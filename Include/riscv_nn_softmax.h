@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -76,8 +76,8 @@ void riscv_nn_softmax_s16_fast(const q15_t * in_vec,
                             q15_t * out_vec);
 
 /**
- * @brief           This is a softmax function for signed 8-bit integer input
- *                  tensor with high precision algorithm.
+ * @brief           This is a softmax function for signed 8-bit integer input/
+ *                  output tensor with high precision algorithm.
  * @param[in]       in_tensor       pointer of the input tensor
  * @param[in]       in_tensor_row   number of rows in the input tensor
  * @param[in]       in_tensor_col   number of columns in the input tensor
@@ -97,6 +97,30 @@ void riscv_nn_softmax_s8_hp(const int8_t *in_tensor,
                             const int32_t lshift,
                             const int32_t diff_min,
                             int8_t *out_tensor);
+
+/**
+ * @brief           This is a softmax function for signed 8-bit integer input
+ *                  tensor and signed 16-bit integer output tensor with high
+ *                  precision algorithm.
+ * @param[in]       in_tensor       pointer of the input tensor
+ * @param[in]       in_tensor_row   number of rows in the input tensor
+ * @param[in]       in_tensor_col   number of columns in the input tensor
+ * @param[in]       scale           scaling value for input quantization
+ * @param[in]       lshift          left shift amount for input quantization
+ * @param[in]       diff_min        minimum threshold to perform the quantized
+ *                                  exponential operation. The difference can be
+ *                                  obtained by subtracting the input from the
+ *                                  maximum in row.
+ * @param[out]      out_tensor      pointer of the output tensor
+ * @return          None
+ */
+void riscv_nn_softmax_s8_s16_hp(const int8_t *in_tensor,
+                                const int32_t in_tensor_row,
+                                const int32_t in_tensor_col,
+                                const int32_t scale,
+                                const int32_t lshift,
+                                const int32_t diff_min,
+                                int16_t *out_tensor);
 
 /**
  * @brief           This is a softmax function for unsigned 8-bit integer input
@@ -120,6 +144,30 @@ void riscv_nn_softmax_u8_hp(const uint8_t *in_tensor,
                             const int32_t lshift,
                             const int32_t diff_min,
                             uint8_t *out_tensor);
+
+/**
+ * @brief           This is a softmax function for signed 16-bit integer input
+ *                  tensor with high precision algorithm.
+ * @param[in]       in_tensor       pointer of the input tensor
+ * @param[in]       in_tensor_row   number of rows in the input tensor
+ * @param[in]       in_tensor_col   number of columns in the input tensor
+ * @param[in]       scale           scaling value for input quantization
+ * @param[in]       shift           left shift amount for input quantization
+ * @param[in]       exp_lut         pointer of the lookup table for exp(x),
+                                    where x is uniformly distributed in [10, 0].
+ * @param[in]       one_by_one_lut  pointer of the lookup table for (1/(1+x)),
+                                    where x is uniformly distributed in [0, 1].
+ * @param[out]      out_tensor      pointer of the output tensor
+ * @return          This function only returns 0.
+ */
+int riscv_nn_softmax_s16_hp(const int16_t *in_tensor,
+                             const int32_t in_tensor_row,
+                             const int32_t in_tensor_col,
+                             const int32_t scale,
+                             const int32_t shift,
+                             const int16_t *exp_lut,
+                             const int16_t *one_by_one_lut,
+                             int16_t *out_tensor);
 
 #ifdef __riscv_zfh
 /**

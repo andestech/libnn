@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -35,7 +35,7 @@
 int riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                             const uint16_t in_tensor_dim_x,
                             const uint16_t in_tensor_ch,
-                            const uint16_t in_tensor_group,
+                            const uint16_t in_tensor_batch,
                             const q7_t *ker_weight,
                             const uint16_t out_tensor_ch,
                             const uint16_t ker_dim_x,
@@ -52,7 +52,7 @@ int riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                             const uint16_t out_tensor_dim_x,
                             q15_t *in_tmp_buf)
 {
-    (void)in_tensor_group;
+    (void)in_tensor_batch;
 
     int status = 0;
     if (out_tensor_dim_x % 4 != 0)

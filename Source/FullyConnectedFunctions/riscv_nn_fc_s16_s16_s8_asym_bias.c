@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -20,18 +20,53 @@
 /** @file*/
 
 #include "internal_nn_math.h"
+#include "riscv_nn_support.h"
 
-//// Convolution Functions
-
-q15_t *riscv_nn_mat_mul_kernel_q7_u16_q15_reordered_2sft(const q7_t * src1,
-                                                    const u16_t * src2,
-                                                    const uint16_t out_tensor_ch,
-                                                    const uint16_t col_src1,
-                                                    const uint16_t pre_rshift,
-                                                    const uint16_t out_scale,
-                                                    const uint16_t post_rshift,
-                                                    q15_t * out)
+int32_t riscv_nn_fc_s16_s16_s8_asym_bias(const int16_t *in_vec,
+    const int8_t *wt_mat,
+    const int32_t in_vec_col,
+    const int32_t wt_mat_row,
+    const int32_t in_vec_batch,
+    const int32_t in_offset,
+    const int32_t wt_offset,
+    const int32_t out_scale,
+    const int32_t out_shift,
+    const int32_t out_offset,
+    const int64_t *bias,
+    int16_t *out_vec,
+    const int32_t act_min,
+    const int32_t act_max,
+    int16_t *tmp_buf)
 {
-    /* To be completed */
-    return NULL;
+    (void)in_offset;
+    (void)wt_offset;
+    (void)out_offset;
+    (void)tmp_buf;
+
+    int32_t batch_cnt = in_vec_batch;
+
+    while (batch_cnt)
+    {
+        riscv_nn_vec_mat_mult_t_s16(in_vec,
+                                    wt_mat,
+                                    bias,
+                                    out_vec,
+                                    out_scale,
+                                    out_shift,
+                                    in_vec_col,
+                                    wt_mat_row,
+                                    act_min,
+                                    act_max);
+        in_vec += in_vec_col;
+        out_vec += wt_mat_row;
+        batch_cnt--;
+    }
+
+    return 0;
+}
+
+int32_t riscv_nn_fc_s16_s16_s8_asym_bias_get_buffer_size(const uint16_t in_vec_col)
+{
+    (void)in_vec_col;
+    return 0;
 }

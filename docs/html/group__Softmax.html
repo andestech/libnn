@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.0</span>
+   &#160;<span id="projectnumber">version3.1</span>
    </div>
   </td>
  </tr>
@@ -97,8 +97,12 @@ Functions</h2></td></tr>
 <tr class="separator:gac4143da954d1f2ab48427022ef51c56e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7cf0ecef9eef8cf2a773574d071abea7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Softmax.html#ga7cf0ecef9eef8cf2a773574d071abea7">riscv_nn_softmax_s8_hp</a> (const int8_t *in_tensor, const int32_t in_tensor_row, const int32_t in_tensor_col, const int32_t scale, const int32_t lshift, const int32_t diff_min, int8_t *out_tensor)</td></tr>
 <tr class="separator:ga7cf0ecef9eef8cf2a773574d071abea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1a4a512687ba8a9f42f5b416abd6903b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Softmax.html#ga1a4a512687ba8a9f42f5b416abd6903b">riscv_nn_softmax_s8_s16_hp</a> (const int8_t *in_tensor, const int32_t in_tensor_row, const int32_t in_tensor_col, const int32_t scale, const int32_t lshift, const int32_t diff_min, int16_t *out_tensor)</td></tr>
+<tr class="separator:ga1a4a512687ba8a9f42f5b416abd6903b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaeb8a9b8dd55434f4df1361ab320b8e9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Softmax.html#gaeb8a9b8dd55434f4df1361ab320b8e9f">riscv_nn_softmax_u8_hp</a> (const uint8_t *in_tensor, const int32_t in_tensor_row, const int32_t in_tensor_col, const int32_t scale, const int32_t lshift, const int32_t diff_min, uint8_t *out_tensor)</td></tr>
 <tr class="separator:gaeb8a9b8dd55434f4df1361ab320b8e9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1edc59ec814a19dc7055420c7831912d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Softmax.html#ga1edc59ec814a19dc7055420c7831912d">riscv_nn_softmax_s16_hp</a> (const int16_t *in_tensor, const int32_t in_tensor_row, const int32_t in_tensor_col, const int32_t scale, const int32_t shift, const int16_t *exp_lut, const int16_t *one_by_one_lut, int16_t *out_tensor)</td></tr>
+<tr class="separator:ga1edc59ec814a19dc7055420c7831912d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
@@ -255,7 +259,80 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a softmax function for signed 8-bit integer input tensor with high precision algorithm. </p>
+<p>This is a softmax function for signed 8-bit integer input/ output tensor with high precision algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_row</td><td>number of rows in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_col</td><td>number of columns in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>scaling value for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>left shift amount for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">diff_min</td><td>minimum threshold to perform the quantized exponential operation. The difference can be obtained by subtracting the input from the maximum in row. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
+
+</div>
+</div>
+<a id="ga1a4a512687ba8a9f42f5b416abd6903b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1a4a512687ba8a9f42f5b416abd6903b">&#9670;&nbsp;</a></span>riscv_nn_softmax_s8_s16_hp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void riscv_nn_softmax_s8_s16_hp </td>
+          <td>(</td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>lshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>diff_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t *&#160;</td>
+          <td class="paramname"><em>out_tensor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This is a softmax function for signed 8-bit integer input tensor and signed 16-bit integer output tensor with high precision algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
@@ -342,6 +419,86 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
+
+</div>
+</div>
+<a id="ga1edc59ec814a19dc7055420c7831912d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1edc59ec814a19dc7055420c7831912d">&#9670;&nbsp;</a></span>riscv_nn_softmax_s16_hp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int riscv_nn_softmax_s16_hp </td>
+          <td>(</td>
+          <td class="paramtype">const int16_t *&#160;</td>
+          <td class="paramname"><em>in_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>shift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t *&#160;</td>
+          <td class="paramname"><em>exp_lut</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t *&#160;</td>
+          <td class="paramname"><em>one_by_one_lut</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t *&#160;</td>
+          <td class="paramname"><em>out_tensor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This is a softmax function for signed 16-bit integer input tensor with high precision algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_row</td><td>number of rows in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_col</td><td>number of columns in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>scaling value for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">shift</td><td>left shift amount for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">exp_lut</td><td>pointer of the lookup table for exp(x), where x is uniformly distributed in [10, 0]. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">one_by_one_lut</td><td>pointer of the lookup table for (1/(1+x)), where x is uniformly distributed in [0, 1]. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0. </dd></dl>
 
 </div>
 </div>

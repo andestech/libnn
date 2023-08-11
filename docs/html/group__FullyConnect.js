@@ -29,6 +29,8 @@ var group__FullyConnect =
     [ "riscv_nn_fc_s8_wt_converter", "group__FullyConnect.html#ga022d9fbda00bb54cdd9d5a74adb504c5", null ],
     [ "riscv_nn_fc_s16_wt_converter", "group__FullyConnect.html#ga5bf7cf6d4f2f88820a02fd5a4062a7ad", null ],
     [ "riscv_nn_fc_mat_vec_s8_wt_converter", "group__FullyConnect.html#gaf537bda831e9b675ab3e9dc9d8218acc", null ],
-    [ "riscv_nn_fc_s8_s8_s8_asym_bias", "group__FullyConnect.html#ga6266966a1d670d32e7b50a97dd2b86aa", null ],
-    [ "riscv_nn_fc_s8_s8_s8_asym_bias_get_buffer_size", "group__FullyConnect.html#gaa08cf07e7d559ae09d12962ed1a38fdb", null ]
+    [ "riscv_nn_fc_s8_s8_s8_asym_bias", "group__FullyConnect.html#ga558944ab2b8847775653fd8da0d62560", null ],
+    [ "riscv_nn_fc_s8_s8_s8_asym_bias_get_buffer_size", "group__FullyConnect.html#gaa08cf07e7d559ae09d12962ed1a38fdb", null ],
+    [ "riscv_nn_fc_s16_s16_s8_asym_bias", "group__FullyConnect.html#ga4f6465d0d154ab7a63a6e964e457ccfd", null ],
+    [ "riscv_nn_fc_s16_s16_s8_asym_bias_get_buffer_size", "group__FullyConnect.html#gad5cfaa0cfb1328967dd9c543352f67fa", null ]
 ];

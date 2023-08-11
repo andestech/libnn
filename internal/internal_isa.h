@@ -1,7 +1,7 @@
 /***************************************************************************
  * internal_isa.h                                                          *
  *                                                                         *
- * Copyright (C) 2012-2016 Andes Technology Corporation                    *
+ * Copyright (C) 2012-2023 Andes Technology Corporation                    *
  * All rights reserved.                                                    *
  ***************************************************************************/
 
@@ -86,7 +86,7 @@ extern "C"
 #ifdef ENA_DSP_ISA
 #define nds_sat_ov_flag nds_dsp_ov_flag
 extern int nds_sat_ov_flag;
-#else    
+#else
 static int nds_sat_ov_flag;
 #endif
 #endif

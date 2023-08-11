@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.0</span>
+   &#160;<span id="projectnumber">version3.1</span>
    </div>
   </td>
  </tr>
@@ -103,10 +103,10 @@ Functions</h2></td></tr>
 <tr class="separator:gaaf3f6b74774316bd722113450119315b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6143532d9602970d60e74124167296f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga6143532d9602970d60e74124167296f1">riscv_nn_leaky_relu_s8_2buf</a> (q7_t *in_vec, uint32_t size, q15_t slope, q7_t *out_vec)</td></tr>
 <tr class="separator:ga6143532d9602970d60e74124167296f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad6be78f20438fc028bebf6ee93938b91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#gad6be78f20438fc028bebf6ee93938b91">riscv_nn_relu_any_s8</a> (q7_t *in_vec, uint16_t size, q7_t max_val)</td></tr>
-<tr class="separator:gad6be78f20438fc028bebf6ee93938b91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga76211dc68f74ffb950f950ad312b7ada"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga76211dc68f74ffb950f950ad312b7ada">riscv_nn_relu_any_s8_2buf</a> (q7_t *in_vec, uint16_t size, q7_t max_val, q7_t *out_vec)</td></tr>
-<tr class="separator:ga76211dc68f74ffb950f950ad312b7ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga740c839f9a7026c52490f01a729bdd6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga740c839f9a7026c52490f01a729bdd6b">riscv_nn_relu_any_s8</a> (q7_t *in_vec, uint32_t size, q7_t max_val)</td></tr>
+<tr class="separator:ga740c839f9a7026c52490f01a729bdd6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1c65ae41993818823d279f55e17282e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga1c65ae41993818823d279f55e17282e4">riscv_nn_relu_any_s8_2buf</a> (q7_t *in_vec, uint32_t size, q7_t max_val, q7_t *out_vec)</td></tr>
+<tr class="separator:ga1c65ae41993818823d279f55e17282e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae651cf6e7b06f27a10e8671ddf2d20f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#gae651cf6e7b06f27a10e8671ddf2d20f1">riscv_nn_relu_s8</a> (q7_t *in_out, uint32_t size)</td></tr>
 <tr class="separator:gae651cf6e7b06f27a10e8671ddf2d20f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga467ed82020ecd6847a2a323d8898a8c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga467ed82020ecd6847a2a323d8898a8c1">riscv_nn_relu_s8_2buf</a> (q7_t *in_vec, uint32_t size, q7_t *out_vec)</td></tr>
@@ -475,8 +475,8 @@ Functions</h2></td></tr>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="gad6be78f20438fc028bebf6ee93938b91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad6be78f20438fc028bebf6ee93938b91">&#9670;&nbsp;</a></span>riscv_nn_relu_any_s8()</h2>
+<a id="ga740c839f9a7026c52490f01a729bdd6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga740c839f9a7026c52490f01a729bdd6b">&#9670;&nbsp;</a></span>riscv_nn_relu_any_s8()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -490,7 +490,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
@@ -507,7 +507,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the ReLU function to perform activation for signed 8-bit integer input vectors with an in-place algorithm. The maximum output from the ReLU function is user specified (i.e., f(x)=min(max(0,x),max_val)). </p>
+<p>This function uses the ReLU function to perform activation for signed 8-bit integer input vectors with an in-place algorithm. The maximum output from the ReLU function is user specified (i.e., f(x) = min(max(0,x),max_val)). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">in_vec</td><td>pointer of the input/output vector </td></tr>
@@ -520,8 +520,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga76211dc68f74ffb950f950ad312b7ada"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga76211dc68f74ffb950f950ad312b7ada">&#9670;&nbsp;</a></span>riscv_nn_relu_any_s8_2buf()</h2>
+<a id="ga1c65ae41993818823d279f55e17282e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1c65ae41993818823d279f55e17282e4">&#9670;&nbsp;</a></span>riscv_nn_relu_any_s8_2buf()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -535,7 +535,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
@@ -558,7 +558,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the ReLU function to perform activation for signed 8-bit integer input vectors with an out-of-place algorithm. The maximum output from the ReLU function is user specified (i.e., f(x)=min(max(0,x),max_val)). </p>
+<p>This function uses the ReLU function to perform activation for signed 8-bit integer input vectors with an out-of-place algorithm. The maximum output from the ReLU function is user specified (i.e., f(x) = min(max(0,x),max_val)). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>

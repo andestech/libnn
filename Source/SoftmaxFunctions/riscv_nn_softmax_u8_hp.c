@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -35,13 +35,13 @@ void riscv_nn_softmax_u8_hp(const uint8_t *in_tensor,
 {
     const int32_t mask = (1 << lshift);
 
-    int32_t col = 0;
-    int32_t row_idx;
+    long col = 0;
+    long row_idx;
 
     for(row_idx = 0; row_idx < in_tensor_row; ++row_idx)
     {
         // Find the maximum value in order to ensure numerical stability
-        uint8_t max;
+        long max;
 
         max = *in_tensor;
         for (col = 1; col < in_tensor_col; ++col)
@@ -49,7 +49,7 @@ void riscv_nn_softmax_u8_hp(const uint8_t *in_tensor,
             max = MAX(max, in_tensor[col]);
         }
 
-        int32_t diff = 0;
+        long diff = 0;
         int32_t sum = 0;
         for (col = 0; col < in_tensor_col; ++col)
         {

@@ -851,6 +851,110 @@ q15_t *riscv_nn_mat_mul_kernel_u8_q15_2sft(const q7_t * src1,
                                     const uint16_t out_scale,
                                     const uint16_t post_rshift,
                                     q15_t * out);
+
+q7_t *riscv_nn_mat_mul_kernel_q7_unroll4(const q7_t * src1,
+                                    const q7_t * src2,
+                                    const uint16_t out_tensor_ch,
+                                    const uint16_t col_src1,
+                                    const uint16_t bias_lshift,
+                                    const uint16_t out_rshift,
+                                    const q7_t * bias,
+                                    q7_t * out);
+
+q7_t *riscv_nn_mat_mul_kernel_q7_bias_2sft_unroll4(const q7_t * src1,
+                                        const q7_t * src2,
+                                        const uint16_t out_tensor_ch,
+                                        const uint16_t col_src1,
+                                        const uint16_t pre_rshift,
+                                        const uint16_t out_scale,
+                                        const uint16_t post_rshift,
+                                        const q31_t * bias,
+                                        q7_t * out);
+
+q15_t *riscv_nn_mat_mul_kernel_q7_q15_bias_2sft_unroll4(const q7_t * src1,
+                                                    const q7_t * src2,
+                                                    const uint16_t out_tensor_ch,
+                                                    const uint16_t col_src1,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    const q31_t * bias,
+                                                    q15_t * out);
+
+u8_t *riscv_nn_mat_mul_kernel_u8_bias_2sft_unroll4(const q7_t * src1,
+                                                const u8_t * src2,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t col_src1,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                const q31_t * conv_out,
+                                                u8_t * out);
+
+q7_t *riscv_nn_mat_mul_kernel_u8_q7_bias_2sft_unroll4(const q7_t * src1,
+                                                    const u8_t * src2,
+                                                    const uint16_t out_tensor_ch,
+                                                    const uint16_t col_src1,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    const q31_t * bias,
+                                                    q7_t * out);
+
+q15_t *riscv_nn_mat_mul_kernel_u8_q15_bias_2sft_unroll4(const q7_t * src1,
+                                                    const u8_t * src2,
+                                                    const uint16_t out_tensor_ch,
+                                                    const uint16_t col_src1,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    const q31_t * bias,
+                                                    q15_t * out);
+
+q7_t *riscv_nn_mat_mul_kernel_q7_2sft_unroll4(const q7_t * src1,
+                                            const q7_t * src2,
+                                            const uint16_t out_tensor_ch,
+                                            const uint16_t col_src1,
+                                            const uint16_t pre_rshift,
+                                            const uint16_t out_scale,
+                                            const uint16_t post_rshift,
+                                            q7_t * out);
+
+q15_t *riscv_nn_mat_mul_kernel_q7_q15_2sft_unroll4(const q7_t * src1,
+                                                const q7_t * src2,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t col_src1,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                q15_t * out);
+
+u8_t *riscv_nn_mat_mul_kernel_u8_2sft_unroll4(const q7_t * src1,
+                                            const u8_t * src2,
+                                            const uint16_t out_tensor_ch,
+                                            const uint16_t col_src1,
+                                            const uint16_t pre_rshift,
+                                            const uint16_t out_scale,
+                                            const uint16_t post_rshift,
+                                            u8_t * out);
+
+q7_t *riscv_nn_mat_mul_kernel_u8_q7_2sft_unroll4(const q7_t * src1,
+                                            const u8_t * src2,
+                                            const uint16_t out_tensor_ch,
+                                            const uint16_t col_src1,
+                                            const uint16_t pre_rshift,
+                                            const uint16_t out_scale,
+                                            const uint16_t post_rshift,
+                                            q7_t * out);
+
+q15_t *riscv_nn_mat_mul_kernel_u8_q15_2sft_unroll4(const q7_t * src1,
+                                                const u8_t * src2,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t col_src1,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                q15_t * out);
 /**
  * @brief           Multiply a Q7 matrix by a Q15 matrix for convolution.
  * @param[in]       src1            pointer of first matrix
@@ -1141,6 +1245,57 @@ int32_t riscv_nn_vec_mat_mult_t_s8_v2(const q7_t *lhs,
                                     const int32_t activation_min,
                                     const int32_t activation_max);
 
+int32_t riscv_nn_vec_mat_mult_t_s8_v3(const q7_t *lhs,
+                                    const q7_t *rhs,
+                                    const q31_t *bias,
+                                    q7_t *dst,
+                                    const int32_t lhs_offset,
+                                    const int32_t rhs_offset,
+                                    const int32_t dst_offset,
+                                    const int32_t dst_multiplier,
+                                    const int32_t dst_shift,
+                                    const int32_t rhs_cols,
+                                    const int32_t rhs_rows,
+                                    const int32_t activation_min,
+                                    const int32_t activation_max,
+                                    const int32_t out_addr_offset);
+
+q15_t *riscv_nn_mat_mult_kernel_s16(const q7_t *ker_wt,
+                                    const q15_t *in_tensor,
+                                    const int32_t output_ch,
+                                    const int32_t *out_shift,
+                                    const int32_t *out_mult,
+                                    const int32_t act_min,
+                                    const int32_t act_max,
+                                    const int32_t col_count,
+                                    const int64_t *const out_bias,
+                                    q15_t *out_tensor);
+
+q15_t *riscv_nn_mat_mult_kernel_s16_acc_s64(const q7_t *ker_wt,
+                                            const q15_t *in_tensor,
+                                            const int32_t output_ch,
+                                            const int32_t *out_shift,
+                                            const int32_t *out_mult,
+                                            const int32_t act_min,
+                                            const int32_t act_max,
+                                            const int32_t col_count,
+                                            const int64_t *const out_bias,
+                                            q15_t *out_tensor);
+
+int32_t riscv_nn_vec_mat_mult_t_s16(const int16_t *lhs,
+                                const int8_t *rhs,
+                                const int64_t *bias,
+                                int16_t *dst,
+                                // const int32_t lhs_offset,
+                                // const int32_t rhs_offset,
+                                // const int32_t dst_offset,
+                                const int32_t dst_multiplier,
+                                const int32_t dst_shift,
+                                const int32_t rhs_cols,
+                                const int32_t rhs_rows,
+                                const int32_t activation_min,
+                                const int32_t activation_max);
+
 int riscv_nn_vec_mat_mult_t_svdf_s8(const q7_t *lhs,
                                     const q7_t *rhs,
                                     q15_t *dst,
@@ -1153,6 +1308,22 @@ int riscv_nn_vec_mat_mult_t_svdf_s8(const q7_t *lhs,
                                     const int32_t rhs_rows,
                                     const int32_t activation_min,
                                     const int32_t activation_max);
+
+#ifdef __riscv_zfh
+float16_t *riscv_nn_mat_mul_kernel_fp16_unroll4(const float16_t * src1,
+                                            const float16_t * src2,
+                                            const uint16_t out_tensor_ch,
+                                            const uint16_t col_src1,
+                                            const float16_t * bias,
+                                            float16_t * out);
+
+float16_t *riscv_nn_mat_mul_kernel_f16(const float16_t * src1,
+                                            const float16_t * src2,
+                                            const uint16_t out_tensor_ch,
+                                            const uint16_t col_src1,
+                                            const float16_t * bias,
+                                            float16_t * out);
+#endif
 /**
  *   * @}
  */

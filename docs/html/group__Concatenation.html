@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.0</span>
+   &#160;<span id="projectnumber">version3.1</span>
    </div>
   </td>
  </tr>
@@ -166,13 +166,17 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>y dimension of the input tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>z dimension of the input tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>w dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_w</td><td>offset value to be added to the w-axis of the output tensor before the concatenation </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The x, y and z dimension of the output tensor will be the same as those of the input tensor. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>The x, y and z dimension of the output tensor will be the same as those of the input tensor.</li>
+<li>The data layout of input and output tensors is assumed to be wzyx. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -247,13 +251,17 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>z dimension of the input tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>w dimension of the input tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_x</td><td>x dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor_x</td><td>x dimension of the output tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_x</td><td>offset value to be added to the x-axis of the output tensor before the concatenation </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The y, z and w dimensions of the output tensor will be the same as those of the input tensor. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>The y, z and w dimensions of the output tensor will be the same as those of the input tensor.</li>
+<li>The data layout of input and output tensors is assumed to be wzyx. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -327,14 +335,18 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>y dimension of the input tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>z dimension of the input tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>w dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_y</td><td>y dimension of the output tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_y</td><td>offset value to be added to the y-axis of the output tensor before the concatenation </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The x, z and w dimensions of the output tensor will be the same as those of the input tensor. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>The x, z and w dimensions of the output tensor will be the same as those of the input tensor.</li>
+<li>The data layout of input and output tensors is assumed to be wzyx. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -408,14 +420,18 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>y dimension of the input tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>z dimension of the input tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>w dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_z</td><td>z dimension of the output tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_z</td><td>offset value to be added to the z-axis of the output tensor before the concatenation </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The x, y and w dimensions of the output tensor will be the same as those of the input tensor. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>The x, y and w dimensions of the output tensor will be the same as those of the input tensor.</li>
+<li>The data layout of input and output tensors is assumed to be wzyx. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

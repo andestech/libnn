@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -36,7 +36,7 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                            const uint16_t in_tensor_dim_x,
                            const uint16_t in_tensor_dim_y,
                            const uint16_t in_tensor_ch,
-                           const uint16_t in_tensor_group,
+                           const uint16_t in_tensor_batch,
                            const q7_t *ker_weight,
                            const uint16_t out_tensor_ch,
                            const uint16_t ker_dim_x,
@@ -58,7 +58,7 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                            q15_t *in_tmp_buf)
 {
     int i_batch;
-    for (i_batch = 0; i_batch < in_tensor_group; i_batch++)
+    for (i_batch = 0; i_batch < in_tensor_batch; i_batch++)
     {
         in_tensor += i_batch * (in_tensor_dim_x * in_tensor_dim_y * in_tensor_ch);
         out_tensor += i_batch * (out_tensor_dim_x * out_tensor_dim_y * out_tensor_ch);
@@ -72,7 +72,11 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
             {
                 for (i_out_x = 0; i_out_x < out_tensor_dim_x; i_out_x++)
                 {
-                    conv_out = bias[i_out_ch];
+                    conv_out = 0;
+                    if (bias)
+                    {
+                        conv_out = bias[i_out_ch];
+                    }
 
                     const int32_t base_idx_y = stride_y * i_out_y - pad_y;
                     const int32_t base_idx_x = stride_x * i_out_x - pad_x;

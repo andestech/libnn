@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -23,15 +23,6 @@
 #include "riscv_nn_support.h"
 
 //// Convolution Functions
-
-q7_t *riscv_nn_mat_mul_kernel_q7_unroll4(const q7_t * src1,
-                                    const q7_t * src2,
-                                    const uint16_t out_tensor_ch,
-                                    const uint16_t col_src1,
-                                    const uint16_t bias_lshift,
-                                    const uint16_t out_rshift,
-                                    const q7_t * bias,
-                                    q7_t * out);
 
 int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sft_bias_fast_any(const q7_t * in_tensor,
                                         const uint16_t in_tensor_dim_x,

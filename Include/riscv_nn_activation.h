@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -224,21 +224,21 @@ void riscv_nn_leaky_relu_f16(const float16_t* in_vec,
  * @brief           This function uses the ReLU function to perform activation
  *                  for signed 8-bit integer input vectors with an in-place
  *                  algorithm. The maximum output from the ReLU function is user
- *                  specified (i.e., f(x)=min(max(0,x),max_val)).
- * @param[in,out]   data        pointer of the input/output vector
+ *                  specified (i.e., f(x) = min(max(0,x),max_val)).
+ * @param[in,out]   in_vec      pointer of the input/output vector
  * @param[in]       size        number of elements in the input/output vector
  * @param[in]       max_val     maximum value to limit the output vector
  * @return          None
  */
 void riscv_nn_relu_any_s8(q7_t * in_vec,
-                          uint16_t size,
+                          uint32_t size,
                           q7_t max_val);
 
 /**
  * @brief           This function uses the ReLU function to perform activation
  *                  for signed 8-bit integer input vectors with an out-of-place
  *                  algorithm. The maximum output from the ReLU function is user
- *                  specified (i.e., f(x)=min(max(0,x),max_val)).
+ *                  specified (i.e., f(x) = min(max(0,x),max_val)).
  * @param[in]       in_vec      pointer of the input vector
  * @param[in]       size        number of elements in the input/output vector
  * @param[in]       max_val     maximum value to limit the output vector
@@ -246,7 +246,7 @@ void riscv_nn_relu_any_s8(q7_t * in_vec,
  * @return          None
  */
 void riscv_nn_relu_any_s8_2buf(q7_t * in_vec,
-                               uint16_t size,
+                               uint32_t size,
                                q7_t max_val,
                                q7_t * out_vec);
 
@@ -255,7 +255,7 @@ void riscv_nn_relu_any_s8_2buf(q7_t * in_vec,
  * @brief           This function uses the ReLU function to perform activation
  *                  for half-precision floating-point input vectors. The maximum
  *                  output from the ReLU function is user specified
- *                  (i.e., f(x)=min(max(0,x),max_val)).
+ *                  specified (i.e., f(x) = min(max(0,x),max_val)).
  * @param[in]       in_vec      pointer of the input vector
  * @param[in]       size        number of elements in the input/output vector
  * @param[in]       max_val     maximum value to limit the output vector

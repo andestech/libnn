@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -25,7 +25,7 @@
 //// Activations Functions
 
 void riscv_nn_relu_any_s8_2buf(q7_t * FUNC_RESTRICT in_vec,
-                               uint16_t size,
+                               uint32_t size,
                                q7_t max_val,
                                q7_t * FUNC_RESTRICT out_vec)
 {

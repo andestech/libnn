@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -83,7 +83,7 @@ float exp_f32(float x)
     return poly.f32;
 }
 
-int riscv_nn_exp_f32(const float32_t * in_vec, uint32_t size, float32_t * out_vec)
+int32_t riscv_nn_exp_f32(const float32_t * in_vec, uint32_t size, float32_t * out_vec)
 {
     while(size-- > 0)
     {

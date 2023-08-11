@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -55,10 +55,17 @@ static void conv_dw_HWC_s8_any_mult_4(const int8_t *in_tensor,
             {
                 for(int mult_tile = 0; mult_tile < ch_mult; mult_tile += 4)
                 {
-                    int32_t out_buff0 = bias[out_ch + 0 + mult_tile];
-                    int32_t out_buff1 = bias[out_ch + 1 + mult_tile];
-                    int32_t out_buff2 = bias[out_ch + 2 + mult_tile];
-                    int32_t out_buff3 = bias[out_ch + 3 + mult_tile];
+                    int32_t out_buff0 = 0;
+                    int32_t out_buff1 = 0;
+                    int32_t out_buff2 = 0;
+                    int32_t out_buff3 = 0;
+                    if (bias)
+                    {
+                        out_buff0 = bias[out_ch + 0 + mult_tile];
+                        out_buff1 = bias[out_ch + 1 + mult_tile];
+                        out_buff2 = bias[out_ch + 2 + mult_tile];
+                        out_buff3 = bias[out_ch + 3 + mult_tile];
+                    }
 
                     for(int32_t ker_h = ker_h_start; ker_h < MIN(ker_dim_y, in_tensor_dim_y - in_h); ++ker_h)
                     {
@@ -123,7 +130,9 @@ static void conv_dw_HWC_s8_any_generic(const q7_t *in_tensor,
                                       const int32_t out_offset,
                                       const int32_t in_offset,
                                       const int32_t act_min,
-                                      const int32_t act_max)
+                                      const int32_t act_max,
+                                      const uint16_t dilation_x,
+                                      const uint16_t dilation_y)
 {
     (void)out_tensor_ch;
 
@@ -140,14 +149,42 @@ static void conv_dw_HWC_s8_any_generic(const q7_t *in_tensor,
                 for (; i_ch_mult < ch_mult; i_ch_mult++)
                 {
                     const int idx_out_ch = i_ch_mult + i_input_ch * ch_mult;
-                    int32_t acc_0;
-                    /* Condition for ker_weight start dimension: (base_idx_<x,y> + ker_<x,y>_start) >= 0 */
-                    const int ker_y_start = MAX(0, -base_idx_y);
-                    const int ker_x_start = MAX(0, -base_idx_x);
-                    /* Condition for ker_weight end dimension: (base_idx_<x,y> + ker_<x,y>_end) < input_<x,y> */
-                    const int ker_y_end = MIN(ker_dim_y, in_tensor_dim_y - base_idx_y);
-                    const int ker_x_end = MIN(ker_dim_x, in_tensor_dim_x - base_idx_x);
-                    acc_0 = bias[idx_out_ch];
+                    int ker_y_start;
+                    int ker_x_start;
+                    int ker_y_end;
+                    int ker_x_end;
+
+                    if (dilation_x > 1)
+                    {
+                        const int32_t start_x_max = (-base_idx_x + dilation_x - 1) / dilation_x;
+                        ker_x_start = MAX(0, start_x_max);
+                        const int32_t end_min_x = (in_tensor_dim_x - base_idx_x + dilation_x - 1) / dilation_x;
+                        ker_x_end = MIN(ker_dim_x, end_min_x);
+                    }
+                    else
+                    {
+                        ker_x_start = MAX(0, -base_idx_x);
+                        ker_x_end = MIN(ker_dim_x, in_tensor_dim_x - base_idx_x);
+                    }
+
+                    if (dilation_y > 1)
+                    {
+                        const int32_t start_y_max = (-base_idx_y + dilation_y - 1) / dilation_y;
+                        ker_y_start = MAX(0, start_y_max);
+                        const int32_t end_min_y = (in_tensor_dim_y - base_idx_y + dilation_y - 1) / dilation_y;
+                        ker_y_end = MIN(ker_dim_y, end_min_y);
+                    }
+                    else
+                    {
+                        ker_y_start = MAX(0, -base_idx_y);
+                        ker_y_end = MIN(ker_dim_y, in_tensor_dim_y - base_idx_y);
+                    }
+
+                    int32_t acc_0 = 0;
+                    if (bias)
+                    {
+                        acc_0 = bias[idx_out_ch];
+                    }
 
                     for (int i_ker_y = ker_y_start; i_ker_y < ker_y_end; i_ker_y++)
                     {
@@ -209,11 +246,11 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                                     const uint16_t dilation_y,
                                     q15_t *tmp_buf)
 {
-    (void)dilation_x;
-    (void)dilation_y;
     (void)tmp_buf;
 
-    if(ch_mult % 4 == 0)
+    if(ch_mult % 4 == 0 &&
+       dilation_x == 1 &&
+       dilation_y == 1)
     {
         conv_dw_HWC_s8_any_mult_4(in_tensor, in_tensor_dim_x, in_tensor_dim_y, in_tensor_ch, ker_weight, out_tensor_ch, ch_mult, ker_dim_x, ker_dim_y, pad_x, pad_y, stride_x, stride_y, bias,
                                  out_tensor, out_shift, out_scale, out_tensor_dim_x, out_tensor_dim_y, out_offset, in_offset, act_min, act_max);
@@ -221,7 +258,7 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
     else
     {
         conv_dw_HWC_s8_any_generic(in_tensor, in_tensor_dim_x, in_tensor_dim_y, in_tensor_ch, ker_weight, out_tensor_ch, ch_mult, ker_dim_x, ker_dim_y, pad_x, pad_y, stride_x, stride_y, bias,
-                                  out_tensor, out_shift, out_scale, out_tensor_dim_x, out_tensor_dim_y, out_offset, in_offset, act_min, act_max);
+                                  out_tensor, out_shift, out_scale, out_tensor_dim_x, out_tensor_dim_y, out_offset, in_offset, act_min, act_max, dilation_x, dilation_y);
     }
 
     /* Return to application */

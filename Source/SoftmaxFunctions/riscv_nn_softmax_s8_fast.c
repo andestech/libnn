@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -25,10 +25,10 @@
 
 void riscv_nn_softmax_s8_fast(const q7_t * in_vec, const uint16_t size, q7_t * out_vec)
 {
-    q31_t     sum;
-    q15_t     base;
-    int16_t   i;
-    uint8_t   shift;
+    q31_t sum;
+    q15_t base;
+    int16_t i;
+    uint8_t shift;
     base = -257;
 
     /* We first search for the maximum */

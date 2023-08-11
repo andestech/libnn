@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -35,8 +35,8 @@ void riscv_nn_softmax_s8_hp(const int8_t *in_tensor,
 {
     const int32_t mask = (1 << lshift);
 
-    int32_t col = 0;
-    int32_t row_idx;
+    long col = 0;
+    long row_idx;
 
     for (row_idx = 0; row_idx < in_tensor_row; ++row_idx)
     {
@@ -49,7 +49,7 @@ void riscv_nn_softmax_s8_hp(const int8_t *in_tensor,
             max = MAX(max, in_tensor[col]);
         }
 
-        int32_t diff = 0;   //bug-fix: the type should be widener than 8-bits
+        long diff = 0;   //bug-fix: the type should be widener than 8-bits
         int32_t sum = 0;
         for (col = 0; col < in_tensor_col; ++col)
         {
@@ -62,19 +62,19 @@ void riscv_nn_softmax_s8_hp(const int8_t *in_tensor,
 
         const int32_t headroom = NDS_ISA_CLZ(sum);
         const int32_t bits_over_unit = ACCUM_BITS - headroom + 23;
-        const int32_t shifted_scale = ONE_OVER1((sum << headroom) - (1 << 31));
+        const int32_t shifted_scale = ONE_OVER1((sum > 0 ? sum << headroom : 0) - (1 << 31));
 
         for (col = 0; col < in_tensor_col; ++col)
         {
             diff = in_tensor[col] - max;
             if (diff >= diff_min)
             {
-                const int32_t res = DIV_POW2_V2(MUL_SAT(shifted_scale, EXP_ON_NEG(MUL_SAT(diff * mask, scale))), bits_over_unit) - 128;
-                out_tensor[col] = (int8_t)riscv_nn_clip_any(res, (int32_t)-128, (int32_t)127);
+                const int32_t res = DIV_POW2_V2(MUL_SAT(shifted_scale, EXP_ON_NEG(MUL_SAT(diff * mask, scale))), bits_over_unit) + Q7_MIN;
+                out_tensor[col] = (int8_t)riscv_nn_clip_any(res, (int32_t)Q7_MIN, (int32_t)Q7_MAX);
             }
             else
             {
-                out_tensor[col] = -128;
+                out_tensor[col] = Q7_MIN;
             }
         }
         in_tensor += in_tensor_col;

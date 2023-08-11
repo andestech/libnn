@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -59,7 +59,7 @@ int riscv_nn_svdf_s8(q31_t *tmp_buf,    //temp buffer for input
 
     memmove((q15_t *)state_tensor,
             (q15_t *)state_tensor + 1,
-            (size_t)(in_batch * wt_feature_batch * wt_time_height * (int32_t)sizeof(int16_t)));
+            (size_t)((in_batch * wt_feature_batch * wt_time_height - 1) * (int32_t)sizeof(int16_t)));
 
     for (int i_batch = 0; i_batch < in_batch; i_batch++)
     {

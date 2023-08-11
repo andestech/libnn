@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -40,16 +40,15 @@ int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias_fast(const q15_t * in_tensor,
                                  q15_t * in_tmp_buf,
                                  q7_t * tmp_buf)
 {
-
-    uint16_t  i, j, k, l, m, n;
-    int       conv_out;
-    long in_row, in_col;
-
     if (in_tensor_ch % 2 != 0 || out_tensor_ch % 2 != 0)
     {
         /* check if the input dimension meets the constraints */
         return -1;
     }
+
+    uint16_t  i, j, k, l, m, n;
+    int       conv_out;
+    long in_row, in_col;
 
     for (i = 0; i < out_tensor_ch; i++)
     {
@@ -69,9 +68,8 @@ int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias_fast(const q15_t * in_tensor,
                             for (l = 0; l < in_tensor_ch; l++)
                             {
                                 conv_out +=
-                                    in_tensor[(in_row * in_tensor_dim + in_col) * in_tensor_ch +
-                                              l] * ker_weight[i * in_tensor_ch * ker_dim * ker_dim + (m * ker_dim +
-                                                              n) * in_tensor_ch + l];
+                                    in_tensor[(in_row * in_tensor_dim + in_col) * in_tensor_ch + l]
+                                    * ker_weight[i * in_tensor_ch * ker_dim * ker_dim + (m * ker_dim + n) * in_tensor_ch + l];
                             }
                         }
                     }

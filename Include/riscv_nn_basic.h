@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -75,8 +75,8 @@ extern    "C"
  *
  * q7_t in_vec1[SIZE] = {...};
  * q7_t in_vec2[SIZE] = {...};
- * q15_t scale1[SIZE] = {...};
- * q15_t scale2[SIZE] = {...};
+ * int16_t scale1[SIZE] = {...};
+ * int16_t scale2[SIZE] = {...};
  * q7_t out_vec[SIZE];
  *
  * riscv_nn_add_s8_sym(in_vec1, in_vec2, scale1, scale2, SIZE, pre_rshift,
@@ -122,31 +122,41 @@ void riscv_nn_add_s8_sym_round(const q7_t * in_vec1,
                             const uint32_t scale2,
                             const uint32_t size,
                             const uint16_t pre_rshift,
-                            const uint16_t out_scale,
+                            const uint32_t out_scale,
                             const uint16_t post_rshift,
                             q7_t * out_vec);
 
 /**
  * @brief           This function performs element-wise addition for signed
- *                  8-bit integer input vectors.
+ *                  8-bit integer input vectors with asymmetric quantization on
+ *                  the inputs/outputs.
  * @param[in]       in_vec1     pointer of the first input vector
  * @param[in]       in_vec2     pointer of the second input vector
- * @param[in]       in_offset1  offset value for first input vector. It should
- *                              be in the range of -127 to 128.
- * @param[in]       in_scale1   scaling value for first input vector
- * @param[in]       in_rshift1  right shift amount for the first input vector
+ * @param[in]       in_offset1  offset value for the first input vector. It
+ *                              should be in the range of -127 to 128.
+ * @param[in]       in_scale1   scaling value for the quantization on first
+ *                              input vector
+ * @param[in]       in_rshift1  right shift amount for the quantization on the
+ *                              first input vector
  * @param[in]       in_offset2  offset value for the second input vector. It
  *                              should be in the range of -127 to 128.
- * @param[in]       in_scale2   scaling value for the second input vector
- * @param[in]       in_rshift2  right shift amount for the second input vector
+ * @param[in]       in_scale2   scaling value for the quantization on the
+ *                              second input vector
+ * @param[in]       in_rshift2  right shift amount for the quantization on the
+ *                              second input vector
  * @param[in]       lshift      left shift amount for the first and second input
  *                              vectors
  * @param[out]      out_vec     pointer of the element-wise addition results
- * @param[in]       out_offset  offset value for the output
- * @param[in]       out_scale   scaling value for the output
- * @param[in]       out_rshift  right shift amount for the output
- * @param[in]       act_min     minimum value that the output is limited to
- * @param[in]       act_max     maximum value that the output is limited to
+ * @param[in]       out_offset  offset value for the output. It should be in
+ *                              the range of -128 to 127.
+ * @param[in]       out_scale   scaling value for the quantization on the
+ *                              outputs
+ * @param[in]       out_rshift  right shift amount for the quantization on the
+ *                              outputs
+ * @param[in]       act_min     minimum value that the outputs are limited to.
+ *                              It should be in the range of -128 to 127.
+ * @param[in]       act_max     maximum value that the outputs are limited to.
+ *                              It should be in the range of -128 to 127.
  * @param[in]       size        number of elements in the input vectors
  * @return          This function returns 0.
  *
@@ -170,9 +180,9 @@ void riscv_nn_add_s8_sym_round(const q7_t * in_vec1,
  * int32_t out_offset = 18;        // Offset for the output tensor
  * int32_t out_scale = (1<<30);    // Scale down in_vec2 by 1/2
  * int32_t out_rshift = 4;         // Scale down in_vec2 by 1/2^4
- * int32_t act_min = 0xffffffa3;   // Limit the outputs in the range of
+ * int32_t act_min = 0xffffffa3;   // Limit the outputs to the range of
  *                                 // [0xffffffa3, 0x0000005d]
- * int32_t act_max = 0x0000005d;   // Limit the outputs in the range of
+ * int32_t act_max = 0x0000005d;   // Limit the outputs to the range of
  *                                 // [0xffffffa3, 0x0000005d]
  *
  * int8_t in_vec1[SIZE] = {...};
@@ -200,6 +210,57 @@ int riscv_nn_ew_add_s8_asym(const int8_t *in_vec1,
                             const int32_t act_min,
                             const int32_t act_max,
                             const uint32_t size);
+/**
+ * @brief           This function performs element-wise addition for signed
+ *                  16-bit integer input vectors with asymmetric quantization on
+ *                  the inputs/outputs.
+ * @param[in]       in_vec1     pointer of the first input vector
+ * @param[in]       in_vec2     pointer of the second input vector
+ * @param[in]       in_offset1  dummy
+ * @param[in]       in_scale1   scaling value for the quantization on first
+ *                              input vector
+ * @param[in]       in_rshift1  right shift amount for the quantization on the
+ *                              first input vector
+ * @param[in]       in_offset2  dummy
+ * @param[in]       in_scale2   scaling value for the quantization on the
+ *                              second input vector
+ * @param[in]       in_rshift2  right shift amount for the quantization on the
+ *                              second input vector
+ * @param[in]       lshift      left shift amount for the first and second input
+ *                              vectors
+ * @param[out]      out_vec     pointer of the element-wise addition results
+ * @param[in]       out_offset  dummy
+ * @param[in]       out_scale   scaling value for the quantization on the
+ *                              outputs
+ * @param[in]       out_rshift  right shift amount for the quantization on the
+ *                              outputs
+ * @param[in]       act_min     minimum value that the outputs are limited to.
+ *                              It should be in the range of -32768 to 32767.
+ * @param[in]       act_max     maximum value that the outputs are limited to.
+ *                              It should be in the range of -32768 to 32767.
+ * @param[in]       size        number of elements in the input vectors
+ * @return          This function returns 0.
+ *
+ * @note
+ *  The calculation of each element could be represented as Figure 2 in which
+ *  in_offset1, in_offset2 and out_offset are dummy for this function.
+ */
+int riscv_nn_ew_add_s16_asym(const int16_t *in_vec1,
+                             const int16_t *in_vec2,
+                             const int32_t in_offset1,
+                             const int32_t in_scale1,
+                             const int32_t in_rshift1,
+                             const int32_t in_offset2,
+                             const int32_t in_scale2,
+                             const int32_t in_rshift2,
+                             const int32_t lshift,
+                             int16_t *out_vec,
+                             const int32_t out_offset,
+                             const int32_t out_scale,
+                             const int32_t out_rshift,
+                             const int32_t act_min,
+                             const int32_t act_max,
+                             const int32_t size);
 
 #ifdef __riscv_zfh
 /**
@@ -210,8 +271,6 @@ int riscv_nn_ew_add_s8_asym(const int8_t *in_vec1,
  * @param[out]      out_vec     pointer of element-wise addition results
  * @param[in]       size        number of elements in the input vectors
  * @return          This function returns 0.
- *
- * @note
  */
 int riscv_nn_ew_add_f16(const float16_t *in_vec1,
                         const float16_t *in_vec2,
@@ -221,19 +280,26 @@ int riscv_nn_ew_add_f16(const float16_t *in_vec1,
 
 /**
  * @brief           This function performs element-wise multiplication for
- *                  signed 8-bit integer input vectors.
+ *                  signed 8-bit integer input vectors with asymmetric
+ *                  quantization on the outputs.
  * @param[in]       in_vec1     pointer of the first input vector
  * @param[in]       in_vec2     pointer of the second input vector
  * @param[in]       in_offset1  offset value for the first input vector. It
  *                              should be in the range of -127 to 128.
  * @param[in]       in_offset2  offset value for the second input vector. It
  *                              should be in the range of -127 to 128.
- * @param[out]      out_vec     pointer of element-wise multiplication results
- * @param[in]       out_offset  offset value for the output
- * @param[in]       out_scale   scaling value for the output
- * @param[in]       out_shift   shift amount for the output
- * @param[in]       act_min     minimum value that the output is limited to
- * @param[in]       act_max     maximum value that the output is limited to
+ * @param[out]      out_vec     pointer of the element-wise multiplication
+ *                              results
+ * @param[in]       out_offset  offset value for the outputs. It should be in
+ *                              the range of -128 to 127.
+ * @param[in]       out_scale   scaling value for the quantization on the
+ *                              outputs
+ * @param[in]       out_shift   shift amount for the quantization on the
+ *                              outputs
+ * @param[in]       act_min     minimum value that the outputs are limited to.
+ *                              It should be in the range of -128 to 127.
+ * @param[in]       act_max     maximum value that the outputs are limited to.
+ *                              It should be in the range of -128 to 127.
  * @param[in]       size        number of elements in the input vectors
  * @return          This function returns 0.
  *
@@ -242,6 +308,8 @@ int riscv_nn_ew_add_f16(const float16_t *in_vec1,
  *   @image html riscv_nn_ew_mul_s8_asym.jpg "Figure 3. riscv_nn_ew_mul_s8_asym algorithm flowchart" width=600px
  * - The multiplication for out_scale could be roughly expressed as:
  *   32b = ((int64_t)32b * 32b) >> 31
+ * - During the quantization process, a positive out_shift value is used to left
+ *   shift calculation results whereas a negative one is used to right shift.
  *
  * @b Example:
  * @code
@@ -251,14 +319,14 @@ int riscv_nn_ew_add_f16(const float16_t *in_vec1,
  * int32_t out_offset = 18;            // Offset for the output tensor
  * int32_t out_scale = (1<<30);        // Scale down the output tensor by 1/2
  * int32_t out_shift = -4;             // Scale down the output tensor by 1/2^4
- * int32_t act_min = 0xffffffa3;       // Limit the outputs in the range of
+ * int32_t act_min = 0xffffffa3;       // Limit the outputs to the range of
  *                                     // [0xffffffa3, 0x0000005d]
- * int32_t act_max = 0x0000005d;       // Limit the outputs in the range of
+ * int32_t act_max = 0x0000005d;       // Limit the outputs to the range of
  *                                     // [0xffffffa3, 0x0000005d]
  *
- * in_vec1[SIZE] = {...};
- * in_vec2[SIZE] = {...};
- * out_vec[SIZE];
+ * int8_t in_vec1[SIZE] = {...};
+ * int8_t in_vec2[SIZE] = {...};
+ * int8_t out_vec[SIZE];
  *
  * riscv_nn_ew_mul_s8_asym(in_vec1, in_vec2, in_offset1, in_offset2, out_vec,
  *     out_offset, out_scale, out_shift, act_min, act_max, SIZE);
@@ -275,6 +343,45 @@ int riscv_nn_ew_mul_s8_asym(const int8_t *in_vec1,
                             const int32_t act_min,
                             const int32_t act_max,
                             const uint32_t size);
+/**
+ * @brief           This function performs element-wise multiplication for
+ *                  signed 16-bit integer input vectors with asymmetric
+ *                  quantization on the outputs.
+ * @param[in]       in_vec1     pointer of the first input vector
+ * @param[in]       in_vec2     pointer of the second input vector
+ * @param[in]       in_offset1  dummy
+ * @param[in]       in_offset2  dummy
+ * @param[out]      out_vec     pointer of the element-wise multiplication
+ *                              results
+ * @param[in]       out_offset  dummy
+ * @param[in]       out_scale   scaling value for the quantization on the
+ *                              outputs
+ * @param[in]       out_shift   shift amount for the quantization on the
+ *                              outputs
+ * @param[in]       act_min     minimum value that the outputs are limited to.
+ *                              It should be in the range of -32768 to 32767.
+ * @param[in]       act_max     maximum value that the outputs are limited to.
+ *                              It should be in the range of -32768 to 32767.
+ * @param[in]       size        number of elements in the input vectors
+ * @return          This function returns 0.
+ *
+ * @note
+ * - The calculation of each element could be represented as Figure 3 in which
+ *   in_offset1, in_offset2 and out_offset are dummy for this function.
+ * - During the quantization process, a positive out_shift value is used to left
+ *   shift calculation results whereas a negative one is used to right shift.
+ */
+int riscv_nn_ew_mul_s16_asym(const int16_t *in_vec1,
+                             const int16_t *in_vec2,
+                             const int32_t in_offset1,
+                             const int32_t in_offset2,
+                             int16_t *out_vec,
+                             const int32_t out_offset,
+                             const int32_t out_scale,
+                             const int32_t out_shift,
+                             const int32_t act_min,
+                             const int32_t act_max,
+                             const int32_t size);
 
 #ifdef __riscv_zfh
 /**

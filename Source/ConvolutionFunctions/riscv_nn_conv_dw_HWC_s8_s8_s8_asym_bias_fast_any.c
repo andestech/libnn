@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -58,7 +58,6 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
     }
 
     (void)in_tmp_buf;
-    /* Run the following code as reference implementation for Cortex-M0 and Cortex-M3 */
     return riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_any(in_tensor,
                                  in_tensor_dim_x,
                                  in_tensor_dim_y,
@@ -86,7 +85,6 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
                                  dilation_y,
                                  NULL);
 
-    /* Return to application */
     return 0;
 }
 

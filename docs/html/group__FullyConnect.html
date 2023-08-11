@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.0</span>
+   &#160;<span id="projectnumber">version3.1</span>
    </div>
   </td>
  </tr>
@@ -149,10 +149,14 @@ Functions</h2></td></tr>
 <tr class="separator:ga5bf7cf6d4f2f88820a02fd5a4062a7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf537bda831e9b675ab3e9dc9d8218acc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FullyConnect.html#gaf537bda831e9b675ab3e9dc9d8218acc">riscv_nn_fc_mat_vec_s8_wt_converter</a> (const q7_t *wt_mat, const uint32_t size, const uint32_t wt_row_num, q7_t *wt_mat_out)</td></tr>
 <tr class="separator:gaf537bda831e9b675ab3e9dc9d8218acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6266966a1d670d32e7b50a97dd2b86aa"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FullyConnect.html#ga6266966a1d670d32e7b50a97dd2b86aa">riscv_nn_fc_s8_s8_s8_asym_bias</a> (const int8_t *in_vec, const int8_t *wt_mat, const uint16_t in_vec_col, const uint16_t wt_mat_row, const uint16_t in_vec_group, const int32_t in_offset, const int32_t wt_offset, const int32_t out_scale, const int32_t out_shift, const int32_t out_offset, const int32_t *bias, int8_t *out_vec, const int32_t act_min, const int32_t act_max, q15_t *tmp_buf)</td></tr>
-<tr class="separator:ga6266966a1d670d32e7b50a97dd2b86aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga558944ab2b8847775653fd8da0d62560"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FullyConnect.html#ga558944ab2b8847775653fd8da0d62560">riscv_nn_fc_s8_s8_s8_asym_bias</a> (const int8_t *in_vec, const int8_t *wt_mat, const uint16_t in_vec_col, const uint16_t wt_mat_row, const uint16_t in_vec_batch, const int32_t in_offset, const int32_t wt_offset, const int32_t out_scale, const int32_t out_shift, const int32_t out_offset, const int32_t *bias, int8_t *out_vec, const int32_t act_min, const int32_t act_max, q15_t *tmp_buf)</td></tr>
+<tr class="separator:ga558944ab2b8847775653fd8da0d62560"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa08cf07e7d559ae09d12962ed1a38fdb"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FullyConnect.html#gaa08cf07e7d559ae09d12962ed1a38fdb">riscv_nn_fc_s8_s8_s8_asym_bias_get_buffer_size</a> (const uint16_t in_vec_col)</td></tr>
 <tr class="separator:gaa08cf07e7d559ae09d12962ed1a38fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4f6465d0d154ab7a63a6e964e457ccfd"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FullyConnect.html#ga4f6465d0d154ab7a63a6e964e457ccfd">riscv_nn_fc_s16_s16_s8_asym_bias</a> (const int16_t *in_vec, const int8_t *wt_mat, const int32_t in_vec_col, const int32_t wt_mat_row, const int32_t in_vec_batch, const int32_t in_offset, const int32_t wt_offset, const int32_t out_scale, const int32_t out_shift, const int32_t out_offset, const int64_t *bias, int16_t *out_vec, const int32_t act_min, const int32_t act_max, int16_t *tmp_buf)</td></tr>
+<tr class="separator:ga4f6465d0d154ab7a63a6e964e457ccfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad5cfaa0cfb1328967dd9c543352f67fa"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FullyConnect.html#gad5cfaa0cfb1328967dd9c543352f67fa">riscv_nn_fc_s16_s16_s8_asym_bias_get_buffer_size</a> (const uint16_t in_vec_col)</td></tr>
+<tr class="separator:gad5cfaa0cfb1328967dd9c543352f67fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
@@ -334,7 +338,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>right shift amount for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -509,7 +513,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>right shift amount for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be 4 * size. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be 4 * size. </td></tr>
   </table>
   </dd>
 </dl>
@@ -779,7 +783,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -874,7 +878,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -969,7 +973,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -1159,7 +1163,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -1247,7 +1251,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -1335,7 +1339,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -1423,7 +1427,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -1511,7 +1515,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -1599,7 +1603,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -1694,7 +1698,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -1793,7 +1797,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -1892,7 +1896,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -1991,7 +1995,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -2090,7 +2094,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -2182,7 +2186,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -2274,7 +2278,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -2366,7 +2370,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -2458,7 +2462,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -2550,7 +2554,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
@@ -2719,8 +2723,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga6266966a1d670d32e7b50a97dd2b86aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6266966a1d670d32e7b50a97dd2b86aa">&#9670;&nbsp;</a></span>riscv_nn_fc_s8_s8_s8_asym_bias()</h2>
+<a id="ga558944ab2b8847775653fd8da0d62560"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga558944ab2b8847775653fd8da0d62560">&#9670;&nbsp;</a></span>riscv_nn_fc_s8_s8_s8_asym_bias()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2753,7 +2757,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const uint16_t&#160;</td>
-          <td class="paramname"><em>in_vec_group</em>, </td>
+          <td class="paramname"><em>in_vec_batch</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2830,21 +2834,26 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the transposed weight matrix </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>number of columns in the input vector (or transposed weight matrix) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat_row</td><td>number of rows in the transposed weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_group</td><td>number of input vector groups </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_batch</td><td>size of the input vector batches </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>offset value to be added to the input tensor . It should be in the range of -127 to 128. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">wt_offset</td><td>offset value to be added to the weight. It should be in the range of -127 to 128. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>shift amount for the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>shift amount for the quantization on the outputs </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>offset value to be added to the output tensor. It should be in the range of -128 to 127. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>dummy </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>This function only returns 0. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>bias could be a null pointer as the bias vector is optional for this function.</li>
+<li>During the quantization process, a positive out_shift value is used to left shift calculation results whereas a negative one is used to right shift. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -2865,6 +2874,167 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This function is used to obtain the required size, in bytes, for the temporary buffer of riscv_nn_fc_s8_s8_s8_asym_bias. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>number of columns in the input vector (or transposed weight matrix) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function returns the needed size by the temporary buffer. </dd></dl>
+
+</div>
+</div>
+<a id="ga4f6465d0d154ab7a63a6e964e457ccfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4f6465d0d154ab7a63a6e964e457ccfd">&#9670;&nbsp;</a></span>riscv_nn_fc_s16_s16_s8_asym_bias()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t riscv_nn_fc_s16_s16_s8_asym_bias </td>
+          <td>(</td>
+          <td class="paramtype">const int16_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>wt_mat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_vec_col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>wt_mat_row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_vec_batch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>wt_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_shift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int64_t *&#160;</td>
+          <td class="paramname"><em>bias</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t *&#160;</td>
+          <td class="paramname"><em>tmp_buf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This is a fully connected layer function for signed 16-bit integer inputs with bias inputs and asymmetric quantization on the outputs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the transposed weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>number of columns in the input vector (or transposed weight matrix) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat_row</td><td>number of rows in the transposed weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_batch</td><td>size of input vector batches </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_offset</td><td>dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>dummy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>bias could be a null pointer as the bias vector is optional for this function.</li>
+<li>During the quantization process, a positive out_shift value is used to left shift calculation results whereas a negative one is used to right shift. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="gad5cfaa0cfb1328967dd9c543352f67fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad5cfaa0cfb1328967dd9c543352f67fa">&#9670;&nbsp;</a></span>riscv_nn_fc_s16_s16_s8_asym_bias_get_buffer_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t riscv_nn_fc_s16_s16_s8_asym_bias_get_buffer_size </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>in_vec_col</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is used to obtain the required size, in bytes, for the temporary buffer of riscv_nn_fc_s16_s16_s8_asym_bias. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>number of columns in the input vector (or transposed weight matrix) </td></tr>

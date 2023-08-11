@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -19,12 +19,6 @@
 
 #include "internal_nn_math.h"
 
-/*
-   * s8 matrix multiplication with the right-hand-side matrix transposed
-   *
-   * Refer header file for details.
-   *
-   */
 int32_t riscv_nn_mat_mult_nt_t_s8(const q7_t *lhs,
                                    const q7_t *rhs,
                                    const q31_t *bias,

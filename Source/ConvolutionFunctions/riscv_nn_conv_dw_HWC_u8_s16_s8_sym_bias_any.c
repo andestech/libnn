@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -45,6 +45,12 @@ int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_bias_any(const u8_t * in_tensor,
         const uint16_t out_tensor_dim_y,
         q15_t * in_tmp_buf)
 {
+    /* do some checking here, basically in_tensor_ch == out_tensor_ch */
+    if (in_tensor_ch != out_tensor_ch)
+    {
+        return -1;
+    }
+
     int       i_out_y, i_out_x, i_ch_out;
     int       i_ker_y, i_ker_x;
 

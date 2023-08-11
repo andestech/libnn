@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -21,32 +21,40 @@
 
 #include "internal_nn_math.h"
 
-//// Convolution Functions
+//// Basic Operation Functions
 
-q7_t *riscv_nn_mat_mult_kernel_s8_offset(const q7_t *input_a,
-                                    const q7_t *input_b,
-                                    const uint16_t output_ch,
-                                    const int32_t *out_shift,
-                                    const int32_t *out_mult,
-                                    const int32_t input_offset,     //value is in the range of [-127, 128]
-                                    const int32_t out_offset,       //value is in the range of [-128, 127]
-                                    const int16_t activation_min,
-                                    const int16_t activation_max,
-                                    const uint16_t num_col_a,
-                                    const int32_t *const output_bias,
-                                     q7_t *out_0)
+int riscv_nn_ew_mul_s16_asym(const int16_t *in_vec1,
+                             const int16_t *in_vec2,
+                             const int32_t in_offset1,
+                             const int32_t in_offset2,
+                             int16_t *out_vec,
+                             const int32_t out_offset,
+                             const int32_t out_scale,
+                             const int32_t out_shift,
+                             const int32_t act_min,
+                             const int32_t act_max,
+                             const int32_t size)
 {
-    (void)input_a;
-    (void)input_b;
-    (void)output_ch;
-    (void)out_shift;
-    (void)out_mult;
+    (void)in_offset1;
+    (void)in_offset2;
     (void)out_offset;
-    (void)activation_min;
-    (void)activation_max;
-    (void)num_col_a;
-    (void)output_bias;
-    (void)out_0;
-    /* To be completed */
-    return NULL;
+    int32_t loop;
+
+    loop = size;
+    while (loop > 0)
+    {
+        int32_t input_1 = *in_vec1++;
+        int32_t input_2 = *in_vec2++;
+
+        int32_t output = input_1 * input_2;
+        output = riscv_nn_requantize(output, out_scale, out_shift);
+
+        output = MAX(output, act_min);
+        output = MIN(output, act_max);
+
+        *out_vec++ = output;
+        loop--;
+    }
+
+    return 0;
 }

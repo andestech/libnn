@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -26,7 +26,7 @@ int32_t riscv_nn_fc_s8_s8_s8_asym_bias(const int8_t *in_vec,
                     const int8_t *wt_mat,
                     const uint16_t in_vec_col,
                     const uint16_t wt_mat_row,
-                    const uint16_t in_vec_group,
+                    const uint16_t in_vec_batch,
                     const int32_t in_offset,    //value is in the range of [-127, 128]
                     const int32_t wt_offset,    //value is in the range of [-127, 128]
                     const int32_t out_scale,
@@ -40,7 +40,7 @@ int32_t riscv_nn_fc_s8_s8_s8_asym_bias(const int8_t *in_vec,
 {
     (void)tmp_buf;
 
-    uint16_t batch_cnt = in_vec_group;
+    uint16_t batch_cnt = in_vec_batch;
 
     if(wt_offset == 0)
     {

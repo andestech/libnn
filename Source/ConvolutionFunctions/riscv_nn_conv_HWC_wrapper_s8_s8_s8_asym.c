@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -28,7 +28,7 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
                                         const uint16_t in_tensor_dim_x,
                                         const uint16_t in_tensor_dim_y,
                                         const uint16_t in_tensor_ch,
-                                        const uint16_t in_tensor_group,
+                                        const uint16_t in_tensor_batch,
                                         const q7_t *ker_weight,
                                         const uint16_t out_tensor_ch,
                                         const uint16_t ker_dim_x,
@@ -61,7 +61,7 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
             in_tensor_dim_x,
             in_tensor_dim_y,
             in_tensor_ch,
-            in_tensor_group,
+            in_tensor_batch,
             ker_weight,
             out_tensor_ch,
             pad_x,
@@ -84,12 +84,12 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
         && (in_tensor_dim_y == 1)
         && (ker_dim_y == 1)
         && ((out_tensor_dim_x & 3) == 0)
-        && (in_tensor_group == 1))
+        && (in_tensor_batch == 1))
     {
         return riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any(in_tensor,
             in_tensor_dim_x,
             in_tensor_ch,
-            in_tensor_group,
+            in_tensor_batch,
             ker_weight,
             out_tensor_ch,
             ker_dim_x,
@@ -112,7 +112,7 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
             in_tensor_dim_x,
             in_tensor_dim_y,
             in_tensor_ch,
-            in_tensor_group,
+            in_tensor_batch,
             ker_weight,
             out_tensor_ch,
             ker_dim_x,
@@ -137,7 +137,7 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
 
 int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_t in_tensor_dim_y,
     const uint16_t in_tensor_ch,
-    const uint16_t in_tensor_group,
+    const uint16_t in_tensor_batch,
     const uint16_t ker_dim_x,
     const uint16_t ker_dim_y,
     const uint16_t pad_x,
@@ -161,7 +161,7 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_t i
         && (in_tensor_dim_y == 1)
         && (ker_dim_y == 1)
         && ((out_tensor_dim_x & 3) == 0)
-        && (in_tensor_group == 1))
+        && (in_tensor_batch == 1))
     {
         return riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(in_tensor_ch,
             ker_dim_x,

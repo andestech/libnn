@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -23,7 +23,6 @@
 #include "riscv_nn_support.h"
 
 //// Convolution Functions
-
 int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
                                      const int32_t in_tensor_dim_x,
                                      const int32_t in_tensor_dim_y,
@@ -64,18 +63,18 @@ int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
         int32_t ker_y_start = MAX(0, -in_y);
         for(int32_t in_x = -pad_x, out_x = 0; out_x < out_tensor_dim_x; in_x += stride_x, out_x++)
         {
-            int32_t in_ch = 0;
+            int32_t cur_ch = 0;
             int32_t ker_x_start = MAX(0, -in_x);
 
-            for(; in_ch <= (in_tensor_ch - 4); in_ch += 4)
+            for(; cur_ch <= (in_tensor_ch - 4); cur_ch += 4)
             {
-                int32_t out_buff0 = bias[in_ch + 0];
-                int32_t out_buff1 = bias[in_ch + 1];
-                int32_t out_buff2 = bias[in_ch + 2];
-                int32_t out_buff3 = bias[in_ch + 3];
+                int32_t out_buff0 = bias[cur_ch + 0];
+                int32_t out_buff1 = bias[cur_ch + 1];
+                int32_t out_buff2 = bias[cur_ch + 2];
+                int32_t out_buff3 = bias[cur_ch + 3];
 
-                const int8_t *input_ptr  = in_tensor + (in_y + ker_y_start) * (in_tensor_ch * in_tensor_dim_x) + in_x * in_tensor_ch + in_ch;
-                const int8_t *kernel_ptr = ker_weight + ker_y_start * (in_tensor_ch * 3) + in_ch;
+                const int8_t *input_ptr  = in_tensor + (in_y + ker_y_start) * (in_tensor_ch * in_tensor_dim_x) + in_x * in_tensor_ch + cur_ch;
+                const int8_t *kernel_ptr = ker_weight + ker_y_start * (in_tensor_ch * 3) + cur_ch;
 
                 for(int32_t ker_y = ker_y_start; ker_y < MIN(3, in_tensor_dim_y - in_y); ++ker_y)
                 {
@@ -109,10 +108,10 @@ int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
                     kernel_ptr += (in_tensor_ch * 3);
                 }
 
-                out_buff0 = riscv_nn_requantize(out_buff0, out_scale[in_ch + 0], out_shift[in_ch + 0]);
-                out_buff1 = riscv_nn_requantize(out_buff1, out_scale[in_ch + 1], out_shift[in_ch + 1]);
-                out_buff2 = riscv_nn_requantize(out_buff2, out_scale[in_ch + 2], out_shift[in_ch + 2]);
-                out_buff3 = riscv_nn_requantize(out_buff3, out_scale[in_ch + 3], out_shift[in_ch + 3]);
+                out_buff0 = riscv_nn_requantize(out_buff0, out_scale[cur_ch + 0], out_shift[cur_ch + 0]);
+                out_buff1 = riscv_nn_requantize(out_buff1, out_scale[cur_ch + 1], out_shift[cur_ch + 1]);
+                out_buff2 = riscv_nn_requantize(out_buff2, out_scale[cur_ch + 2], out_shift[cur_ch + 2]);
+                out_buff3 = riscv_nn_requantize(out_buff3, out_scale[cur_ch + 3], out_shift[cur_ch + 3]);
 
                 out_buff0 += out_offset;
                 out_buff1 += out_offset;
@@ -131,12 +130,12 @@ int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
             }
 
             // Leftover
-            for(; in_ch < in_tensor_ch; ++in_ch)
+            for(; cur_ch < in_tensor_ch; ++cur_ch)
             {
-                int32_t out_buff = bias[in_ch];
+                int32_t out_buff = bias[cur_ch];
 
-                const int8_t *input_ptr  = in_tensor + (in_y + ker_y_start) * (in_tensor_ch * in_tensor_dim_x) + in_x * in_tensor_ch + in_ch;
-                const int8_t *kernel_ptr = ker_weight + ker_y_start * (in_tensor_ch * 3) + in_ch;
+                const int8_t *input_ptr  = in_tensor + (in_y + ker_y_start) * (in_tensor_ch * in_tensor_dim_x) + in_x * in_tensor_ch + cur_ch;
+                const int8_t *kernel_ptr = ker_weight + ker_y_start * (in_tensor_ch * 3) + cur_ch;
 
                 for(int32_t ker_y = ker_y_start; ker_y < MIN(3, in_tensor_dim_y - in_y); ++ker_y)
                 {
@@ -156,7 +155,7 @@ int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
                     kernel_ptr += (in_tensor_ch * 3);
                 }
 
-                out_buff = riscv_nn_requantize(out_buff, out_scale[in_ch], out_shift[in_ch]);
+                out_buff = riscv_nn_requantize(out_buff, out_scale[cur_ch], out_shift[cur_ch]);
                 out_buff += out_offset;
                 out_buff = MIN(MAX(out_buff, act_min), act_max);
                 *out_tensor++ = out_buff;

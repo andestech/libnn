@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -27,12 +27,7 @@
 
 void riscv_nn_activate_s8(q7_t * in_out, uint32_t size, uint16_t int_bits, riscv_nn_activation_fun act_fun)
 {
-    uint32_t  i = size;
-    q7_t     *pIn = in_out;
-    q7_t     *pOut = in_out;
-    q7_t      in;
-    q7_t      out;
-    uint16_t  shift_size = 3 - int_bits;
+    uint16_t shift_size = 3 - int_bits;
     const q7_t *lookup_table;
     switch (act_fun)
     {
@@ -44,6 +39,12 @@ void riscv_nn_activate_s8(q7_t * in_out, uint32_t size, uint16_t int_bits, riscv
         lookup_table = tanhTable_q7;
         break;
     }
+
+    uint32_t i = size;
+    q7_t *pIn = in_out;
+    q7_t *pOut = in_out;
+    q7_t in;
+    q7_t out;
 
     while (i)
     {

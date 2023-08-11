@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.0</span>
+   &#160;<span id="projectnumber">version3.1</span>
    </div>
   </td>
  </tr>
@@ -92,7 +92,7 @@ $(document).ready(function(){initNavTree('group__Utils.html',''); initResizable(
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:gaa49e7e1a1073ca1e89c86a82864b7c66"><td class="memItemLeft" align="right" valign="top"><a id="gaa49e7e1a1073ca1e89c86a82864b7c66"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>riscv_nn_upsample_method</b> { <b>NN_UPSAMPLE_NEAREST</b> = 0
+<tr class="memitem:gaa49e7e1a1073ca1e89c86a82864b7c66"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Utils.html#gaa49e7e1a1073ca1e89c86a82864b7c66">riscv_nn_upsample_method</a> { <b>NN_UPSAMPLE_NEAREST</b> = 0
  }</td></tr>
 <tr class="separator:gaa49e7e1a1073ca1e89c86a82864b7c66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -104,12 +104,31 @@ Functions</h2></td></tr>
 <tr class="separator:ga8badb3e55083a0af9a86b92b8c2c08ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga07f85c637d13901f0a1d0fbd87d3be25"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Utils.html#ga07f85c637d13901f0a1d0fbd87d3be25">riscv_nn_svdf_s8</a> (q31_t *tmp_buf, q31_t *tmp_buf2, const int32_t rank, const int32_t in_offset, const int32_t out_offset, const int32_t in_act_min, const int32_t in_act_max, const int32_t out_act_min, const int32_t out_act_max, const int32_t in_scale, const int32_t in_shift, const int32_t out_scale, const int32_t out_shift, const int32_t in_batch, const int32_t in_height, const q7_t *in_tensor, q15_t *state_tensor, const int32_t wt_feature_batch, const q7_t *wt_feature_tensor, const int32_t wt_time_height, const q15_t *wt_time_tensor, const q31_t *bias, q7_t *out_tensor)</td></tr>
 <tr class="separator:ga07f85c637d13901f0a1d0fbd87d3be25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga334cd6c58c1e7f5c88941dc97fc3c2c5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Utils.html#ga334cd6c58c1e7f5c88941dc97fc3c2c5">riscv_nn_svdf_s8_state_s8</a> (q31_t *tmp_buf, q31_t *tmp_buf2, const int32_t rank, const int32_t in_offset, const int32_t out_offset, const int32_t in_act_min, const int32_t in_act_max, const int32_t out_act_min, const int32_t out_act_max, const int32_t in_scale, const int32_t in_shift, const int32_t out_scale, const int32_t out_shift, const int32_t in_batch, const int32_t in_height, const q7_t *in_tensor, q7_t *state_tensor, const int32_t wt_feature_batch, const q7_t *wt_feature_tensor, const int32_t wt_time_height, const q7_t *wt_time_tensor, const q31_t *bias, q7_t *out_tensor)</td></tr>
+<tr class="separator:ga334cd6c58c1e7f5c88941dc97fc3c2c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf634e1f828e7a9c8955a5a6ac3dc7a6a"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Utils.html#gaf634e1f828e7a9c8955a5a6ac3dc7a6a">riscv_nn_top_k_s8</a> (q7_t *in_vec, uint32_t size, uint32_t k, q7_t *val, uint32_t *idx)</td></tr>
 <tr class="separator:gaf634e1f828e7a9c8955a5a6ac3dc7a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga104609b893e0373f99e7d9b2c8c70be2"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Utils.html#ga104609b893e0373f99e7d9b2c8c70be2">riscv_nn_upsampling2d_HWC_s8</a> (const int8_t *in_tensor, const uint32_t in_tensor_dim_x, const uint32_t in_tensor_dim_y, const uint32_t in_tensor_ch, const uint32_t scale_factor_x, const uint32_t scale_factor_y, const riscv_nn_upsample_method upsample_method, int8_t *out_tensor)</td></tr>
+<tr class="memitem:ga104609b893e0373f99e7d9b2c8c70be2"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Utils.html#ga104609b893e0373f99e7d9b2c8c70be2">riscv_nn_upsampling2d_HWC_s8</a> (const int8_t *in_tensor, const uint32_t in_tensor_dim_x, const uint32_t in_tensor_dim_y, const uint32_t in_tensor_ch, const uint32_t scale_factor_x, const uint32_t scale_factor_y, const <a class="el" href="group__Utils.html#gaa49e7e1a1073ca1e89c86a82864b7c66">riscv_nn_upsample_method</a> upsample_method, int8_t *out_tensor)</td></tr>
 <tr class="separator:ga104609b893e0373f99e7d9b2c8c70be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="gaa49e7e1a1073ca1e89c86a82864b7c66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa49e7e1a1073ca1e89c86a82864b7c66">&#9670;&nbsp;</a></span>riscv_nn_upsample_method</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__Utils.html#gaa49e7e1a1073ca1e89c86a82864b7c66">riscv_nn_upsample_method</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This is the enumeration type to select an unsampling algorithm. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="gafebdb257b10c22758d2ba7715a8e1d2e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gafebdb257b10c22758d2ba7715a8e1d2e">&#9670;&nbsp;</a></span>riscv_nn_exp_f32()</h2>
@@ -358,7 +377,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function performs single value decomposition filter for signed 8-bit integer inputs. </p>
+<p>This function performs single value decomposition filter for signed 8-bit integer inputs and signed 16-bit integer state tensor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>temporary buffer for the input tensor </td></tr>
@@ -370,24 +389,219 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_act_max</td><td>maximum value that the intput tensor is limited to. It should be in the range of -128 to 127. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_act_min</td><td>minimum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">out_act_max</td><td>maximum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale</td><td>pointer of the scaling vector for the intput tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_shift</td><td>pointer of the shift vector for the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>pointer of the scaling vector for the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>pointer of the shift vector for the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_batch</td><td>number of input tensors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale</td><td>scaling value for the quantization on the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_shift</td><td>shift amount for the quantization on the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_batch</td><td>size of input tensor batches </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_height</td><td>height of the input tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">state_tensor</td><td>pointer of the state tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_feature_batch</td><td>number of weight tensors for feature dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_feature_tensor</td><td>pointer of the weight tensor for feature dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_time_height</td><td>number of weight tensors for time dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_time_tensor</td><td>pointer of the weight tensor for time dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_feature_batch</td><td>size of the feature weight tensor batches </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_feature_tensor</td><td>pointer of the feature weight tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_time_height</td><td>height of the time weight tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_time_tensor</td><td>pointer of the time weight tensor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>This function returns 0 on success; otherwise, it returns -1 if its inputs do not meet the constraints that in_height is nonnegative and less than 0x7FFFFFF0 and wt_time_height is also nonnegative. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>This function returns 0 on success; otherwise, it returns -1 if its inputs do not meet the constraints that in_height is nonnegative and less than 0x7FFFFFF0 and wt_time_height is also nonnegative.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>bias could be a null pointer as the bias vector is optional for this function.</li>
+<li>During the quantization process, a positive out_shift value is used to left shift calculation results whereas a negative one is used to right shift. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="ga334cd6c58c1e7f5c88941dc97fc3c2c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga334cd6c58c1e7f5c88941dc97fc3c2c5">&#9670;&nbsp;</a></span>riscv_nn_svdf_s8_state_s8()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int riscv_nn_svdf_s8_state_s8 </td>
+          <td>(</td>
+          <td class="paramtype">q31_t *&#160;</td>
+          <td class="paramname"><em>tmp_buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">q31_t *&#160;</td>
+          <td class="paramname"><em>tmp_buf2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>rank</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_act_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_act_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_act_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_act_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_shift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_shift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_batch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const q7_t *&#160;</td>
+          <td class="paramname"><em>in_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">q7_t *&#160;</td>
+          <td class="paramname"><em>state_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>wt_feature_batch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const q7_t *&#160;</td>
+          <td class="paramname"><em>wt_feature_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>wt_time_height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const q7_t *&#160;</td>
+          <td class="paramname"><em>wt_time_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const q31_t *&#160;</td>
+          <td class="paramname"><em>bias</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">q7_t *&#160;</td>
+          <td class="paramname"><em>out_tensor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs single value decomposition filter for signed 8-bit integer inputs and signed 8-bit integer state tensor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>temporary buffer for the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf2</td><td>temporary buffer for the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rank</td><td>number of largest elements to be kept </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>offset value for the input tensor It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>offset value for the output tensor. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_act_min</td><td>minimum value that the intput tensor is limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_act_max</td><td>maximum value that the intput tensor is limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_act_min</td><td>minimum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_act_max</td><td>maximum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale</td><td>scaling value for the quantization on the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_shift</td><td>shift amount for the quantization on the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_batch</td><td>size of input tensor batches </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_height</td><td>height of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">state_tensor</td><td>pointer of the state tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_feature_batch</td><td>size of the feature weight tensor batches </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_feature_tensor</td><td>pointer of the feature weight tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_time_height</td><td>height of the time weight tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_time_tensor</td><td>pointer of the time weight tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function returns 0 on success; otherwise, it returns -1 if its inputs do not meet the constraints that in_height is nonnegative and less than 0x7FFFFFF0 and wt_time_height is also nonnegative.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>bias could be a null pointer as the bias vector is optional for this function.</li>
+<li>During the quantization process, a positive out_shift value is used to left shift calculation results whereas a negative one is used to right shift. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -496,7 +710,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const riscv_nn_upsample_method&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__Utils.html#gaa49e7e1a1073ca1e89c86a82864b7c66">riscv_nn_upsample_method</a>&#160;</td>
           <td class="paramname"><em>upsample_method</em>, </td>
         </tr>
         <tr>
@@ -528,7 +742,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Now only NN_UPSAMPLE_NEAREST algorithm is supported for upsample_method. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Now only the algorithm NN_UPSAMPLE_NEAREST is supported for upsample_method. </dd></dl>
 
 </div>
 </div>

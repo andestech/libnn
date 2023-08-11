@@ -1,5 +1,5 @@
 /***************************************************************************
- *  Copyright (C) 2018 Andes Technology Corporation                        *
+ *  Copyright (C) 2018-2023 Andes Technology Corporation                   *
  *  All rights reserved.                                                   *
  ***************************************************************************/
 
@@ -16,29 +16,7 @@ extern "C"
 #include <string.h>
 #include <math.h>
 
-#ifdef ENA_VEC_ISA
-#include "internal_vec_isa.h"
-#define NDS_VEC_VSETVLI_E8_M2(OUT, AVL) \
-            NDS_VEC_VSETVLI(OUT, AVL, NDS_VEC_VTYPE_SEW_E8, NDS_VEC_VTYPE_LMUL_M2)
-#define NDS_VEC_VSETVLI_E8_M4(OUT, AVL) \
-            NDS_VEC_VSETVLI(OUT, AVL, NDS_VEC_VTYPE_SEW_E8, NDS_VEC_VTYPE_LMUL_M4)
-#define NDS_VEC_VSETVLI_E16_M2(OUT, AVL) \
-            NDS_VEC_VSETVLI(OUT, AVL, NDS_VEC_VTYPE_SEW_E16, NDS_VEC_VTYPE_LMUL_M2)
-#define NDS_VEC_VSETVLI_E16_M4(OUT, AVL) \
-            NDS_VEC_VSETVLI(OUT, AVL, NDS_VEC_VTYPE_SEW_E16, NDS_VEC_VTYPE_LMUL_M4)
-#define NDS_VEC_VSETVLI_E32_M2(OUT, AVL) \
-            NDS_VEC_VSETVLI(OUT, AVL, NDS_VEC_VTYPE_SEW_E32, NDS_VEC_VTYPE_LMUL_M2)
-#define NDS_VEC_VSETVLI_E32_M4(OUT, AVL) \
-            NDS_VEC_VSETVLI(OUT, AVL, NDS_VEC_VTYPE_SEW_E32, NDS_VEC_VTYPE_LMUL_M4)
-#define NDS_VEC_VSETVLI_E32_M8(OUT, AVL) \
-            NDS_VEC_VSETVLI(OUT, AVL, NDS_VEC_VTYPE_SEW_E32, NDS_VEC_VTYPE_LMUL_M8)
-#endif
-
-#ifdef ENA_DSP_ISA
-#include "internal_dsp_isa.h"
-#else
 #include "internal_isa.h"
-#endif
 
 #ifdef ALWAY_INLINE
 #define FUNCTION_INLINE  __attribute__((always_inline))
@@ -70,20 +48,8 @@ extern "C"
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
 #define MIN(x, y) ((x) < (y) ? (x) : (y))
 #define riscv_nn_clip_any(in, clip_min, clip_max) MIN(MAX((in), (clip_min)), (clip_max))
+#define REDUCE_MULTIPLIER(_mult) ((_mult < 0x7FFF0000) ? ((_mult + (1 << 15)) >> 16) : 0x7FFF)
 
-#ifdef ENA_DSP_ISA_64
-union riscv_nnDoubleWord
-{
-    q63_t     dword;
-               /**< Q63 type */
-    q31_t     word[2];
-               /**< Q31 type */
-    q15_t     half_words[4];
-               /**< Q15 type */
-    q7_t      bytes[8];
-               /**< Q7 type */
-};
-#endif
 union riscv_nnword
 {
     q31_t     word;
@@ -101,15 +67,7 @@ union riscv_nnword
 #define __SIMD64(addr)        (*(int64_t **) & (addr))
 
 
-#ifdef ENA_DSP_ISA
-#ifdef ENA_DSP_ISA_64
-#define NDS_DSP_ROR(X, Y)     __nds__rotr((X), (Y))
-#else
-#define NDS_DSP_ROR(X, Y)     __nds32__rotr((X), (Y))
-#endif
-#else
 #define NDS_DSP_ROR(X, Y)     NDS_ISA_ROTR((X), (Y))
-#endif
 
 static inline unsigned int NDS_ISA_ROTR(unsigned int val, unsigned int ror)
 {
@@ -136,141 +94,14 @@ static inline unsigned int NDS_ISA_ROTR(unsigned int val, unsigned int ror)
 /**
  * @brief read and expand one Q7 word into two Q15 words
  */
-#ifdef ENA_DSP_ISA
-__STATIC_FORCEINLINE void *read_and_pad(void *source, q31_t * out1, q31_t * out2)
-{
-        q31_t     inA = *__SIMD32(source)++;
-
-#if ENA_DSP_BE
-#ifdef ENA_DSP_ISA2
-        *out1 = NDS_DSP_SUNPKD832(inA);
-#else
-        *out1 = NDS_DSP_SUNPKD810(inA >> 16);
-#endif
-        *out2 = NDS_DSP_SUNPKD810(inA);
-#else
-        *out1 = NDS_DSP_SUNPKD810(inA);
-#ifdef ENA_DSP_ISA2
-        *out2 = NDS_DSP_SUNPKD832(inA);
-#else
-        *out2 = NDS_DSP_SUNPKD810(inA >> 16);
-#endif
-#endif
-        return source;
-}
-#endif
-
-#ifdef ENA_DSP_ISA_64
-__STATIC_FORCEINLINE void *read_and_pad_q63(void *source, q63_t * out1, q63_t * out2)
-{
-        q63_t     inA = *__SIMD64(source)++;
-#if ENA_DSP_BE
-        *out1 = NDS_DSP_SUNPKD832(inA);
-        *out2 = NDS_DSP_SUNPKD810(inA);
-#else
-        *out1 = NDS_DSP_SUNPKD810(inA);
-        *out2 = NDS_DSP_SUNPKD832(inA);
-#endif
-        return source;
-}
-#endif
 
 /**
  * @brief read and expand one Q7 word into two Q15 words with reordering
  */
-#ifdef ENA_DSP_ISA
-__STATIC_FORCEINLINE void *read_and_pad_reordered(void *source, q31_t * out1, q31_t * out2)
-{
-        q31_t     inA = *__SIMD32(source)++;
-#if ENA_DSP_BE
-        *out1 = NDS_DSP_SUNPKD831(inA);
-        *out2 = NDS_DSP_SUNPKD820(inA);
-#else
-        *out2 = NDS_DSP_SUNPKD831(inA);
-        *out1 = NDS_DSP_SUNPKD820(inA);
-#endif
-        return source;
-}
-#endif
-
-#ifdef ENA_DSP_ISA_64
-__STATIC_FORCEINLINE void *read_and_pad_reordered_q63(void *source, long * out1, long * out2)
-{
-        long     inA = *__SIMD64(source)++;
-#if ENA_DSP_BE
-        *out1 = NDS_DSP_SUNPKD831(inA);
-        *out2 = NDS_DSP_SUNPKD820(inA);
-#else
-        *out2 = NDS_DSP_SUNPKD831(inA);
-        *out1 = NDS_DSP_SUNPKD820(inA);
-#endif
-        return source;
-}
-#endif /* ENA_DSP_ISA_64 */
 
 /**
  * @brief used to accumulate q7 to q15 in avepool q7.
  */
-#if defined(ENA_DSP_ISA) || defined(ENA_VEC_ISA)
-__STATIC_FORCEINLINE void accumulate_q7_to_q15(q15_t * base, q7_t * target, const uint16_t length)
-{
-#ifdef ENA_VEC_ISA
-    int32_t vl;
-    int16_t avl = length;
-
-    while(avl > 0)
-    {
-        NDS_VEC_VSETVLI_E16_M2(vl, avl);
-        NDS_VEC_VLH_V(NDS_VEC_V0, base);
-
-        NDS_VEC_VSETVLI_E8(vl, avl);
-        NDS_VEC_VLB_V(NDS_VEC_V2, target);
-
-        NDS_VEC_VWADD_WV(NDS_VEC_V0, NDS_VEC_V0, NDS_VEC_V2);
-
-        NDS_VEC_VSETVLI_E16_M2(vl, avl);
-        NDS_VEC_VSH_V(NDS_VEC_V0, base);
-        base += vl;
-        target += vl;
-        avl -= vl;
-    }
-#else
-    q15_t    *pCnt = base;
-    q7_t     *pV = target;
-    q31_t     v1, v2, vo1, vo2;
-    uint16_t  cnt = length >> 2;
-    q31_t     in;
-
-    while (cnt > 0u)
-    {
-        q31_t     value = *__SIMD32(pV)++;
-        v1 = NDS_DSP_SUNPKD831(value);
-        v2 = NDS_DSP_SUNPKD820(value);
-#if ENA_DSP_BE
-        vo1 = NDS_DSP_PKTT16(v1, v2);
-        vo2 = NDS_DSP_PKBB16(v1, v2);
-#else
-        vo2 = NDS_DSP_PKTT16(v1, v2);
-        vo1 = NDS_DSP_PKBB16(v1, v2);
-#endif
-
-        in = *__SIMD32(pCnt);
-        *__SIMD32(pCnt)++ = NDS_DSP_KADD16(vo1, in);
-
-        in = *__SIMD32(pCnt);
-        *__SIMD32(pCnt)++ = NDS_DSP_KADD16(vo2, in);
-
-        cnt--;
-    }
-    cnt = length & 0x3;
-    while (cnt > 0u)
-    {
-        *pCnt++ += *pV++;
-        cnt--;
-    }
-#endif
-}
-#endif
 
 __STATIC_FORCEINLINE void buffer_scale_back_q15_to_q7_shift(q15_t * buffer,
         q7_t * target,
@@ -278,25 +109,9 @@ __STATIC_FORCEINLINE void buffer_scale_back_q15_to_q7_shift(q15_t * buffer,
         uint16_t scale,
         const uint16_t shift)
 {
-#ifdef ENA_VEC_ISA
-    while(length > 0)
-    {
-        uint32_t vl;
-        NDS_VEC_VSETVLI_E16_M2(vl, length);
-        NDS_VEC_VLH_V(NDS_VEC_V2, buffer);
-        NDS_VEC_VSLL_VX(NDS_VEC_V2, NDS_VEC_V2, shift);
-        NDS_VEC_VDIV_VX(NDS_VEC_V2, NDS_VEC_V2, scale);
-        NDS_VEC_VSB_V(NDS_VEC_V2, target);
-
-        length -= vl;
-        buffer += vl;
-        target += vl;
-    }
-#else
     int i;
     for (i = 0; i < length; i++)
         target[i] = (q7_t) ((buffer[i] << shift) / scale);
-#endif
 }
 
 __STATIC_FORCEINLINE void buffer_scale_back_q15_to_q7(q15_t * buffer,
@@ -304,24 +119,9 @@ __STATIC_FORCEINLINE void buffer_scale_back_q15_to_q7(q15_t * buffer,
         uint16_t length,
         uint16_t scale)
 {
-#ifdef ENA_VEC_ISA
-    while(length > 0)
-    {
-        uint32_t vl;
-        NDS_VEC_VSETVLI_E16_M2(vl, length);
-        NDS_VEC_VLH_V(NDS_VEC_V2, buffer);
-        NDS_VEC_VDIV_VX(NDS_VEC_V2, NDS_VEC_V2, scale);
-        NDS_VEC_VSB_V(NDS_VEC_V2, target);
-
-        length -= vl;
-        buffer += vl;
-        target += vl;
-    }
-#else
     int i;
     for (i = 0; i < length; i++)
         target[i] = (q7_t) (buffer[i] / scale);
-#endif
 }
 
 /**
@@ -333,9 +133,6 @@ __STATIC_FORCEINLINE void buffer_scale_back_q15_to_q7(q15_t * buffer,
  */
 __STATIC_FORCEINLINE q31_t riscv_nn_sat_doubling_high_mult(const q31_t m1, const q31_t m2)
 {
-#ifdef ENA_DSP_ISA
-    q31_t result = NDS_DSP_KWMMUL_U(m1, m2);
-#else
     q31_t result = 0;
     // Rounding offset to add for a right shift of 31
     q63_t mult = 1 << 30;
@@ -348,13 +145,12 @@ __STATIC_FORCEINLINE q31_t riscv_nn_sat_doubling_high_mult(const q31_t m1, const
 
     // Utilize all of the upper 32 bits. This is the doubling step
     // as well.
-    result = mult / (1UL << 31);
+    result = mult >> 31;
 
     if ((m1 == m2) && (m1 == (int32_t)Q31_MIN))
     {
         result = Q31_MAX;
     }
-#endif
     return result;
 }
 
@@ -368,9 +164,6 @@ __STATIC_FORCEINLINE q31_t riscv_nn_sat_doubling_high_mult(const q31_t m1, const
  */
 __STATIC_FORCEINLINE q31_t riscv_nn_divide_by_power_of_two(const q31_t dividend, const q31_t exponent)
 {
-#ifdef ENA_DSP_ISA
-    q31_t result = NDS_DSP_SRA_U(dividend, exponent);
-#else
     q31_t result = 0;
     const q31_t remainder_mask = (1l << exponent) - 1;
     int32_t remainder = remainder_mask & dividend;
@@ -388,7 +181,6 @@ __STATIC_FORCEINLINE q31_t riscv_nn_divide_by_power_of_two(const q31_t dividend,
     {
         result++;
     }
-#endif
 
     return result;
 }
@@ -429,17 +221,44 @@ __STATIC_FORCEINLINE q31_t riscv_nn_divide_by_power_of_two_v2(const q31_t divide
  */
 __STATIC_FORCEINLINE q31_t riscv_nn_requantize(const q31_t val, const q31_t multiplier, const q31_t shift)
 {
-#ifdef ENA_DSP_ISA
-    q31_t tmp = val << NDS_DSP_UCLIP32(shift, 5);
-    q31_t out = riscv_nn_sat_doubling_high_mult(tmp, multiplier);
-    out = riscv_nn_divide_by_power_of_two(out, NDS_DSP_UCLIP32(-shift, 5));
-    return out;
-#else
-    q31_t tmp = val << LEFT_SHIFT(shift);
-    q31_t out = riscv_nn_sat_doubling_high_mult(tmp, multiplier);
-    out = riscv_nn_divide_by_power_of_two(out, RIGHT_SHIFT(shift));
-    return out;
-#endif
+    const long total_shift = 31 - shift;
+    int64_t new_val = val * (int64_t)multiplier;
+    int32_t result = new_val >> (total_shift - 1);
+    result = (result + 1) >> 1;
+
+    return result;
+}
+
+// variant of riscv_nn_requantize for the shift is always >= 0 (for fixing the coverage issue on RV32P algo)
+__STATIC_FORCEINLINE q31_t riscv_nn_requantize_ps(const q31_t val, const q31_t multiplier, const q31_t shift)
+{
+    const long total_shift = 31 - shift;
+    int64_t new_val = val * (int64_t)multiplier;
+    int32_t result = new_val >> (total_shift - 1);
+    result = (result + 1) >> 1;
+
+    return result;
+}
+
+// variant of riscv_nn_requantize for the shift is always <= 0 (for fixing the coverage issue on RV32P algo)
+__STATIC_FORCEINLINE q31_t riscv_nn_requantize_ns(const q31_t val, const q31_t multiplier, const q31_t shift)
+{
+    const long total_shift = 31 - shift;
+    int64_t new_val = val * (int64_t)multiplier;
+    int32_t result = new_val >> (total_shift - 1);
+    result = (result + 1) >> 1;
+
+    return result;
+}
+
+__STATIC_FORCEINLINE q31_t riscv_nn_requantize_s64(const q63_t val, const q31_t reduced_multiplier, const q31_t shift)
+{
+    const q63_t new_val = val * reduced_multiplier;
+
+    q31_t result = new_val >> (14 - shift);
+    result = (result + 1) >> 1;
+
+    return result;
 }
 
 // Macros for shortening quantization functions' names and avoid long lines
@@ -491,14 +310,10 @@ __STATIC_FORCEINLINE int32_t riscv_nn_exp_on_negative_values(int32_t val)
 
 __STATIC_FORCEINLINE q31_t riscv_nn_mult_by_power_of_two(const int32_t val, const int32_t exp)
 {
-#ifdef ENA_DSP_ISA
-    int32_t result = NDS_DSP_KSLL(val, exp);
-#else
     const int32_t thresh = ((1 << (31 - exp)) - 1);
     int32_t result = val << exp;
     result = SELECT_USING_MASK(MASK_IF_NON_ZERO(val > thresh), Q31_MAX, result);
     result = SELECT_USING_MASK(MASK_IF_NON_ZERO(val < -thresh), Q31_MIN, result);
-#endif
     return result;
 }
 
@@ -515,6 +330,7 @@ __STATIC_FORCEINLINE int32_t riscv_nn_one_over_one_plus_x_for_x_in_0_1(int32_t v
 
     return MUL_POW2(x, 1);
 }
+
 //----- sub-functions for softmax layer_end -----
 
 // Exponent polynomial coefficients

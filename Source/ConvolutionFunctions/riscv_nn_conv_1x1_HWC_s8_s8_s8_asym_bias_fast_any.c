@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -24,18 +24,11 @@
 
 //// Convolution Functions
 
-/*
-   * Fast s8 version for 1x1 convolution (non-square shape)
-   *
-   * Refer header file for details.
-   *
-   */
-
 int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
                                     const uint16_t in_tensor_dim_x,
                                     const uint16_t in_tensor_dim_y,
                                     const uint16_t in_tensor_ch,
-                                    const uint16_t in_tensor_group,
+                                    const uint16_t in_tensor_batch,
                                     const q7_t *ker_weight,
                                     const uint16_t out_tensor_ch,
                                     const uint16_t pad_x,
@@ -67,7 +60,7 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
     (void)out_tensor_dim_y;
     (void)tmp_buf;
 
-    const int32_t lhs_rows = in_tensor_dim_x * in_tensor_dim_y * in_tensor_group;
+    const int32_t lhs_rows = in_tensor_dim_x * in_tensor_dim_y * in_tensor_batch;
     const int32_t rhs_rows = out_tensor_ch;
     const int32_t rhs_cols = in_tensor_ch;
 

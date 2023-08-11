@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2022 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -50,22 +50,16 @@ int riscv_nn_ew_add_s8_asym(const int8_t *in_vec1,
 
     loop = size;
 
-    // output[*] = in1[*] * scale1[*] + in2[*] * scale2[*]
     while(loop > 0)
     {
-        //scale inputs
         in1 = (*in_vec1++ + in_offset1) << lshift;
         in2 = (*in_vec2++ + in_offset2) << lshift;
 
-        in1 = riscv_nn_sat_doubling_high_mult(in1, in_scale1);
-        in1 = riscv_nn_divide_by_power_of_two(in1, in_rshift1);
-
-        in2 = riscv_nn_sat_doubling_high_mult(in2, in_scale2);
-        in2 = riscv_nn_divide_by_power_of_two(in2, in_rshift2);
+        in1 = riscv_nn_requantize_ns(in1, in_scale1, -in_rshift1);
+        in2 = riscv_nn_requantize_ns(in2, in_scale2, -in_rshift2);
 
         output = in1 + in2;
-        output = riscv_nn_sat_doubling_high_mult(output, out_scale);
-        output = riscv_nn_divide_by_power_of_two(output, out_rshift);
+        output = riscv_nn_requantize_ns(output, out_scale, -out_rshift);
         output += out_offset;
         output = MAX(output, act_min);
         output = MIN(output, act_max);
