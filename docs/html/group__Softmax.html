@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.1</span>
+   &#160;<span id="projectnumber">version3.3</span>
    </div>
   </td>
  </tr>
@@ -103,6 +103,12 @@ Functions</h2></td></tr>
 <tr class="separator:gaeb8a9b8dd55434f4df1361ab320b8e9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1edc59ec814a19dc7055420c7831912d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Softmax.html#ga1edc59ec814a19dc7055420c7831912d">riscv_nn_softmax_s16_hp</a> (const int16_t *in_tensor, const int32_t in_tensor_row, const int32_t in_tensor_col, const int32_t scale, const int32_t shift, const int16_t *exp_lut, const int16_t *one_by_one_lut, int16_t *out_tensor)</td></tr>
 <tr class="separator:ga1edc59ec814a19dc7055420c7831912d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaafecfd2ae73cbb1fc175038dbd565204"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Softmax.html#gaafecfd2ae73cbb1fc175038dbd565204">riscv_nn_softmax_f32</a> (const float32_t *in_vec, const uint32_t size, float32_t *out_vec)</td></tr>
+<tr class="separator:gaafecfd2ae73cbb1fc175038dbd565204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga95f34f7382bc22ca80386f52e99624b7"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Softmax.html#ga95f34f7382bc22ca80386f52e99624b7">riscv_nn_softmax_f32_2pass</a> (const float32_t *in_vec, const uint32_t size, float32_t *out_vec)</td></tr>
+<tr class="separator:ga95f34f7382bc22ca80386f52e99624b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ae830fce2d3b3a7ca70bac52828f6df"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Softmax.html#ga8ae830fce2d3b3a7ca70bac52828f6df">riscv_nn_softmax2d_f32</a> (const float32_t *in_buf, uint32_t row, uint32_t col, float32_t *out_buf, float32_t *tmp_buf)</td></tr>
+<tr class="separator:ga8ae830fce2d3b3a7ca70bac52828f6df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
@@ -138,17 +144,21 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a softmax function for signed 8-bit integer input vectors. </p>
+<p>This function performs softmax calculations on signed 8-bit integer input vectors. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs from inputs with very small values will be zero, and this makes the summation of dequant outputs far from 1.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Outputs from inputs with very small values will be zero, which may cause the sum of the dequantized outputs to deviate from 1.</li>
+<li>This is a 2-based softmax function.</li>
+</ul>
+</dd></dl>
 <p><b>Example:</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#define LENGTH 10</span></div>
 <div class="line">q7_t in_data[LENGTH] = {...};</div>
 <div class="line">q7_t out_data[LENGTH];</div>
@@ -189,17 +199,21 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a softmax function for signed 16-bit integer input vectors. </p>
+<p>This function performs softmax calculations on signed 16-bit integer input vectors. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs from inputs with very small values will be zero, and this makes the summation of dequant outputs far from 1. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Outputs from inputs with very small values will be zero, which may cause the sum of the dequantized outputs to deviate from 1.</li>
+<li>This is a 2-based softmax function. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -259,16 +273,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a softmax function for signed 8-bit integer input/ output tensor with high precision algorithm. </p>
+<p>This function performs softmax calculations on signed 8-bit integer input/output tensors using a high-precision algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_row</td><td>number of rows in the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_col</td><td>number of columns in the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>scaling value for input quantization </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>left shift amount for input quantization </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">diff_min</td><td>minimum threshold to perform the quantized exponential operation. The difference can be obtained by subtracting the input from the maximum in row. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_row</td><td>Number of rows in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_col</td><td>Number of columns in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>Scaling value for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>Left shift amount for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">diff_min</td><td>Minimum threshold to perform the quantized exponential operation. The difference can be obtained by subtracting the input from the maximum in row. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
   </table>
   </dd>
 </dl>
@@ -335,13 +349,13 @@ Functions</h2></td></tr>
 <p>This is a softmax function for signed 8-bit integer input tensor and signed 16-bit integer output tensor with high precision algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_row</td><td>number of rows in the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_col</td><td>number of columns in the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>scaling value for input quantization </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>left shift amount for input quantization </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">diff_min</td><td>minimum threshold to perform the quantized exponential operation. The difference can be obtained by subtracting the input from the maximum in row. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_row</td><td>Number of rows in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_col</td><td>Number of columns in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>Scaling value for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>Left shift amount for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">diff_min</td><td>Minimum threshold to perform the quantized exponential operation. The difference can be obtained by subtracting the input from the maximum in row. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
   </table>
   </dd>
 </dl>
@@ -408,13 +422,13 @@ Functions</h2></td></tr>
 <p>This is a softmax function for unsigned 8-bit integer input tensor with high precision algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_row</td><td>number of rows in the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_col</td><td>number of columns in the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>scaling value for input quantization </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>left shift amount for input quantization </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">diff_min</td><td>minimum threshold to perform the quantized exponential operation. The difference can be obtained by subtracting the input from the maximum in row. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_row</td><td>Number of rows in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_col</td><td>Number of columns in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>Scaling value for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>Left shift amount for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">diff_min</td><td>Minimum threshold to perform the quantized exponential operation. The difference can be obtained by subtracting the input from the maximum in row. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
   </table>
   </dd>
 </dl>
@@ -484,17 +498,166 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a softmax function for signed 16-bit integer input tensor with high precision algorithm. </p>
+<p>This function performs softmax calculations on signed 16-bit integer input/output tensors using a high-precision algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_row</td><td>number of rows in the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_col</td><td>number of columns in the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>scaling value for input quantization </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">shift</td><td>left shift amount for input quantization </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">exp_lut</td><td>pointer of the lookup table for exp(x), where x is uniformly distributed in [10, 0]. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">one_by_one_lut</td><td>pointer of the lookup table for (1/(1+x)), where x is uniformly distributed in [0, 1]. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_row</td><td>Number of rows in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_col</td><td>Number of columns in the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>Scaling value for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">shift</td><td>Left shift amount for input quantization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">exp_lut</td><td>Pointer to the lookup table for exp(x), where x is uniformly distributed in [10, 0]. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">one_by_one_lut</td><td>Pointer to the lookup table for (1/(1+x)), where x is uniformly distributed in [0, 1]. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0. </dd></dl>
+
+</div>
+</div>
+<a id="gaafecfd2ae73cbb1fc175038dbd565204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaafecfd2ae73cbb1fc175038dbd565204">&#9670;&nbsp;</a></span>riscv_nn_softmax_f32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t riscv_nn_softmax_f32 </td>
+          <td>(</td>
+          <td class="paramtype">const float32_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float32_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs softmax calculations on single-precision floating-point input vectors. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0. </dd></dl>
+
+</div>
+</div>
+<a id="ga95f34f7382bc22ca80386f52e99624b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga95f34f7382bc22ca80386f52e99624b7">&#9670;&nbsp;</a></span>riscv_nn_softmax_f32_2pass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t riscv_nn_softmax_f32_2pass </td>
+          <td>(</td>
+          <td class="paramtype">const float32_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float32_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs softmax calculations on single-precision floating-point input vectors using a two-pass algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0. </dd></dl>
+
+</div>
+</div>
+<a id="ga8ae830fce2d3b3a7ca70bac52828f6df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8ae830fce2d3b3a7ca70bac52828f6df">&#9670;&nbsp;</a></span>riscv_nn_softmax2d_f32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t riscv_nn_softmax2d_f32 </td>
+          <td>(</td>
+          <td class="paramtype">const float32_t *&#160;</td>
+          <td class="paramname"><em>in_buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float32_t *&#160;</td>
+          <td class="paramname"><em>out_buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float32_t *&#160;</td>
+          <td class="paramname"><em>tmp_buf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function applies calculations to each row of a two-dimensional single-precision floating-point buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_buf</td><td>Pointer to the input buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>Number of rows in the two-dimension buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">col</td><td>Number of columns in the two-dimension buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_buf</td><td>Pointer to the output buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>Temporary buffer for calculations. It is required when -mext-vector is enabled and its size must be the same as input buffer. </td></tr>
   </table>
   </dd>
 </dl>
@@ -504,7 +667,7 @@ Functions</h2></td></tr>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="agroup__Softmax_html_ga8a6aec663c02f68d170a1f68a2b94b99"><div class="ttname"><a href="group__Softmax.html#ga8a6aec663c02f68d170a1f68a2b94b99">riscv_nn_softmax_s8_fast</a></div><div class="ttdeci">void riscv_nn_softmax_s8_fast(const q7_t *in_vec, const uint16_t size, q7_t *out_vec)</div><div class="ttdoc">This is a softmax function for signed 8-bit integer input vectors.</div></div>
+<div class="ttc" id="agroup__Softmax_html_ga8a6aec663c02f68d170a1f68a2b94b99"><div class="ttname"><a href="group__Softmax.html#ga8a6aec663c02f68d170a1f68a2b94b99">riscv_nn_softmax_s8_fast</a></div><div class="ttdeci">void riscv_nn_softmax_s8_fast(const q7_t *in_vec, const uint16_t size, q7_t *out_vec)</div><div class="ttdoc">This function performs softmax calculations on signed 8-bit integer input vectors.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

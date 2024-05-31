@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -51,8 +51,8 @@ int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_bias_any(const u8_t * in_tensor,
         return -1;
     }
 
-    int       i_out_y, i_out_x, i_ch_out;
-    int       i_ker_y, i_ker_x;
+    int i_out_y, i_out_x, i_ch_out;
+    int i_ker_y, i_ker_x;
 
     for (i_out_y = 0; i_out_y < out_tensor_dim_y; i_out_y++)
     {
@@ -60,14 +60,13 @@ int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_bias_any(const u8_t * in_tensor,
         {
             for (i_ch_out = 0; i_ch_out < out_tensor_ch; i_ch_out++)
             {
-                // for each output
-                int       conv_out = bias[i_ch_out];
+                int conv_out = bias[i_ch_out];
                 for (i_ker_y = 0; i_ker_y < ker_dim_y; i_ker_y++)
                 {
                     for (i_ker_x = 0; i_ker_x < ker_dim_x; i_ker_x++)
                     {
-                        int       in_row = stride_y * i_out_y + i_ker_y - pad_y;
-                        int       in_col = stride_x * i_out_x + i_ker_x - pad_x;
+                        int in_row = stride_y * i_out_y + i_ker_y - pad_y;
+                        int in_col = stride_x * i_out_x + i_ker_x - pad_x;
                         if (in_row >= 0 && in_col >= 0 && in_row < in_tensor_dim_y && in_col < in_tensor_dim_x)
                         {
                             conv_out += in_tensor[(in_row * in_tensor_dim_x + in_col) * in_tensor_ch + i_ch_out] *

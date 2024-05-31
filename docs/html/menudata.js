@@ -23,4 +23,9 @@ for the JavaScript code in this file
 var menudata={children:[
 {text:"Andes",url:"index.html"},
 {text:"Related Pages",url:"pages.html"},
-{text:"Descriptions of Functions",url:"modules.html"}]}
+{text:"Descriptions of Functions",url:"modules.html"},
+{text:"Data Structures",url:"annotated.html",children:[
+{text:"Data Structures",url:"annotated.html"},
+{text:"Data Fields",url:"functions.html",children:[
+{text:"All",url:"functions.html"},
+{text:"Variables",url:"functions_vars.html"}]}]}]}

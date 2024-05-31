@@ -14,6 +14,8 @@ extern    "C"
 #endif
 
 #include "riscv_math_types.h"
+#include "riscv_nn_types.h"
+#include "riscv_nn_activation.h"
 #include <string.h>
 
 /**
@@ -72,165 +74,70 @@ void riscv_nn_dup_s8_s16_offset(const q7_t *src,
 
 void static inline riscv_nn_dup_s16(const q15_t * src, q15_t * dst, uint32_t size)
 {
-#ifdef ENA_VEC_ISA
-    long vl;
-    while(size > 0)
-    {
-        NDS_VEC_VSETVLI(vl, size, NDS_VEC_VTYPE_SEW_E16, NDS_VEC_VTYPE_LMUL_M8);
-        NDS_VEC_VLH_V(NDS_VEC_V0, src);
-        NDS_VEC_VSH_V(NDS_VEC_V0, dst);
-        src += vl;
-        dst += vl;
-        size -= vl;
-    }
-#elif defined(NDS_TOOLCHAIN_RISCV)
+#if   defined(NDS_TOOLCHAIN_RISCV)
     memcpy(dst, src, sizeof(*src) * size);
 #endif
 }
 
 void static inline riscv_nn_dup_s8(const q7_t * src, q7_t * dst, uint32_t size)
 {
-#ifdef ENA_VEC_ISA
-    //used vector registers: v0
+    memcpy(dst, src, size);
+}
+
+void static inline riscv_nn_dup_s8_v2(const q7_t * src, q7_t * dst, uint32_t size)
+{
+#ifdef ENA_VEC_INTRINSIC
     long vl;
-    while(size > 0)
+    long size2 = size;
+    while(size2 > 0)
     {
-        NDS_VEC_VSETVLI(vl, size, NDS_VEC_VTYPE_SEW_E8, NDS_VEC_VTYPE_LMUL_M8);
-        NDS_VEC_VLB_V(NDS_VEC_V0, src);
-        NDS_VEC_VSB_V(NDS_VEC_V0, dst);
+        vl = __riscv_vsetvl_e8m4(size2);
+        vint8m4_t vSrc = __riscv_vle8_v_i8m4(src, vl);
+        __riscv_vse8(dst, vSrc, vl);
         src += vl;
         dst += vl;
-        size -= vl;
+        size2 -= vl;
     }
 #else
     memcpy(dst, src, size);
 #endif
 }
-
-//customized function for the VPU with the configuration of SIMD=VLEN/2
-#ifdef ENA_VEC_ISA
-void static inline riscv_nn_dup_s8_v2(const q7_t * src, q7_t * dst, uint32_t size)
-{
-    //used vector registers: v0
-    long vl;
-    while(size > 0)
-    {
-        NDS_VEC_VSETVLI(vl, size, NDS_VEC_VTYPE_SEW_E8, NDS_VEC_VTYPE_LMUL_M4);
-        NDS_VEC_VLB_V(NDS_VEC_V0, src);
-        NDS_VEC_VSB_V(NDS_VEC_V0, dst);
-        src += vl;
-        dst += vl;
-        size -= vl;
-    }
-}
-#endif
 
 void static inline riscv_nn_dup_u8(const u8_t * src, u8_t * dst, uint32_t size)
 {
-#ifdef ENA_VEC_ISA
-    //used vector registers: v0
-    int32_t vl;
-    while(size > 0)
-    {
-        NDS_VEC_VSETVLI_E8(vl, size);
-        NDS_VEC_VLBU_V(NDS_VEC_V0, src);
-        NDS_VEC_VSB_V(NDS_VEC_V0, dst);
-        src += vl;
-        dst += vl;
-        size -= vl;
-    }
-#else
     memcpy(dst, src, size);
-#endif
 }
 
 void static inline riscv_nn_set_zero_s16(q15_t *dst, uint32_t size)
 {
-#ifdef ENA_VEC_ISA
-    long vl;
-    NDS_VEC_VSETVLI(vl, size, NDS_VEC_VTYPE_SEW_E16, NDS_VEC_VTYPE_LMUL_M8);
-    NDS_VEC_VAND_VI(NDS_VEC_V24, NDS_VEC_V24, 0);
-    while(size > 0)
-    {
-        NDS_VEC_VSH_V(NDS_VEC_V24, dst);
-        dst += vl;
-        size -= vl;
-        NDS_VEC_VSETVLI(vl, size, NDS_VEC_VTYPE_SEW_E16, NDS_VEC_VTYPE_LMUL_M8);
-    }
-#else
     // while(size-- > 0)
     // {
     //     *dst++ = 0;
     // }
     memset(dst, 0, sizeof(int16_t) * size);
-#endif
 }
 
 void static inline riscv_nn_set_zero_s8(q7_t *dst, uint32_t size)
 {
-#ifdef ENA_VEC_ISA
-    //Note. vector register v31 must be set to zero before calling this function
-    long vl;
-    NDS_VEC_VSETVLI(vl, size, NDS_VEC_VTYPE_SEW_E8, NDS_VEC_VTYPE_LMUL_M8);
-    NDS_VEC_VAND_VI(NDS_VEC_V24, NDS_VEC_V24, 0);
-    while(size > 0)
-    {
-        NDS_VEC_VSB_V(NDS_VEC_V24, dst);
-        dst += vl;
-        size -= vl;
-        NDS_VEC_VSETVLI(vl, size, NDS_VEC_VTYPE_SEW_E8, NDS_VEC_VTYPE_LMUL_M8);
-    }
-#else
     // while(size-- > 0)
     // {
     //     *dst++ = 0;
     // }
     memset(dst, 0, size);
-#endif
 }
 
 void static inline riscv_nn_set_zero_u8(u8_t *dst, uint32_t size)
 {
-#ifdef ENA_VEC_ISA
-    //Note. vector register v31 must be set to zero before calling this function
-    int32_t vl;
-    NDS_VEC_VSETVLI_E8(vl, size);
-    NDS_VEC_VAND_VI(NDS_VEC_V31, NDS_VEC_V31, 0);
-    while(size > 0)
-    {
-        NDS_VEC_VSETVLI_E8(vl, size);
-        NDS_VEC_VSB_V(NDS_VEC_V31, dst);
-        dst += vl;
-        size -= vl;
-    }
-#else
     memset(dst, 0, size);
-#endif
 }
 
 void static inline riscv_nn_set_val_s8(q7_t *dst, q7_t val, uint32_t size)
 {
-#ifdef ENA_VEC_ISA
-    uint32_t vl;
-    NDS_VEC_VSETVLI_E8(vl, size);
-    NDS_VEC_VAND_VI(NDS_VEC_V31, NDS_VEC_V31, 0x0);
-    NDS_VEC_VADD_VX(NDS_VEC_V31, NDS_VEC_V31, val);
-
-    //Note. vector register v31 must be set to val before calling this function
-    while(size > 0)
-    {
-        NDS_VEC_VSETVLI_E8(vl, size);
-        NDS_VEC_VSB_V(NDS_VEC_V31, dst);
-        dst += vl;
-        size -= vl;
-    }
-#else
     // while(size-- > 0)
     // {
     //     *dst++ = 0;
     // }
     memset(dst, val, size);
-#endif
 }
 
 // Following is a customized function for q7 fully-connected.
@@ -239,406 +146,6 @@ void static inline riscv_nn_set_val_s8(q7_t *dst, q7_t val, uint32_t size)
 // (in[n] in[n] in[n+1] in[n+1] in[n] in[n] in[n+1] in[n+1])
 // (left hand side elements have lower index).
 // The rest (size mod 3) elements are copied to the destination directly.
-#ifdef ENA_VEC_ISA
-void static inline riscv_nn_dup_s8_x4_reordered(const q7_t * src, q7_t * dst, uint32_t size)
-{
-#if 0   //version-1 (generate the load index at run time)
-    int32_t vl, vl2;
-    uint32_t sft_bit = 8;
-    uint32_t size2 = (size >> 2) << 2;
-
-    //generate load index (swap the elements at index of 4n+1 and 4n+2)
-    NDS_VEC_VSETVLI_E8(vl, size2);
-    NDS_VEC_VID_V(NDS_VEC_V1);      //temp index vector
-    NDS_VEC_VSETVLI_E32(vl, vl>>2);
-    //clear 4n+1 and 4n+2 index elements
-    NDS_VEC_VAND_VX(NDS_VEC_V0, NDS_VEC_V1, 0xFF0000FF);
-    //select 4n+2 index elements
-    NDS_VEC_VAND_VX(NDS_VEC_V2, NDS_VEC_V1, 0x00FF0000);
-    //shift 4n+2 index elements to 4n+1 position
-    NDS_VEC_VSRL_VX(NDS_VEC_V2, NDS_VEC_V2, sft_bit);
-    NDS_VEC_VOR_VV(NDS_VEC_V0, NDS_VEC_V0, NDS_VEC_V2);
-    //select 4n+1 index elements
-    NDS_VEC_VAND_VX(NDS_VEC_V2, NDS_VEC_V1, 0x0000FF00);
-    //shift 4n+1 index elements to 4n+2 position
-    NDS_VEC_VSLL_VX(NDS_VEC_V2, NDS_VEC_V2, sft_bit);
-    //V0: load ordering index
-    NDS_VEC_VOR_VV(NDS_VEC_V0, NDS_VEC_V0, NDS_VEC_V2);
-
-    q7_t *dst2 = dst+4;
-    while(size2 > 0)
-    {
-        NDS_VEC_VSETVLI_E8(vl, size2);
-        NDS_VEC_VLXBU_V(NDS_VEC_V1, src, NDS_VEC_V0);
-        NDS_VEC_VWADDU_VX(NDS_VEC_V2, NDS_VEC_V1, 0);
-        NDS_VEC_VSETVLI_E16_M2(vl2, size2);
-        NDS_VEC_VSLL_VX(NDS_VEC_V4, NDS_VEC_V2, 8);
-        NDS_VEC_VOR_VV(NDS_VEC_V2, NDS_VEC_V2, NDS_VEC_V4);
-
-        //since the AndeSim now doesn't support SEW=64
-        //thus, here we strided store the results to the destination twice
-        NDS_VEC_VSETVLI_E32_M2(vl2, size2>>1);
-        NDS_VEC_VSSW_V(NDS_VEC_V2, dst, 8);
-        NDS_VEC_VSSW_V(NDS_VEC_V2, dst2, 8);
-
-        size2 -= vl;
-        src += vl;
-        dst += vl<<2;
-        dst2 += vl<<2;
-    }
-
-    //rest
-    size2 = size & 0x3u;
-    while (size2 > 0u)
-    {
-        *dst++ = *src++;
-        size2--;
-    }
-#elif 0     //version-2 (plain C)
-    uint32_t size2 = size >> 2;
-    while(size2-- > 0)
-    {
-        q7_t in0 = *src++,
-             in1 = *src++,
-             in2 = *src++,
-             in3 = *src++;
-
-        *dst++ = in0;
-        *dst++ = in0;
-        *dst++ = in2;
-        *dst++ = in2;
-        *dst++ = in0;
-        *dst++ = in0;
-        *dst++ = in2;
-        *dst++ = in2;
-
-        *dst++ = in1;
-        *dst++ = in1;
-        *dst++ = in3;
-        *dst++ = in3;
-        *dst++ = in1;
-        *dst++ = in1;
-        *dst++ = in3;
-        *dst++ = in3;
-    }
-
-    //rest
-    size2 = size & 0x3u;
-    while (size2 > 0u)
-    {
-        *dst++ = *src++;
-        size2--;
-    }
-#elif 1
-
-//VLEN checking
-#ifndef VLEN
-    #error "[Error]Please define VLEN!"
-#elif (VLEN > 512)
-    #error "[Error]The algorithm doesn't support VLEN > 512 now!"
-#endif
-
-    //assume the maximun supported VLEN=512b
-    const uint8_t index[] = {  0,  0,  2,  2,  0,  0,  2,  2,  1,  1,  3,  3,  1,  1,  3,  3,
-                               4,  4,  6,  6,  4,  4,  6,  6,  5,  5,  7,  7,  5,  5,  7,  7,
-                               8,  8, 10, 10,  8,  8, 10, 10,  9,  9, 11, 11,  9,  9, 11, 11,
-                              12, 12, 14, 14, 12, 12, 14, 14, 13, 13, 15, 15, 13, 13, 15, 15};
-    uint32_t vl, size2 = size & 0xfffffffc;
-    size2 = size2 << 2;     //output length is 4x of input length (since they will be duplicated 4 times)
-    NDS_VEC_VSETVLI_E8(vl, size2);
-    NDS_VEC_VLB_V(NDS_VEC_V0, index);
-
-    // while(size2 >= 64*4)
-    // {
-    //     NDS_VEC_VSETVLI_E8(vl, size2);
-    //     NDS_VEC_VLB_V(NDS_VEC_V1, src);
-
-    //     // 1st 1/4 input data
-    //     NDS_VEC_VRGATHER_VV(NDS_VEC_V2, NDS_VEC_V1, NDS_VEC_V0);
-    //     NDS_VEC_VSB_V(NDS_VEC_V2, dst);
-    //     dst += vl;
-
-    //     // 2nd 1/4 input data
-    //     NDS_VEC_VSLIDEDOWN_VI(NDS_VEC_V1, NDS_VEC_V1, 16);
-    //     NDS_VEC_VRGATHER_VV(NDS_VEC_V2, NDS_VEC_V1, NDS_VEC_V0);
-    //     NDS_VEC_VSB_V(NDS_VEC_V2, dst);
-    //     dst += vl;
-
-    //     // 3rd 1/4 input data
-    //     NDS_VEC_VSLIDEDOWN_VI(NDS_VEC_V1, NDS_VEC_V1, 16);
-    //     NDS_VEC_VRGATHER_VV(NDS_VEC_V2, NDS_VEC_V1, NDS_VEC_V0);
-    //     NDS_VEC_VSB_V(NDS_VEC_V2, dst);
-    //     dst += vl;
-
-    //     // 4th 1/4 input data
-    //     NDS_VEC_VSLIDEDOWN_VI(NDS_VEC_V1, NDS_VEC_V1, 16);
-    //     NDS_VEC_VRGATHER_VV(NDS_VEC_V2, NDS_VEC_V1, NDS_VEC_V0);
-    //     NDS_VEC_VSB_V(NDS_VEC_V2, dst);
-    //     dst += vl;
-
-    //     size2 -= vl << 2;
-    //     src += vl;
-    // }
-
-    while(size2 > 0)
-    {
-        NDS_VEC_VSETVLI_E8(vl, size2 >> 2);
-        NDS_VEC_VLB_V(NDS_VEC_V1, src);
-        NDS_VEC_VSETVLI_E8(vl, size2);
-        NDS_VEC_VRGATHER_VV(NDS_VEC_V2, NDS_VEC_V1, NDS_VEC_V0);
-        NDS_VEC_VSB_V(NDS_VEC_V2, dst);
-        size2 -= vl;
-        src += vl >> 2;
-        dst += vl;
-    }
-
-    //rest
-    size2 = size & 0x3u;
-    while (size2 > 0u)
-    {
-        *dst++ = *src++;
-        size2--;
-    }
-#endif
-}
-
-// void static inline riscv_nn_dup_u8_x4_reordered(const u8_t * src, u8_t * dst, uint32_t size)
-// {
-//     int32_t vl, vl2;
-//     uint32_t sft_bit = 8;
-//     uint32_t size2 = (size >> 2) << 2;
-
-//     //generate load index (swap the elements at index of 4n+1 and 4n+2)
-//     NDS_VEC_VSETVLI_E8(vl, size2);
-//     NDS_VEC_VID_V(NDS_VEC_V1);      //temp index vector
-//     NDS_VEC_VSETVLI_E32(vl, vl>>2);
-//     //clear 4n+1 and 4n+2 index elements
-//     NDS_VEC_VAND_VX(NDS_VEC_V0, NDS_VEC_V1, 0xFF0000FF);
-//     //select 4n+2 index elements
-//     NDS_VEC_VAND_VX(NDS_VEC_V2, NDS_VEC_V1, 0x00FF0000);
-//     //shift 4n+2 index elements to 4n+1 position
-//     NDS_VEC_VSRL_VX(NDS_VEC_V2, NDS_VEC_V2, sft_bit);
-//     NDS_VEC_VOR_VV(NDS_VEC_V0, NDS_VEC_V0, NDS_VEC_V2);
-//     //select 4n+1 index elements
-//     NDS_VEC_VAND_VX(NDS_VEC_V2, NDS_VEC_V1, 0x0000FF00);
-//     //shift 4n+1 index elements to 4n+2 position
-//     NDS_VEC_VSLL_VX(NDS_VEC_V2, NDS_VEC_V2, sft_bit);
-//     //V0: load ordering index
-//     NDS_VEC_VOR_VV(NDS_VEC_V0, NDS_VEC_V0, NDS_VEC_V2);
-
-//     u8_t *dst2 = dst+4;
-//     while(size2 > 0)
-//     {
-//         NDS_VEC_VSETVLI_E8(vl, size2);
-//         NDS_VEC_VLXBU_V(NDS_VEC_V1, src, NDS_VEC_V0);
-//         NDS_VEC_VWADDU_VX(NDS_VEC_V2, NDS_VEC_V1, 0);
-//         NDS_VEC_VSETVLI_E16_M2(vl2, size2);
-//         NDS_VEC_VSLL_VX(NDS_VEC_V4, NDS_VEC_V2, 8);
-//         NDS_VEC_VOR_VV(NDS_VEC_V2, NDS_VEC_V2, NDS_VEC_V4);
-
-//         //since the AndeSim now doesn't support SEW=64
-//         //thus, here we strided store the results to the destination twice
-//         NDS_VEC_VSETVLI_E32_M2(vl2, size2>>1);
-//         NDS_VEC_VSSW_V(NDS_VEC_V2, dst, 8);
-//         NDS_VEC_VSSW_V(NDS_VEC_V2, dst2, 8);
-
-//         size2 -= vl;
-//         src += vl;
-//         dst += vl<<2;
-//         dst2 += vl<<2;
-//     }
-
-//     //rest
-//     size2 = size & 0x3u;
-//     while (size2 > 0u)
-//     {
-//         *dst++ = *src++;
-//         size2--;
-//     }
-// }
-
-// Following is a customized function for fc_q15_fast.
-// This function will read every two inputs (in[n] and in[n+1]), duplicate them
-// 4 times and store them to the destination with the reordered ordering of
-// (in[n] in[n+1] in[n] in[n+1] in[n] in[n+1] in[n] in[n+1]).
-void static inline riscv_nn_dup_s16_x4_reordered(const q15_t * src, q15_t * dst, uint32_t size)
-{
-#if 0   //version-1: vlxh
-    int32_t vl;
-    uint32_t size2 = (size >> 1) << 3;  //x4
-
-    //assume VLEN <= 512 (*2 -> convert to byte offset)
-    //      load_index   = {0,   1,   0,   1,   0,   1,   0,   1,   2,   3,   2,   3,   2,   3,   2,   3,   4,   5,   4,   5,   4,   5,   4,   5,   6,   7,   6,   7,   6,   7,   6,   7}
-    int16_t load_index[] = {0*2, 1*2, 0*2, 1*2, 0*2, 1*2, 0*2, 1*2, 2*2, 3*2, 2*2, 3*2, 2*2, 3*2, 2*2, 3*2, 4*2, 5*2, 4*2, 5*2, 4*2, 5*2, 4*2, 5*2, 6*2, 7*2, 6*2, 7*2, 6*2, 7*2, 6*2, 7*2,};
-
-    NDS_VEC_VSETVLI_E16(vl, size2);
-    NDS_VEC_VLH_V(NDS_VEC_V0, load_index);
-
-    while(size2 > 0)
-    {
-        NDS_VEC_VSETVLI_E16(vl, size2);
-        NDS_VEC_VLXH_V(NDS_VEC_V1, src, NDS_VEC_V0);
-        NDS_VEC_VSH_V(NDS_VEC_V1, dst);
-        size2 -= vl ;
-        src += vl>>2;
-        dst += vl;
-    }
-
-    //rest one
-    //Note. if the size is odd, the last element needs to be processed specially
-    if(size & 0x1)
-    {
-        *dst++ = *src;
-        *dst++ = *src;
-        *dst++ = *src;
-        *dst++ = *src;
-    }
-#else   //version-2: vrgather (only support VLEN=512)
-
-//VLEN checking
-#ifndef VLEN
-    #error "[Error]Please define VLEN!"
-#elif (VLEN > 512)
-    #error "[Error]The algorithm doesn't support VLEN > 512 now!"
-#endif
-
-    const int16_t load_index[] = { 0, 1, 0, 1, 0, 1, 0, 1, 2, 3, 2, 3, 2, 3, 2, 3, 4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7};
-    int32_t vl;
-    uint32_t size2 = (size >> 1) << 3;  //x4
-    NDS_VEC_VSETVLI_E16(vl, size2);
-    NDS_VEC_VLH_V(NDS_VEC_V0, load_index);
-
-    while(size2 > 0)
-    {
-        NDS_VEC_VSETVLI_E16(vl, size2 >> 2);
-        NDS_VEC_VLH_V(NDS_VEC_V1, src);
-        NDS_VEC_VSETVLI_E16(vl, size2);
-        NDS_VEC_VRGATHER_VV(NDS_VEC_V2, NDS_VEC_V1, NDS_VEC_V0);
-        NDS_VEC_VSH_V(NDS_VEC_V2, dst);
-        size2 -= vl;
-        src += vl >> 2;
-        dst += vl;
-    }
-
-    //rest one
-    //Note. if the size is odd, the last element needs to be processed specially
-    if(size & 0x1)
-    {
-        *dst++ = *src;
-        *dst++ = *src;
-        *dst++ = *src;
-        *dst++ = *src;
-    }
-#endif
-}
-
-// Following is a customized function for fc_mat_q7_vec_q15_fast.
-// This function will read every two inputs (in[n] and in[n+1]), duplicate them
-// 4 times and store them to the destination with the reordered ordering of
-// (in[n] in[n] in[n+1] in[n+1] in[n] in[n] in[n+1] in[n+1]).
-void static inline riscv_nn_dup_s16_x4_reordered_v2(const q15_t * src, q15_t * dst, uint32_t size)
-{
-#if 0   //version-1: vlxh
-    int32_t vl;
-    uint32_t size2 = (size >> 1) << 3;  //x4
-
-    //assume VLEN <= 512 (*2 -> convert to byte offset)
-    //      load_index   = {0,   0,   1,   1,   0,   0,   1,   1,   2,   2,   3,   3,   2,   2,   3,   3,   4,   4,   5,   5,   4,   4,   5,   5,   6,   6,   7,   7,   6,   6,   7,   7}
-    int16_t load_index[] = {0*2, 0*2, 1*2, 1*2, 0*2, 0*2, 1*2, 1*2, 2*2, 2*2, 3*2, 3*2, 2*2, 2*2, 3*2, 3*2, 4*2, 4*2, 5*2, 5*2, 4*2, 4*2, 5*2, 5*2, 6*2, 6*2, 7*2, 7*2, 6*2, 6*2, 7*2, 7*2};
-
-    NDS_VEC_VSETVLI_E16(vl, size2);
-    NDS_VEC_VLH_V(NDS_VEC_V0, load_index);
-
-    while(size2 > 0)
-    {
-        NDS_VEC_VSETVLI_E16(vl, size2);
-        NDS_VEC_VLXH_V(NDS_VEC_V1, src, NDS_VEC_V0);
-        NDS_VEC_VSH_V(NDS_VEC_V1, dst);
-        size2 -= vl ;
-        src += vl>>2;
-        dst += vl;
-    }
-
-    //rest one
-    //Note. if the size is odd, the last element needs to be processed specially
-    if(size & 0x1)
-    {
-        *dst++ = *src;
-        *dst++ = *src;
-        *dst++ = *src;
-        *dst++ = *src;
-    }
-#else   //version-2: vrgather
-
-//VLEN checking
-#ifndef VLEN
-    #error "[Error]Please define VLEN!"
-#elif (VLEN > 512)
-    #error "[Error]The algorithm doesn't support VLEN > 512 now!"
-#endif
-
-    const int16_t load_index[] = { 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 5, 5, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7};
-    int32_t vl;
-    uint32_t size2 = (size >> 1) << 3;  //x4
-    NDS_VEC_VSETVLI_E16(vl, size2);
-    NDS_VEC_VLH_V(NDS_VEC_V0, load_index);
-
-    // while(size2 >= 32*4)
-    // {
-    //     NDS_VEC_VSETVLI_E16(vl, size2);
-    //     NDS_VEC_VLH_V(NDS_VEC_V1, src);
-
-    //     // 1st 1/4 input data
-    //     NDS_VEC_VRGATHER_VV(NDS_VEC_V2, NDS_VEC_V1, NDS_VEC_V0);
-    //     NDS_VEC_VSH_V(NDS_VEC_V2, dst);
-    //     dst += vl;
-
-    //     // 2nd 1/4 input data
-    //     NDS_VEC_VSLIDEDOWN_VX(NDS_VEC_V1, NDS_VEC_V1, vl>>2);
-    //     NDS_VEC_VRGATHER_VV(NDS_VEC_V2, NDS_VEC_V1, NDS_VEC_V0);
-    //     NDS_VEC_VSH_V(NDS_VEC_V2, dst);
-    //     dst += vl;
-
-    //     // 3rd 1/4 input data
-    //     NDS_VEC_VSLIDEDOWN_VX(NDS_VEC_V1, NDS_VEC_V1, vl>>2);
-    //     NDS_VEC_VRGATHER_VV(NDS_VEC_V2, NDS_VEC_V1, NDS_VEC_V0);
-    //     NDS_VEC_VSH_V(NDS_VEC_V2, dst);
-    //     dst += vl;
-
-    //     // 4th 1/4 input data
-    //     NDS_VEC_VSLIDEDOWN_VX(NDS_VEC_V1, NDS_VEC_V1, vl>>2);
-    //     NDS_VEC_VRGATHER_VV(NDS_VEC_V2, NDS_VEC_V1, NDS_VEC_V0);
-    //     NDS_VEC_VSH_V(NDS_VEC_V2, dst);
-    //     dst += vl;
-
-    //     size2 -= vl << 2;
-    //     src += vl;
-    // }
-
-    while(size2 > 0)
-    {
-        NDS_VEC_VSETVLI_E16(vl, size2 >> 2);
-        NDS_VEC_VLH_V(NDS_VEC_V1, src);
-        NDS_VEC_VSETVLI_E16(vl, size2);
-        NDS_VEC_VRGATHER_VV(NDS_VEC_V2, NDS_VEC_V1, NDS_VEC_V0);
-        NDS_VEC_VSH_V(NDS_VEC_V2, dst);
-        size2 -= vl;
-        src += vl >> 2;
-        dst += vl;
-    }
-
-    //rest one
-    //Note. if the size is odd, the last element needs to be processed specially
-    if(size & 0x1)
-    {
-        *dst++ = *src;
-        *dst++ = *src;
-        *dst++ = *src;
-        *dst++ = *src;
-    }
-#endif
-}
-#endif
 
 /**
  * @brief           Multiply two Q7 vectors, right shift the results with
@@ -705,7 +212,8 @@ int32_t riscv_nn_mat_mult_nt_t_s8(const q7_t *lhs,
                                    const int32_t lhs_offset,
                                    const int32_t dst_offset,
                                    const int32_t activation_min,
-                                   const int32_t activation_max);
+                                   const int32_t activation_max,
+                                   const int32_t lhs_cols_offset);
 
 //========== sub-functions for convolution ==========
 // following are internal sub-functions called by NN convolution functions
@@ -1260,6 +768,21 @@ int32_t riscv_nn_vec_mat_mult_t_s8_v3(const q7_t *lhs,
                                     const int32_t activation_max,
                                     const int32_t out_addr_offset);
 
+int32_t vec_mat_mult_acc_t_s8_s16(const q7_t *lhs,
+                                  const q7_t *rhs,
+                                  const q31_t *bias,
+                                  q15_t *dst,
+                                  const int32_t lhs_offset,   //value is in the range of [-127, 128]
+                                  const int32_t rhs_offset,   //value is in the range of [-127, 128]
+                                  const int32_t dst_offset,   //value is in the range of [-128, 127]
+                                  const int32_t dst_multiplier,
+                                  const int32_t dst_shift,
+                                  const int32_t rhs_cols,
+                                  const int32_t rhs_rows,
+                                  const int32_t activation_min,
+                                  const int32_t activation_max,
+                                  const int32_t batch);
+
 q15_t *riscv_nn_mat_mult_kernel_s16(const q7_t *ker_wt,
                                     const q15_t *in_tensor,
                                     const int32_t output_ch,
@@ -1309,6 +832,70 @@ int riscv_nn_vec_mat_mult_t_svdf_s8(const q7_t *lhs,
                                     const int32_t activation_min,
                                     const int32_t activation_max);
 
+//----- sub-functions for lstm_begin -----
+void lstm_update_cell_state_and_output_s16_s8(const int32_t cell_state_scale,
+                                              int16_t *cell_state,
+                                              riscv_nn_lstm_context *scratch_buffers,
+                                              const riscv_nn_scaling hidden_scaling,
+                                              const int32_t hidden_offset,
+                                              int8_t *output_state,
+                                              const int n_batch,
+                                              const int n_cell,
+                                              const int n_output,
+                                              int8_t* output);
+
+void lstm_update_cell_state_s16(const int32_t n_block,
+                                const int32_t cell_state_scale,
+                                int16_t *cell_state,
+                                const int16_t *input_gate,
+                                const int16_t *forget_gate,
+                                const int16_t *cell_gate);
+
+void lstm_update_output_s16_s8(const int n_batch,
+                               const int n_cell,
+                               int16_t *cell_state,
+                               const int32_t cell_state_scale,
+                               const int16_t *output_gate,
+                               const riscv_nn_scaling hidden_scaling,
+                               const int32_t hidden_offset,
+                               int8_t *output_state,
+                               int16_t *cell_gate_scratch);
+
+void lstm_calculate_gate_s8_s16(const int8_t *input,
+                                const int8_t *input_to_gate_weights,
+                                const int32_t *input_to_gate_bias,
+                                const riscv_nn_scaling input_to_gate_scaling,
+                                const int8_t *output_state,
+                                const int8_t *recurrent_to_gate_weights,
+                                const int32_t *recurrent_to_gate_bias,
+                                const riscv_nn_scaling recurrent_to_gate,
+                                const int32_t n_batch,
+                                const int32_t n_input,
+                                const int32_t n_output,
+                                const int32_t n_cell,
+                                const riscv_nn_activation_fun activation_type,
+                                int16_t *gate);
+
+int lstm_step_s8(const int8_t *input,
+                 const int8_t *input_to_input_weight,
+                 const int8_t *input_to_forget_weight,
+                 const int8_t *input_to_cell_weight,
+                 const int8_t *input_to_output_weight,
+                 const int8_t *recurrent_to_input_weight,
+                 const int8_t *recurrent_to_forget_weight,
+                 const int8_t *recurrent_to_cell_weight,
+                 const int8_t *recurrent_to_output_weight,
+                 const riscv_nn_lstm_params *lstm,
+                 const int n_batch,
+                 const int n_cell,
+                 const int n_input,
+                 const int n_output,
+                 int8_t *output_state,
+                 int16_t *cell_state,
+                 int8_t *output,
+                 riscv_nn_lstm_context *scratch_buffers);
+//----- sub-functions for lstm_end -----
+
 #ifdef __riscv_zfh
 float16_t *riscv_nn_mat_mul_kernel_fp16_unroll4(const float16_t * src1,
                                             const float16_t * src2,
@@ -1323,6 +910,20 @@ float16_t *riscv_nn_mat_mul_kernel_f16(const float16_t * src1,
                                             const uint16_t col_src1,
                                             const float16_t * bias,
                                             float16_t * out);
+
+float16_t *riscv_nn_mat_mul_kernel_tiling_f16(const float16_t * src1,
+                                          const float16_t * src2,
+                                          float16_t * out,
+                                          const uint16_t row,
+                                          const uint16_t col,
+                                          const uint16_t col2,
+                                          const float16_t * bias,
+                                          const uint16_t tiling_size);
+
+void riscv_nn_mat_mul_kernel_tiling_transpose_f16(const float16_t * src,
+                                                  float16_t * dst,
+                                                  const long row,
+                                                  const long col);
 #endif
 /**
  *   * @}

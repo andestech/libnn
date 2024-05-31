@@ -1,5 +1,5 @@
 /***************************************************************************
- *  Copyright (C) 2018 Andes Technology Corporation                        *
+ *  Copyright (C) 2018-2024 Andes Technology Corporation                   *
  *  All rights reserved.                                                   *
  ***************************************************************************/
 

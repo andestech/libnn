@@ -23,16 +23,25 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "Andes Neural Network Library User Manual", "index.html", [
+    [ "AndesAIRE<sup>TM</sup> Neural Network Library User Manual", "index.html", null ],
     [ "Copyright Notice", "copy_sec.html", null ],
     [ "Contact Information", "cont_sec.html", null ],
     [ "Overview", "ov_sec.html", null ],
-    [ "Descriptions of Functions", "modules.html", "modules" ]
+    [ "Descriptions of Functions", "modules.html", "modules" ],
+    [ "Data Structures", "annotated.html", [
+      [ "Data Structures", "annotated.html", "annotated_dup" ],
+      [ "Data Fields", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
+    ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"cont_sec.html"
+"annotated.html",
+"structriscv__nn__lstm__params.html#a27d26d184e5e35d95be4e6136fab2f4e"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

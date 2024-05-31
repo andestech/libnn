@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -117,6 +117,13 @@ extern "C"
 #ifdef __riscv_vector
     #ifndef ENA_VEC_ISA
         #define ENA_VEC_ISA
+    #endif
+    #ifdef ENA_VEC_ISA
+        #ifdef __riscv_v_elen
+            #if __riscv_v_elen == 64
+                #define ENA_VEC_ELEN64
+            #endif
+        #endif
     #endif
 #endif
 

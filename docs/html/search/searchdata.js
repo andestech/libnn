@@ -1,27 +1,33 @@
 var indexSectionsWithContent =
 {
-  0: "abcfoprsu",
+  0: "abcfilmoprstu",
   1: "r",
   2: "r",
-  3: "abcfpsu",
-  4: "aco"
+  3: "ilmrst",
+  4: "r",
+  5: "abcfpsu",
+  6: "aco"
 };
 
 var indexSectionNames =
 {
   0: "all",
-  1: "functions",
-  2: "enums",
-  3: "groups",
-  4: "pages"
+  1: "classes",
+  2: "functions",
+  3: "variables",
+  4: "enums",
+  5: "groups",
+  6: "pages"
 };
 
 var indexSectionLabels =
 {
   0: "All",
-  1: "Functions",
-  2: "Enumerations",
-  3: "Modules",
-  4: "Pages"
+  1: "Data Structures",
+  2: "Functions",
+  3: "Variables",
+  4: "Enumerations",
+  5: "Modules",
+  6: "Pages"
 };
 

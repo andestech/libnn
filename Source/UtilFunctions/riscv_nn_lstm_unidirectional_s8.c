@@ -1,0 +1,120 @@
+#include "internal_nn_math.h"
+#include "riscv_nn_types.h"
+#include "riscv_nn_util.h"
+#include "riscv_nn_support.h"
+
+int32_t riscv_nn_lstm_unidirectional_s16_s8(riscv_nn_lstm_context *scratch_buffers,
+                                         const int8_t *input_data,
+                                         const riscv_nn_lstm_dims *lstm_dims,
+                                         const int8_t *in_to_in_weights,
+                                         const int8_t *in_to_forget_weights,
+                                         const int8_t *in_to_cell_weights,
+                                         const int8_t *in_to_out_weights,
+                                         const int8_t *recurrent_to_in_weights,
+                                         const int8_t *recurrent_to_forget_weights,
+                                         const int8_t *recurrent_to_cell_weights,
+                                         const int8_t *recurrent_to_out_weights,
+                                         const int16_t *cell_to_in_weights,
+                                         const int16_t *cell_to_forget_weights,
+                                         const int16_t *cell_to_out_weights,
+                                         const int8_t *projection_weights,
+                                         const riscv_nn_lstm_params *lstm,
+                                         int8_t *output_state,
+                                         int16_t *cell_state,
+                                         int8_t *output_data)
+{
+    (void)cell_to_in_weights;
+    (void)cell_to_forget_weights;
+    (void)cell_to_out_weights;
+
+    const int32_t num_batch = lstm_dims->num_batches;
+    const int32_t num_input = lstm_dims->num_inputs;
+    const int32_t max_time = lstm_dims->max_time;
+
+    const int32_t num_output = lstm_dims->num_outputs;
+    const int32_t out_batch_leading_dim = num_output;
+
+    // num_cell = num_output is considered in the code under the assumption that projection is NULL.
+    const int32_t num_cell = num_output;
+
+    if (projection_weights != NULL)
+    {
+        return -1;
+    }
+
+    if (lstm->i2f_effective_bias == NULL || lstm->i2c_effective_bias == NULL || lstm->i2o_effective_bias == NULL)
+    {
+        return -1;
+    }
+
+    if (lstm->r2f_effective_bias == NULL || lstm->r2c_effective_bias == NULL || lstm->r2o_effective_bias == NULL)
+    {
+        return -1;
+    }
+
+    if (lstm->i2i_effective_bias == NULL || lstm->r2i_effective_bias == NULL)
+    {
+        return -1;
+    }
+
+    if (lstm->time_major)
+    {
+        const int32_t in_step = num_batch * num_input;
+        const int32_t out_step = num_batch * out_batch_leading_dim;
+        for (int i_max_time = 0; i_max_time < max_time; i_max_time++)
+        {
+            lstm_step_s8(input_data + i_max_time * in_step,
+                         in_to_in_weights,
+                         in_to_forget_weights,
+                         in_to_cell_weights,
+                         in_to_out_weights,
+                         recurrent_to_in_weights,
+                         recurrent_to_forget_weights,
+                         recurrent_to_cell_weights,
+                         recurrent_to_out_weights,
+                         lstm,
+                         num_batch,
+                         num_cell,
+                         num_input,
+                         num_output,
+                         output_state,
+                         cell_state,
+                         output_data + i_max_time * out_step,
+                         scratch_buffers);
+        }
+    }
+    else
+    {
+        for (int i_num_batch = 0; i_num_batch < num_batch; i_num_batch++)
+        {
+            const int32_t in_step = num_input;
+            const int32_t out_step = out_batch_leading_dim;
+            for (int i_max_time = 0; i_max_time < max_time; i_max_time++)
+            {
+                const int32_t time_offset = i_num_batch * max_time + i_max_time;
+
+                lstm_step_s8(input_data + time_offset * in_step,
+                             in_to_in_weights,
+                             in_to_forget_weights,
+                             in_to_cell_weights,
+                             in_to_out_weights,
+                             recurrent_to_in_weights,
+                             recurrent_to_forget_weights,
+                             recurrent_to_cell_weights,
+                             recurrent_to_out_weights,
+                             lstm,
+                             /*num_batch=*/1,
+                             num_cell,
+                             num_input,
+                             num_output,
+                             output_state + i_num_batch * out_batch_leading_dim,
+                             cell_state + i_num_batch * num_cell,
+                             output_data + time_offset * out_step,
+                             scratch_buffers);
+
+            }
+        }
+    }
+
+    return 0;
+}

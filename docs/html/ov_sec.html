@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.1</span>
+   &#160;<span id="projectnumber">version3.3</span>
    </div>
   </td>
  </tr>
@@ -86,9 +86,9 @@ $(document).ready(function(){initNavTree('ov_sec.html',''); initResizable(); });
 <div class="title">Overview </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Andes Neural Network Library (libnn) User Manual contains information about neural network function specifications in Andes neural network library and describes how to use these functions.</p>
-<p>The functions in Andes neural network library can be classified into several categories: activation functions, basic math functions, concatenation functions, convolution functions, fully connected functions, pooling functions, softmax functions and util functions.</p>
-<p>To call the library functions, just include header files provided by Andes neural network library. These header files define prototypes of functions. They are named according to functioncategories as listed below:</p><ul>
+<div class="textblock"><p>This document contains information about neural network function specifications in AndesAIRE Neural Network Library (the NN Library, also known as libnn) and describes how to use these functions.</p>
+<p>The functions can be classiﬁed into several categories: activation, basic math, concatenation, convolution, fully-connected layer, pooling, softmax, and utility.</p>
+<p>To call the library functions, simply include header ﬁles provided by the NN Library. These header files define prototypes of functions and are named according to the function categories, as listed below:</p><ul>
 <li>riscv_nn_activation.h</li>
 <li>riscv_nn_basic.h</li>
 <li>riscv_nn_concatenation.h</li>
@@ -98,8 +98,8 @@ $(document).ready(function(){initNavTree('ov_sec.html',''); initResizable(); });
 <li>riscv_nn_softmax.h</li>
 <li>riscv_nn_util.h</li>
 </ul>
-<p>For example, if you would like to use activation functions to activate neural network data, you can include riscv_nn_activation.h in your C files.</p>
-<p>Andes neural network library defines several data types to properly keep the data during computation. These data types, defined in riscv_math_types.h and quoted below, are q7_t for signed 8-bit integer, u8_t for unsigned 8-bit integer, q15_t for signed 16-bit integer, u16_t for unsigned 16-bit integer, q31_t for signed 32-bit integer, u32_t for unsigned 32-bit integer, q63_t for signed 64-bit integer, u64_t for unsigned 64-bit integer, float32_t for 32-bit single-precision floating-point and float64_t for 64-bit double-precision floating-point respectively: </p><div class="fragment"><div class="line"><span class="keyword">typedef</span> int8_t q7_t;      <span class="comment">/* for signed 8-bit integer */</span></div>
+<p>For example, to use activation functions to activate the neural network data, you can include riscv_nn_activation.h in your C files.</p>
+<p>The NN Library defines several data types in riscv_math_types.h (as quoted below) to properly keep the data during computation. </p><div class="fragment"><div class="line"><span class="keyword">typedef</span> int8_t q7_t;      <span class="comment">/* for signed 8-bit integer */</span></div>
 <div class="line"><span class="keyword">typedef</span> uint8_t u8_t;     <span class="comment">/* for unsigned 8-bit integer */</span></div>
 <div class="line"><span class="keyword">typedef</span> int16_t q15_t;    <span class="comment">/* for signed 16-bit integer */</span></div>
 <div class="line"><span class="keyword">typedef</span> uint16_t u16_t;   <span class="comment">/* for unsigned 16-bit integer */</span></div>
@@ -109,14 +109,119 @@ $(document).ready(function(){initNavTree('ov_sec.html',''); initResizable(); });
 <div class="line"><span class="keyword">typedef</span> uint64_t u64_t;   <span class="comment">/* for unsigned 64-bit integer */</span></div>
 <div class="line"><span class="keyword">typedef</span> <span class="keywordtype">float</span> float32_t;  <span class="comment">/* for single-precision (32-bit) floating-point */</span></div>
 <div class="line"><span class="keyword">typedef</span> <span class="keywordtype">double</span> float64_t; <span class="comment">/* for double-precision (64-bit) floating-point */</span></div>
-</div><!-- fragment --><p>Andes neural network library defines riscv_nn_activation_fun type, defined in riscv_nn_activation.h, for selecting the activation function: </p><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+</div><!-- fragment --><p>The NN Library also defines enumeration types riscv_nn_activation_fun for selecting the activation function and riscv_nn_upsample_method for selecting the upsampling algorithm.</p>
+<p>The definition of riscv_nn_activation_fun is provided below and can be found in riscv_nn_activation.h. </p><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
 <div class="line">{</div>
 <div class="line">    NN_SIGMOID = 0,    <span class="comment">/* Use sigmoid activation function */</span></div>
 <div class="line">    NN_TANH = 1,       <span class="comment">/* Use tanh activation function */</span></div>
 <div class="line">} riscv_nn_activation_fun;</div>
+</div><!-- fragment --><p>The definition of riscv_nn_upsample_method is provided below and can be found in riscv_nn_util.h. </p><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line">{</div>
+<div class="line">    NN_UPSAMPLE_NEAREST = 0,</div>
+<div class="line">} <a class="code" href="group__Util.html#gaa49e7e1a1073ca1e89c86a82864b7c66">riscv_nn_upsample_method</a>;</div>
+</div><!-- fragment --><p>riscv_nn_types.h deﬁnes additional types for the riscv_nn_lstm_unidirectional_s16_s8 function, and their deﬁnitions are as follows: </p><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line">{</div>
+<div class="line">    int32_t min;</div>
+<div class="line">    int32_t max;</div>
+<div class="line">} <a class="code" href="structriscv__nn__activation.html">riscv_nn_activation</a>;</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line">{</div>
+<div class="line">    int32_t max_time;</div>
+<div class="line">    int32_t num_inputs;</div>
+<div class="line">    int32_t num_batches;</div>
+<div class="line">    int32_t num_outputs;</div>
+<div class="line">} <a class="code" href="structriscv__nn__lstm__dims.html">riscv_nn_lstm_dims</a>;</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line">{</div>
+<div class="line">    int32_t input_variance;</div>
+<div class="line">    int32_t forget_variance;</div>
+<div class="line">    int32_t cell_variance;</div>
+<div class="line">    int32_t output_variance;</div>
+<div class="line">} <a class="code" href="structriscv__nn__lstm__guard__params.html">riscv_nn_lstm_guard_params</a>;</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line">{</div>
+<div class="line">    int16_t *input_gate;</div>
+<div class="line">    int16_t *forget_gate;</div>
+<div class="line">    int16_t *cell_gate;</div>
+<div class="line">    int16_t *output_gate;</div>
+<div class="line">} <a class="code" href="structriscv__nn__lstm__context.html">riscv_nn_lstm_context</a>;</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line">{</div>
+<div class="line">    int16_t cell;</div>
+<div class="line">    int8_t projection;</div>
+<div class="line">} <a class="code" href="structriscv__nn__lstm__clip__params.html">riscv_nn_lstm_clip_params</a>;</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line">{</div>
+<div class="line">    int32_t multiplier;</div>
+<div class="line">    int32_t shift;</div>
+<div class="line">} <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a></div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line">{</div>
+<div class="line">    int16_t *input_weight;</div>
+<div class="line">    int16_t *forget_weight;</div>
+<div class="line">    int16_t *cell_weight;</div>
+<div class="line">    int16_t *output_weight;</div>
+<div class="line">} <a class="code" href="structriscv__nn__layer__norm.html">riscv_nn_layer_norm</a>;</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line">{</div>
+<div class="line">    int32_t time_major;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> input_to_input_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> input_to_forget_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> input_to_cell_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> input_to_output_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> recurrent_to_input_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> recurrent_to_forget_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> recurrent_to_cell_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> recurrent_to_output_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> cell_to_input_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> cell_to_forget_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> cell_to_output_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> projection_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> hidden_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> layer_norm_input_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> layer_norm_forget_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> layer_norm_cell_scaling;</div>
+<div class="line">    <a class="code" href="structriscv__nn__scaling.html">riscv_nn_scaling</a> layer_norm_output_scaling;</div>
+<div class="line"> </div>
+<div class="line">    int32_t cell_state_shift;</div>
+<div class="line">    int32_t hidden_offset;</div>
+<div class="line">    int32_t output_state_offset;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code" href="structriscv__nn__lstm__clip__params.html">riscv_nn_lstm_clip_params</a> clip;</div>
+<div class="line">    <a class="code" href="structriscv__nn__lstm__guard__params.html">riscv_nn_lstm_guard_params</a> guard;</div>
+<div class="line">    <a class="code" href="structriscv__nn__layer__norm.html">riscv_nn_layer_norm</a> layer_norm;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">const</span> int32_t *i2i_effective_bias;</div>
+<div class="line">    <span class="keyword">const</span> int32_t *i2f_effective_bias;</div>
+<div class="line">    <span class="keyword">const</span> int32_t *i2c_effective_bias;</div>
+<div class="line">    <span class="keyword">const</span> int32_t *i2o_effective_bias;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">const</span> int32_t *r2i_effective_bias;</div>
+<div class="line">    <span class="keyword">const</span> int32_t *r2f_effective_bias;</div>
+<div class="line">    <span class="keyword">const</span> int32_t *r2c_effective_bias;</div>
+<div class="line">    <span class="keyword">const</span> int32_t *r2o_effective_bias;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">const</span> int32_t *projection_effective_bias;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">const</span> int32_t *input_gate_bias;</div>
+<div class="line">    <span class="keyword">const</span> int32_t *forget_gate_bias;</div>
+<div class="line">    <span class="keyword">const</span> int32_t *cell_gate_bias;</div>
+<div class="line">    <span class="keyword">const</span> int32_t *output_gate_bias;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code" href="structriscv__nn__activation.html">riscv_nn_activation</a> activation;</div>
+<div class="line">} <a class="code" href="structriscv__nn__lstm__params.html">riscv_nn_lstm_params</a>;</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
+<div class="ttc" id="astructriscv__nn__lstm__clip__params_html"><div class="ttname"><a href="structriscv__nn__lstm__clip__params.html">riscv_nn_lstm_clip_params</a></div><div class="ttdef"><b>Definition:</b> riscv_nn_types.h:42</div></div>
+<div class="ttc" id="astructriscv__nn__lstm__guard__params_html"><div class="ttname"><a href="structriscv__nn__lstm__guard__params.html">riscv_nn_lstm_guard_params</a></div><div class="ttdef"><b>Definition:</b> riscv_nn_types.h:24</div></div>
+<div class="ttc" id="astructriscv__nn__activation_html"><div class="ttname"><a href="structriscv__nn__activation.html">riscv_nn_activation</a></div><div class="ttdef"><b>Definition:</b> riscv_nn_types.h:8</div></div>
+<div class="ttc" id="astructriscv__nn__lstm__dims_html"><div class="ttname"><a href="structriscv__nn__lstm__dims.html">riscv_nn_lstm_dims</a></div><div class="ttdef"><b>Definition:</b> riscv_nn_types.h:15</div></div>
+<div class="ttc" id="astructriscv__nn__lstm__params_html"><div class="ttname"><a href="structriscv__nn__lstm__params.html">riscv_nn_lstm_params</a></div><div class="ttdef"><b>Definition:</b> riscv_nn_types.h:65</div></div>
+<div class="ttc" id="agroup__Util_html_gaa49e7e1a1073ca1e89c86a82864b7c66"><div class="ttname"><a href="group__Util.html#gaa49e7e1a1073ca1e89c86a82864b7c66">riscv_nn_upsample_method</a></div><div class="ttdeci">riscv_nn_upsample_method</div><div class="ttdoc">This is the enumeration type to select an unsampling algorithm.</div><div class="ttdef"><b>Definition:</b> riscv_nn_util.h:43</div></div>
+<div class="ttc" id="astructriscv__nn__lstm__context_html"><div class="ttname"><a href="structriscv__nn__lstm__context.html">riscv_nn_lstm_context</a></div><div class="ttdef"><b>Definition:</b> riscv_nn_types.h:33</div></div>
+<div class="ttc" id="astructriscv__nn__layer__norm_html"><div class="ttname"><a href="structriscv__nn__layer__norm.html">riscv_nn_layer_norm</a></div><div class="ttdef"><b>Definition:</b> riscv_nn_types.h:56</div></div>
+<div class="ttc" id="astructriscv__nn__scaling_html"><div class="ttname"><a href="structriscv__nn__scaling.html">riscv_nn_scaling</a></div><div class="ttdef"><b>Definition:</b> riscv_nn_types.h:49</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

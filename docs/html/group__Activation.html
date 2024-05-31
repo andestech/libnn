@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.1</span>
+   &#160;<span id="projectnumber">version3.3</span>
    </div>
   </td>
  </tr>
@@ -99,10 +99,18 @@ Functions</h2></td></tr>
 <tr class="separator:ga54e487f436d44eb28cada03ed0f4ec5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab51621c203b968f2de532da082d13b41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#gab51621c203b968f2de532da082d13b41">riscv_nn_activate_s16_2buf</a> (q15_t *in_vec, uint32_t size, uint16_t int_bits, riscv_nn_activation_fun act_fun, q15_t *out_vec)</td></tr>
 <tr class="separator:gab51621c203b968f2de532da082d13b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gade2a7cb115b020a468fe4ecceaa1b4a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#gade2a7cb115b020a468fe4ecceaa1b4a6">riscv_nn_activate_s16_hp</a> (const q15_t *in_vec, q15_t *out_vec, const uint32_t size, const uint32_t left_shift, const riscv_nn_activation_fun act_fun)</td></tr>
+<tr class="separator:gade2a7cb115b020a468fe4ecceaa1b4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga52c0d6b23fc8b69131b86d8fe010b8b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga52c0d6b23fc8b69131b86d8fe010b8b9">riscv_nn_gelu_f32</a> (const float32_t *in_vec, uint32_t size, float32_t *out_vec)</td></tr>
+<tr class="separator:ga52c0d6b23fc8b69131b86d8fe010b8b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaaf3f6b74774316bd722113450119315b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#gaaf3f6b74774316bd722113450119315b">riscv_nn_leaky_relu_s8</a> (q7_t *in_out, uint32_t size, q15_t slope)</td></tr>
 <tr class="separator:gaaf3f6b74774316bd722113450119315b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6143532d9602970d60e74124167296f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga6143532d9602970d60e74124167296f1">riscv_nn_leaky_relu_s8_2buf</a> (q7_t *in_vec, uint32_t size, q15_t slope, q7_t *out_vec)</td></tr>
 <tr class="separator:ga6143532d9602970d60e74124167296f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga20aee70cbec9a6e4779469409457abfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga20aee70cbec9a6e4779469409457abfd">riscv_nn_leaky_relu_s8_asym</a> (int8_t *in_vec, int8_t *out_vec, const uint32_t size, const int32_t multi_identity, const int32_t shift_identity, const int32_t multi_alpha, const int32_t shift_alpha, const int32_t in_offset, const int32_t out_offset, const int8_t act_min, const int8_t act_max)</td></tr>
+<tr class="separator:ga20aee70cbec9a6e4779469409457abfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafa7b48bb4ca82cb295d756fa2b18513a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#gafa7b48bb4ca82cb295d756fa2b18513a">riscv_nn_prelu_s8_asym</a> (q7_t *in_vec, q7_t *out_vec, const q7_t *alpha_data, const uint16_t in_tensor_dim_x, const uint16_t in_tensor_dim_y, const uint16_t in_tensor_ch, const int32_t multi_identity, const int32_t shift_identity, const int32_t multi_alpha, const int32_t shift_alpha, const int32_t in_offset, const int32_t alpha_offset, const int32_t out_offset, const q7_t act_min, const q7_t act_max)</td></tr>
+<tr class="separator:gafa7b48bb4ca82cb295d756fa2b18513a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga740c839f9a7026c52490f01a729bdd6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga740c839f9a7026c52490f01a729bdd6b">riscv_nn_relu_any_s8</a> (q7_t *in_vec, uint32_t size, q7_t max_val)</td></tr>
 <tr class="separator:ga740c839f9a7026c52490f01a729bdd6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1c65ae41993818823d279f55e17282e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga1c65ae41993818823d279f55e17282e4">riscv_nn_relu_any_s8_2buf</a> (q7_t *in_vec, uint32_t size, q7_t max_val, q7_t *out_vec)</td></tr>
@@ -115,6 +123,10 @@ Functions</h2></td></tr>
 <tr class="separator:ga76b22ee15a7da9aca409018563da9d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab5a5223419921d026b9c9bc0e067678a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#gab5a5223419921d026b9c9bc0e067678a">riscv_nn_relu_s16_2buf</a> (q15_t *in_vec, uint32_t size, q15_t *out_vec)</td></tr>
 <tr class="separator:gab5a5223419921d026b9c9bc0e067678a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad91095201f5f932c9ff45f7b38d2bc75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#gad91095201f5f932c9ff45f7b38d2bc75">riscv_nn_sigmoid_s8</a> (const int32_t in_offset, const int32_t in_range_radius, const int16_t in_mult, const int16_t in_lshift, const uint32_t size, const int8_t *in_vec, int8_t *out_vec)</td></tr>
+<tr class="separator:gad91095201f5f932c9ff45f7b38d2bc75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga897eaa690a30c9f2faeda4048d5d09d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga897eaa690a30c9f2faeda4048d5d09d1">riscv_nn_tanh_s8</a> (const int32_t in_offset, const int32_t in_range_radius, const int16_t in_mult, const int16_t in_lshift, const uint32_t size, const int8_t *in_vec, int8_t *out_vec)</td></tr>
+<tr class="separator:ga897eaa690a30c9f2faeda4048d5d09d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga53442c0962124793387ecf7c23c22e6b"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Activation.html#ga53442c0962124793387ecf7c23c22e6b">riscv_nn_tanh_f32</a> (const float32_t *in_vec, uint32_t size, float32_t *out_vec)</td></tr>
 <tr class="separator:ga53442c0962124793387ecf7c23c22e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -158,20 +170,20 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the sigmoid or tanh function to perform activation for signed 8-bit integer input vectors with an in-place algorithm. </p>
+<p>This function performs activation on signed 8-bit integer input vectors using either the Sigmoid or Tanh function, along with in-place and look-up table (LUT) algorithms. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_out</td><td>pointer of the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">int_bits</td><td>number of the bits in the integer part, which is supposed to be smaller than 4 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_fun</td><td>selection of activation functions. See the Note below for details. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_out</td><td>Pointer to the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_bits</td><td>Number of the bits in the integer part should be less than 4 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_fun</td><td>Selection of activation functions. See Note below for details. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The available activation functions for selection include:<ul>
-<li>NN_SIGMOID: Use the sigmoid activation function</li>
-<li>NN_TANH: Use the tanh activation function</li>
+<li>NN_SIGMOID: Use the Sigmoid activation function</li>
+<li>NN_TANH: Use the Tanh activation function</li>
 </ul>
 </dd></dl>
 <p><b>Example:</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#define SIZE 32</span></div>
@@ -224,21 +236,21 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the sigmoid or tanh function to perform activation for signed 8-bit integer input vectors with an out-of-place algorithm. </p>
+<p>This function performs activation on signed 8-bit integer input vectors using either the Sigmoid or Tanh function, along with out-of-place and LUT algorithms. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">int_bits</td><td>number of the bits in the integer part, which is supposed to be smaller than 4 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_fun</td><td>selection of activation functions. See the Note below for details. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_bits</td><td>Number of the bits in the integer part should be less than 4 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_fun</td><td>Selection of activation functions. See Note below for details. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The available activation functions for selection include:<ul>
-<li>NN_SIGMOID: Use the sigmoid activation function</li>
-<li>NN_TANH: Use the tanh activation function</li>
+<li>NN_SIGMOID: Use the Sigmoid activation function</li>
+<li>NN_TANH: Use the Tanh activation function</li>
 </ul>
 </dd></dl>
 <p><b>Example:</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#define SIZE 32</span></div>
@@ -286,20 +298,20 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses sigmoid or tanh function to perform activation for signed 16-bit integer input vectors with an in-place algorithm. </p>
+<p>This function performs activation on signed 16-bit integer input vectors using either the Sigmoid or Tanh function, along with in-place and LUT algorithms. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_out</td><td>pointer of the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">int_bits</td><td>number of the bits in the integer part, which is supposed to be smaller than 4 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_fun</td><td>selection of activation functions. See the Note below for details. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_out</td><td>Pointer to the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_bits</td><td>Number of the bits in the integer part should be less than 4 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_fun</td><td>Selection of activation functions. See Note below for details. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The availbale activation functions for selection include:<ul>
-<li>NN_SIGMOID: Use the sigmoid activation function</li>
-<li>NN_TANH: Use the tanh activation function </li>
+<li>NN_SIGMOID: Use the Sigmoid activation function</li>
+<li>NN_TANH: Use the Tanh activation function </li>
 </ul>
 </dd></dl>
 
@@ -349,23 +361,137 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses sigmoid or tanh function to perform activation for signed 16-bit integer input vectors with an out-of-place algorithm. </p>
+<p>This function performs activation on signed 16-bit integer input vectors using either the Sigmoid or Tanh function, along with out-of-place and LUT algorithms. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">int_bits</td><td>number of the bits in the integer part, which is supposed to be smaller than 4 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_fun</td><td>selection of activation functions. See the Note below for details. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_bits</td><td>Number of the bits in the integer part should be less than 4 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_fun</td><td>Selection of activation functions. See Note below for details. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The availbale activation functions for selection include:<ul>
-<li>NN_SIGMOID: Use the sigmoid activation function</li>
-<li>NN_TANH: Use the tanh activation function </li>
+<li>NN_SIGMOID: Use the Sigmoid activation function</li>
+<li>NN_TANH: Use the Tanh activation function </li>
 </ul>
 </dd></dl>
+
+</div>
+</div>
+<a id="gade2a7cb115b020a468fe4ecceaa1b4a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gade2a7cb115b020a468fe4ecceaa1b4a6">&#9670;&nbsp;</a></span>riscv_nn_activate_s16_hp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void riscv_nn_activate_s16_hp </td>
+          <td>(</td>
+          <td class="paramtype">const q15_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">q15_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>left_shift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const riscv_nn_activation_fun&#160;</td>
+          <td class="paramname"><em>act_fun</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs activation on signed 16-bit integer input vectors using either the Sigmoid or Tanh function, along with a high-precision algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">left_shift</td><td>The scaling for the inputs. See Note below for details. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_fun</td><td>Selection of activation functions. See Note below for details. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Let INT_BITS represent the number of the bits in the integer part of the inputs. Set left_shift to INT_BITS -3 if INT_BITS is 3 or greater. Otherwise, set left_shift to 0.</li>
+<li>The inputs should be scaled down by the following if INT_BITS is less than 3: 1/(2^(3 - INT_BITS))</li>
+<li>The availbale activation functions for selection include:<ul>
+<li>NN_SIGMOID: Use the Sigmoid activation function</li>
+<li>NN_TANH: Use the tanh Activation function </li>
+</ul>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="ga52c0d6b23fc8b69131b86d8fe010b8b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga52c0d6b23fc8b69131b86d8fe010b8b9">&#9670;&nbsp;</a></span>riscv_nn_gelu_f32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void riscv_nn_gelu_f32 </td>
+          <td>(</td>
+          <td class="paramtype">const float32_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float32_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs activation on single-precision floating-point input vectors using the GELU function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
 </div>
 </div>
@@ -401,12 +527,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the leaky ReLU function to perform activation for signed 8-bit integer input vectors with an in-place algorithm. </p>
+<p>This function performs activation on signed 8-bit integer input vectors using the Leaky ReLU function, along with an in-place algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_out</td><td>pointer of the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">slope</td><td>slope value to be multiplied with the negative inputs. The result will be right shifted 15 bits to scale back to signed 8-bit integer. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_out</td><td>Pointer to the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">slope</td><td>Slope value to be multiplied with the negative inputs. The result will be right shifted 15 bits to scale back to signed 8-bit integer. </td></tr>
   </table>
   </dd>
 </dl>
@@ -456,13 +582,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the leaky ReLU function to perform activation for signed 8-bit integer input vectors with an out-of-place algorithm. </p>
+<p>This function performs activation on signed 8-bit integer input vectors using the Leaky ReLU function, along with an out-of-place algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">slope</td><td>slope value to be multiplied with the negative inputs. The result will be right shifted 15 bits </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector to scale back to signed 8-bit integer. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">slope</td><td>Slope value to be multiplied with the negative inputs. The result will be right shifted 15 bits to scale back to signed 8-bit integer. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
   </table>
   </dd>
 </dl>
@@ -473,6 +599,238 @@ Functions</h2></td></tr>
 <div class="line">q7_t out_vec[SIZE];</div>
 <div class="line"><a class="code" href="group__Activation.html#ga6143532d9602970d60e74124167296f1">riscv_nn_leaky_relu_s8_2buf</a>(in_vec, SIZE, slope, out_vec);</div>
 </div><!-- fragment --> 
+</div>
+</div>
+<a id="ga20aee70cbec9a6e4779469409457abfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga20aee70cbec9a6e4779469409457abfd">&#9670;&nbsp;</a></span>riscv_nn_leaky_relu_s8_asym()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void riscv_nn_leaky_relu_s8_asym </td>
+          <td>(</td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>multi_identity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>shift_identity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>multi_alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>shift_alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int8_t&#160;</td>
+          <td class="paramname"><em>act_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int8_t&#160;</td>
+          <td class="paramname"><em>act_max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs activation on signed 8-bit integer input vectors using the Leaky ReLU function and applies asymmetric quantization to the outputs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">multi_identity</td><td>Scaling value for the quantization on the nonnegative inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">shift_identity</td><td>Shift amount for the quantization on the nonnegative inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">multi_alpha</td><td>Scaling value for the quantization on the negative inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">shift_alpha</td><td>Shift amount for the quantization on the negative inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>Offset value for the input vector. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Offset value for the outputs. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>During the quantization process, a positive shift_identity/shift_alpha value is used to left shift calculation results whereas a negative one is used to right shift. </dd></dl>
+
+</div>
+</div>
+<a id="gafa7b48bb4ca82cb295d756fa2b18513a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafa7b48bb4ca82cb295d756fa2b18513a">&#9670;&nbsp;</a></span>riscv_nn_prelu_s8_asym()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void riscv_nn_prelu_s8_asym </td>
+          <td>(</td>
+          <td class="paramtype">q7_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">q7_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const q7_t *&#160;</td>
+          <td class="paramname"><em>alpha_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>in_tensor_dim_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>in_tensor_dim_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>in_tensor_ch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>multi_identity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>shift_identity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>multi_alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>shift_alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>alpha_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const q7_t&#160;</td>
+          <td class="paramname"><em>act_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const q7_t&#160;</td>
+          <td class="paramname"><em>act_max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs activation on signed 8-bit integer input tensors using the PReLU function and applies asymmetric quantization to the outputs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha_data</td><td>Pointer to the scaling vector for the negative inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>Number of input tensor channels </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">multi_identity</td><td>Scaling value for the quantization on the nonnegative inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">shift_identity</td><td>Shift amount for the quantization on the nonnegative inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">multi_alpha</td><td>Scaling value for the quantization on the negative inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">shift_alpha</td><td>Shift amount for the quantization on the negative inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>Offset value for the input tensor. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha_offset</td><td>Offset value for the scaling vector. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Offset value for the outputs. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>During the quantization process, a positive shift_identity/shift_alpha value is used to left shift calculation results whereas a negative one is used to right shift. </dd></dl>
+
 </div>
 </div>
 <a id="ga740c839f9a7026c52490f01a729bdd6b"></a>
@@ -507,12 +865,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the ReLU function to perform activation for signed 8-bit integer input vectors with an in-place algorithm. The maximum output from the ReLU function is user specified (i.e., f(x) = min(max(0,x),max_val)). </p>
+<p>This function performs activation on signed 8-bit integer input vectors using the ReLU function, along with an in-place algorithm. The maximum output from the ReLU function is user-specified, for example: f(x) = min(max(0,x),max_val) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_vec</td><td>pointer of the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">max_val</td><td>maximum value to limit the output vector </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_vec</td><td>Pointer to the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_val</td><td>Maximum value to limit the output vector </td></tr>
   </table>
   </dd>
 </dl>
@@ -558,13 +916,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the ReLU function to perform activation for signed 8-bit integer input vectors with an out-of-place algorithm. The maximum output from the ReLU function is user specified (i.e., f(x) = min(max(0,x),max_val)). </p>
+<p>This function performs activation on signed 8-bit integer input vectors using the ReLU function, along with an out-of-place algorithm. The maximum output from the ReLU function is user-specified, for example: f(x) = min(max(0,x),max_val) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">max_val</td><td>maximum value to limit the output vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_val</td><td>Maximum value to limit the output vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
   </table>
   </dd>
 </dl>
@@ -598,11 +956,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the ReLU function to perform activation for signed 8-bit integer input vectors with an in-place algorithm. </p>
+<p>This function performs activation on signed 8-bit integer input vectors using the ReLU function, along with an in-place algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_out</td><td>pointer of the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_out</td><td>Pointer to the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
   </table>
   </dd>
 </dl>
@@ -648,12 +1006,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the ReLU function to perform activation for signed 8-bit integer input vectors with an out-of-place algorithm. </p>
+<p>This function performs activation on signed 8-bit integer input vectors using the ReLU function, along with an out-of-place algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
   </table>
   </dd>
 </dl>
@@ -694,11 +1052,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the ReLU function to perform activation for signed 16-bit integer input vectors with an in-place algorithm. </p>
+<p>This function performs activation on signed 16-bit integer input vectors using the ReLU function, along with an in-place algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_out</td><td>pointer of the input/output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">in_out</td><td>Pointer to the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
   </table>
   </dd>
 </dl>
@@ -738,12 +1096,158 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the ReLU function to perform activation for signed 16-bit integer input vectors with an out-of-place algorithm. </p>
+<p>This function performs activation on signed 16-bit integer input vectors using the ReLU function, along with an out-of-place algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
+
+</div>
+</div>
+<a id="gad91095201f5f932c9ff45f7b38d2bc75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad91095201f5f932c9ff45f7b38d2bc75">&#9670;&nbsp;</a></span>riscv_nn_sigmoid_s8()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void riscv_nn_sigmoid_s8 </td>
+          <td>(</td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_range_radius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>in_mult</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>in_lshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs activation on signed 8-bit integer input vectors using the Sigmoid function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>Offset value for the input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_range_radius</td><td>The maximum or minimum value for the inputs. If the input is less than or equal to in_range_radius, the output will be limited to -128. Conversely, if the input is greater than in_range_radius, the output will be limited to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_mult</td><td>Scaling value for rescaling the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_lshift</td><td>Shift amount for resacling the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
+
+</div>
+</div>
+<a id="ga897eaa690a30c9f2faeda4048d5d09d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga897eaa690a30c9f2faeda4048d5d09d1">&#9670;&nbsp;</a></span>riscv_nn_tanh_s8()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void riscv_nn_tanh_s8 </td>
+          <td>(</td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_range_radius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>in_mult</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>in_lshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs activation on signed 8-bit integer input vectors using the Tanh function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>Offset value for the input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_range_radius</td><td>The maximum or minimum value for the inputs. If the input is less than or equal to in_range_radius, the output will be limited to -128. Conversely, if the input is greater than in_range_radius, the output will be limited to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_mult</td><td>Scaling value for rescaling the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_lshift</td><td>Shift amount for resacling the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
   </table>
   </dd>
 </dl>
@@ -783,12 +1287,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function uses the tanh function to perform activation for single-precision floating-point input vectors. </p>
+<p>This function performs activation on single-precision floating-point input vectors using the Tanh function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input/output vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input/output vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
   </table>
   </dd>
 </dl>
@@ -798,12 +1302,12 @@ Functions</h2></td></tr>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="agroup__Activation_html_ga6143532d9602970d60e74124167296f1"><div class="ttname"><a href="group__Activation.html#ga6143532d9602970d60e74124167296f1">riscv_nn_leaky_relu_s8_2buf</a></div><div class="ttdeci">void riscv_nn_leaky_relu_s8_2buf(q7_t *in_vec, uint32_t size, q15_t slope, q7_t *out_vec)</div><div class="ttdoc">This function uses the leaky ReLU function to perform activation for signed 8-bit integer input vecto...</div></div>
-<div class="ttc" id="agroup__Activation_html_ga2956f98dda4c59f735aa6330235539c5"><div class="ttname"><a href="group__Activation.html#ga2956f98dda4c59f735aa6330235539c5">riscv_nn_activate_s8_2buf</a></div><div class="ttdeci">void riscv_nn_activate_s8_2buf(q7_t *in_vec, uint32_t size, uint16_t int_bits, riscv_nn_activation_fun act_fun, q7_t *out_vec)</div><div class="ttdoc">This function uses the sigmoid or tanh function to perform activation for signed 8-bit integer input ...</div></div>
-<div class="ttc" id="agroup__Activation_html_ga467ed82020ecd6847a2a323d8898a8c1"><div class="ttname"><a href="group__Activation.html#ga467ed82020ecd6847a2a323d8898a8c1">riscv_nn_relu_s8_2buf</a></div><div class="ttdeci">void riscv_nn_relu_s8_2buf(q7_t *in_vec, uint32_t size, q7_t *out_vec)</div><div class="ttdoc">This function uses the ReLU function to perform activation for signed 8-bit integer input vectors wit...</div></div>
-<div class="ttc" id="agroup__Activation_html_gaaf3f6b74774316bd722113450119315b"><div class="ttname"><a href="group__Activation.html#gaaf3f6b74774316bd722113450119315b">riscv_nn_leaky_relu_s8</a></div><div class="ttdeci">void riscv_nn_leaky_relu_s8(q7_t *in_out, uint32_t size, q15_t slope)</div><div class="ttdoc">This function uses the leaky ReLU function to perform activation for signed 8-bit integer input vecto...</div></div>
-<div class="ttc" id="agroup__Activation_html_ga49b39517c94b2a22d70c0a33bcddc295"><div class="ttname"><a href="group__Activation.html#ga49b39517c94b2a22d70c0a33bcddc295">riscv_nn_activate_s8</a></div><div class="ttdeci">void riscv_nn_activate_s8(q7_t *in_out, uint32_t size, uint16_t int_bits, riscv_nn_activation_fun act_fun)</div><div class="ttdoc">This function uses the sigmoid or tanh function to perform activation for signed 8-bit integer input ...</div></div>
-<div class="ttc" id="agroup__Activation_html_gae651cf6e7b06f27a10e8671ddf2d20f1"><div class="ttname"><a href="group__Activation.html#gae651cf6e7b06f27a10e8671ddf2d20f1">riscv_nn_relu_s8</a></div><div class="ttdeci">void riscv_nn_relu_s8(q7_t *in_out, uint32_t size)</div><div class="ttdoc">This function uses the ReLU function to perform activation for signed 8-bit integer input vectors wit...</div></div>
+<div class="ttc" id="agroup__Activation_html_ga6143532d9602970d60e74124167296f1"><div class="ttname"><a href="group__Activation.html#ga6143532d9602970d60e74124167296f1">riscv_nn_leaky_relu_s8_2buf</a></div><div class="ttdeci">void riscv_nn_leaky_relu_s8_2buf(q7_t *in_vec, uint32_t size, q15_t slope, q7_t *out_vec)</div><div class="ttdoc">This function performs activation on signed 8-bit integer input vectors using the Leaky ReLU function...</div></div>
+<div class="ttc" id="agroup__Activation_html_ga2956f98dda4c59f735aa6330235539c5"><div class="ttname"><a href="group__Activation.html#ga2956f98dda4c59f735aa6330235539c5">riscv_nn_activate_s8_2buf</a></div><div class="ttdeci">void riscv_nn_activate_s8_2buf(q7_t *in_vec, uint32_t size, uint16_t int_bits, riscv_nn_activation_fun act_fun, q7_t *out_vec)</div><div class="ttdoc">This function performs activation on signed 8-bit integer input vectors using either the Sigmoid or T...</div></div>
+<div class="ttc" id="agroup__Activation_html_ga467ed82020ecd6847a2a323d8898a8c1"><div class="ttname"><a href="group__Activation.html#ga467ed82020ecd6847a2a323d8898a8c1">riscv_nn_relu_s8_2buf</a></div><div class="ttdeci">void riscv_nn_relu_s8_2buf(q7_t *in_vec, uint32_t size, q7_t *out_vec)</div><div class="ttdoc">This function performs activation on signed 8-bit integer input vectors using the ReLU function,...</div></div>
+<div class="ttc" id="agroup__Activation_html_gaaf3f6b74774316bd722113450119315b"><div class="ttname"><a href="group__Activation.html#gaaf3f6b74774316bd722113450119315b">riscv_nn_leaky_relu_s8</a></div><div class="ttdeci">void riscv_nn_leaky_relu_s8(q7_t *in_out, uint32_t size, q15_t slope)</div><div class="ttdoc">This function performs activation on signed 8-bit integer input vectors using the Leaky ReLU function...</div></div>
+<div class="ttc" id="agroup__Activation_html_ga49b39517c94b2a22d70c0a33bcddc295"><div class="ttname"><a href="group__Activation.html#ga49b39517c94b2a22d70c0a33bcddc295">riscv_nn_activate_s8</a></div><div class="ttdeci">void riscv_nn_activate_s8(q7_t *in_out, uint32_t size, uint16_t int_bits, riscv_nn_activation_fun act_fun)</div><div class="ttdoc">This function performs activation on signed 8-bit integer input vectors using either the Sigmoid or T...</div></div>
+<div class="ttc" id="agroup__Activation_html_gae651cf6e7b06f27a10e8671ddf2d20f1"><div class="ttname"><a href="group__Activation.html#gae651cf6e7b06f27a10e8671ddf2d20f1">riscv_nn_relu_s8</a></div><div class="ttdeci">void riscv_nn_relu_s8(q7_t *in_out, uint32_t size)</div><div class="ttdoc">This function performs activation on signed 8-bit integer input vectors using the ReLU function,...</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.1</span>
+   &#160;<span id="projectnumber">version3.3</span>
    </div>
   </td>
  </tr>
@@ -99,6 +99,14 @@ Functions</h2></td></tr>
 <tr class="separator:ga325170a7b371088550d2b7c17e84bce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2d793e1d953958cdf097b12ef53af20c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Concatenation.html#ga2d793e1d953958cdf097b12ef53af20c">riscv_nn_concate_s8_z</a> (const int8_t *in_tensor, const uint16_t in_tensor_x, const uint16_t in_tensor_y, const uint16_t in_tensor_z, const uint16_t in_tensor_w, int8_t *out_tensor, const uint16_t out_tensor_z, const uint32_t out_offset_z)</td></tr>
 <tr class="separator:ga2d793e1d953958cdf097b12ef53af20c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadfb0ef5183f9a7709d9d8f15e520af0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Concatenation.html#gadfb0ef5183f9a7709d9d8f15e520af0a">riscv_nn_split_s8_w</a> (const int8_t *in_tensor, const uint32_t in_tensor_x, const uint32_t in_tensor_y, const uint32_t in_tensor_z, const uint32_t in_tensor_w, int8_t *out_tensor, const uint32_t split_len_w, const uint32_t in_offset)</td></tr>
+<tr class="separator:gadfb0ef5183f9a7709d9d8f15e520af0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaec394de7546d89fee27cafb82cd0e687"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Concatenation.html#gaec394de7546d89fee27cafb82cd0e687">riscv_nn_split_s8_x</a> (const int8_t *in_tensor, const uint32_t in_tensor_x, const uint32_t in_tensor_y, const uint32_t in_tensor_z, const uint32_t in_tensor_w, int8_t *out_tensor, const uint32_t split_len_x, const uint32_t in_offset)</td></tr>
+<tr class="separator:gaec394de7546d89fee27cafb82cd0e687"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2d74bdc6ec49bb1f8202004d8b75b54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Concatenation.html#gaa2d74bdc6ec49bb1f8202004d8b75b54">riscv_nn_split_s8_y</a> (const int8_t *in_tensor, const uint32_t in_tensor_x, const uint32_t in_tensor_y, const uint32_t in_tensor_z, const uint32_t in_tensor_w, int8_t *out_tensor, const uint32_t split_len_y, const uint32_t in_offset)</td></tr>
+<tr class="separator:gaa2d74bdc6ec49bb1f8202004d8b75b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaae98553904592f8604c0793d6f5759f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Concatenation.html#gaae98553904592f8604c0793d6f5759f7">riscv_nn_split_s8_z</a> (const int8_t *in_tensor, const uint32_t in_tensor_x, const uint32_t in_tensor_y, const uint32_t in_tensor_z, const uint32_t in_tensor_w, int8_t *out_tensor, const uint32_t split_len_z, const uint32_t in_offset)</td></tr>
+<tr class="separator:gaae98553904592f8604c0793d6f5759f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
@@ -158,23 +166,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function concatenates the signed 8-bit integer input tensor along the w-axis with the output tensor. </p>
+<p>This function concatenates a signed 8-bit integer input tensor along the w-axis with an output tensor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>x dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>y dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>z dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>w dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_w</td><td>offset value to be added to the w-axis of the output tensor before the concatenation </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>Z dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>W dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_w</td><td>Offset value to be added to the w-axis of the output tensor before the concatenation </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
 <li>The x, y and z dimension of the output tensor will be the same as those of the input tensor.</li>
-<li>The data layout of input and output tensors is assumed to be wzyx. </li>
+<li>The assumed data layout for both input and output tensors is wzyx. </li>
 </ul>
 </dd></dl>
 
@@ -242,24 +250,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function concatenates the signed 8-bit integer input tensor along the x-axis with the output tensor. </p>
+<p>This function concatenates a signed 8-bit integer input tensor along the x-axis with an output tensor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>x dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>y dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>z dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>w dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor_x</td><td>x dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_x</td><td>offset value to be added to the x-axis of the output tensor before the concatenation </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>Z dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>W dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor_x</td><td>X dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_x</td><td>Offset value to be added to the x-axis of the output tensor before the concatenation </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
 <li>The y, z and w dimensions of the output tensor will be the same as those of the input tensor.</li>
-<li>The data layout of input and output tensors is assumed to be wzyx. </li>
+<li>The assumed data layout for both input and output tensors is wzyx. </li>
 </ul>
 </dd></dl>
 
@@ -327,24 +335,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function concatenates the signed 8-bit integer input tensor along the y-axis with the output tensor. </p>
+<p>This function concatenates a signed 8-bit integer input tensor along the y-axis with an output tensor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>x dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>y dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>z dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>w dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_y</td><td>y dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_y</td><td>offset value to be added to the y-axis of the output tensor before the concatenation </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>Z dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>W dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_y</td><td>Y dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_y</td><td>Offset value to be added to the y-axis of the output tensor before the concatenation </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
 <li>The x, z and w dimensions of the output tensor will be the same as those of the input tensor.</li>
-<li>The data layout of input and output tensors is assumed to be wzyx. </li>
+<li>The assumed data layout for both input and output tensors is wzyx. </li>
 </ul>
 </dd></dl>
 
@@ -412,24 +420,364 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function concatenates the signed 8-bit integer input tensor along the z-axis with the output tensor. </p>
+<p>This function concatenates a signed 8-bit integer input tensor along the z-axis with an output tensor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>x dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>y dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>z dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>w dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_z</td><td>z dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_z</td><td>offset value to be added to the z-axis of the output tensor before the concatenation </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>Z dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>W dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_z</td><td>Z dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset_z</td><td>Offset value to be added to the z-axis of the output tensor before the concatenation </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
 <li>The x, y and w dimensions of the output tensor will be the same as those of the input tensor.</li>
-<li>The data layout of input and output tensors is assumed to be wzyx. </li>
+<li>The assumed data layout for both input and output tensors is wzyx. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="gadfb0ef5183f9a7709d9d8f15e520af0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadfb0ef5183f9a7709d9d8f15e520af0a">&#9670;&nbsp;</a></span>riscv_nn_split_s8_w()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void riscv_nn_split_s8_w </td>
+          <td>(</td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>split_len_w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function splits a signed 8-bit integer input tensor along the w-axis with an input tensor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>Z dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>W dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">split_len_w</td><td>The length to be splited in the w-axis </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>The offset between the starting point of the input tenosr and the position to be split </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>The x, y and z dimension of the output tensor will be the same as those of the input tensor.</li>
+<li>The assumed data layout for both input and output tensors is wzyx. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="gaec394de7546d89fee27cafb82cd0e687"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaec394de7546d89fee27cafb82cd0e687">&#9670;&nbsp;</a></span>riscv_nn_split_s8_x()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void riscv_nn_split_s8_x </td>
+          <td>(</td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>split_len_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function splits a signed 8-bit integer input tensor along the x-axis with an input tensor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>Z dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>W dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">split_len_x</td><td>The length to be splited in the x-axis </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>The offset between the starting point of the input tenosr and the position to be split </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>The y, z and w dimensions of the output tensor will be the same as those of the input tensor.</li>
+<li>The assumed data layout for both input and output tensors is wzyx. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="gaa2d74bdc6ec49bb1f8202004d8b75b54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa2d74bdc6ec49bb1f8202004d8b75b54">&#9670;&nbsp;</a></span>riscv_nn_split_s8_y()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void riscv_nn_split_s8_y </td>
+          <td>(</td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>split_len_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function splits a signed 8-bit integer input tensor along the y-axis with an input tensor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>Z dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>W dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">split_len_y</td><td>The length to be splited in the y-axis </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>The offset between the starting point of the input tenosr and the position to be split </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>The x, z and w dimensions of the output tensor will be the same as those of the input tensor.</li>
+<li>The assumed data layout for both input and output tensors is wzyx. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="gaae98553904592f8604c0793d6f5759f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaae98553904592f8604c0793d6f5759f7">&#9670;&nbsp;</a></span>riscv_nn_split_s8_z()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void riscv_nn_split_s8_z </td>
+          <td>(</td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_tensor_w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_tensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>split_len_z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function splits a signed 8-bit integer input tensor along the z-axis with an input tensor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_z</td><td>Z dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_w</td><td>W dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">split_len_z</td><td>The length to be splited in the z-axis </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>The offset between the starting point of the input tenosr and the position to be splited </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>The x, y and w dimensions of the output tensor will be the same as those of the input tensor.</li>
+<li>The assumed data layout for both input and output tensors is wzyx. </li>
 </ul>
 </dd></dl>
 

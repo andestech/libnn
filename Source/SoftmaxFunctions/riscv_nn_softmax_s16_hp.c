@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -32,7 +32,7 @@ int riscv_nn_softmax_s16_hp(const int16_t *in_tensor,
                              const int16_t *one_by_one_lut,
                              int16_t *out_tensor)
 {
-    int32_t col = 0;
+    long col = 0;
     int32_t row_idx;
 
     for (row_idx = 0; row_idx < in_tensor_row; ++row_idx)

@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -31,8 +31,8 @@ extern    "C"
 
 /**
  * @defgroup Pooling Pooling Functions
- * @brief The pooling functions are used to downsample input data. They include
- * max and average pooling functions.
+ * @brief Pooling functions are used to downsample input data. They include both
+ *        max and average pooling functions.
  *
  * @{
  */
@@ -40,15 +40,15 @@ extern    "C"
 /**
  * @brief           This is an average pooling function for signed 8-bit integer
  *                  inputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_dim         dimension of the pooling window
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      dummy
- * @param[out]      out_tensor      pointer of the output tensor.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_dim         Dimension of the pooling window
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Stride of the pooling window
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Dummy
+ * @param[out]      out_tensor      Pointer to the output tensor.
  * @return          None
  *
  * @b Example:
@@ -79,25 +79,25 @@ void riscv_nn_avepool_HWC_s8(q7_t * in_tensor,
                            q7_t * out_tensor);
 
 /**
- * @brief           This is an average pooling function for signed 8-bit integer
- *                  inputs in any x and y dimensions.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the pooling window
- * @param[in]       ker_dim_y           y dimension of the pooling window
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            stride of the pooling window in the x
+ * @brief           This average pooling function processes signed 8-bit integer
+ *                  inputs across any x and y dimensions.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the pooling window
+ * @param[in]       ker_dim_y           Y dimension of the pooling window
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Stride of the pooling window in the x
  *                                      dimension
- * @param[in]       stride_y            stride of the pooling window in the y
+ * @param[in]       stride_y            Stride of the pooling window in the y
  *                                      dimension
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          dummy
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_lshift          left shift amount for the output
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Dummy
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_lshift          Left shift amount for the output
  * @return          None
  *
  * @b Example:
@@ -141,33 +141,33 @@ void riscv_nn_avepool_HWC_s8_any(q7_t * in_tensor,
                                const uint16_t out_lshift);
 
 /**
- * @brief           This is an average pooling function for signed 8-bit integer
- *                  inputs in any x and y dimensions with activation parameters
- *                  to limit the outputs.
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       stride_y            stride of the pooling window in the y
+ * @brief           This average pooling function processes signed 8-bit integer
+ *                  inputs across any x and y dimensions and includes activation
+ *                  parameters to limit the outputs.
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       stride_y            Stride of the pooling window in the y
  *                                      dimension
- * @param[in]       stride_x            stride of the pooling window in the x
+ * @param[in]       stride_x            Stride of the pooling window in the x
  *                                      dimension
- * @param[in]       ker_dim_y           y dimension of the pooling window
- * @param[in]       ker_dim_x           x dimension of the pooling window
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       ker_dim_y           Y dimension of the pooling window
+ * @param[in]       ker_dim_x           X dimension of the pooling window
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
- *                                      Its needed size could be obtained by
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
+ *                                      Its required size can be obtained by
  *                                      calling riscv_nn_avepool_HWC_s8_any_act_get_buffer_size.
- * @param[out]      out_tensor          pointer of the output tensor
+ * @param[out]      out_tensor          Pointer to the output tensor
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_avepool_HWC_s8_any_act(const int in_tensor_dim_y,
@@ -188,43 +188,42 @@ int32_t riscv_nn_avepool_HWC_s8_any_act(const int in_tensor_dim_y,
                                 int8_t *out_tensor);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of riscv_nn_avepool_HWC_s8_any_act.
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @return          This function returns the size required by the temporary
- *                  buffer.
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for riscv_nn_avepool_HWC_s8_any_act.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @return          Returns the required size of the temporary buffer.
  */
 int32_t riscv_nn_avepool_HWC_s8_any_act_get_buffer_size(const int out_tensor_dim_x,
                                                         const int in_tensor_ch);
 /**
- * @brief           This is an average pooling function for signed 16-bit integer
- *                  inputs in any x and y dimensions with activation parameters
- *                  to limit the outputs.
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       stride_y            stride of the pooling window in the y
+ * @brief           This average pooling function processes signed 16-bit
+ *                  integer inputs across any x and y dimensions and includes
+ *                  activation parameters to limit the outputs.
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       stride_y            Stride of the pooling window in the y
  *                                      dimension
- * @param[in]       stride_x            stride of the pooling window in the x
+ * @param[in]       stride_x            Stride of the pooling window in the x
  *                                      dimension
- * @param[in]       ker_dim_y           y dimension of the pooling window
- * @param[in]       ker_dim_x           x dimension of the pooling window
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       ker_dim_y           Y dimension of the pooling window
+ * @param[in]       ker_dim_x           X dimension of the pooling window
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
- *                                      Its needed size could be obtained by
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
+ *                                      Its required size can be obtained by
  *                                      calling riscv_nn_avepool_HWC_s16_any_act_get_buffer_size.
- * @param[out]      out_tensor          pointer of the output tensor
+ * @param[out]      out_tensor          Pointer to the output tensor
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_avepool_HWC_s16_any_act(const int in_tensor_dim_y,
@@ -245,36 +244,35 @@ int32_t riscv_nn_avepool_HWC_s16_any_act(const int in_tensor_dim_y,
     int16_t *out_tensor);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of riscv_nn_avepool_HWC_s16_any_act.
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @return          This function returns the size required by the temporary
- *                  buffer.
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for riscv_nn_avepool_HWC_s16_any_act.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @return          Returns the required size of the temporary buffer.
  */
 int32_t riscv_nn_avepool_HWC_s16_any_act_get_buffer_size(const int out_tensor_dim_x,
     const int in_tensor_ch);
 
 #ifdef __riscv_zfh
 /**
- * @brief           This is an average pooling function for half-precision
- *                  floating-point inputs in any x and y dimensions.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the pooling window
- * @param[in]       ker_dim_y           y dimension of the pooling window
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            stride of the pooling window in the x
+ * @brief           This average pooling function processes half-precision
+ *                  floating-point inputs across any x and y dimensions.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the pooling window
+ * @param[in]       ker_dim_y           Y dimension of the pooling window
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Stride of the pooling window in the x
  *                                      dimension
- * @param[in]       stride_y            stride of the pooling window in the y
+ * @param[in]       stride_y            Stride of the pooling window in the y
  *                                      dimension
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          dummy
- * @param[out]      out_tensor          pointer of the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Dummy
+ * @param[out]      out_tensor          Pointer to the output tensor
  * @return          None
  */
 void riscv_nn_avepool_HWC_f16_any(float16_t * in_tensor,
@@ -295,15 +293,15 @@ void riscv_nn_avepool_HWC_f16_any(float16_t * in_tensor,
 /**
  * @brief           This is a max pooling function for signed 8-bit integer
  *                  inputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_dim         dimension of the pooling window
- * @param[in]       pad             padding size
- * @param[in]       stride          stride of the pooling window
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      dummy
- * @param[out]      out_tensor      pointer of the output tensor
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_dim         Dimension of the pooling window
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Stride of the pooling window
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Dummy
+ * @param[out]      out_tensor      Pointer to the output tensor
  * @return          None
  *
  * @b Example:
@@ -333,31 +331,31 @@ void riscv_nn_avepool_HWC_f16_any(float16_t * in_tensor,
                             q7_t * out_tensor);
 
 /**
- * @brief           This is a max pooling function for signed 8-bit integer
- *                  inputs in any x and y dimensions with the actvating
+ * @brief           This max pooling function processes signed 8-bit integer
+ *                  inputs across any x and y dimensions and includes activation
  *                  parameters to limit the outputs.
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       stride_y            stride of the pooling window in the y
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       stride_y            Stride of the pooling window in the y
  *                                      dimension
- * @param[in]       stride_x            stride of the pooling window in the x
+ * @param[in]       stride_x            Stride of the pooling window in the x
  *                                      dimension
- * @param[in]       ker_dim_y           y dimension of the pooling window
- * @param[in]       ker_dim_x           x dimension of the pooling window
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       ker_dim_y           Y dimension of the pooling window
+ * @param[in]       ker_dim_x           X dimension of the pooling window
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       tmp_buffer          dummy
- * @param[out]      out_tensor          pointer of the output tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       tmp_buffer          Dummy
+ * @param[out]      out_tensor          Pointer to the output tensor
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_maxpool_HWC_s8_any_act(const uint16_t in_tensor_dim_y,
@@ -378,31 +376,31 @@ int32_t riscv_nn_maxpool_HWC_s8_any_act(const uint16_t in_tensor_dim_y,
                                         int8_t *out_tensor);
 
 /**
- * @brief           This is a max pooling function for signed 16-bit integer
- *                  inputs in any x and y dimensions with the actvating
+ * @brief           This max pooling function processes signed 16-bit integer
+ *                  inputs across any x and y dimensions and includes activation
  *                  parameters to limit the outputs.
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       stride_y            stride of the pooling window in the y
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       stride_y            Stride of the pooling window in the y
  *                                      dimension
- * @param[in]       stride_x            stride of the pooling window in the x
+ * @param[in]       stride_x            Stride of the pooling window in the x
  *                                      dimension
- * @param[in]       ker_dim_y           y dimension of the pooling window
- * @param[in]       ker_dim_x           x dimension of the pooling window
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       ker_dim_y           Y dimension of the pooling window
+ * @param[in]       ker_dim_x           X dimension of the pooling window
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       tmp_buffer          dummy
- * @param[out]      out_tensor          pointer of the output tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       tmp_buffer          Dummy
+ * @param[out]      out_tensor          Pointer to the output tensor
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_maxpool_HWC_s16_any_act(const int32_t in_tensor_dim_y,
@@ -424,24 +422,24 @@ int32_t riscv_nn_maxpool_HWC_s16_any_act(const int32_t in_tensor_dim_y,
 
 #ifdef __riscv_zfh
 /**
- * @brief           This is a max pooling function for half-precision
- *                  floating-point inputs in any x and y dimensions.
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       stride_y            stride of the pooling window in the y
+ * @brief           This max pooling function processes half-precision
+ *                  floating-point inputs across any x and y dimensions.
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       stride_y            Stride of the pooling window in the y
  *                                      dimension
- * @param[in]       stride_x            stride of the pooling window in the x
+ * @param[in]       stride_x            Stride of the pooling window in the x
  *                                      dimension
- * @param[in]       ker_dim_y           y dimension of the pooling window
- * @param[in]       ker_dim_x           x dimension of the pooling window
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       tmp_buffer          dummy
- * @param[out]      out_tensor          pointer of the output tensor
+ * @param[in]       ker_dim_y           Y dimension of the pooling window
+ * @param[in]       ker_dim_x           X dimension of the pooling window
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       tmp_buffer          Dummy
+ * @param[out]      out_tensor          Pointer to the output tensor
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_maxpool_HWC_f16_any(const uint16_t in_tensor_dim_y,

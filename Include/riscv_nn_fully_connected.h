@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -30,29 +30,30 @@ extern    "C"
 #include "riscv_math_types.h"
 
 /**
- * @defgroup FullyConnect Fully Connected Functions
- * @brief The fully connected functions multiply the input vector by a weight
- * matrix and add a bias, if any, to the result. The supported combinations of
- * input vector and weight matrix are (signed 8-bit integer, signed 8-bit integer),
- * (unsigned 8-bit integer, signed 8-bit integer), (signed 16-bit integer,
- * signed 8-bit integer), (signed 16-bit integer, signed 16-bit integer) and
- * (half-precision floating point, half-precision floating point).
+ * @defgroup FullyConnect Fully-Connected Layer Functions
+ * @brief Fully-connected layer functions multiply the input vector by a weight
+ *        matrix and add a bias, if any, to the results.
+ *        The supported combinations of input vector and weight matrix are
+ *        (signed 8-bit integer, signed 8-bit integer), (unsigned 8-bit integer,
+ *        signed 8-bit integer), (signed 16-bit integer, signed 8-bit integer),
+ *        (signed 16-bit integer, signed 16-bit integer), and (half-precision
+ *        floating-point, half-precision floating-point).
  *
  * @{
  */
 
 /**
- * @brief           This is a fully connected layer function for signed 8-bit
- *                  integer inputs with shift-based quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      dummy
+ * @brief           This function performs calculation on signed 8-bit integers
+ *                  for inputs, applying shift-based quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Dummy
  * @return          This function only returns 0.
  *
  * @b Example:
@@ -82,25 +83,25 @@ int32_t riscv_nn_fc_s8_s8_s8_sft_bias(const q7_t * in_vec,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for signed 8-bit
- *                  integer inputs with interleaved multiplication and
- *                  shift-based quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @brief           This function performs interleaved multiplication on signed
+ *                  8-bit integers for inputs, applying shift-based quantization
+ *                  to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be "2 * size".
  * @return          This function only returns 0.
  *
  * @note
- * In this function, the input vector is multiplied by a weight matrix in
- * interleaved format obtained from riscv_nn_fc_s8_wt_converter.
+ * The input vector is multiplied by a weight matrix, which is in interleaved
+ * format and obtained from riscv_nn_fc_s8_wt_converter.
  */
 int32_t riscv_nn_fc_s8_s8_s8_sft_bias_fast(const q7_t * in_vec,
                                         const q7_t * wt_mat,
@@ -113,17 +114,17 @@ int32_t riscv_nn_fc_s8_s8_s8_sft_bias_fast(const q7_t * in_vec,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for signed 16-bit
- *                  integer inputs with shift-based quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[in]       bias            pointer of the bias
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       tmp_buf         dummy
+ * @brief           This function performs calculation on signed 16-bit integers
+ *                  for inputs, applying shift-based quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[in]       bias            Pointer to the bias
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       tmp_buf         Dummy
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_fc_s16_s16_s16_sft_bias(const q15_t * in_vec,
@@ -137,26 +138,26 @@ int32_t riscv_nn_fc_s16_s16_s16_sft_bias(const q15_t * in_vec,
                                         q15_t * tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for signed 16-bit
- *                  integer inputs with interleaved multiplication and
- *                  shift-based quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[in]       bias            pointer of the bias
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @brief           This function performs interleaved multiplication on signed
+ *                  16-bit integers for inputs, applying shift-based
+ *                  quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[in]       bias            Pointer to the bias
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be 4 * size.
  * @return          This function only returns 0.
  *
  *
  * @note
- * In this function, the input vector is multiplied by a weight matrix in
- * interleaved formats which could be obtained by riscv_nn_fc_s16_wt_converter.
+ * The input vector is multiplied by a weight matrix, which is in interleaved
+ * format and obtained from riscv_nn_fc_s16_wt_converter.
  */
 int32_t riscv_nn_fc_s16_s16_s16_sft_bias_fast(const q15_t * in_vec,
                                             const q15_t * wt_mat,
@@ -170,17 +171,17 @@ int32_t riscv_nn_fc_s16_s16_s16_sft_bias_fast(const q15_t * in_vec,
 
 /**
  * @brief           This function multiplies a signed 16-bit integer input
- *                  vector by a signed 8-bit integer weight matrix and performs
- *                  shift-based quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[in]       bias            pointer of the bias
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       tmp_buf         dummy
+ *                  vector by a signed 8-bit integer weight matrix, and applies
+ *                  shift-based quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[in]       bias            Pointer to the bias
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       tmp_buf         Dummy
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_fc_mat_vec_s16_s16_s8_sft_bias(const q15_t * in_vec,
@@ -196,22 +197,22 @@ int32_t riscv_nn_fc_mat_vec_s16_s16_s8_sft_bias(const q15_t * in_vec,
 /**
  * @brief           This function multiplies a signed 16-bit integer input
  *                  vector by a signed 8-bit integer weight matrix in
- *                  interleaved format and performs shift-based quantization on
+ *                  interleaved format, then applies shift-based quantization to
  *                  the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[in]       bias            pointer of the bias
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       tmp_buf         dummy
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[in]       bias            Pointer to the bias
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       tmp_buf         Dummy
  * @return          This function only returns 0.
  *
  * @note
- * In this function, the input vector is multiplied by a weight matrix in
- * interleaved format obtained from riscv_nn_fc_mat_vec_s8_wt_converter.
+ * The input vector is multiplied by a weight matrix, which is in interleaved
+ * format and obtained from riscv_nn_fc_mat_vec_s8_wt_converter.
  */
 int32_t riscv_nn_fc_mat_vec_s16_s16_s8_sft_bias_fast(const q15_t * in_vec,
                                                     const q7_t * wt_mat,
@@ -224,27 +225,27 @@ int32_t riscv_nn_fc_mat_vec_s16_s16_s8_sft_bias_fast(const q15_t * in_vec,
                                                     q15_t * tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for signed 8-bit
- *                  integer inputs/outputs with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs calculation on signed 8-bit integers
+ *                  for both inputs and outputs, incorporating bias inputs and
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before the
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after the
  *                                  scaling
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be "size".
  * @return          This function only returns 0.
  *
  * @note
- * The outputs will be two-stage shifted before being stored, i.e.,
+ * The outputs will be two-stage shifted before being stored, for example:
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s8_s8_sym_bias(const q7_t * in_vec,
@@ -259,27 +260,28 @@ int32_t riscv_nn_fc_s8_s8_s8_sym_bias(const q7_t * in_vec,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for signed 8-bit
- *                  integer inputs and signed 16-bit integer outputs with bias
- *                  inputs and symmetric quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs calculation on signed 8-bit integers
+ *                  for inputs and signed 16-bit integers for outputs,
+ *                  incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be "size".
  * @return          This function only returns 0.
  *
  * @note
- * The outputs will be two-stage shifted before being stored, i.e.,
+ * The outputs will be two-stage shifted before being stored, for example:
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s16_s8_sym_bias(const q7_t * in_vec,
@@ -294,27 +296,27 @@ int32_t riscv_nn_fc_s8_s16_s8_sym_bias(const q7_t * in_vec,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs/outputs with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs calculation on unsigned 8-bit
+ *                  integers for both inputs and outputs, incorporating bias
+ *                  inputs and applying symmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be "size".
  * @return          This function only returns 0.
  *
  * @note
- * The outputs will be two-stage shifted before being stored, i.e.,
+ * The outputs will be two-stage shifted before being stored, for example:
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_u8_s8_sym_bias(const u8_t * in_vec,
@@ -329,27 +331,28 @@ int32_t riscv_nn_fc_u8_u8_s8_sym_bias(const u8_t * in_vec,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs and signed 8-bit integer outputs with bias
- *                  inputs and symmetric quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs calculation on unsigned 8-bit
+ *                  integers for inputs and signed 8-bit integers for outputs,
+ *                  incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for input vector. It is
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for input vector. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be "size".
  * @return          This function only returns 0.
  *
  * @note
- * The outputs will be two-stage shifted before being stored, i.e.,
+ * The outputs will be two-stage shifted before being stored, for example:
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s8_s8_sym_bias(const u8_t * in_vec,
@@ -364,27 +367,28 @@ int32_t riscv_nn_fc_u8_s8_s8_sym_bias(const u8_t * in_vec,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs and signed 16-bit integer outputs with bias
- *                  inputs and symmetric quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs calculation on unsigned 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs,
+ *                  incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be "size".
  * @return          This function only returns 0.
  *
  * @note
- * The outputs will be two-stage shifted before being stored, i.e.,
+ * The outputs will be two-stage shifted before being stored, for example:
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s16_s8_sym_bias(const u8_t * in_vec,
@@ -399,26 +403,26 @@ int32_t riscv_nn_fc_u8_s16_s8_sym_bias(const u8_t * in_vec,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for signed 8-bit
- *                  integer inputs/outputs with symmetric quantization on the
- *                  outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs calculation on signed 8-bit integers
+ *                  for both inputs and outputs, applying symmetric quantization
+ *                  to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be "size".
  * @return          This function only returns 0.
  *
  * @note
- * The outputs will be two-stage shifted before being stored, i.e.,
+ * The outputs will be two-stage shifted before being stored, for example:
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s8_s8_sym(const q7_t * in_vec,
@@ -432,26 +436,26 @@ int32_t riscv_nn_fc_s8_s8_s8_sym(const q7_t * in_vec,
                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for signed 8-bit
- *                  integer inputs and signed 16-bit integer outputs with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs calculation on signed 8-bit integers
+ *                  for inputs and signed 16-bit integers for outputs, applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be "size".
  * @return          This function only returns 0.
  *
  * @note
- * The outputs will be two-stage shifted before being stored, i.e.,
+ * The outputs will be two-stage shifted before being stored, for example:
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s16_s8_sym(const q7_t * in_vec,
@@ -465,26 +469,26 @@ int32_t riscv_nn_fc_s8_s16_s8_sym(const q7_t * in_vec,
                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs/outputs with symmetric quantization on the
- *                  outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs calculation on unsigned 8-bit
+ *                  integers for both inputs and outputs, applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be "size".
  * @return          This function only returns 0.
  *
  * @note
- * The outputs will be two-stage shifted before being stored, i.e.,
+ * The outputs will be two-stage shifted before being stored, for example:
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_u8_s8_sym(const u8_t * in_vec,
@@ -498,26 +502,26 @@ int32_t riscv_nn_fc_u8_u8_s8_sym(const u8_t * in_vec,
                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs and signed 8-bit integer outputs with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs calculation on unsigned 8-bit
+ *                  integers for inputs and signed 8-bit integers for outputs,
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be "size".
  * @return          This function only returns 0.
  *
  * @note
- * The outputs will be two-stage shifted before being stored, i.e.,
+ * The outputs will be two-stage shifted before being stored, for example:
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s8_s8_sym(const u8_t * in_vec,
@@ -531,26 +535,26 @@ int32_t riscv_nn_fc_u8_s8_s8_sym(const u8_t * in_vec,
                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs and signed 16-bit integer outputs with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs calculation on unsigned 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs,
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be "size".
  * @return          This function only returns 0.
  *
  * @note
- * The outputs will be two-stage shifted before being stored, i.e.,
+ * The outputs will be two-stage shifted before being stored, for example:
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s16_s8_sym(const u8_t * in_vec,
@@ -564,29 +568,30 @@ int32_t riscv_nn_fc_u8_s16_s8_sym(const u8_t * in_vec,
                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for signed 8-bit
- *                  integer inputs/outputs with bias inputs, interleaved
- *                  multiplication and symmetric quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs interleaved multiplication on signed
+ *                  8-bit integers for both inputs and outputs, incorporating
+ *                  bias inputs and applying symmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be "2 * size".
  * @return          This function only returns 0.
  *
  * @note
- *  - In this function, the input vector is multiplied by a weight matrix in
- *    interleaved format obtained from riscv_nn_fc_s8_wt_converter.
- *  - The outputs will be two-stage shifted before being stored, i.e.,
+ *  - The input vector is multiplied by a weight matrix, which is in interleaved
+ *    format and obtained from riscv_nn_fc_s8_wt_converter.
+ *  - The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s8_s8_sym_bias_fast(const q7_t * in_vec,
@@ -601,30 +606,30 @@ int32_t riscv_nn_fc_s8_s8_s8_sym_bias_fast(const q7_t * in_vec,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for signed 8-bit
- *                  integer inputs and signed 16-bit integer outputs with bias
- *                  inputs, interleaved multiplication and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs interleaved multiplication on signed
+ *                  8-bit integers for inputs and signed 16-bit integers for
+ *                  outputs, incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be "2 * size".
  * @return          This function only returns 0.
  *
  * @note
- *  - In this function, the input vector is multiplied by a weight matrix in
- *    interleaved format obtained from riscv_nn_fc_s8_wt_converter.
- *  - The outputs will be two-stage shifted before being stored, i.e.,
+ *  - The input vector is multiplied by a weight matrix, which is in interleaved
+ *    format and obtained from riscv_nn_fc_s8_wt_converter.
+ *  - The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s16_s8_sym_bias_fast(const q7_t * in_vec,
@@ -639,29 +644,30 @@ int32_t riscv_nn_fc_s8_s16_s8_sym_bias_fast(const q7_t * in_vec,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs/outputs with bias inputs, interleaved
- *                  multiplication and symmetric quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs interleaved multiplication on
+ *                  unsigned 8-bit integers for both inputs and outputs,
+ *                  incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be "2 * size".
  * @return          This function only returns 0.
  *
  * @note
- *  - In this function, the input vector is multiplied by a weight matrix in
- *    interleaved format obtained from riscv_nn_fc_s8_wt_converter.
- *  - The outputs will be two-stage shifted before being stored, i.e.,
+ *  - The input vector is multiplied by a weight matrix, which is in interleaved
+ *    format and obtained from riscv_nn_fc_s8_wt_converter.
+ *  - The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_u8_s8_sym_bias_fast(const u8_t * in_vec,
@@ -676,29 +682,29 @@ int32_t riscv_nn_fc_u8_u8_s8_sym_bias_fast(const u8_t * in_vec,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs and signed 8-bit integer outputs with bias
- *                  inputs, interleaved multiplication and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs interleaved multiplication on
+ *                  unsigned 8-bit integers for inputs and signed 8-bit integers
+ *                  for outputs, incorporating bias inputs and applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be "2 * size".
  * @return          This function only returns 0.
  *
  * @note
- *  - In this function, the input vector is multiplied by the weight matrix in
- *    interleaved format which could be obtained by riscv_nn_fc_s8_wt_converter.
+ *  - The input vector is multiplied by a weight matrix, which is in interleaved
+ *    format and obtained from riscv_nn_fc_s8_wt_converter.
  *  - The outputs will be two-stage shifted before being stored, i.e.,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
@@ -714,28 +720,30 @@ int32_t riscv_nn_fc_u8_s8_s8_sym_bias_fast(const u8_t * in_vec,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs and signed 16-bit integer outputs with bias
- *                  inputs, interleaved multiplication and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @brief           This performs interleaved multiplication on unsigned 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs,
+ *                  incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be "2 * size".
  * @return          This function only returns 0.
  *
  * @note
- *  - In this function, the input vector is multiplied by a weight matrix in
- *    interleaved format obtained from riscv_nn_fc_s8_wt_converter.
- *  - The outputs will be two-stage shifted before being stored, i.e.,
+ *  - The input vector is multiplied by a weight matrix, which is in interleaved
+ *    format and obtained from riscv_nn_fc_s8_wt_converter.
+ *  - The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s16_s8_sym_bias_fast(const u8_t * in_vec,
@@ -750,28 +758,28 @@ int32_t riscv_nn_fc_u8_s16_s8_sym_bias_fast(const u8_t * in_vec,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for signed 8-bit
- *                  integer inputs/outputs with interleaved multiplication and
- *                  symmetric quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs interleaved multiplication on signed
+ *                  8-bit integers for both inputs and outputs, applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be "2 * size".
  * @return          This function only returns 0.
  *
  * @note
- *  - In this function, the input vector is multiplied by a weight matrix in
- *    interleaved format obtained from riscv_nn_fc_s8_wt_converter.
- *  - The outputs will be two-stage shifted before being stored, i.e.,
+ *  - The input vector is multiplied by a weight matrix, which is in interleaved
+ *    format and obtained from riscv_nn_fc_s8_wt_converter.
+ *  - The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s8_s8_sym_fast(const q7_t * in_vec,
@@ -786,28 +794,28 @@ int32_t riscv_nn_fc_s8_s8_s8_sym_fast(const q7_t * in_vec,
 
 /**
  * @brief           This is a fully connected layer function for signed 8-bit
- *                  integer inputs and signed 16-bit integer  outputs with
+ *                  integer inputs and signed 16-bit integer outputs with
  *                  interleaved multiplication and symmetric quantization on the
  *                  outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before the
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after the
  *                                  scaling
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be "2 * size".
  * @return          This function only returns 0.
  *
  * @note
- *  - In this function, the input vector is multiplied by a weight matrix in
- *    interleaved format obtained from riscv_nn_fc_s8_wt_converter.
- *  - The outputs will be two-stage shifted before being stored, i.e.,
+ *  - The input vector is multiplied by a weight matrix, which is in interleaved
+ *    format and obtained from riscv_nn_fc_s8_wt_converter.
+ *  - The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s16_s8_sym_fast(const q7_t * in_vec,
@@ -821,28 +829,28 @@ int32_t riscv_nn_fc_s8_s16_s8_sym_fast(const q7_t * in_vec,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs/outputs with interleaved multiplication and
- *                  symmetric quantization on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs interleaved multiplication on
+ *                  unsigned 8-bit integers for both inputs and outputs,
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be "2 * size".
  * @return          This function only returns 0.
  *
  * @note
- *  - In this function, the input vector is multiplied by a weight matrix in
- *    interleaved format obtained from riscv_nn_fc_s8_wt_converter.
- *  - The outputs will be two-stage shifted before being stored, i.e.,
+ *  - The input vector is multiplied by a weight matrix, which is in interleaved
+ *    format and obtained from riscv_nn_fc_s8_wt_converter.
+ *  - The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_u8_s8_sym_fast(const u8_t * in_vec,
@@ -856,29 +864,28 @@ int32_t riscv_nn_fc_u8_u8_s8_sym_fast(const u8_t * in_vec,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs and signed 8-bit integer outputs with
- *                  interleaved multiplication and symmetric quantization on the
- *                  outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @brief           This function performs interleaved multiplication on
+ *                  unsigned 8-bit integers for inputs and signed 8-bit integers
+ *                  for outputs, applying symmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be "2 * size".
  * @return          This function only returns 0.
  *
  * @note
- *  - In this function, the input vector is multiplied by a weight matrix in
- *    interleaved format obtained from riscv_nn_fc_s8_wt_converter.
- *  - The outputs will be two-stage shifted before being stored, i.e.,
+ *  - The input vector is multiplied by a weight matrix, which is in interleaved
+ *    format and obtained from riscv_nn_fc_s8_wt_converter.
+ *  - The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s8_s8_sym_fast(const u8_t * in_vec,
@@ -892,29 +899,29 @@ int32_t riscv_nn_fc_u8_s8_s8_sym_fast(const u8_t * in_vec,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a fully connected layer function for unsigned 8-bit
- *                  integer inputs and signed 16-bit integer outputs with
- *                  interleaved multiplication and symmetric quantization on the
+ * @brief           This function performs interleaved multiplication on
+ *                  unsigned 8-bit integers for inputs and signed 16-bit
+ *                  integers for outputs, applying symmetric quantization to the
  *                  outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       pre_rshift      right shift amount for the output before the
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       pre_rshift      Right shift amount for the output before
  *                                  scaling
- * @param[in]       out_scale       scaling value for the output
- * @param[in]       post_rshift     right shift amount for the output after the
+ * @param[in]       out_scale       Scaling value for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
  *                                  scaling
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       in_tmp_buf      temporary buffer for the input vector. It is
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       in_tmp_buf      Temporary buffer for the input vector. It is
  *                                  required when -mext-vector is enabled and
  *                                  its size must be "2 * size".
  * @return          This function only returns 0.
  *
  * @note
- *  - In this function, the input vector is multiplied by a weight matrix in
- *    interleaved format obtained from riscv_nn_fc_s8_wt_converter.
- *  - The outputs will be two-stage shifted before being stored, i.e.,
+ *  - The input vector is multiplied by a weight matrix, which is in interleaved
+ *    format and obtained from riscv_nn_fc_s8_wt_converter.
+ *  - The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s16_s8_sym_fast(const u8_t * in_vec,
@@ -928,12 +935,13 @@ int32_t riscv_nn_fc_u8_s16_s8_sym_fast(const u8_t * in_vec,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This is a weight converter for fully-connected functions
- *                  with signed 8-bit weight data and named with "fast".
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[out]      wt_mat_out      pointer of the weight matrix stored in
+ * @brief           This is a weight converter for fully-connected layer
+ *                  functions that use signed 8-bit weight data and are named
+ *                  with a _fast suffix.
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[out]      wt_mat_out      Pointer to the weight matrix stored in
  *                                  specific ordering
  * @return          None
  */
@@ -943,12 +951,13 @@ void riscv_nn_fc_s8_wt_converter(const q7_t *wt_mat,
                                 q7_t *wt_mat_out);
 
 /**
- * @brief           This is a weight converter for fully-connected functions
- *                  with signed 16-bit weight data and named with "fast".
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[out]      wt_mat_out      pointer of the weight matrix stored in
+ * @brief           This is a weight converter for fully-connected layer
+ *                  functions that use signed 16-bit weight data and are named
+ *                  with a _fast suffix.
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[out]      wt_mat_out      Pointer to the weight matrix stored in
  *                                  specific ordering
  * @return          None
  */
@@ -960,10 +969,10 @@ void riscv_nn_fc_s16_wt_converter(const q15_t *wt_mat,
 /**
  * @brief           This is a weight converter for
  *                  riscv_nn_fc_mat_vec_s16_s16_s8_sft_bias_fast.
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[out]      wt_mat_out      pointer of the weight matrix stored in
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[out]      wt_mat_out      Pointer to the weight matrix stored in
  *                                  specific ordering
  * @return          None
  */
@@ -973,36 +982,36 @@ void riscv_nn_fc_mat_vec_s8_wt_converter(const q7_t *wt_mat,
                                         q7_t *wt_mat_out);
 
 /**
- * @brief           This is a fully connected layer function for signed 8-bit
- *                  integer inputs with bias inputs and asymmetric quantization
- *                  on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the transposed weight matrix
- * @param[in]       in_vec_col      number of columns in the input vector (or
+ * @brief           This function performs calculation on signed 8-bit integers
+ *                  for inputs, incorporating bias inputs and applying
+ *                  asymmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the transposed weight matrix
+ * @param[in]       in_vec_col      Number of columns in the input vector (or
  *                                  transposed weight matrix)
- * @param[in]       wt_mat_row      number of rows in the transposed weight
+ * @param[in]       wt_mat_row      Number of rows in the transposed weight
  *                                  matrix
- * @param[in]       in_vec_batch    size of the input vector batches
- * @param[in]       in_offset       offset value to be added to the input tensor
+ * @param[in]       in_vec_batch    Size of the input vector batches
+ * @param[in]       in_offset       Offset value to be added to the input tensor
  *                                  . It should be in the range of -127 to 128.
- * @param[in]       wt_offset       offset value to be added to the weight. It
+ * @param[in]       wt_offset       Offset value to be added to the weight. It
  *                                  should be in the range of -127 to 128.
- * @param[in]       out_scale       scaling value for the quantization on the
+ * @param[in]       out_scale       Scaling value for the quantization on the
  *                                  outputs
- * @param[in]       out_shift       shift amount for the quantization on the
+ * @param[in]       out_shift       Shift amount for the quantization on the
  *                                  outputs
- * @param[in]       out_offset      offset value to be added to the output
+ * @param[in]       out_offset      Offset value to be added to the output
  *                                  tensor. It should be in the range of -128 to
  *                                  127.
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       act_min         minimum value that the output tensor is
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       act_min         Minimum value that the output tensor is
  *                                  limited to. It should be in the range of
  *                                  -128 to 127.
- * @param[in]       act_max         maximum value that the output tensor is
+ * @param[in]       act_max         Maximum value that the output tensor is
  *                                  limited to. It should be in the range of
  *                                  -128 to 127.
- * @param[in]       tmp_buf         dummy
+ * @param[in]       tmp_buf         Dummy
  * @return          This function only returns 0.
  *
  * @note
@@ -1029,42 +1038,42 @@ int32_t riscv_nn_fc_s8_s8_s8_asym_bias(const int8_t *in_vec,
                                     q15_t *tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the temporary buffer of riscv_nn_fc_s8_s8_s8_asym_bias.
- * @param[in]       in_vec_col      number of columns in the input vector (or
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the temporary buffer needed for riscv_nn_fc_s8_s8_s8_asym_bias.
+ * @param[in]       in_vec_col      Number of columns in the input vector (or
  *                                  transposed weight matrix)
- * @return          This function returns the needed size by the temporary
+ * @return          This function returns the required size of the temporary
  *                  buffer.
  */
 int32_t riscv_nn_fc_s8_s8_s8_asym_bias_get_buffer_size(const uint16_t in_vec_col);
 
 /**
- * @brief           This is a fully connected layer function for signed 16-bit
- *                  integer inputs with bias inputs and asymmetric quantization
- *                  on the outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the transposed weight matrix
- * @param[in]       in_vec_col      number of columns in the input vector (or
+ * @brief           This function performs calculation on signed 16-bit integers
+ *                  for inputs, incorporating bias inputs and applying
+ *                  asymmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the transposed weight matrix
+ * @param[in]       in_vec_col      Number of columns in the input vector (or
  *                                  transposed weight matrix)
- * @param[in]       wt_mat_row      number of rows in the transposed weight
+ * @param[in]       wt_mat_row      Number of rows in the transposed weight
  *                                  matrix
- * @param[in]       in_vec_batch    size of input vector batches
- * @param[in]       in_offset       dummy
- * @param[in]       wt_offset       dummy
- * @param[in]       out_scale       scaling value for the quantization on the
+ * @param[in]       in_vec_batch    Size of input vector batches
+ * @param[in]       in_offset       Dummy
+ * @param[in]       wt_offset       Dummy
+ * @param[in]       out_scale       Scaling value for the quantization on the
  *                                  outputs
- * @param[in]       out_shift       shift amount for the quantization on the
+ * @param[in]       out_shift       Shift amount for the quantization on the
  *                                  outputs
- * @param[in]       out_offset      dummy
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       act_min         minimum value that the output tensor is
+ * @param[in]       out_offset      Dummy
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       act_min         Minimum value that the output tensor is
  *                                  limited to. It should be in the range of
  *                                  -32768 to 32767.
- * @param[in]       act_max         maximum value that the output tensor is
+ * @param[in]       act_max         Maximum value that the output tensor is
  *                                  limited to. It should be in the range of
  *                                  -32768 to 32767.
- * @param[in]       tmp_buf         dummy
+ * @param[in]       tmp_buf         Dummy
  * @return          This function only returns 0.
  *
  * @note
@@ -1091,26 +1100,26 @@ int32_t riscv_nn_fc_s16_s16_s8_asym_bias(const int16_t *in_vec,
     int16_t *tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the temporary buffer of riscv_nn_fc_s16_s16_s8_asym_bias.
- * @param[in]       in_vec_col      number of columns in the input vector (or
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the temporary buffer needed for riscv_nn_fc_s16_s16_s8_asym_bias.
+ * @param[in]       in_vec_col      Number of columns in the input vector (or
  *                                  transposed weight matrix)
- * @return          This function returns the needed size by the temporary
+ * @return          This function returns the required size of the temporary
  *                  buffer.
  */
 int32_t riscv_nn_fc_s16_s16_s8_asym_bias_get_buffer_size(const uint16_t in_vec_col);
 
 #ifdef __riscv_zfh
 /**
- * @brief           This is a fully connected layer function for half-precision
- *                  floating point inputs/outputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       wt_mat          pointer of the weight matrix
- * @param[in]       size            number of elements in the input vector
- * @param[in]       wt_row_num      number of rows in the weight matrix
- * @param[in]       bias            pointer of the bias vector
- * @param[out]      out_vec         pointer of the output vector
- * @param[in]       tmp_buf         dummy
+ * @brief           This function performs calculation on half-precision
+ *                  floating-point inputs and outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       wt_mat          Pointer to the weight matrix
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       wt_row_num      Number of rows in the weight matrix
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       tmp_buf         Dummy
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_fc_f16_f16_f16_bias(const float16_t * in_vec,

@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -40,7 +40,6 @@ int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias(const q15_t * in_tensor,
                             q15_t * in_tmp_buf,
                             q7_t * tmp_buf)
 {
-
     uint16_t  i, j, k, l, m, n;
     int       conv_out;
     long in_row, in_col;

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Andes Neural Network Library User Manual: Fully Connected Functions</title>
+<title>Andes Neural Network Library User Manual: Fully-Connected Layer Functions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.1</span>
+   &#160;<span id="projectnumber">version3.3</span>
    </div>
   </td>
  </tr>
@@ -85,7 +85,7 @@ $(document).ready(function(){initNavTree('group__FullyConnect.html',''); initRes
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Fully Connected Functions</div>  </div>
+<div class="title">Fully-Connected Layer Functions</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
@@ -228,18 +228,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 8-bit integer inputs with shift-based quantization on the outputs. </p>
+<p>This function performs calculation on signed 8-bit integers for inputs, applying shift-based quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>left shift amount for the bias </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>right shift amount for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>Left shift amount for the bias </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Dummy </td></tr>
   </table>
   </dd>
 </dl>
@@ -327,23 +327,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 8-bit integer inputs with interleaved multiplication and shift-based quantization on the outputs. </p>
+<p>This function performs interleaved multiplication on signed 8-bit integers for inputs, applying shift-based quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>left shift amount for the bias </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>right shift amount for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>Left shift amount for the bias </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>In this function, the input vector is multiplied by a weight matrix in interleaved format obtained from riscv_nn_fc_s8_wt_converter. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s8_wt_converter. </dd></dl>
 
 </div>
 </div>
@@ -415,18 +415,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 16-bit integer inputs with shift-based quantization on the outputs. </p>
+<p>This function performs calculation on signed 16-bit integers for inputs, applying shift-based quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>left shift amount for the bias </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>right shift amount for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>Left shift amount for the bias </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>Dummy </td></tr>
   </table>
   </dd>
 </dl>
@@ -502,23 +502,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 16-bit integer inputs with interleaved multiplication and shift-based quantization on the outputs. </p>
+<p>This function performs interleaved multiplication on signed 16-bit integers for inputs, applying shift-based quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>left shift amount for the bias </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>right shift amount for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be 4 * size. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>Left shift amount for the bias </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be 4 * size. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>In this function, the input vector is multiplied by a weight matrix in interleaved formats which could be obtained by riscv_nn_fc_s16_wt_converter. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s16_wt_converter. </dd></dl>
 
 </div>
 </div>
@@ -590,18 +590,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function multiplies a signed 16-bit integer input vector by a signed 8-bit integer weight matrix and performs shift-based quantization on the outputs. </p>
+<p>This function multiplies a signed 16-bit integer input vector by a signed 8-bit integer weight matrix, and applies shift-based quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>left shift amount for the bias </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>right shift amount for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>Left shift amount for the bias </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>Dummy </td></tr>
   </table>
   </dd>
 </dl>
@@ -677,23 +677,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function multiplies a signed 16-bit integer input vector by a signed 8-bit integer weight matrix in interleaved format and performs shift-based quantization on the outputs. </p>
+<p>This function multiplies a signed 16-bit integer input vector by a signed 8-bit integer weight matrix in interleaved format, then applies shift-based quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>left shift amount for the bias </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>right shift amount for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias_lshift</td><td>Left shift amount for the bias </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>Dummy </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>In this function, the input vector is multiplied by a weight matrix in interleaved format obtained from riscv_nn_fc_mat_vec_s8_wt_converter. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_mat_vec_s8_wt_converter. </dd></dl>
 
 </div>
 </div>
@@ -771,24 +771,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 8-bit integer inputs/outputs with bias inputs and symmetric quantization on the outputs. </p>
+<p>This function performs calculation on signed 8-bit integers for both inputs and outputs, incorporating bias inputs and applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before the scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after the scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
 
 </div>
 </div>
@@ -866,24 +866,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 8-bit integer inputs and signed 16-bit integer outputs with bias inputs and symmetric quantization on the outputs. </p>
+<p>This function performs calculation on signed 8-bit integers for inputs and signed 16-bit integers for outputs, incorporating bias inputs and applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
 
 </div>
 </div>
@@ -961,24 +961,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs/outputs with bias inputs and symmetric quantization on the outputs. </p>
+<p>This function performs calculation on unsigned 8-bit integers for both inputs and outputs, incorporating bias inputs and applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
 
 </div>
 </div>
@@ -1056,24 +1056,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs and signed 8-bit integer outputs with bias inputs and symmetric quantization on the outputs. </p>
+<p>This function performs calculation on unsigned 8-bit integers for inputs and signed 8-bit integers for outputs, incorporating bias inputs and applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
 
 </div>
 </div>
@@ -1151,24 +1151,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs and signed 16-bit integer outputs with bias inputs and symmetric quantization on the outputs. </p>
+<p>This function performs calculation on unsigned 8-bit integers for inputs and signed 16-bit integers for outputs, incorporating bias inputs and applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
 
 </div>
 </div>
@@ -1240,23 +1240,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 8-bit integer inputs/outputs with symmetric quantization on the outputs. </p>
+<p>This function performs calculation on signed 8-bit integers for both inputs and outputs, applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
 
 </div>
 </div>
@@ -1328,23 +1328,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 8-bit integer inputs and signed 16-bit integer outputs with symmetric quantization on the outputs. </p>
+<p>This function performs calculation on signed 8-bit integers for inputs and signed 16-bit integers for outputs, applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
 
 </div>
 </div>
@@ -1416,23 +1416,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs/outputs with symmetric quantization on the outputs. </p>
+<p>This function performs calculation on unsigned 8-bit integers for both inputs and outputs, applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
 
 </div>
 </div>
@@ -1504,23 +1504,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs and signed 8-bit integer outputs with symmetric quantization on the outputs. </p>
+<p>This function performs calculation on unsigned 8-bit integers for inputs and signed 8-bit integers for outputs, applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
 
 </div>
 </div>
@@ -1592,23 +1592,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs and signed 16-bit integer outputs with symmetric quantization on the outputs. </p>
+<p>This function performs calculation on unsigned 8-bit integers for inputs and signed 16-bit integers for outputs, applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-dsp is enabled and its size must be "size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </dd></dl>
 
 </div>
 </div>
@@ -1686,26 +1686,26 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 8-bit integer inputs/outputs with bias inputs, interleaved multiplication and symmetric quantization on the outputs. </p>
+<p>This function performs interleaved multiplication on signed 8-bit integers for both inputs and outputs, incorporating bias inputs and applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
-<li>In this function, the input vector is multiplied by a weight matrix in interleaved format obtained from riscv_nn_fc_s8_wt_converter.</li>
-<li>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
+<li>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s8_wt_converter.</li>
+<li>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
 </ul>
 </dd></dl>
 
@@ -1785,26 +1785,26 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 8-bit integer inputs and signed 16-bit integer outputs with bias inputs, interleaved multiplication and symmetric quantization on the outputs. </p>
+<p>This function performs interleaved multiplication on signed 8-bit integers for inputs and signed 16-bit integers for outputs, incorporating bias inputs and applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
-<li>In this function, the input vector is multiplied by a weight matrix in interleaved format obtained from riscv_nn_fc_s8_wt_converter.</li>
-<li>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
+<li>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s8_wt_converter.</li>
+<li>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
 </ul>
 </dd></dl>
 
@@ -1884,26 +1884,26 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs/outputs with bias inputs, interleaved multiplication and symmetric quantization on the outputs. </p>
+<p>This function performs interleaved multiplication on unsigned 8-bit integers for both inputs and outputs, incorporating bias inputs and applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
-<li>In this function, the input vector is multiplied by a weight matrix in interleaved format obtained from riscv_nn_fc_s8_wt_converter.</li>
-<li>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
+<li>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s8_wt_converter.</li>
+<li>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
 </ul>
 </dd></dl>
 
@@ -1983,25 +1983,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs and signed 8-bit integer outputs with bias inputs, interleaved multiplication and symmetric quantization on the outputs. </p>
+<p>This function performs interleaved multiplication on unsigned 8-bit integers for inputs and signed 8-bit integers for outputs, incorporating bias inputs and applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
-<li>In this function, the input vector is multiplied by the weight matrix in interleaved format which could be obtained by riscv_nn_fc_s8_wt_converter.</li>
+<li>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s8_wt_converter.</li>
 <li>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
 </ul>
 </dd></dl>
@@ -2082,26 +2082,26 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs and signed 16-bit integer outputs with bias inputs, interleaved multiplication and symmetric quantization on the outputs. </p>
+<p>This performs interleaved multiplication on unsigned 8-bit integers for inputs and signed 16-bit integers for outputs, incorporating bias inputs and applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>value of scaling for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Value of scaling for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
-<li>In this function, the input vector is multiplied by a weight matrix in interleaved format obtained from riscv_nn_fc_s8_wt_converter.</li>
-<li>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
+<li>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s8_wt_converter.</li>
+<li>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
 </ul>
 </dd></dl>
 
@@ -2175,25 +2175,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 8-bit integer inputs/outputs with interleaved multiplication and symmetric quantization on the outputs. </p>
+<p>This function performs interleaved multiplication on signed 8-bit integers for both inputs and outputs, applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
-<li>In this function, the input vector is multiplied by a weight matrix in interleaved format obtained from riscv_nn_fc_s8_wt_converter.</li>
-<li>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
+<li>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s8_wt_converter.</li>
+<li>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
 </ul>
 </dd></dl>
 
@@ -2270,22 +2270,22 @@ Functions</h2></td></tr>
 <p>This is a fully connected layer function for signed 8-bit integer inputs and signed 16-bit integer outputs with interleaved multiplication and symmetric quantization on the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before the scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after the scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
-<li>In this function, the input vector is multiplied by a weight matrix in interleaved format obtained from riscv_nn_fc_s8_wt_converter.</li>
-<li>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
+<li>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s8_wt_converter.</li>
+<li>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
 </ul>
 </dd></dl>
 
@@ -2359,25 +2359,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs/outputs with interleaved multiplication and symmetric quantization on the outputs. </p>
+<p>This function performs interleaved multiplication on unsigned 8-bit integers for both inputs and outputs, applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
-<li>In this function, the input vector is multiplied by a weight matrix in interleaved format obtained from riscv_nn_fc_s8_wt_converter.</li>
-<li>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
+<li>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s8_wt_converter.</li>
+<li>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
 </ul>
 </dd></dl>
 
@@ -2451,25 +2451,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs and signed 8-bit integer outputs with interleaved multiplication and symmetric quantization on the outputs. </p>
+<p>This function performs interleaved multiplication on unsigned 8-bit integers for inputs and signed 8-bit integers for outputs, applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
-<li>In this function, the input vector is multiplied by a weight matrix in interleaved format obtained from riscv_nn_fc_s8_wt_converter.</li>
-<li>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
+<li>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s8_wt_converter.</li>
+<li>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
 </ul>
 </dd></dl>
 
@@ -2543,25 +2543,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for unsigned 8-bit integer inputs and signed 16-bit integer outputs with interleaved multiplication and symmetric quantization on the outputs. </p>
+<p>This function performs interleaved multiplication on unsigned 8-bit integers for inputs and signed 16-bit integers for outputs, applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the output before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the output </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the output after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the output before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the output after scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input vector. It is required when -mext-vector is enabled and its size must be "2 * size". </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
-<li>In this function, the input vector is multiplied by a weight matrix in interleaved format obtained from riscv_nn_fc_s8_wt_converter.</li>
-<li>The outputs will be two-stage shifted before being stored, i.e., out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
+<li>The input vector is multiplied by a weight matrix, which is in interleaved format and obtained from riscv_nn_fc_s8_wt_converter.</li>
+<li>The outputs will be two-stage shifted before being stored, for example: out = ((out &gt;&gt; pre_rshift) * out_scale) &gt;&gt; post_rshift. </li>
 </ul>
 </dd></dl>
 
@@ -2605,13 +2605,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a weight converter for fully-connected functions with signed 8-bit weight data and named with "fast". </p>
+<p>This is a weight converter for fully-connected layer functions that use signed 8-bit weight data and are named with a _fast suffix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">wt_mat_out</td><td>pointer of the weight matrix stored in specific ordering </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">wt_mat_out</td><td>Pointer to the weight matrix stored in specific ordering </td></tr>
   </table>
   </dd>
 </dl>
@@ -2657,13 +2657,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a weight converter for fully-connected functions with signed 16-bit weight data and named with "fast". </p>
+<p>This is a weight converter for fully-connected layer functions that use signed 16-bit weight data and are named with a _fast suffix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">wt_mat_out</td><td>pointer of the weight matrix stored in specific ordering </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">wt_mat_out</td><td>Pointer to the weight matrix stored in specific ordering </td></tr>
   </table>
   </dd>
 </dl>
@@ -2712,10 +2712,10 @@ Functions</h2></td></tr>
 <p>This is a weight converter for riscv_nn_fc_mat_vec_s16_s16_s8_sft_bias_fast. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>number of rows in the weight matrix </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">wt_mat_out</td><td>pointer of the weight matrix stored in specific ordering </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_row_num</td><td>Number of rows in the weight matrix </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">wt_mat_out</td><td>Pointer to the weight matrix stored in specific ordering </td></tr>
   </table>
   </dd>
 </dl>
@@ -2827,24 +2827,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 8-bit integer inputs with bias inputs and asymmetric quantization on the outputs. </p>
+<p>This function performs calculation on signed 8-bit integers for inputs, incorporating bias inputs and applying asymmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the transposed weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>number of columns in the input vector (or transposed weight matrix) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat_row</td><td>number of rows in the transposed weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_batch</td><td>size of the input vector batches </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>offset value to be added to the input tensor . It should be in the range of -127 to 128. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_offset</td><td>offset value to be added to the weight. It should be in the range of -127 to 128. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>shift amount for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>offset value to be added to the output tensor. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the transposed weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>Number of columns in the input vector (or transposed weight matrix) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat_row</td><td>Number of rows in the transposed weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_batch</td><td>Size of the input vector batches </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>Offset value to be added to the input tensor . It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_offset</td><td>Offset value to be added to the weight. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>Shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Offset value to be added to the output tensor. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>Dummy </td></tr>
   </table>
   </dd>
 </dl>
@@ -2873,14 +2873,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function is used to obtain the required size, in bytes, for the temporary buffer of riscv_nn_fc_s8_s8_s8_asym_bias. </p>
+<p>This function calculates the required size (in bytes) for the temporary buffer needed for riscv_nn_fc_s8_s8_s8_asym_bias. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>number of columns in the input vector (or transposed weight matrix) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>Number of columns in the input vector (or transposed weight matrix) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>This function returns the needed size by the temporary buffer. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>This function returns the required size of the temporary buffer. </dd></dl>
 
 </div>
 </div>
@@ -2988,24 +2988,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a fully connected layer function for signed 16-bit integer inputs with bias inputs and asymmetric quantization on the outputs. </p>
+<p>This function performs calculation on signed 16-bit integers for inputs, incorporating bias inputs and applying asymmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>pointer of the input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>pointer of the transposed weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>number of columns in the input vector (or transposed weight matrix) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat_row</td><td>number of rows in the transposed weight matrix </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_batch</td><td>size of input vector batches </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wt_offset</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>shift amount for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>pointer of the bias vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the output vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat</td><td>Pointer to the transposed weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>Number of columns in the input vector (or transposed weight matrix) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_mat_row</td><td>Number of rows in the transposed weight matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_batch</td><td>Size of input vector batches </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wt_offset</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>Shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bias</td><td>Pointer to the bias vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buf</td><td>Dummy </td></tr>
   </table>
   </dd>
 </dl>
@@ -3034,20 +3034,20 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function is used to obtain the required size, in bytes, for the temporary buffer of riscv_nn_fc_s16_s16_s8_asym_bias. </p>
+<p>This function calculates the required size (in bytes) for the temporary buffer needed for riscv_nn_fc_s16_s16_s8_asym_bias. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>number of columns in the input vector (or transposed weight matrix) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec_col</td><td>Number of columns in the input vector (or transposed weight matrix) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>This function returns the needed size by the temporary buffer. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>This function returns the required size of the temporary buffer. </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="agroup__FullyConnect_html_ga12c2d04f5e6954ea471b2fd443698a32"><div class="ttname"><a href="group__FullyConnect.html#ga12c2d04f5e6954ea471b2fd443698a32">riscv_nn_fc_s8_s8_s8_sft_bias</a></div><div class="ttdeci">int32_t riscv_nn_fc_s8_s8_s8_sft_bias(const q7_t *in_vec, const q7_t *wt_mat, const uint16_t size, const uint16_t wt_row_num, const uint16_t bias_lshift, const uint16_t out_rshift, const q7_t *bias, q7_t *out_vec, q15_t *in_tmp_buf)</div><div class="ttdoc">This is a fully connected layer function for signed 8-bit integer inputs with shift-based quantizatio...</div></div>
+<div class="ttc" id="agroup__FullyConnect_html_ga12c2d04f5e6954ea471b2fd443698a32"><div class="ttname"><a href="group__FullyConnect.html#ga12c2d04f5e6954ea471b2fd443698a32">riscv_nn_fc_s8_s8_s8_sft_bias</a></div><div class="ttdeci">int32_t riscv_nn_fc_s8_s8_s8_sft_bias(const q7_t *in_vec, const q7_t *wt_mat, const uint16_t size, const uint16_t wt_row_num, const uint16_t bias_lshift, const uint16_t out_rshift, const q7_t *bias, q7_t *out_vec, q15_t *in_tmp_buf)</div><div class="ttdoc">This function performs calculation on signed 8-bit integers for inputs, applying shift-based quantiza...</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

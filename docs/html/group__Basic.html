@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.1</span>
+   &#160;<span id="projectnumber">version3.3</span>
    </div>
   </td>
  </tr>
@@ -99,10 +99,22 @@ Functions</h2></td></tr>
 <tr class="separator:ga6d1d93515fcce1f7342bc7178738a251"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadd96f344ca58c1cd2bd0cd690573730b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Basic.html#gadd96f344ca58c1cd2bd0cd690573730b">riscv_nn_ew_add_s16_asym</a> (const int16_t *in_vec1, const int16_t *in_vec2, const int32_t in_offset1, const int32_t in_scale1, const int32_t in_rshift1, const int32_t in_offset2, const int32_t in_scale2, const int32_t in_rshift2, const int32_t lshift, int16_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_rshift, const int32_t act_min, const int32_t act_max, const int32_t size)</td></tr>
 <tr class="separator:gadd96f344ca58c1cd2bd0cd690573730b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0ab844a9ca0425fcdb8607e5cd115d00"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Basic.html#ga0ab844a9ca0425fcdb8607e5cd115d00">riscv_nn_ew_addc_s8_asym</a> (const int8_t *in_vec, const int32_t in_const, const int32_t in_offset, const int32_t in_scale, const int32_t in_rshift, const int32_t lshift, int8_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_rshift, const int32_t act_min, const int32_t act_max, const uint32_t size)</td></tr>
+<tr class="separator:ga0ab844a9ca0425fcdb8607e5cd115d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4a65ac7692fc464dc0c637c5abf952d3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Basic.html#ga4a65ac7692fc464dc0c637c5abf952d3">riscv_nn_ew_mul_s8_asym</a> (const int8_t *in_vec1, const int8_t *in_vec2, const int32_t in_offset1, const int32_t in_offset2, int8_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_shift, const int32_t act_min, const int32_t act_max, const uint32_t size)</td></tr>
 <tr class="separator:ga4a65ac7692fc464dc0c637c5abf952d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga14c8e376ad56e652d4018f5d759c077b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Basic.html#ga14c8e376ad56e652d4018f5d759c077b">riscv_nn_ew_mul_s16_asym</a> (const int16_t *in_vec1, const int16_t *in_vec2, const int32_t in_offset1, const int32_t in_offset2, int16_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_shift, const int32_t act_min, const int32_t act_max, const int32_t size)</td></tr>
 <tr class="separator:ga14c8e376ad56e652d4018f5d759c077b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaea6b330de451ff877ad825c694786326"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Basic.html#gaea6b330de451ff877ad825c694786326">riscv_nn_ew_mul_s16_s8_asym</a> (const int16_t *in_vec1, const int16_t *in_vec2, int8_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_shift, const int32_t size)</td></tr>
+<tr class="separator:gaea6b330de451ff877ad825c694786326"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf2efe5a9cac57156e96afe4fa1c79f1f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Basic.html#gaf2efe5a9cac57156e96afe4fa1c79f1f">riscv_nn_ew_mulc_s8_asym</a> (const int8_t *in_vec, const int32_t in_const, const int32_t in_offset, int8_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_shift, const int32_t act_min, const int32_t act_max, const uint32_t size)</td></tr>
+<tr class="separator:gaf2efe5a9cac57156e96afe4fa1c79f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafc833448bf5b85a0824f5f0c10fc2b1e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Basic.html#gafc833448bf5b85a0824f5f0c10fc2b1e">riscv_nn_ew_rsubc_s8_asym</a> (const int8_t *in_vec, const int32_t in_const, const int32_t in_offset, const int32_t in_scale, const int32_t in_rshift, const int32_t lshift, int8_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_rshift, const int32_t act_min, const int32_t act_max, const uint32_t size)</td></tr>
+<tr class="separator:gafc833448bf5b85a0824f5f0c10fc2b1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac28bf2acae3c93f254226e8fb6ca55a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Basic.html#gac28bf2acae3c93f254226e8fb6ca55a0">riscv_nn_ew_sub_s8_asym</a> (const int8_t *in_vec1, const int8_t *in_vec2, const int32_t in_offset1, const int32_t in_scale1, const int32_t in_rshift1, const int32_t in_offset2, const int32_t in_scale2, const int32_t in_rshift2, const int32_t lshift, int8_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_rshift, const int32_t act_min, const int32_t act_max, const uint32_t size)</td></tr>
+<tr class="separator:gac28bf2acae3c93f254226e8fb6ca55a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabe32f3d56da697861e8526dfb6cc615d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Basic.html#gabe32f3d56da697861e8526dfb6cc615d">riscv_nn_ew_subc_s8_asym</a> (const int8_t *in_vec, const int32_t in_const, const int32_t in_offset, const int32_t in_scale, const int32_t in_rshift, const int32_t lshift, int8_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_rshift, const int32_t act_min, const int32_t act_max, const uint32_t size)</td></tr>
+<tr class="separator:gabe32f3d56da697861e8526dfb6cc615d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
@@ -174,27 +186,27 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function performs element-wise addition for signed 8-bit integer input vectors with symmetric quantization on the outputs. </p>
+<p>This function performs elementwise addition on signed 8-bit integer input vectors, applying symmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>pointer of the first input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>pointer of the second input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">scale1</td><td>pointer of the first scaling vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">scale2</td><td>pointer of the second scaling vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vectors </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the accumulator before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the accumulator </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the accumulator after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the element-wise addition results </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>Pointer to the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>Pointer to the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale1</td><td>Pointer to the first scaling vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale2</td><td>Pointer to the second scaling vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vectors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the accumulator before scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the accumulator </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the accumulator after scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the element-wise addition results </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The calculation of each element can be represented as Figure 1, where rectangles represent inputs or outputs, circles represent arithmetical operations, solid lines are for required steps and dashed lines, if any, are for optional ones.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Figure 1 illustrates the calculation of each element, where rectangles represent inputs or outputs, circles denote arithmetic operations, solid lines indicate the required steps, and dashed lines represents optional ones.</dd></dl>
 <div class="image">
-<img src="riscv_nn_add_s8_sym.jpg" alt="" width="600px"/>
+<img src="riscv_nn_add_s8_sym_algorithm_flowchart.png" alt="" width="600px"/>
 <div class="caption">
-Figure 1. riscv_nn_add_s8_sym algorithm flowchart</div></div>
+Figure 1. riscv_nn_add_s8_sym Algorithm Flowchart</div></div>
 <p><b>Example:</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#define SIZE 1024</span></div>
 <div class="line">uint16_t pre_rshift = 8;        <span class="comment">// The addition results of both scaled input</span></div>
 <div class="line">                                <span class="comment">// tensors are in the range of 24-bit; thus, the</span></div>
@@ -283,18 +295,18 @@ Figure 1. riscv_nn_add_s8_sym algorithm flowchart</div></div>
       </table>
 </div><div class="memdoc">
 
-<p>This function performs element-wise addition for signed 8-bit integer input vectors with symmetric quantization and rounding on the outputs. </p>
+<p>This function performs elementwise addition on signed 8-bit integer input vectors, applying symmetric quantization and rounding to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>pointer of the first input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>pointer of the second input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">scale1</td><td>scaling value for the first input vector. It should be in the range of 0 to 2^23. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">scale2</td><td>scaling value for the second input vector. It should be in the range of 0 to 2^23. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vectors </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>right shift amount for the accumulator before the scaling </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the accumulator </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>right shift amount for the accumulator after the scaling </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of element-wise addition results </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>Pointer to the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>Pointer to the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale1</td><td>Scaling value for the first input vector. It should be in the range of 0 to 2^23. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale2</td><td>Scaling value for the second input vector. It should be in the range of 0 to 2^23. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vectors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pre_rshift</td><td>Right shift amount for the accumulator before the scaling </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the accumulator </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">post_rshift</td><td>Right shift amount for the accumulator after the scaling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to element-wise addition results </td></tr>
   </table>
   </dd>
 </dl>
@@ -417,34 +429,34 @@ Figure 1. riscv_nn_add_s8_sym algorithm flowchart</div></div>
       </table>
 </div><div class="memdoc">
 
-<p>This function performs element-wise addition for signed 8-bit integer input vectors with asymmetric quantization on the inputs/outputs. </p>
+<p>This function performs elementwise addition on signed 8-bit integer input vectors, applying asymmetric quantization to either the inputs or the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>pointer of the first input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>pointer of the second input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset1</td><td>offset value for the first input vector. It should be in the range of -127 to 128. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale1</td><td>scaling value for the quantization on first input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift1</td><td>right shift amount for the quantization on the first input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset2</td><td>offset value for the second input vector. It should be in the range of -127 to 128. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale2</td><td>scaling value for the quantization on the second input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift2</td><td>right shift amount for the quantization on the second input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>left shift amount for the first and second input vectors </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the element-wise addition results </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>offset value for the output. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>right shift amount for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vectors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>Pointer to the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>Pointer to the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset1</td><td>Offset value for the first input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale1</td><td>Scaling value for the quantization on the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift1</td><td>Right shift amount for the quantization on the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset2</td><td>Offset value for the second input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale2</td><td>Scaling value for the quantization on the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift2</td><td>Right shift amount for the quantization on the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>Left shift amount for the first and second input vectors </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the element-wise addition results </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Offset value for the output. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vectors </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>This function returns 0.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
 <li>The calculation of each element could be represented as Figure 2. <div class="image">
-<img src="riscv_nn_ew_add_s8_asym.jpg" alt="" width="600px"/>
+<img src="riscv_nn_ew_add_s8_asym_algorithm_flowchart.png" alt="" width="600px"/>
 <div class="caption">
-Figure 2. riscv_nn_ew_add_s8_asym algorithm flowchart</div></div>
+Figure 2. riscv_nn_ew_add_s8_asym Algorithm Flowchart</div></div>
 </li>
 <li>The multiplication for in_scale1, in_scale2 and out_scale could be roughly expressed as: 32b = ((int64_t)32b * 32b) &gt;&gt; 31</li>
 </ul>
@@ -585,30 +597,145 @@ Figure 2. riscv_nn_ew_add_s8_asym algorithm flowchart</div></div>
       </table>
 </div><div class="memdoc">
 
-<p>This function performs element-wise addition for signed 16-bit integer input vectors with asymmetric quantization on the inputs/outputs. </p>
+<p>This function performs elementwise addition on signed 16-bit integer input vectors, applying asymmetric quantization to either the inputs or the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>pointer of the first input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>pointer of the second input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset1</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale1</td><td>scaling value for the quantization on first input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift1</td><td>right shift amount for the quantization on the first input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset2</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale2</td><td>scaling value for the quantization on the second input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift2</td><td>right shift amount for the quantization on the second input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>left shift amount for the first and second input vectors </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the element-wise addition results </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>right shift amount for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the outputs are limited to. It should be in the range of -32768 to 32767. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the outputs are limited to. It should be in the range of -32768 to 32767. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vectors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>Pointer to the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>Pointer to the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset1</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale1</td><td>Scaling value for the quantization on first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift1</td><td>Right shift amount for the quantization on the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset2</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale2</td><td>Scaling value for the quantization on the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift2</td><td>Right shift amount for the quantization on the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>Left shift amount for the first and second input vectors </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the elementwise addition results </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the outputs are limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the outputs are limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vectors </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>This function returns 0.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The calculation of each element could be represented as Figure 2 in which in_offset1, in_offset2 and out_offset are dummy for this function. </dd></dl>
+
+</div>
+</div>
+<a id="ga0ab844a9ca0425fcdb8607e5cd115d00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0ab844a9ca0425fcdb8607e5cd115d00">&#9670;&nbsp;</a></span>riscv_nn_ew_addc_s8_asym()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int riscv_nn_ew_addc_s8_asym </td>
+          <td>(</td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_const</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_rshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>lshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_rshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs elementwise addition on a signed 8-bit integer input vector and a constant, applying asymmetric quantization to either the inputs or the outputs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_const</td><td>Constant value to be added. It should be in the range of -255 to 255. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>Offset value for the input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale</td><td>Scaling value for the quantization on the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift</td><td>Right shift amount for the quantization on the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>Left shift amount for the input vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Offset value for the outputs. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the quantization on the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0. </dd></dl>
 
 </div>
 </div>
@@ -692,29 +819,29 @@ Figure 2. riscv_nn_ew_add_s8_asym algorithm flowchart</div></div>
       </table>
 </div><div class="memdoc">
 
-<p>This function performs element-wise multiplication for signed 8-bit integer input vectors with asymmetric quantization on the outputs. </p>
+<p>This function performs elementwise multiplication on signed 8-bit integer input vectors, applying asymmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>pointer of the first input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>pointer of the second input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset1</td><td>offset value for the first input vector. It should be in the range of -127 to 128. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset2</td><td>offset value for the second input vector. It should be in the range of -127 to 128. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the element-wise multiplication results </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>offset value for the outputs. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>shift amount for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vectors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>Pointer to the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>Pointer to the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset1</td><td>Offset value for the first input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset2</td><td>Offset value for the second input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the element-wise multiplication results </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Offset value for the outputs. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>Shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vectors </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This function returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
 <li>The calculation of each element could be represented as Figure 3. <div class="image">
-<img src="riscv_nn_ew_mul_s8_asym.jpg" alt="" width="600px"/>
+<img src="riscv_nn_ew_mul_s8_asym_algorithm_flowchart.png" alt="" width="600px"/>
 <div class="caption">
-Figure 3. riscv_nn_ew_mul_s8_asym algorithm flowchart</div></div>
+Figure 3. riscv_nn_ew_mul_s8_asym Algorithm Flowchart</div></div>
 </li>
 <li>The multiplication for out_scale could be roughly expressed as: 32b = ((int64_t)32b * 32b) &gt;&gt; 31</li>
 <li>During the quantization process, a positive out_shift value is used to left shift calculation results whereas a negative one is used to right shift.</li>
@@ -820,24 +947,24 @@ Figure 3. riscv_nn_ew_mul_s8_asym algorithm flowchart</div></div>
       </table>
 </div><div class="memdoc">
 
-<p>This function performs element-wise multiplication for signed 16-bit integer input vectors with asymmetric quantization on the outputs. </p>
+<p>This function performs elementwise multiplication on signed 16-bit integer input/output vectors, applying asymmetric quantization to the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>pointer of the first input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>pointer of the second input vector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset1</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset2</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>pointer of the element-wise multiplication results </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>scaling value for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>shift amount for the quantization on the outputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the outputs are limited to. It should be in the range of -32768 to 32767. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the outputs are limited to. It should be in the range of -32768 to 32767. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>number of elements in the input vectors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>Pointer to the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>Pointer to the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset1</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset2</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the elementwise multiplication results </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>Shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the outputs are limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the outputs are limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vectors </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>This function returns 0.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><ul>
 <li>The calculation of each element could be represented as Figure 3 in which in_offset1, in_offset2 and out_offset are dummy for this function.</li>
 <li>During the quantization process, a positive out_shift value is used to left shift calculation results whereas a negative one is used to right shift. </li>
@@ -846,11 +973,546 @@ Figure 3. riscv_nn_ew_mul_s8_asym algorithm flowchart</div></div>
 
 </div>
 </div>
+<a id="gaea6b330de451ff877ad825c694786326"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaea6b330de451ff877ad825c694786326">&#9670;&nbsp;</a></span>riscv_nn_ew_mul_s16_s8_asym()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int riscv_nn_ew_mul_s16_s8_asym </td>
+          <td>(</td>
+          <td class="paramtype">const int16_t *&#160;</td>
+          <td class="paramname"><em>in_vec1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t *&#160;</td>
+          <td class="paramname"><em>in_vec2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_shift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs elementwise multiplication on signed 16-bit integer input vectors and signed 8-bit integer output vectors, applying asymmetric quantization to the outputs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>Pointer to the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>Pointer to the second input vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Offset value for the outputs. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>Shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vectors </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>During the quantization process, a positive out_shift value is used to left shift calculation results whereas a negative one is used to right shift. </dd></dl>
+
+</div>
+</div>
+<a id="gaf2efe5a9cac57156e96afe4fa1c79f1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf2efe5a9cac57156e96afe4fa1c79f1f">&#9670;&nbsp;</a></span>riscv_nn_ew_mulc_s8_asym()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int riscv_nn_ew_mulc_s8_asym </td>
+          <td>(</td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_const</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_shift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs elementwise multiplication on a signed 8-bit integer input vector and a constant, applying asymmetric quantization to the outputs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_const</td><td>Constant value to be added </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>Offset value for the input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Offset value for the outputs. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_shift</td><td>Shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>During the quantization process, a positive out_shift value is used to left shift calculation results whereas a negative one is used to right shift. </dd></dl>
+
+</div>
+</div>
+<a id="gafc833448bf5b85a0824f5f0c10fc2b1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafc833448bf5b85a0824f5f0c10fc2b1e">&#9670;&nbsp;</a></span>riscv_nn_ew_rsubc_s8_asym()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int riscv_nn_ew_rsubc_s8_asym </td>
+          <td>(</td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_const</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_rshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>lshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_rshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs elementwise subtraction of a constant from a signed 8-bit integer input vector, applying asymmetric quantization to either the inputs or the outputs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_const</td><td>Constant value for the subtraction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>Offset value for the input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale</td><td>Scaling value for the quantization on the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift</td><td>Right shift amount for the quantization on the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>Left shift amount for the inputs </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Offset value for the output. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0. </dd></dl>
+
+</div>
+</div>
+<a id="gac28bf2acae3c93f254226e8fb6ca55a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac28bf2acae3c93f254226e8fb6ca55a0">&#9670;&nbsp;</a></span>riscv_nn_ew_sub_s8_asym()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int riscv_nn_ew_sub_s8_asym </td>
+          <td>(</td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_vec1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_vec2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_scale1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_rshift1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_scale2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_rshift2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>lshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_rshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs elementwise subtraction on signed 8-bit integer input vectors, applying asymmetric quantization to either the inputs or the outputs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec1</td><td>Pointer to the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec2</td><td>Pointer to the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset1</td><td>Offset value for the first input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale1</td><td>Scaling value for the quantization on the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift1</td><td>Right shift amount for the quantization on the first input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset2</td><td>Offset value for the second input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale2</td><td>Scaling value for the quantization on the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift2</td><td>Right shift amount for the quantization on the second input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>Left shift amount for the first and second input vectors </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Offset value for the output. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vectors </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0. </dd></dl>
+
+</div>
+</div>
+<a id="gabe32f3d56da697861e8526dfb6cc615d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabe32f3d56da697861e8526dfb6cc615d">&#9670;&nbsp;</a></span>riscv_nn_ew_subc_s8_asym()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int riscv_nn_ew_subc_s8_asym </td>
+          <td>(</td>
+          <td class="paramtype">const int8_t *&#160;</td>
+          <td class="paramname"><em>in_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_const</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>in_rshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>lshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramname"><em>out_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>out_rshift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>act_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs elementwise subtraction of a constant from a signed 8-bit integer input vector, applying asymmetric quantization to either the inputs or the outputs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_vec</td><td>Pointer to the input vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_const</td><td>Constant value for the subtraction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_offset</td><td>Offset value for the first input vector. It should be in the range of -127 to 128. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_scale</td><td>Scaling value for the quantization on the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_rshift</td><td>Right shift amount for the quantization on the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lshift</td><td>Left shift amount for the input vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_vec</td><td>Pointer to the output vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_offset</td><td>Offset value for the output. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_scale</td><td>Scaling value for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_rshift</td><td>Right shift amount for the quantization on the outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the outputs are limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Number of elements in the input vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function only returns 0. </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="agroup__Basic_html_ga6d1d93515fcce1f7342bc7178738a251"><div class="ttname"><a href="group__Basic.html#ga6d1d93515fcce1f7342bc7178738a251">riscv_nn_ew_add_s8_asym</a></div><div class="ttdeci">int riscv_nn_ew_add_s8_asym(const int8_t *in_vec1, const int8_t *in_vec2, const int32_t in_offset1, const int32_t in_scale1, const int32_t in_rshift1, const int32_t in_offset2, const int32_t in_scale2, const int32_t in_rshift2, const int32_t lshift, int8_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_rshift, const int32_t act_min, const int32_t act_max, const uint32_t size)</div><div class="ttdoc">This function performs element-wise addition for signed 8-bit integer input vectors with asymmetric q...</div></div>
-<div class="ttc" id="agroup__Basic_html_ga4a65ac7692fc464dc0c637c5abf952d3"><div class="ttname"><a href="group__Basic.html#ga4a65ac7692fc464dc0c637c5abf952d3">riscv_nn_ew_mul_s8_asym</a></div><div class="ttdeci">int riscv_nn_ew_mul_s8_asym(const int8_t *in_vec1, const int8_t *in_vec2, const int32_t in_offset1, const int32_t in_offset2, int8_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_shift, const int32_t act_min, const int32_t act_max, const uint32_t size)</div><div class="ttdoc">This function performs element-wise multiplication for signed 8-bit integer input vectors with asymme...</div></div>
-<div class="ttc" id="agroup__Basic_html_ga551f84785d11de350ff5275ae058ce4d"><div class="ttname"><a href="group__Basic.html#ga551f84785d11de350ff5275ae058ce4d">riscv_nn_add_s8_sym</a></div><div class="ttdeci">void riscv_nn_add_s8_sym(const q7_t *in_vec1, const q7_t *in_vec2, const int16_t *scale1, const int16_t *scale2, const uint32_t size, const uint16_t pre_rshift, const uint16_t out_scale, const uint16_t post_rshift, q7_t *out_vec)</div><div class="ttdoc">This function performs element-wise addition for signed 8-bit integer input vectors with symmetric qu...</div></div>
+<div class="ttc" id="agroup__Basic_html_ga6d1d93515fcce1f7342bc7178738a251"><div class="ttname"><a href="group__Basic.html#ga6d1d93515fcce1f7342bc7178738a251">riscv_nn_ew_add_s8_asym</a></div><div class="ttdeci">int riscv_nn_ew_add_s8_asym(const int8_t *in_vec1, const int8_t *in_vec2, const int32_t in_offset1, const int32_t in_scale1, const int32_t in_rshift1, const int32_t in_offset2, const int32_t in_scale2, const int32_t in_rshift2, const int32_t lshift, int8_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_rshift, const int32_t act_min, const int32_t act_max, const uint32_t size)</div><div class="ttdoc">This function performs elementwise addition on signed 8-bit integer input vectors,...</div></div>
+<div class="ttc" id="agroup__Basic_html_ga4a65ac7692fc464dc0c637c5abf952d3"><div class="ttname"><a href="group__Basic.html#ga4a65ac7692fc464dc0c637c5abf952d3">riscv_nn_ew_mul_s8_asym</a></div><div class="ttdeci">int riscv_nn_ew_mul_s8_asym(const int8_t *in_vec1, const int8_t *in_vec2, const int32_t in_offset1, const int32_t in_offset2, int8_t *out_vec, const int32_t out_offset, const int32_t out_scale, const int32_t out_shift, const int32_t act_min, const int32_t act_max, const uint32_t size)</div><div class="ttdoc">This function performs elementwise multiplication on signed 8-bit integer input vectors,...</div></div>
+<div class="ttc" id="agroup__Basic_html_ga551f84785d11de350ff5275ae058ce4d"><div class="ttname"><a href="group__Basic.html#ga551f84785d11de350ff5275ae058ce4d">riscv_nn_add_s8_sym</a></div><div class="ttdeci">void riscv_nn_add_s8_sym(const q7_t *in_vec1, const q7_t *in_vec2, const int16_t *scale1, const int16_t *scale2, const uint32_t size, const uint16_t pre_rshift, const uint16_t out_scale, const uint16_t post_rshift, q7_t *out_vec)</div><div class="ttdoc">This function performs elementwise addition on signed 8-bit integer input vectors,...</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

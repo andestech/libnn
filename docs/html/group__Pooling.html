@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Andes Neural Network Library User Manual
-   &#160;<span id="projectnumber">version3.1</span>
+   &#160;<span id="projectnumber">version3.3</span>
    </div>
   </td>
  </tr>
@@ -183,15 +183,15 @@ Functions</h2></td></tr>
 <p>This is an average pooling function for signed 8-bit integer inputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim</td><td>dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>number of input tensor channels </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim</td><td>dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad</td><td>padding size </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride</td><td>convolution stride </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim</td><td>dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim</td><td>Dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>Number of input tensor channels </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim</td><td>Dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad</td><td>Padding size </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride</td><td>Stride of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim</td><td>Dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor. </td></tr>
   </table>
   </dd>
 </dl>
@@ -316,24 +316,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is an average pooling function for signed 8-bit integer inputs in any x and y dimensions. </p>
+<p>This average pooling function processes signed 8-bit integer inputs across any x and y dimensions. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_x</td><td>x dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_y</td><td>y dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>number of input tensor channels </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_x</td><td>x dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_y</td><td>y dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad_x</td><td>padding size in the x dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad_y</td><td>padding size in the y dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride_x</td><td>stride of the pooling window in the x dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride_y</td><td>stride of the pooling window in the y dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>x dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_y</td><td>y dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_lshift</td><td>left shift amount for the output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>Number of input tensor channels </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_x</td><td>X dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_y</td><td>Y dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad_x</td><td>Padding size in the x dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad_y</td><td>Padding size in the y dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride_x</td><td>Stride of the pooling window in the x dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride_y</td><td>Stride of the pooling window in the y dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>X dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_y</td><td>Y dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_lshift</td><td>Left shift amount for the output </td></tr>
   </table>
   </dd>
 </dl>
@@ -471,25 +471,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is an average pooling function for signed 8-bit integer inputs in any x and y dimensions with activation parameters to limit the outputs. </p>
+<p>This average pooling function processes signed 8-bit integer inputs across any x and y dimensions and includes activation parameters to limit the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_y</td><td>y dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_x</td><td>x dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_y</td><td>y dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>x dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride_y</td><td>stride of the pooling window in the y dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride_x</td><td>stride of the pooling window in the x dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_y</td><td>y dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_x</td><td>x dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad_y</td><td>padding size in the y dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad_x</td><td>padding size in the x dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>number of input tensor channels </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input tensor. Its needed size could be obtained by calling riscv_nn_avepool_HWC_s8_any_act_get_buffer_size. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_y</td><td>Y dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>X dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride_y</td><td>Stride of the pooling window in the y dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride_x</td><td>Stride of the pooling window in the x dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_y</td><td>Y dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_x</td><td>X dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad_y</td><td>Padding size in the y dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad_x</td><td>Padding size in the x dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>Number of input tensor channels </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input tensor. Its required size can be obtained by calling riscv_nn_avepool_HWC_s8_any_act_get_buffer_size. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
   </table>
   </dd>
 </dl>
@@ -523,15 +523,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function is used to obtain the required size, in bytes, for the input temporary buffer of riscv_nn_avepool_HWC_s8_any_act. </p>
+<p>This function calculates the required size (in bytes) for the input temporary buffer needed for riscv_nn_avepool_HWC_s8_any_act. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>x dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>number of input tensor channels </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>X dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>Number of input tensor channels </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>This function returns the size required by the temporary buffer. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the required size of the temporary buffer. </dd></dl>
 
 </div>
 </div>
@@ -645,25 +645,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is an average pooling function for signed 16-bit integer inputs in any x and y dimensions with activation parameters to limit the outputs. </p>
+<p>This average pooling function processes signed 16-bit integer inputs across any x and y dimensions and includes activation parameters to limit the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_y</td><td>y dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_x</td><td>x dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_y</td><td>y dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>x dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride_y</td><td>stride of the pooling window in the y dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride_x</td><td>stride of the pooling window in the x dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_y</td><td>y dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_x</td><td>x dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad_y</td><td>padding size in the y dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad_x</td><td>padding size in the x dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>number of input tensor channels </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>temporary buffer for the input tensor. Its needed size could be obtained by calling riscv_nn_avepool_HWC_s16_any_act_get_buffer_size. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_y</td><td>Y dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>X dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride_y</td><td>Stride of the pooling window in the y dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride_x</td><td>Stride of the pooling window in the x dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_y</td><td>Y dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_x</td><td>X dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad_y</td><td>Padding size in the y dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad_x</td><td>Padding size in the x dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>Number of input tensor channels </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Temporary buffer for the input tensor. Its required size can be obtained by calling riscv_nn_avepool_HWC_s16_any_act_get_buffer_size. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
   </table>
   </dd>
 </dl>
@@ -697,15 +697,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function is used to obtain the required size, in bytes, for the input temporary buffer of riscv_nn_avepool_HWC_s16_any_act. </p>
+<p>This function calculates the required size (in bytes) for the input temporary buffer needed for riscv_nn_avepool_HWC_s16_any_act. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>x dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>number of input tensor channels </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>X dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>Number of input tensor channels </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>This function returns the size required by the temporary buffer. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the required size of the temporary buffer. </dd></dl>
 
 </div>
 </div>
@@ -780,15 +780,15 @@ Functions</h2></td></tr>
 <p>This is a max pooling function for signed 8-bit integer inputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim</td><td>dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>number of input tensor channels </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim</td><td>dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad</td><td>padding size </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride</td><td>stride of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim</td><td>dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim</td><td>Dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>Number of input tensor channels </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim</td><td>Dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad</td><td>Padding size </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride</td><td>Stride of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim</td><td>Dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tmp_buf</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
   </table>
   </dd>
 </dl>
@@ -918,25 +918,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a max pooling function for signed 8-bit integer inputs in any x and y dimensions with the actvating parameters to limit the outputs. </p>
+<p>This max pooling function processes signed 8-bit integer inputs across any x and y dimensions and includes activation parameters to limit the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_y</td><td>y dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_x</td><td>x dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_y</td><td>y dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>x dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride_y</td><td>stride of the pooling window in the y dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride_x</td><td>stride of the pooling window in the x dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_y</td><td>y dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_x</td><td>x dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad_y</td><td>padding size in the y dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad_x</td><td>padding size in the x dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>number of input tensor channels </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buffer</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_y</td><td>Y dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>X dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride_y</td><td>Stride of the pooling window in the y dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride_x</td><td>Stride of the pooling window in the x dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_y</td><td>Y dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_x</td><td>X dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad_y</td><td>Padding size in the y dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad_x</td><td>Padding size in the x dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the output tensor is limited to. It should be in the range of -128 to 127. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>Number of input tensor channels </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buffer</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
   </table>
   </dd>
 </dl>
@@ -1054,25 +1054,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is a max pooling function for signed 16-bit integer inputs in any x and y dimensions with the actvating parameters to limit the outputs. </p>
+<p>This max pooling function processes signed 16-bit integer inputs across any x and y dimensions and includes activation parameters to limit the outputs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_y</td><td>y dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_x</td><td>x dimension of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_y</td><td>y dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>x dimension of the output tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride_y</td><td>stride of the pooling window in the y dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stride_x</td><td>stride of the pooling window in the x dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_y</td><td>y dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_x</td><td>x dimension of the pooling window </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad_y</td><td>padding size in the y dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pad_x</td><td>padding size in the x dimension </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>minimum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>maximum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>number of input tensor channels </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>pointer of the input tensor </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buffer</td><td>dummy </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>pointer of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_y</td><td>Y dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_dim_x</td><td>X dimension of the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_y</td><td>Y dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">out_tensor_dim_x</td><td>X dimension of the output tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride_y</td><td>Stride of the pooling window in the y dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stride_x</td><td>Stride of the pooling window in the x dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_y</td><td>Y dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ker_dim_x</td><td>X dimension of the pooling window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad_y</td><td>Padding size in the y dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pad_x</td><td>Padding size in the x dimension </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_min</td><td>Minimum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">act_max</td><td>Maximum value that the output tensor is limited to. It should be in the range of -32768 to 32767. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor_ch</td><td>Number of input tensor channels </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in_tensor</td><td>Pointer to the input tensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmp_buffer</td><td>Dummy </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_tensor</td><td>Pointer to the output tensor </td></tr>
   </table>
   </dd>
 </dl>
@@ -1082,7 +1082,7 @@ Functions</h2></td></tr>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="agroup__Pooling_html_ga690775548c1d85767ced38e5a35a1d9e"><div class="ttname"><a href="group__Pooling.html#ga690775548c1d85767ced38e5a35a1d9e">riscv_nn_avepool_HWC_s8_any</a></div><div class="ttdeci">void riscv_nn_avepool_HWC_s8_any(q7_t *in_tensor, const uint16_t in_tensor_dim_x, const uint16_t in_tensor_dim_y, const uint16_t in_tensor_ch, const uint16_t ker_dim_x, const uint16_t ker_dim_y, const uint16_t pad_x, const uint16_t pad_y, const uint16_t stride_x, const uint16_t stride_y, const uint16_t out_tensor_dim_x, const uint16_t out_tensor_dim_y, q7_t *in_tmp_buf, q7_t *out_tensor, const uint16_t out_lshift)</div><div class="ttdoc">This is an average pooling function for signed 8-bit integer inputs in any x and y dimensions.</div></div>
+<div class="ttc" id="agroup__Pooling_html_ga690775548c1d85767ced38e5a35a1d9e"><div class="ttname"><a href="group__Pooling.html#ga690775548c1d85767ced38e5a35a1d9e">riscv_nn_avepool_HWC_s8_any</a></div><div class="ttdeci">void riscv_nn_avepool_HWC_s8_any(q7_t *in_tensor, const uint16_t in_tensor_dim_x, const uint16_t in_tensor_dim_y, const uint16_t in_tensor_ch, const uint16_t ker_dim_x, const uint16_t ker_dim_y, const uint16_t pad_x, const uint16_t pad_y, const uint16_t stride_x, const uint16_t stride_y, const uint16_t out_tensor_dim_x, const uint16_t out_tensor_dim_y, q7_t *in_tmp_buf, q7_t *out_tensor, const uint16_t out_lshift)</div><div class="ttdoc">This average pooling function processes signed 8-bit integer inputs across any x and y dimensions.</div></div>
 <div class="ttc" id="agroup__Pooling_html_ga13a1d821d0d516ba1280eb11b599b3f4"><div class="ttname"><a href="group__Pooling.html#ga13a1d821d0d516ba1280eb11b599b3f4">riscv_nn_avepool_HWC_s8</a></div><div class="ttdeci">void riscv_nn_avepool_HWC_s8(q7_t *in_tensor, const uint16_t in_tensor_dim, const uint16_t in_tensor_ch, const uint16_t ker_dim, const uint16_t pad, const uint16_t stride, const uint16_t out_tensor_dim, q7_t *in_tmp_buf, q7_t *out_tensor)</div><div class="ttdoc">This is an average pooling function for signed 8-bit integer inputs.</div></div>
 <div class="ttc" id="agroup__Pooling_html_ga7c962592959381dc4fb746a71619b5b0"><div class="ttname"><a href="group__Pooling.html#ga7c962592959381dc4fb746a71619b5b0">riscv_nn_maxpool_HWC_s8</a></div><div class="ttdeci">void riscv_nn_maxpool_HWC_s8(q7_t *in_tensor, const uint16_t in_tensor_dim, const uint16_t in_tensor_ch, const uint16_t ker_dim, const uint16_t pad, const uint16_t stride, const uint16_t out_tensor_dim, q7_t *in_tmp_buf, q7_t *out_tensor)</div><div class="ttdoc">This is a max pooling function for signed 8-bit integer inputs.</div></div>
 <!-- start footer part -->

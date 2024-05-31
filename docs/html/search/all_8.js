@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['utils_20functions_186',['Utils Functions',['../group__Utils.html',1,'']]]
+  ['pooling_20functions_20',['Pooling Functions',['../group__Pooling.html',1,'']]]
 ];

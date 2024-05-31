@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -42,45 +42,45 @@ extern    "C"
  *  optional ones.
  *
  *  - Algorithm flow of convolution functions with shift-based quantization
- *  @image html shift-based_convolution_algorithm_flowchart.jpg "Figure 4. Algorithm flowchart of convolution functions with shift-based quantization" width=600px
+ *  @image html convolution_functions_shift-based_quantization.png "Figure 4. Algorithm Flowchart of Convolution Functions With Shift-based Quantization" width=600px
  *  - Algorithm flow of convolution functions with symmetric quantization
- *  @image html symmetric_convolution_algorithm_flowchart.jpg "Figure 5. Algorithm flowchart of convolution functions with symmetric quantization" width=600px
+ *  @image html convolution_functions_symmetric_quantization.png "Figure 5. Algorithm Flowchart of Convolution Functions With Symmetric Quantization" width=600px
  *  - Algorithm flow for convolution functions with asymmetric quantization
- *  @image html asymmetric_convolution_algorithm_flowchart.jpg "Figure 6. Algorithm flowchart of convolution functions with asymmetric quantization" width=600px
+ *  @image html convolution_functions_asymmetric_quantization.png "Figure 6. Algorithm Flowchart of Convolution Functions With Asymmetric Quantization" width=600px
  * @{
  */
 
 /**
- * @brief           This function performs 1x1 kernels convolution for signed
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  shift-based quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       bias_lshift         left shift amount for the bias
- * @param[in]       out_rshift          right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  signed 8-bit integers for both inputs and outputs across any
+ *                  x and y dimensions, applying shift-based quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       bias_lshift         Left shift amount for the bias
+ * @param[in]       out_rshift          Right shift amount for the output
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to "2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y".
- * @param[in]       tmp_buf             dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @param[in]       tmp_buf             Dummy
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -149,25 +149,26 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sft_bias_fast_any(const q7_t * in_tensor,
                                                 q7_t * tmp_buf);
 
 /**
- * @brief           This function performs signed 8-bit integer convolution for
- *                  RGB images with shift-based quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   input tensor dimension
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs convolution on RGB images with signed
+ *                  8-bit integers, applying shift-based quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Input tensor dimension
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  (3 * ker_dim * ker_dim + 1)".
- * @param[in]       tmp_buf         temporary buffer for kernel weights. It is
+ * @param[in]       tmp_buf         Temporary buffer for kernel weights. It is
  *                                  required when -mext-vector enabled and its
  *                                  size must be "out_tensor_ch * (3 * ker_dim *
  *                                  ker_dim + 1)".
@@ -215,25 +216,26 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sft_bias(const q7_t * in_tensor,
                                                 q7_t * tmp_buf);
 
 /**
- * @brief           This function performs fast signed 8-bit integer convolution
- *                  for RGB images with shift-based quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution on RGB images with
+ *                  signed 8-bit integers, applying shift-based quantization to
+ *                  the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "2 * (3 *
  *                                  ker_dim * ker_dim + 1)".
- * @param[in]       wt_tmp_buf      temporary buffer for kernel weights. It is
+ * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
  *                                  (3 * ker_dim * ker_dim + 1)".
@@ -282,26 +284,26 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sft_bias_fast(const q7_t * in_tensor,
 
 
 /**
- * @brief           This function performs signed 8-bit integer convolution with
- *                  shift-based quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for input tensor. It is
+ * @brief           This function performs convolution with signed 8-bit
+ *                  integers, applying shift-based quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for input tensor. It is
  *                                  required when -mext-dsp or -mext-vector is
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @param[in]       tmp_buf         dummy
+ * @param[in]       tmp_buf         Dummy
  * @return          This function only returns 0.
  *
  * @b Example:
@@ -348,33 +350,33 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sft_bias(const q7_t * in_tensor,
                                             q7_t * tmp_buf);
 
 /**
- * @brief           This function performs signed 8-bit integer convolution in
- *                  any x and y dimensions with shift-based quantization on the
- *                  outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       bias_lshift         left shift amount for the bias
- * @param[in]       out_rshift          right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution with signed 8-bit
+ *                  integers across any x and y dimensions, applying shift-based
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       bias_lshift         Left shift amount for the bias
+ * @param[in]       out_rshift          Right shift amount for the output
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to "2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y".
- * @param[in]       tmp_buf             dummy
+ * @param[in]       tmp_buf             Dummy
  * @return          None
  *
  * @b Example:
@@ -431,29 +433,29 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sft_bias_any(const q7_t * in_tensor,
                                             q7_t * tmp_buf);
 
 /**
- * @brief           This function performs fast signed 8-bit integer convolution
- *                  with shift-based quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers, applying shift-based quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @param[in]       tmp_buf         dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @param[in]       tmp_buf         Dummy
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @b Example:
  * @code
@@ -499,36 +501,36 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sft_bias_fast(const q7_t * in_tensor,
                                 q7_t * tmp_buf);
 
 /**
- * @brief           This function performs fast signed 8-bit integer convolution
- *                  in any x and y dimensions with shift-based quantization on
- *                  the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       bias_lshift         left shift amount for the bias
- * @param[in]       out_rshift          right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers across any x and y dimensions, applying shift-based
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       bias_lshift         Left shift amount for the bias
+ * @param[in]       out_rshift          Right shift amount for the output
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @param[in]       tmp_buf             dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @param[in]       tmp_buf             Dummy
+ * @return          Returns 0 if successful; otherwise, it returns -1 if its
+ *                  inputs do not meet the following constraints: in_tensor_ch
+ *                  is a multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @b Example:
  * @code
@@ -587,26 +589,26 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sft_bias_fast_any(const q7_t * in_tensor,
 
 
 /**
- * @brief           This function performs signed 16-bit integer convolution
- *                  with shift-based quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs convolution with signed 16-bit
+ *                  integers, applying shift-based quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector is
  *                                  enabled and its size must be equal to
  *                                  "in_tensor_ch * ker_dim * ker_dim".
- * @param[in]       tmp_buf         dummy
+ * @param[in]       tmp_buf         Dummy
  * @return          This function only returns 0.
  *
  * @b Example:
@@ -653,29 +655,29 @@ int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias(const q15_t * in_tensor,
                                             q7_t * tmp_buf);
 
 /**
- * @brief           This function performs fast signed 16-bit integer
- *                  convolution with shift-based quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with signed 16-bit
+ *                  integers, applying shift-based quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector is
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @param[in]       tmp_buf         dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch,
- *                  out_tensor_ch and out_tensor_dim are multiples of 2.
+ * @param[in]       tmp_buf         Dummy
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that both in_tensor_ch and
+ *                  out_tensor_ch are multiples of 2.
  *
  * @b Example:
  * @code
@@ -721,36 +723,36 @@ int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias_fast(const q15_t * in_tensor,
                                                 q7_t * tmp_buf);
 
 /**
- * @brief           This function performs fast signed 16-bit integer
- *                  convolution in any x and y dimensions with shift-based
- *                  quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       bias_lshift         left shift amount for the bias
- * @param[in]       out_rshift          right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs fast convolution with signed 16-bit
+ *                  integers across x and y dimensions, applying shift-based
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       bias_lshift         Left shift amount for the bias
+ * @param[in]       out_rshift          Right shift amount for the output
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to "2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y".
- * @param[in]       tmp_buf             dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that both
- *                  in_tensor_ch and out_tensor_ch are multiples of 2.
+ * @param[in]       tmp_buf             Dummy
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that both in_tensor_ch and
+ *                  out_tensor_ch are multiples of 2.
  *
  * @b Example:
  * @code
@@ -808,29 +810,30 @@ int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias_fast_any(const q15_t * in_tensor,
                                                 q7_t * tmp_buf);
 
 /**
- * @brief           This function performs signed 8-bit integer depthwise
- *                  convolution with shift-based quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       bias_lshift     left shift amount for the bias
- * @param[in]       out_rshift      right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers, applying shift-based quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       bias_lshift     Left shift amount for the bias
+ * @param[in]       out_rshift      Right shift amount for the output
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector is
  *                                  enabled and its size must be equal to
  *                                  "(in_tensor_ch * ker_dim * ker_dim + 1) / 2".
- * @param[in]       tmp_buf         dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @param[in]       tmp_buf         Dummy
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch must be equal
+ *                  to out_tensor_ch.
  *
  * @b Example:
  * @code
@@ -875,36 +878,36 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sft_bias(const q7_t * in_tensor,
                                             q7_t * tmp_buf);
 
 /**
- * @brief           This function performs signed 8-bit integer depthwise
- *                  convolution in any x and y dimensions with shift-based
- *                  quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       bias_lshift         left shift amount for the bias
- * @param[in]       out_rshift          right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers across any x and y dimensions, applying
+ *                  shift-based quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       bias_lshift         Left shift amount for the bias
+ * @param[in]       out_rshift          Right shift amount for the output
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to "(in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y + 1) / 2".
- * @param[in]       tmp_buf             dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  must be equal to out_tensor_ch.
+ * @param[in]       tmp_buf             Dummy
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch must be equal
+ *                  to out_tensor_ch.
  *
  * @b Example:
  * @code
@@ -958,36 +961,38 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sft_bias_any(const q7_t * in_tensor,
                                                 q7_t * tmp_buf);
 
 /**
- * @brief           This function performs 1x1 kernels convolution for signed
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  bias inputs and symmetric quantization on the outputs..
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  signed 8-bit integers for both inputs and outputs across any
+ *                  x and y dimensions, incorporating bias inputs and applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to "2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -999,7 +1004,7 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sft_bias_any(const q7_t * in_tensor,
  *     - pad_y is 0
  *     - stride_x is 1
  *     - stride_y is 1
- * - The outputs will be 2-stage shifted before being stored, i.e.,
+ * - The outputs will be two-stage shifted before being stored, for example:
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_bias_fast_any(const q7_t * in_tensor,
@@ -1024,37 +1029,39 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_bias_fast_any(const q7_t * in_tensor,
                                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs 1x1 kernels convolution for signed
- *                  8-bit integer inputs and signed 16-bit integer outputs in
- *                  any x and y dimensions with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  signed 8-bit integers for inputs and signed 16-bit integers
+ *                  for outputs across any x and y dimensions, incorporating
+ *                  bias inputs and applying symmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to "2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -1066,7 +1073,7 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_bias_fast_any(const q7_t * in_tensor,
  *     - pad_y is 0
  *     - stride_x is 1
  *     - stride_y is 1
- * - The outputs will be 2-stage shifted before being stored, i.e.,
+ * - The outputs will be two-stage shifted before being stored, for example:
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_bias_fast_any(const q7_t * in_tensor,
@@ -1091,36 +1098,38 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_bias_fast_any(const q7_t * in_tensor
                                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs 1x1 kernels convolution for unsigned
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  bias inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  unsigned 8-bit integers for both inputs and outputs across
+ *                  any x and y dimensions, incorporating bias inputs and
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to "2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -1132,7 +1141,7 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_bias_fast_any(const q7_t * in_tensor
  *     - pad_y is 0
  *     - stride_x is 1
  *     - stride_y is 1
- * - The outputs will be 2-stage shifted before being stored, i.e.,
+ * - The outputs will be two-stage shifted before being stored, for example:
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_bias_fast_any(const u8_t * in_tensor,
@@ -1157,37 +1166,39 @@ int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_bias_fast_any(const u8_t * in_tensor,
                                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs 1x1 kernels convolution for unsigned
- *                  8-bit integer inputs and signed 8-bit integer outputs in any
- *                  x and y dimensions with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  unsigned 8-bit integers for inputs and signed 8-bit integers
+ *                  for outputs across any x and y dimensions, incorporating
+ *                  bias inputs and applying symmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to "2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -1199,7 +1210,7 @@ int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_bias_fast_any(const u8_t * in_tensor,
  *     - pad_y is 0
  *     - stride_x is 1
  *     - stride_y is 1
- * - The outputs will be 2-stage shifted before being stored, i.e.,
+ * - The outputs will be two-stage shifted before being stored, for example:
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_bias_fast_any(const u8_t * in_tensor,
@@ -1224,37 +1235,39 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_bias_fast_any(const u8_t * in_tensor,
                                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs 1x1 kernels convolution for unsigned
- *                  8-bit integer inputs and signed 16-bit integer outputs in
- *                  any x and y dimensions with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  unsigned 8-bit integers for inputs and signed 16-bit
+ *                  integers for outputs across any x and y dimensions,
+ *                  incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to "2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -1266,7 +1279,7 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_bias_fast_any(const u8_t * in_tensor,
  *     - pad_y is 0
  *     - stride_x is 1
  *     - stride_y is 1
- * - The outputs will be 2-stage shifted before being stored, i.e.,
+ * - The outputs will be two-stage shifted before being stored, for example:
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor,
@@ -1291,35 +1304,37 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor
                                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs 1x1 kernels convolution for signed
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  signed 8-bit integers for both inputs and outputs across any
+ *                  x and y dimensions, applying symmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to 2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y.
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -1331,7 +1346,7 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor
  *     - pad_y is 0
  *     - stride_x is 1
  *     - stride_y is 1
- * - The outputs will be 2-stage shifted before being stored, i.e.,
+ * - The outputs will be two-stage shifted before being stored, for example:
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_fast_any(const q7_t * in_tensor,
@@ -1355,36 +1370,37 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_fast_any(const q7_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs 1x1 kernels convolution for signed
- *                  8-bit integer inputs and signed 16-bit integer outputs in
- *                  any x and y dimensions with symmetric quantization on the
- *                  outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  signed 8-bit integers for inputs and signed 16-bit integers
+ *                  for outputs across any x and y dimensions, applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to 2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y.
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -1396,7 +1412,7 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_fast_any(const q7_t * in_tensor,
  *     - pad_y is 0
  *     - stride_x is 1
  *     - stride_y is 1
- * - The outputs will be 2-stage shifted before being stored, i.e.,
+ * - The outputs will be two-stage shifted before being stored, for example:
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_fast_any(const q7_t * in_tensor,
@@ -1420,35 +1436,37 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_fast_any(const q7_t * in_tensor,
                                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs 1x1 kernels convolution for unsigned
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  unsigned 8-bit integers for both inputs and outputs across
+ *                  any x and y dimensions, applying symmetric quantization to
+ *                  the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to "2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -1460,7 +1478,7 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_fast_any(const q7_t * in_tensor,
  *     - pad_y is 0
  *     - stride_x is 1
  *     - stride_y is 1
- * - The outputs will be 2-stage shifted before being stored, i.e.,
+ * - The outputs will be two-stage shifted before being stored, for example:
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_fast_any(const u8_t * in_tensor,
@@ -1484,36 +1502,37 @@ int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_fast_any(const u8_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs 1x1 kernels convolution for unsigned
- *                  8-bit integer inputs and signed 8-bit integer outputs in any
- *                  x and y dimensions with symmetric quantization on the
- *                  outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  unsigned 8-bit integers for inputs and signed 8-bit integers
+ *                  for outputs across any x and y dimensions, applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to 2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y.
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -1525,7 +1544,7 @@ int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_fast_any(const u8_t * in_tensor,
  *     - pad_y is 0
  *     - stride_x is 1
  *     - stride_y is 1
- * - The outputs will be 2-stage shifted before being stored, i.e.,
+ * - The outputs will be two-stage shifted before being stored, for example:
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_fast_any(const u8_t * in_tensor,
@@ -1549,36 +1568,37 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_fast_any(const u8_t * in_tensor,
                                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs 1x1 kernels convolution for unsigned
- *                  8-bit integer inputs and signed 16-bit integer outputs in
- *                  any x and y dimensions with symmetric quantization on the
- *                  outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  unsigned 8-bit integers for inputs and signed 16-bit
+ *                  integers for outputs across any x and y dimensions, applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its size
  *                                      must be equal to "2 * in_tensor_ch *
  *                                      ker_dim_x * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -1590,7 +1610,7 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_fast_any(const u8_t * in_tensor,
  *     - pad_y is 0
  *     - stride_x is 1
  *     - stride_y is 1
- * - The outputs will be 2-stage shifted before being stored, i.e.,
+ * - The outputs will be two-stage shifted before being stored, for example:
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_s16_s8_sym_fast_any(const u8_t * in_tensor,
@@ -1614,34 +1634,37 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s16_s8_sym_fast_any(const u8_t * in_tensor,
                                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution on RGB images for
- *                  signed 8-bit integer inputs/outputs with bias inputs and
- *                  symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   input tensor dimension
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution on RGB images with
+ *                  signed 8-bit integers for both inputs and outputs,
+ *                  incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Input tensor dimension
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "2 * (3 *
  *                                  ker_dim * ker_dim + 1)".
- * @param[in]       wt_tmp_buf      temporary buffer for kernel weights. It is
+ * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
  *                                  (3 * ker_dim * ker_dim + 1)".
  * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sym_bias_fast(const q7_t * in_tensor,
@@ -1661,35 +1684,37 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sym_bias_fast(const q7_t * in_tensor,
                                             q15_t * wt_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution on RGB images for
- *                  signed 8-bit integer inputs and signed 16-bit integer
- *                  outputs with bias inputs and symmetric quantization on the
- *                  outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   input tensor dimension
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution on RGB images with
+ *                  signed 8-bit integers for inputs and signed 16-bit integers
+ *                  for outputs, incorporating bias inputs and applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Input tensor dimension
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "2 * (3 *
  *                                  ker_dim * ker_dim + 1)".
- * @param[in]       wt_tmp_buf      temporary buffer for kernel weights. It is
+ * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
  *                                  (3 * ker_dim * ker_dim + 1)".
  * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s16_s8_RGB_sym_bias_fast(const q7_t * in_tensor,
@@ -1709,34 +1734,36 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_RGB_sym_bias_fast(const q7_t * in_tensor,
                                                 q15_t * wt_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution on RGB images for
- *                  unsigned 8-bit integer inputs/outputs with symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   input tensor dimension
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution on RGB images with
+ *                  unsigned 8-bit integers for both inputs and outputs,
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Input tensor dimension
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "2 * (3 *
  *                                  ker_dim * ker_dim + 1)".
- * @param[in]       wt_tmp_buf      temporary buffer for kernel weights. It is
+ * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
  *                                  (3 * ker_dim * ker_dim + 1)".
  * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_u8_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
@@ -1756,35 +1783,37 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
                                             q15_t * wt_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution on RGB images for
- *                  unsigned 8-bit integer inputs and signed 8-bit integer
- *                  outputs with bias inputs and symmetric quantization on the
- *                  outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   input tensor dimension
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution on RGB images with
+ *                  unsigned 8-bit integers for inputs and signed 8-bit integers
+ *                  for outputs, incorporating bias inputs and applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Input tensor dimension
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "2 * (3 *
  *                                  ker_dim * ker_dim + 1)".
- * @param[in]       wt_tmp_buf      temporary buffer for kernel weights. It is
+ * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
  *                                  (3 * ker_dim * ker_dim + 1)".
  * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s8_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
@@ -1804,35 +1833,37 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
                                                 q15_t * wt_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution on RGB images for
- *                  unsigned 8-bit integer inputs and signed 16-bit integer
- *                  outputs with bias inputs and symmetric quantization on the
- *                  outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   input tensor dimension
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution on RGB images with
+ *                  unsigned 8-bit integers for inputs and signed 16-bit
+ *                  integers for outputs, incorporating bias inputs and applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Input tensor dimension
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "2 * (3 *
  *                                  ker_dim * ker_dim + 1)".
- * @param[in]       wt_tmp_buf      temporary buffer for kernel weights. It is
+ * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
  *                                  (3 * ker_dim * ker_dim + 1)".
  * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s16_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
@@ -1852,33 +1883,35 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
                                                 q15_t * wt_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution on RGB images for
- *                  signed 8-bit integer inputs/outputs with symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   input tensor dimension
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution on RGB images with
+ *                  signed 8-bit integer for both inputs and outputs, applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Input tensor dimension
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "2 * (3 *
  *                                  ker_dim * ker_dim + 1)".
- * @param[in]       wt_tmp_buf      temporary buffer for kernel weights. It is
+ * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
  *                                  (3 * ker_dim * ker_dim + 1)".
  * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sym_fast(const q7_t * in_tensor,
@@ -1897,33 +1930,35 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sym_fast(const q7_t * in_tensor,
                                         q15_t * wt_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution on RGB images for
- *                  signed 8-bit integer inputs and signed 16-bit integer
- *                  outputs with symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   input tensor dimension
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution on RGB images with
+ *                  signed 8-bit integer for inputs and signed 16-bit integers
+ *                  for outputs, applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Input tensor dimension
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "2 * (3 *
  *                                  ker_dim * ker_dim + 1)".
- * @param[in]       wt_tmp_buf      temporary buffer for kernel weights. It is
+ * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
  *                                  (3 * ker_dim * ker_dim + 1)".
  * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s16_s8_RGB_sym_fast(const q7_t * in_tensor,
@@ -1942,33 +1977,35 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_RGB_sym_fast(const q7_t * in_tensor,
                                             q15_t * wt_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution on RGB images for
- *                  unsigned 8-bit integer inputs/outputs with symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   input tensor dimension
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution on RGB images with
+ *                  unsigned 8-bit integer for both inputs and outputs, applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Input tensor dimension
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "2 * (3 *
  *                                  ker_dim * ker_dim + 1)".
- * @param[in]       wt_tmp_buf      temporary buffer for kernel weights. It is
+ * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
  *                                  (3 * ker_dim * ker_dim + 1)".
  * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_u8_s8_RGB_sym_fast(const u8_t * in_tensor,
@@ -1987,33 +2024,35 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_RGB_sym_fast(const u8_t * in_tensor,
                                         q15_t * wt_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution on RGB images for
- *                  unsigned 8-bit integer inputs and signed 8-bit integer
- *                  outputs with symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   input tensor dimension
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution on RGB images with
+ *                  unsigned 8-bit integers for inputs and signed 8-bit integers
+ *                  for outputs, applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Input tensor dimension
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "2 * (3 *
  *                                  ker_dim * ker_dim + 1)".
- * @param[in]       wt_tmp_buf      temporary buffer for kernel weights. It is
+ * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
  *                                  (3 * ker_dim * ker_dim + 1)".
  * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s8_s8_RGB_sym_fast(const u8_t * in_tensor,
@@ -2032,33 +2071,36 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_RGB_sym_fast(const u8_t * in_tensor,
                                             q15_t * wt_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution on RGB images for
- *                  unsigned 8-bit integer inputs and signed 16-bit integer
- *                  outputs with symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   input tensor dimension
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution on RGB images with
+ *                  unsigned 8-bit integers for inputs and signed 16-bit
+ *                  integers for outputs, applying symmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Input tensor dimension
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "2 * (3 *
  *                                  ker_dim * ker_dim + 1)".
- * @param[in]       wt_tmp_buf      temporary buffer for kernel weights. It is
+ * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
  *                                  (3 * ker_dim * ker_dim + 1)".
  * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s16_s8_RGB_sym_fast(const u8_t * in_tensor,
@@ -2077,33 +2119,35 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_RGB_sym_fast(const u8_t * in_tensor,
                                             q15_t * wt_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for signed 8-bit
- *                  integer inputs/outputs with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input vector
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers for both inputs and outputs, incorporating bias
+ *                  inputs and applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_bias_fast(const q7_t * in_tensor,
@@ -2123,33 +2167,36 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_bias_fast(const q7_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for signed 8-bit
- *                  integer inputs and signed 16-bit integer outputs with bias
- *                  inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input vector
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs,
+ *                  incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_bias_fast(const q7_t * in_tensor,
@@ -2169,33 +2216,35 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_bias_fast(const q7_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs/outputs with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input vector
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for both inputs and outputs, incorporating bias
+ *                  inputs and applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_bias_fast(const u8_t * in_tensor,
@@ -2215,33 +2264,36 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_bias_fast(const u8_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs and signed 8-bit integer outputs with bias
- *                  inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input vector
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for inputs and signed 8-bit integers for outputs,
+ *                  incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_bias_fast(const u8_t * in_tensor,
@@ -2261,33 +2313,36 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_bias_fast(const u8_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs and signed 16-bit integer outputs with bias
- *                  inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input vector
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs,
+ *                  incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_bias_fast(const u8_t * in_tensor,
@@ -2307,32 +2362,34 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_bias_fast(const u8_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for signed 8-bit
- *                  integer inputs/outputs with symmetric quantization on the
- *                  outputs.
- * @param[in]       in_tensor       pointer of the input vector
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers for both inputs and outputs, applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_fast(const q7_t * in_tensor,
@@ -2351,32 +2408,34 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_fast(const q7_t * in_tensor,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for signed 8-bit
- *                  integer inputs and signed 16-bit integer outputs with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input vector
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs,
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_fast(const q7_t * in_tensor,
@@ -2395,32 +2454,34 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_fast(const q7_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs/outputs with symmetric quantization on
- *                  the outputs.
- * @param[in]       in_tensor       pointer of the input vector
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for both inputs and outputs, applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_fast(const u8_t * in_tensor,
@@ -2439,32 +2500,34 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_fast(const u8_t * in_tensor,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs and signed 8-bit integer outputs with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input vector
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for inputs and signed 8-bit integers for outputs,
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_fast(const u8_t * in_tensor,
@@ -2483,32 +2546,34 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_fast(const u8_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs and signed 16-bit integer outputs with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input vector
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs,
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be equal to "2 *
  *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_fast(const u8_t * in_tensor,
@@ -2527,39 +2592,42 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_fast(const u8_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for signed 8-bit
- *                  integer inputs/outputs in any x and y dimensions with bias
- *                  inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input vector
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers for both inputs and outputs across any x and y
+ *                  dimensions, incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_bias_fast_any(const q7_t * in_tensor,
@@ -2584,40 +2652,42 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_bias_fast_any(const q7_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for signed 8-bit
- *                  integer inputs and signed 16-bit integer outputs in any x
- *                  and y dimensions with bias inputs and symmetric quantization
- *                  on the outputs.
- * @param[in]       in_tensor           pointer of the input vector
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs
+ *                  across any x and y dimensions, incorporating bias inputs and
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_bias_fast_any(const q7_t * in_tensor,
@@ -2642,39 +2712,42 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_bias_fast_any(const q7_t * in_tensor,
                                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs/outputs in any x and y dimensions with bias
- *                  inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input vector
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for both inputs and outputs across any x and y
+ *                  dimensions, incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_bias_fast_any(const u8_t * in_tensor,
@@ -2699,40 +2772,42 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_bias_fast_any(const u8_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs and signed 8-bit integer outputs in any x and
- *                  y dimensions with bias inputs and symmetric quantization on
- *                  the outputs.
- * @param[in]       in_tensor           pointer of the input vector
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for inputs and signed 8-bit integers for outputs
+ *                  across any x and y dimensions, incorporating bias inputs and
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_bias_fast_any(const u8_t * in_tensor,
@@ -2757,40 +2832,42 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_bias_fast_any(const u8_t * in_tensor,
                                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs and signed 16-bit integer outputs in any x
- *                  and y dimensions with bias inputs and symmetric quantization
- *                  on the outputs.
- * @param[in]       in_tensor           pointer of the input vector
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs
+ *                  across any x and y dimensions, incorporating bias inputs and
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor,
@@ -2815,14 +2892,14 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor,
                                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for signed 8-bit
- *                  integer inputs/outputs in any x and y dimensions with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input vector
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers for both inputs and outputs across any x and y
+ *                  dimensions, applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
  * @param[in]       in_tensor_dim_x     x dimension of the input tensor
  * @param[in]       in_tensor_dim_y     y dimension of the input tensor
  * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
+ * @param[in]       ker_weight          Pointer of kernel weights
  * @param[in]       out_tensor_ch       number of output tensor channels
  * @param[in]       ker_dim_x           x dimension of the filter kernel
  * @param[in]       ker_dim_y           y dimension of the filter kernel
@@ -2830,10 +2907,12 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor,
  * @param[in]       pad_y               padding size in the y dimension
  * @param[in]       stride_x            convolution stride in the x dimension
  * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
  * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
  * @param[in]       out_tensor_dim_x    x dimension of the output tensor
  * @param[in]       out_tensor_dim_y    y dimension of the output tensor
  * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
@@ -2841,12 +2920,12 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor,
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_fast_any(const q7_t * in_tensor,
@@ -2870,38 +2949,41 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_fast_any(const q7_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for signed 8-bit
- *                  integer inputs and signed 16-bit integer outputs in any x
- *                  and y dimensions with symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input vector
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs
+ *                  across any x and y dimensions, applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_fast_any(const q7_t * in_tensor,
@@ -2925,38 +3007,40 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_fast_any(const q7_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs/outputs in any x and y dimensions with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input vector
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for both inputs and outputs across any x and y
+ *                  dimensions, applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_fast_any(const u8_t * in_tensor,
@@ -2980,38 +3064,41 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_fast_any(const u8_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs and signed 8-bit integer outputs in any x and
- *                  y dimensions with symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input vector
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for inputs and signed 8-bit integers for outputs
+ *                  across any x and y dimensions, applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_fast_any(const u8_t * in_tensor,
@@ -3035,38 +3122,41 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_fast_any(const u8_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs fast convolution for unsigned 8-bit
- *                  integer inputs and signed 16-bit integer outputs in any x
- *                  and y dimensions with symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input vector
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs
+ *                  across any x and y dimensions, applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  is a multiple of 4 and out_tensor_ch is a multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_fast_any(const u8_t * in_tensor,
@@ -3091,33 +3181,34 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_fast_any(const u8_t * in_tensor,
 
 
 /**
- * @brief           This function performs depthwise convolution for signed
- *                  8-bit integer inputs/outputs with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers for both inputs and outputs, incorporating
+ *                  bias inputs and applying symmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be equal to
  *                                  "(in_tensor_ch * ker_dim * ker_dim + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_bias(const q7_t * in_tensor,
@@ -3137,33 +3228,36 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_bias(const q7_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for signed
- *                  8-bit integer inputs and signed 16-bit integer outputs with
- *                  bias inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers for inputs and signed 16-bit integers for
+ *                  outputs, incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be equal to
  *                                  "(in_tensor_ch * ker_dim * ker_dim + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_bias(const q7_t * in_tensor,
@@ -3183,33 +3277,36 @@ int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_bias(const q7_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs/outputs with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for both inputs and outputs, incorporating
+ *                  bias inputs and applying symmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be equal to
  *                                  "(in_tensor_ch * ker_dim * ker_dim + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_bias(const u8_t * in_tensor,
@@ -3229,33 +3326,36 @@ int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_bias(const u8_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs and signed 8-bit integer outputs with
- *                  bias inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for inputs and signed 8-bit integers for
+ *                  outputs, incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be equal to
  *                                  "(in_tensor_ch * ker_dim * ker_dim + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_bias(const u8_t * in_tensor,
@@ -3275,33 +3375,36 @@ int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_bias(const u8_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs and signed 16-bit integer outputs with
- *                  bias inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       bias            pointer of the bias vector
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for inputs and signed 16-bit integers for
+ *                  outputs, incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be equal to
  *                                  "(in_tensor_ch * ker_dim * ker_dim + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_bias(const u8_t * in_tensor,
@@ -3321,32 +3424,32 @@ int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_bias(const u8_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for signed
- *                  8-bit integer inputs/outputs with symmetric quantization on
- *                  the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers for both inputs and outputs, applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be equal to
  *                                  "(in_tensor_ch * ker_dim * ker_dim + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym(const q7_t * in_tensor,
@@ -3365,32 +3468,34 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym(const q7_t * in_tensor,
                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for signed
- *                  8-bit integer inputs and signed 16-bit integer outputs with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers for inputs and signed 16-bit integers for
+ *                  outputs, applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be equal to
  *                                  "(in_tensor_ch * ker_dim * ker_dim + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym(const q7_t * in_tensor,
@@ -3409,32 +3514,34 @@ int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym(const q7_t * in_tensor,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs/outputs with symmetric quantization on
- *                  the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for both inputs and outputs, applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be equal to
  *                                  (in_tensor_ch * ker_dim * ker_dim + 1) / 2.
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym(const u8_t * in_tensor,
@@ -3453,32 +3560,34 @@ int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym(const u8_t * in_tensor,
                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs and signed 8-bit integer outputs, and
- *                  with symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for inputs and signed 8-bit integers for
+ *                  outputs, applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be equal to
  *                                  "(in_tensor_ch * ker_dim * ker_dim + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym(const u8_t * in_tensor,
@@ -3497,32 +3606,34 @@ int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym(const u8_t * in_tensor,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs and signed 16-bit integer outputs with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       in_tensor_dim   dimension of the input tensor
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_weight      pointer of kernel weights
- * @param[in]       out_tensor_ch   number of output tensor channels
- * @param[in]       ker_dim         dimension of the filter kernel
- * @param[in]       pad             padding size
- * @param[in]       stride          convolution stride
- * @param[in]       pre_rshift      right shift amount for the output
- * @param[in]       out_scale       value of scaling for the output
- * @param[in]       post_rshift     right shift amount for the output
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       out_tensor_dim  dimension of the output tensor
- * @param[in]       in_tmp_buf      temporary buffer for the input tensor. It is
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for inputs and signed 16-bit integers for
+ *                  outputs, applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp is enabled and its
  *                                  size must be equal to
  *                                  "(in_tensor_ch * ker_dim * ker_dim + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym(const u8_t * in_tensor,
@@ -3541,38 +3652,39 @@ int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym(const u8_t * in_tensor,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for signed
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  bias inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers for both inputs and outputs across any x and
+ *                  y dimensions, incorporating bias inputs and applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp is enabled
  *                                      and its size must be equal to
  *                                      "(in_tensor_ch * ker_dim_x * ker_dim_y + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  must be equal to out_tensor_ch.
+ * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_bias_any(const q7_t * in_tensor,
@@ -3597,39 +3709,41 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_bias_any(const q7_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for signed
- *                  8-bit integer inputs and signed 16-bit integer outputs in
- *                  any x and y dimensions with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers for inputs and signed 16-bit integers for
+ *                  outputs across any x and y dimensions, incorporating bias
+ *                  inputs and applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp is enabled
  *                                      and its size must be equal to
  *                                      "(in_tensor_ch * ker_dim_x * ker_dim_y + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  must be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_bias_any(const q7_t * in_tensor,
@@ -3654,38 +3768,41 @@ int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_bias_any(const q7_t * in_tensor,
                                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  bias inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for both inputs and outputs across any x and
+ *                  y dimensions, incorporating bias inputs and applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp is enabled
  *                                      and its size must be equal to
  *                                      "(in_tensor_ch * ker_dim_x * ker_dim_y + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  must be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_bias_any(const u8_t * in_tensor,
@@ -3710,39 +3827,41 @@ int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_bias_any(const u8_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs and signed 8-bit integer outputs in any
- *                  x and y dimensions with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for inputs and signed 8-bit integers for
+ *                  outputs across any x and y dimensions, incorporating bias
+ *                  inputs and applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp is enabled
  *                                      and its size must be equal to
  *                                      "(in_tensor_ch * ker_dim_x * ker_dim_y + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  must be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_bias_any(const u8_t * in_tensor,
@@ -3767,39 +3886,41 @@ int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_bias_any(const u8_t * in_tensor,
                                             q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs and signed 16-bit integer outputs in
- *                  any x and y dimensions with bias inputs and symmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for inputs and signed 16-bit integers for
+ *                  outputs across any x and y dimensions, incorporating bias
+ *                  inputs and applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp is enabled
  *                                      and its size must be equal to
  *                                      "(in_tensor_ch * ker_dim_x * ker_dim_y + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  must be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_bias_any(const u8_t * in_tensor,
@@ -3824,37 +3945,38 @@ int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_bias_any(const u8_t * in_tensor,
                                                 q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for signed
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  bias inputs and symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers for both inputs and outputs across any x and
+ *                  y dimensions, incorporating bias inputs and applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp is enabled
  *                                      and its size must be equal to
  *                                      "(in_tensor_ch * ker_dim_x * ker_dim_y + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  must be equal to out_tensor_ch.
+ * @return          This function only returns 0.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_any(const q7_t * in_tensor,
@@ -3878,38 +4000,40 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_any(const q7_t * in_tensor,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for signed
- *                  8-bit integer inputs and signed 16-bit integer outputs in
- *                  any x and y dimensions with symmetric quantization on the
- *                  outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers for inputs and signed 16-bit integers for
+ *                  outputs across any x and y dimensions, applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp is enabled
  *                                      and its size must be equal to
  *                                      "(in_tensor_ch * ker_dim_x * ker_dim_y + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  must be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_any(const q7_t * in_tensor,
@@ -3933,37 +4057,39 @@ int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_any(const q7_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for both inputs and outputs across any x and
+ *                  y dimensions, applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp is enabled
  *                                      and its size must be equal to
  *                                      "(in_tensor_ch * ker_dim_x * ker_dim_y + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  must be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_any(const u8_t * in_tensor,
@@ -3987,38 +4113,40 @@ int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_any(const u8_t * in_tensor,
                                     q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs and signed 8-bit integer outputs in any
- *                  x and y dimensions with symmetric quantization on the
- *                  outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for inputs and signed 8-bit integers for
+ *                  outputs across any x and y dimensions, applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp is enabled
  *                                      and its size must be equal to
  *                                      "(in_tensor_ch * ker_dim_x * ker_dim_y + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  must be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_any(const u8_t * in_tensor,
@@ -4042,38 +4170,40 @@ int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_any(const u8_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs and signed 16-bit integer outputs in
- *                  any x and y dimensions with symmetric quantization on the
- *                  outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for inputs and signed 16-bit integers for
+ *                  outputs across any x and y dimensions, applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp is enabled
  *                                      and its size must be equal to
  *                                      "(in_tensor_ch * ker_dim_x * ker_dim_y + 1) / 2".
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  must be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  The outputs will be 2-stage shifted before being stored, i.e.,
+ *  The outputs will be two-stage shifted before being stored, for example:
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_any(const u8_t * in_tensor,
@@ -4097,34 +4227,37 @@ int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_any(const u8_t * in_tensor,
                                         q15_t * in_tmp_buf);
 
 /**
- * @brief           This function performs convolution for signed 8-bit integer
- *                  inputs/outputs in any x and y dimensions with bias inputs
- *                  and symmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input vector
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       pre_rshift          right shift amount for the output
- * @param[in]       out_scale           value of scaling for the output
- * @param[in]       post_rshift         right shift amount for the output
- * @param[in]       out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs convolution with signed 8-bit
+ *                  integers for both inputs and outputs across any x and y
+ *                  dimensions, incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[in]       out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector enabled and its size must
  *                                      be equal to "2 * in_tensor_ch * ker_dim_x
  *                                      * ker_dim_y".
- * @param[in]       tmp_buf             dummy
+ * @param[in]       tmp_buf             Dummy
  * @return          None
  */
 void riscv_nn_conv_HWC_s8_s8_s8_sym_bias_any(const q7_t * in_tensor,
@@ -4150,50 +4283,144 @@ void riscv_nn_conv_HWC_s8_s8_s8_sym_bias_any(const q7_t * in_tensor,
                             q7_t * tmp_buf);
 
 /**
- * @brief           This function performs 1x1 kernels convolution for signed
- *                  8-bit interger inputs/outputs in any x and y dimensions with
- *                  asymmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor_batch     size of input tensor batches
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @brief           This function performs transposed convolution with signed
+ *                  8-bit integers for both inputs and outputs across any x and
+ *                  y dimensions, incorporating bias inputs and applying
+ *                  symmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       pad_offset_x        Dummy
+ * @param[in]       pad_offset_y        Dummy
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       pre_rshift          Right shift amount for the output before
+ *                                      scaling
+ * @param[in]       out_scale           Value of scaling for the output
+ * @param[in]       post_rshift         Right shift amount for the output after
+ *                                      scaling
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       tmp_buf             Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any_get_buffer_size.
+ * @return          This function only returns 0.
+ *
+ * @note
+ *  bias could be a null pointer as the bias vector is optional for this
+ *  function.
+ */
+int32_t riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any(const q7_t *in_tensor,
+    const uint16_t in_tensor_dim_x,
+    const uint16_t in_tensor_dim_y,
+    const uint16_t in_tensor_ch,
+    const uint16_t in_tensor_batch,
+    const q7_t *ker_weight,
+    const uint16_t out_tensor_ch,
+    const uint16_t ker_dim_x,
+    const uint16_t ker_dim_y,
+    const uint16_t pad_x,
+    const uint16_t pad_y,
+    const uint16_t pad_offset_x,
+    const uint16_t pad_offset_y,
+    const uint16_t stride_x,
+    const uint16_t stride_y,
+    const int32_t *bias,
+    const uint16_t pre_rshift,
+    const uint16_t out_scale,
+    const uint16_t post_rshift,
+    q7_t *out_tensor,
+    const uint16_t out_tensor_dim_x,
+    const uint16_t out_tensor_dim_y,
+    int8_t *tmp_buf);
+
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @return          Returns the size required by the temporary buffer.
+ */
+uint32_t riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                                   const uint16_t in_tensor_dim_y,
+                                                   const uint16_t in_tensor_ch,
+                                                   const uint16_t in_tensor_batch,
+                                                   const uint16_t out_tensor_ch,
+                                                   const uint16_t ker_dim_x,
+                                                   const uint16_t ker_dim_y,
+                                                   const uint16_t pad_x,
+                                                   const uint16_t pad_y,
+                                                   const uint16_t stride_x,
+                                                   const uint16_t stride_y,
+                                                   const uint16_t out_tensor_dim_x,
+                                                   const uint16_t out_tensor_dim_y);
+
+/**
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  signed 8-bit integers for both inputs and outputs across
+ *                  any x and y dimensions, applying asymmetric quantization to
+ *                  the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on outputs
- * @param[in]       out_offset          offset value for the output tensor. It
+ * @param[in]       out_offset          Offset value for the output tensor. It
  *                                      should be in the range of -128 to 127.
- * @param[in]       in_offset           offset value for the input tensor. It
+ * @param[in]       in_offset           Offset value for the input tensor. It
  *                                      should be in the range of -127 to 128.
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       tmp_buf             dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       tmp_buf             Dummy
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
- *     - in_tensor_ch is a multiple of 4
  *     - pad_x is 0
  *     - pad_y is 0
- *     - stride_x is 1
- *     - stride_y is 1
+ * - bias could be a null pointer as the bias vector is optional for this
+ *    function.
  * - During the quantization process, a positive out_shift value is used to left
  *   shift calculation results whereas a negative one is used to right shift.
  */
@@ -4221,55 +4448,56 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
                                     q15_t *tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @return          This function returns the size required by the temporary
- *                  buffer.
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @return          Returns the size required by the temporary buffer.
  */
 int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size(const uint16_t in_tensor_ch);
 
 /**
- * @brief           This function performs 1xn kernels convolution for signed
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  asymmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor_batch     dummy
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @brief           This function performs convolution using a 1xn kernel on
+ *                  signed 8-bit integers for both inputs and outputs across any
+ *                  x and y dimensions, applying asymmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Dummy
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on outputs
- * @param[in]       out_offset          offset value for the output tensor. It
+ * @param[in]       out_offset          Offset value for the output tensor. It
  *                                      should be in the range of -128 to 127.
- * @param[in]       in_offset           offset value for the input tensor. It
+ * @param[in]       in_offset           Offset value for the input tensor. It
  *                                      should be in the range of -127 to 128.
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its needed
  *                                      size can be obtained by calling riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any_get_buffer_size.
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that
- *                  out_tensor_dim_x is a multiple of 4.
+ * @return          This function only returns 0.
  *
  * @note
- *  During the quantization process, a positive out_shift value is used to left
- *  shift calculation results whereas a negative one is used to right shift.
+ * - bias could be a null pointer as the bias vector is optional for this
+ *   function.
+ * - During the quantization process, a positive out_shift value is used to left
+ *   shift calculation results whereas a negative one is used to right shift.
  */
 int riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                                                 const uint16_t in_tensor_dim_x,
@@ -4292,54 +4520,55 @@ int riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                                                 q15_t *in_tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any.
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel. It is
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any.
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel. It is
  *                                      always 1.
- * @return          This function returns the needed size by the temporary buffer.
+ * @return          Returns the size required by the temporary buffer.
  */
 int32_t riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_ch,
                                                 const uint16_t ker_dim_x,
                                                 const uint16_t ker_dim_y);
 
 /**
- * @brief           This function performs convolution for signed 8-bit integer
- *                  inputs/outputs in any x and y dimensions with asymmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor_batch     size of input tensor batches
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @brief           This function performs convolution with signed 8-bit
+ *                  integers for both inputs and outputs across any x and y
+ *                  dimensions, applying asymmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on outputs
- * @param[in]       out_offset          offset value for the output tensor. It
+ * @param[in]       out_offset          Offset value for the output tensor. It
  *                                      should be in the range of -128 to 127.
- * @param[in]       in_offset           offset value for the input tensor. It
+ * @param[in]       in_offset           Offset value for the input tensor. It
  *                                      should be in the range of -127 to 128.
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its needed
  *                                      size could be obtained by calling riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_get_buffer_size.
@@ -4378,55 +4607,56 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                                                 q15_t *in_tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any.
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @return          This function returns the required size of the temporary buffer.
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any.
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @return          Returns the required size of the temporary buffer.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_ch,
                                         const uint16_t ker_dim_x,
                                         const uint16_t ker_dim_y);
 
 /**
- * @brief           This function performs dilated convolution for signed 8-bit
-                    integer inputs/outputs in any x and y dimensions with
-                    asymmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor_batch     size of input tensor batches
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @brief           This function performs dilated convolution with signed 8-bit
+ *                  integers for both inputs and outputs across any x and y
+ *                  dimensions, applying asymmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on outputs
- * @param[in]       out_offset          offset value for the output tensor. It
+ * @param[in]       out_offset          Offset value for the output tensor. It
  *                                      should be in the range of -128 to 127.
- * @param[in]       in_offset           offset value for the input tensor. It
+ * @param[in]       in_offset           Offset value for the input tensor. It
  *                                      should be in the range of -127 to 128.
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       dilation_x          dilation factor for the x dimension
- * @param[in]       dilation_y          dilation factor for the y dimension
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       dilation_x          Dilation factor for the x dimension
+ * @param[in]       dilation_y          Dilation factor for the y dimension
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its needed
  *                                      size could be obtained by calling riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated_get_buffer_size.
@@ -4467,53 +4697,56 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated(const q7_t *in_tensor,
     q15_t *in_tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated.
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @return int32_t
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated.
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @return          Returns the required size of the temporary buffer.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated_get_buffer_size(const uint16_t in_tensor_ch,
     const uint16_t ker_dim_x,
     const uint16_t ker_dim_y);
 
 /**
- * @brief           This function performs convolution for signed 16-bit integer
- *                  inputs/outputs in any x and y dimensions with asymmetric
- *                  quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor_batch     size of input tensor batches
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @brief           This function performs convolution with signed 16-bit
+ *                  integers for both inputs and outputs across any x and y
+ *                  dimensions, applying asymmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on the outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on the outputs
- * @param[in]       out_offset          dummy
- * @param[in]       in_offset           dummy
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       out_offset          Dummy
+ * @param[in]       in_offset           Dummy
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       dilation_x          dilation factor for the x dimension
- * @param[in]       dilation_y          dilation factor for the y dimension
- * @param[in]       in_tmp_buf          dummy
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       dilation_x          Dilation factor for the x dimension
+ * @param[in]       dilation_y          Dilation factor for the y dimension
+ * @param[in]       in_tmp_buf          Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any_get_buffer_size.
  * @return          This function only returns 0.
  *
  * @note
@@ -4551,57 +4784,59 @@ int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any(const q15_t *in_tensor,
     q15_t *in_tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any.
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @return          This function returns the required size of the temporary buffer.
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any.
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @return          Returns the required size of the temporary buffer.
  */
 int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any_get_buffer_size(const int32_t in_tensor_ch,
     const int32_t ker_dim_x,
     const int32_t ker_dim_y);
 
 /**
- * @brief           This function performs convolution for signed 16-bit integer
- *                  inputs/outputs in any x and y dimensions with asymmetric
- *                  quantization on the outputs. When compared with
- *                  riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any, this function
- *                  uses a faster algorithm but there has more constraints on
- *                  input parameters.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor_batch     size of input tensor batches
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @brief           This function performs convolution with signed 16-bit
+ *                  integers for both inputs and outputs across any x and y
+ *                  dimensions, applying asymmetric quantization to the outputs.
+ *                  When compared to with riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any,
+ *                  this function uses a faster algorithm but imposes more
+ *                  constraints on input parameters.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on outputs
- * @param[in]       out_offset          dummy
- * @param[in]       in_offset           dummy
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       out_offset          Dummy
+ * @param[in]       in_offset           Dummy
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any_get_buffer_size.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  *  - The product of (in_tensor_ch * ker_dim_x * ker_dim_x) should be less than
@@ -4638,13 +4873,13 @@ int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any(const q15_t *in_tensor,
     q15_t *in_tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any.
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @return          This function returns the required size of the temporary buffer.
- * @return int32_t
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any.
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @return          Returns the required size of the temporary buffer.
  */
 int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any_get_buffer_size(const int32_t in_tensor_ch,
     const int32_t ker_dim_x,
@@ -4657,38 +4892,38 @@ int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any_get_buffer_size(const in
  *                  riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any. This function
  *                  calls one among the three convolution functions according
  *                  to the provided parameters.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor_batch     size of input tensor batches
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on outputs
- * @param[in]       out_offset          offset value for the output tensor. It
+ * @param[in]       out_offset          Offset value for the output tensor. It
  *                                      should be in the range of -128 to 127.
- * @param[in]       in_offset           offset value for the input tensor It
+ * @param[in]       in_offset           Offset value for the input tensor It
  *                                      should be in the range of -127 to 128.
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its needed
  *                                      size could be obtained by calling
@@ -4696,8 +4931,10 @@ int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any_get_buffer_size(const in
  * @return          This function only returns 0.
  *
  * @note
- *  During the quantization process, a positive out_shift value is used to left
- *  shift calculation results whereas a negative one is used to right shift.
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to left
+ *    shift calculation results whereas a negative one is used to right shift.
  */
 int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
                                         const uint16_t in_tensor_dim_x,
@@ -4725,22 +4962,21 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
                                         q15_t *in_tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
  *                  riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym.
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor_batch     size of input tensor batches
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @return          This function returns the required size of the temporary
- *                  buffer.
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @return          Returns the required size of the temporary buffer.
  */
 int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_t in_tensor_dim_y,
     const uint16_t in_tensor_ch,
@@ -4760,38 +4996,38 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_t i
  *                  riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any. This
  *                  function calls one of the two convolution functions
  *                  according to the provided parameters.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       in_tensor_batch     size of input tensor batches
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on outputs
- * @param[in]       out_offset          dummy
- * @param[in]       in_offset           dummy
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       out_offset          Dummy
+ * @param[in]       in_offset           Dummy
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       dilation_x          dilation factor for the x dimension
- * @param[in]       dilation_y          dilation factor for the y dimension
- * @param[in]       in_tmp_buf          dummy
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       dilation_x          Dilation factor for the x dimension
+ * @param[in]       dilation_y          Dilation factor for the y dimension
+ * @param[in]       in_tmp_buf          Dummy
  * @return          This function only returns 0.
  *
  * @note
@@ -4829,14 +5065,15 @@ int32_t riscv_nn_conv_HWC_wrapper_s16_s16_s8_asym(const q15_t *in_tensor,
     q15_t *in_tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of riscv_nn_conv_HWC_wrapper_s16_s16_s8_asym.
- * @param[in]       in_tensor_ch    number of input tensor channels
- * @param[in]       ker_dim_x       x dimension of the filter kernel
- * @param[in]       ker_dim_y       y dimension of the filter kernel
- * @param[in]       dilation_x      dilation factor for the x dimension
- * @param[in]       dilation_y      dilation factor for the y dimension
- * @return          This function returns the required size of the temporary buffer.
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_HWC_wrapper_s16_s16_s8_asym.
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_dim_x       X dimension of the filter kernel
+ * @param[in]       ker_dim_y       Y dimension of the filter kernel
+ * @param[in]       dilation_x      Dilation factor for the x dimension
+ * @param[in]       dilation_y      Dilation factor for the y dimension
+ * @return          Returns the required size of the temporary buffer.
  */
 int32_t riscv_nn_conv_HWC_wrapper_s16_s16_s8_asym_get_buffer_size(const int32_t in_tensor_ch,
     const int32_t ker_dim_x,
@@ -4845,48 +5082,50 @@ int32_t riscv_nn_conv_HWC_wrapper_s16_s16_s8_asym_get_buffer_size(const int32_t 
     const int32_t dilation_y);
 
 /**
- * @brief           This function performs depthwise 3x3 kernels convolution for
- *                  signed 8-bit integer inputs/outputs in any x and y
- *                  dimensions with asymmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @brief           This function performs depthwise convolution using a 3x3
+ *                  kernel on signed 8-bit integers for both inputs and outputs
+ *                  across any x and y dimensions, applying asymmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on outputs
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       out_offset          offset value for the output tensor. It
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_offset          Offset value for the output tensor. It
  *                                      should be in the range of -128 to 127.
- * @param[in]       in_offset           offset value for the input tensor It
+ * @param[in]       in_offset           Offset value for the input tensor It
  *                                      should be in the range of -127 to 128.
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       dilation_x          dummy
- * @param[in]       dilation_y          dummy
- * @param[in]       tmp_buf             dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  has to be equal to out_tensor_ch and pad_x is less than or
- *                  equal to 1.
+ * @param[in]       dilation_x          Dummy
+ * @param[in]       dilation_y          Dummy
+ * @param[in]       tmp_buf             Dummy
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch must be
+ *                  equal to out_tensor_ch, and pad_x is less than or equal to 1.
  *
  * @note
- *  During the quantization process, a positive out_shift value is used to left
- *  shift calculation results whereas a negative one is used to right shift.
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to left
+ *    shift calculation results whereas a negative one is used to right shift.
  */
 int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
                                                 const int32_t in_tensor_dim_x,
@@ -4913,45 +5152,46 @@ int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
                                                 int16_t *tmp_buf);
 
 /**
- * @brief           This function performs depthwise convolution for signed
- *                  8-bit interger inputs/outputs in any x and y dimensions with
- *                  asymmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels.
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers for both inputs and outputs across any x and
+ *                  y dimensions, applying asymmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels.
  *                                      out_tensor_ch is equal to "ch_mult *
  *                                      in_tensor_ch".
- * @param[in]       ch_mult             multiplier of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @param[in]       ch_mult             Multiplier of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on outputs
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       out_offset          value of offset for the output tensor.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_offset          Value of offset for the output tensor.
  *                                      It should be in the range of -128 to 127.
- * @param[in]       in_offset           value of offset for the input tensor
+ * @param[in]       in_offset           Value of offset for the input tensor
  *                                      It should be in the range of -127 to 128.
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       dilation_x          dilation factor for the x dimension
- * @param[in]       dilation_y          dilation factor for the y dimension
- * @param[in]       tmp_buf             dummy
+ * @param[in]       dilation_x          Dilation factor for the x dimension
+ * @param[in]       dilation_y          Dilation factor for the y dimension
+ * @param[in]       tmp_buf             Dummy
  * @return          This function only returns 0.
  *
  * @note
@@ -4989,52 +5229,55 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                                 q15_t *tmp_buf);
 
 /**
- * @brief           This function performs fast depthwise convolution for signed
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  asymmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @brief           This function performs fast depthwise convolution with
+ *                  signed 8-bit integers for both inputs and outputs across any
+ *                  x and y dimensions, applying asymmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on outputs
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       out_offset          offset value for the output tensor.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_offset          Offset value for the output tensor.
  *                                      It should be in the range of -128 to 127.
- * @param[in]       in_offset           offset value for the input tensor. It
+ * @param[in]       in_offset           Offset value for the input tensor. It
  *                                      should be in the range of -127 to 128.
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       dilation_x          dummy
- * @param[in]       dilation_y          dummy
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @param[in]       dilation_x          Dummy
+ * @param[in]       dilation_y          Dummy
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its needed
  *                                      size could be obtained by calling riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size.
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  During the quantization process, a positive out_shift value is used to left
- *  shift calculation results whereas a negative one is used to right shift.
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to left
+ *    shift calculation results whereas a negative one is used to right shift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
                                      const uint16_t in_tensor_dim_x,
@@ -5063,59 +5306,60 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
                                      q15_t *in_tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of riscv_nn_conv_dw_HWC_s8_fast_any.
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @return          This function returns the size required by the temporary
- *                  buffer.
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_dw_HWC_s8_fast_any.
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @return          Returns the size required by the temporary buffer.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size(const uint16_t in_tensor_ch,
                                                   const uint16_t ker_dim_x,
                                                   const uint16_t ker_dim_y);
 
 /**
- * @brief           This function performs depthwise convolution for unsigned
- *                  8-bit integer inputs/outputs in any x and y dimensions with
- *                  asymmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       ch_mult             multiplier of input tensor channels
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       dilation_x          dummy
- * @param[in]       dilation_y          dummy
- * @param[in]       bias                pointer of the bias vector
- * @param[in]       in_offset           offset value for the input tensor. It
+ * @brief           This function performs depthwise convolution with unsigned
+ *                  8-bit integers for both inputs and outputs across any x and
+ *                  y dimensions, applying asymmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       ch_mult             Multiplier of input tensor channels
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       dilation_x          Dummy
+ * @param[in]       dilation_y          Dummy
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       in_offset           Offset value for the input tensor. It
  *                                      should be in the range of -255 to 0.
- * @param[in]       ker_offset          offset value for the filter kernel. It
+ * @param[in]       ker_offset          Offset value for the filter kernel. It
  *                                      should be in the range of -255 to 0.
- * @param[in]       out_offset          offset value for the output tensor. It
+ * @param[in]       out_offset          Offset value for the output tensor. It
  *                                      should be in the range of 0 to 255.
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      0 to 255.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      0 to 255.
- * @param[in]       out_shift           shift amount for the quantization on
+ * @param[in]       out_shift           Shift amount for the quantization on
  *                                      outputs
- * @param[in]       out_scale           scaling value for the quantization on
+ * @param[in]       out_scale           Scaling value for the quantization on
  *                                      outputs
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraint that both ch_mult
- *                  and ker_dim_x are multiple of 2.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that both ch_mult and ker_dim_x
+ *                  are multiples of 2.
  *
  * @note
  *  During the quantization process, a positive out_shift value is used to left
@@ -5148,41 +5392,42 @@ int32_t riscv_nn_conv_dw_HWC_u8_u8_u8_asym_bias_any(const uint8_t *in_tensor,
                                     const int32_t out_scale);
 
 /**
- * @brief           This function performs depthwise convolution for signed
- *                  16-bit integer inputs/outputs in any x and y dimensions with
- *                  asymmetric quantization on the outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_batch     number of input tensor batches
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       ch_mult             multiplier of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @brief           This function performs depthwise convolution with signed
+ *                  16-bit integers for both inputs and outputs across any x and
+ *                  y dimensions, applying asymmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_batch     Number of input tensor batches
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       ch_mult             Multiplier of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on the outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on the outputs
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       out_offset          dummy
- * @param[in]       in_offset           dummy
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_offset          Dummy
+ * @param[in]       in_offset           Dummy
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -32768 to 32767.
- * @param[in]       dilation_x          dilation factor for the x dimension
- * @param[in]       dilation_y          dilation factor for the y dimension
- * @param[in]       tmp_buf             dummy
+ * @param[in]       dilation_x          Dilation factor for the x dimension
+ * @param[in]       dilation_y          Dilation factor for the y dimension
+ * @param[in]       tmp_buf             Dummy
  * @return          This function only returns 0.
  *
  * @note
@@ -5226,53 +5471,55 @@ int32_t riscv_nn_conv_dw_HWC_s16_s16_s8_asym_bias_any(const int16_t *in_tensor,
  *                  riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any. This
  *                  function calls one among the three depthwise convolution
  *                  functions according to the provided parameters.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels.
  *                                      out_tensor_ch is equal to “ch_mult *
  *                                      in_tensor_ch”.
- * @param[in]       ch_mult             multiplier of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_shift           pointer of the shift vector for the
+ * @param[in]       ch_mult             Multiplier of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on outputs
- * @param[in]       out_scale           pointer of the scaling vector for the
+ * @param[in]       out_scale           Pointer to the scaling vector for the
  *                                      quantization on outputs
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       out_offset          offset value for the output tensor. It
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_offset          Offset value for the output tensor. It
  *                                      should be in the range of -128 to 127.
- * @param[in]       in_offset           offset value for the input tensor. It
+ * @param[in]       in_offset           Offset value for the input tensor. It
  *                                      should be in the range of -127 to 128.
- * @param[in]       act_min             minimum value that the output tensor is
+ * @param[in]       act_min             Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       act_max             maximum value that the output tensor is
+ * @param[in]       act_max             Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       dilation_x          dummy
- * @param[in]       dilation_y          dummy
- * @param[in]       tmp_buf             temporary buffer for the input tensor.
+ * @param[in]       dilation_x          Dummy
+ * @param[in]       dilation_y          Dummy
+ * @param[in]       tmp_buf             Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its needed
  *                                      size could be obtained by calling
  *                                      riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym_get_buffer_size.
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch has to be
+ *                  equal to out_tensor_ch.
  *
  * @note
- *  During the quantization process, a positive out_shift value is used to left
- *  shift calculation results whereas a negative one is used to right shift.
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to left
+ *    shift calculation results whereas a negative one is used to right shift.
  */
 int32_t riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
                                     const uint16_t in_tensor_dim_x,
@@ -5302,15 +5549,15 @@ int32_t riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
                                     q15_t *tmp_buf);
 
 /**
- * @brief           This function is used to obtain the required size, in bytes,
- *                  for the input temporary buffer of riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym.
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ch_mult             multiplier of input tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @return          This function returns the size required by the temporary
- *                  buffer.
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym.
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ch_mult             Multiplier of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @return          Returns the size required by the temporary buffer.
  */
 int32_t riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_t in_tensor_ch,
                                                             const uint16_t ch_mult,
@@ -5318,32 +5565,151 @@ int32_t riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_
                                                             const uint16_t ker_dim_y,
                                                             const uint16_t pad_x);
 
+/**
+ * @brief           This function performs transposed convolution with signed
+ *                  8-bit integers for both inputs and outputs across any x and
+ *                  y dimensions, applying asymmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       pad_offset_x        Dummy
+ * @param[in]       pad_offset_y        Dummy
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_scale           Pointer to the scaling vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_offset          Offset value for the output tensor. It
+ *                                      should be in the range of -128 to 127.
+ * @param[in]       in_offset           Offset value for the input tensor. It
+ *                                      should be in the range of -127 to 128.
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       act_max             Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       tmp_buf             Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any_get_buffer_size.
+ * @return          This function only returns 0.
+ *
+ * @note
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to
+ *    left shift calculation results whereas a negative one is used to right
+ *    shift.
+ */
+int32_t riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
+    const uint16_t in_tensor_dim_x,
+    const uint16_t in_tensor_dim_y,
+    const uint16_t in_tensor_ch,
+    const uint16_t in_tensor_batch,
+    const q7_t *ker_weight,
+    const uint16_t out_tensor_ch,
+    const uint16_t ker_dim_x,
+    const uint16_t ker_dim_y,
+    const uint16_t pad_x,
+    const uint16_t pad_y,
+    const uint16_t pad_offset_x,
+    const uint16_t pad_offset_y,
+    const uint16_t stride_x,
+    const uint16_t stride_y,
+    const int32_t *bias,
+    q7_t *out_tensor,
+    const int32_t *out_shift,
+    const int32_t *out_scale,
+    const int32_t out_offset,
+    const int32_t in_offset,
+    const int32_t act_min,
+    const int32_t act_max,
+    const uint16_t out_tensor_dim_x,
+    const uint16_t out_tensor_dim_y,
+    int8_t *tmp_buf);
+
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @return          Returns the required size by the temporary buffer.
+ */
+uint32_t riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                                                        const uint16_t in_tensor_dim_y,
+                                                                        const uint16_t in_tensor_ch,
+                                                                        const uint16_t in_tensor_batch,
+                                                                        const uint16_t out_tensor_ch,
+                                                                        const uint16_t ker_dim_x,
+                                                                        const uint16_t ker_dim_y,
+                                                                        const uint16_t pad_x,
+                                                                        const uint16_t pad_y,
+                                                                        const uint16_t stride_x,
+                                                                        const uint16_t stride_y,
+                                                                        const uint16_t out_tensor_dim_x,
+                                                                        const uint16_t out_tensor_dim_y);
+
+
+uint32_t riscv_nn_conv_get_buf_size(const long in_tensor_ch,
+    const long ker_dim_x,
+    const long ker_dim_y,
+    const long out_tensor_ch,
+    const long in_sz,
+    const long wt_sz);
+
 #ifdef __riscv_zfh
 /**
- * @brief           This function performs 1x1 kernels convolution for
- *                  half-precision floating point inputs/outputs in any x and y
- *                  dimensions.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim_x           x dimension of the filter kernel
- * @param[in]       ker_dim_y           y dimension of the filter kernel
- * @param[in]       pad_x               padding size in the x dimension
- * @param[in]       pad_y               padding size in the y dimension
- * @param[in]       stride_x            convolution stride in the x dimension
- * @param[in]       stride_y            convolution stride in the y dimension
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim_x    x dimension of the output tensor
- * @param[in]       out_tensor_dim_y    y dimension of the output tensor
- * @param[in]       in_tmp_buf          dummy
- * @param[in]       tmp_buf             dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints (see the Note
- *                  below for details).
+ * @brief           This function performs convolution using 1x1 kernel on
+ *                  half-precision ﬂoating-point data for both inputs and
+ *                  outputs across any x and y dimensions.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for calculations. Its
+ *                                      needed length could be obtained by calling
+ *                                      riscv_nn_conv_1x1_HWC_f16_f16_f16_bias_any_get_buffer_size.
+ * @param[in]       tmp_buf             Dummy
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
  *
  * @note
  * - The input constraints of this function are:
@@ -5376,24 +5742,55 @@ int32_t riscv_nn_conv_1x1_HWC_f16_f16_f16_bias_any(const float16_t * in_tensor,
                                                 float16_t * tmp_buf);
 
 /**
- * @brief           This function performs convolution for half-precision
- *                  floating point inputs/outputs.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim       dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim             dimension of the filter kernel
- * @param[in]       pad                 padding size
- * @param[in]       stride              convolution stride
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim      dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function calculates the required length for the input
+ *                  temporary buffer needed for
+ *                  riscv_nn_conv_1x1_HWC_f16_f16_f16_bias_any.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @return          Returns the required length of the temporary buffer.
+ */
+uint32_t riscv_nn_conv_1x1_HWC_f16_f16_f16_bias_any_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                                                   const uint16_t in_tensor_dim_y,
+                                                                   const uint16_t in_tensor_ch,
+                                                                   const uint16_t out_tensor_ch,
+                                                                   const uint16_t ker_dim_x,
+                                                                   const uint16_t ker_dim_y,
+                                                                   const uint16_t pad_x,
+                                                                   const uint16_t pad_y,
+                                                                   const uint16_t stride_x,
+                                                                   const uint16_t stride_y,
+                                                                   const uint16_t out_tensor_dim_x,
+                                                                   const uint16_t out_tensor_dim_y);
+
+/**
+ * @brief           This function performs convolution on half-precision
+ *                  floating-point data for both inputs and outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim       Dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim             Dimension of the filter kernel
+ * @param[in]       pad                 Padding size
+ * @param[in]       stride              Convolution stride
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim      Dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-vector is
  *                                      enabled and its size must be equal to
  *                                      "2 * in_tensor_ch * ker_dim * ker_dim".
- * @param[in]       tmp_buf             dummy
+ * @param[in]       tmp_buf             Dummy
  * @return          This function returns 0.
  */
 int32_t riscv_nn_conv_HWC_f16_f16_f16_bias(const float16_t * in_tensor,
@@ -5409,29 +5806,50 @@ int32_t riscv_nn_conv_HWC_f16_f16_f16_bias(const float16_t * in_tensor,
                                         const uint16_t out_tensor_dim,
                                         float16_t * in_tmp_buf,
                                         float16_t * tmp_buf);
+/**
+ * @brief           This function calculates the required length for the input
+ *                  temporary buffer needed for
+ *                  riscv_nn_conv_HWC_f16_f16_f16_bias.
+ * @param[in]       in_tensor_dim       Dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim             Dimension of the filter kernel
+ * @param[in]       pad                 Padding size
+ * @param[in]       stride              Convolution stride
+ * @param[in]       out_tensor_dim      Dimension of the output tensor
+ * @return          Returns the required length of the temporary buffer.
+ */
+uint32_t riscv_nn_conv_HWC_f16_f16_f16_bias_get_buffer_size(const uint16_t in_tensor_dim,
+                                                           const uint16_t in_tensor_ch,
+                                                           const uint16_t out_tensor_ch,
+                                                           const uint16_t ker_dim,
+                                                           const uint16_t pad,
+                                                           const uint16_t stride,
+                                                           const uint16_t out_tensor_dim);
 
 /**
- * @brief           This function performs depthwise convolution for
- *                  half-precision floating point inputs/outputs
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim       dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       ker_weight          pointer of kernel weights
- * @param[in]       out_tensor_ch       number of output tensor channels
- * @param[in]       ker_dim             dimension of the filter kernel
- * @param[in]       pad                 padding size
- * @param[in]       stride              convolution stride
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @param[in]       out_tensor_dim      dimension of the output tensor
- * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
+ * @brief           This function performs depthwise convolution on
+ *                  half-precision floating-point data for both inputs and
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim       Dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim             Dimension of the filter kernel
+ * @param[in]       pad                 Padding size
+ * @param[in]       stride              Convolution stride
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim      Dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-vector is
  *                                      enabled and its size must be equal to
  *                                      "in_tensor_ch * ker_dim * ker_dim".
- * @param[in]       tmp_buf             dummy
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_tensor_ch
- *                  has to be equal to out_tensor_ch.
+ * @param[in]       tmp_buf             Dummy
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch must be equal
+ *                  to out_tensor_ch.
  */
 int32_t riscv_nn_conv_dw_HWC_f16_f16_f16_bias(const float16_t * in_tensor,
                                             const uint16_t in_tensor_dim,

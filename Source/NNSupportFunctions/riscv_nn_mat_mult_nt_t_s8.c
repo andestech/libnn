@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -31,7 +31,8 @@ int32_t riscv_nn_mat_mult_nt_t_s8(const q7_t *lhs,
                                    const int32_t lhs_offset,    //value is in the range of [-127, 128]
                                    const int32_t dst_offset,    //value is in the range of [-128, 127]
                                    const int32_t activation_min,
-                                   const int32_t activation_max)
+                                   const int32_t activation_max,
+                                   const int32_t lhs_cols_offset)
 {
     for (int32_t rhs_rows_idx = 0; (rhs_rows_idx + 2) <= rhs_rows; rhs_rows_idx += 2)
     {
@@ -50,8 +51,11 @@ int32_t riscv_nn_mat_mult_nt_t_s8(const q7_t *lhs,
         lhs_offset_contribution0 *= lhs_offset;
         lhs_offset_contribution1 *= lhs_offset;
 
-        lhs_offset_contribution0 += bias[rhs_rows_idx];
-        lhs_offset_contribution1 += bias[rhs_rows_idx + 1];
+        if (bias != NULL)
+        {
+            lhs_offset_contribution0 += bias[rhs_rows_idx];
+            lhs_offset_contribution1 += bias[rhs_rows_idx + 1];
+        }
 
         int32_t lhs_rows_idx = lhs_rows >> 1;
 
@@ -73,7 +77,7 @@ int32_t riscv_nn_mat_mult_nt_t_s8(const q7_t *lhs,
                 res00 += lhs_value * rhs_value0;
                 res01 += lhs_value * rhs_value1;
 
-                lhs_value  = lhs_ptr[rhs_cols];
+                lhs_value  = lhs_ptr[lhs_cols_offset];
                 res10 += lhs_value * rhs_value0;
                 res11 += lhs_value * rhs_value1;
 
@@ -110,7 +114,8 @@ int32_t riscv_nn_mat_mult_nt_t_s8(const q7_t *lhs,
             dst_ptr[1] = (q7_t)res11;
             dst_ptr += rhs_rows;
 
-            lhs_ptr += rhs_cols;
+            lhs_ptr -= rhs_cols;
+            lhs_ptr += 2 * lhs_cols_offset;
 
             lhs_rows_idx--;
         }
@@ -166,7 +171,11 @@ int32_t riscv_nn_mat_mult_nt_t_s8(const q7_t *lhs,
         for (int32_t lhs_rows_idx = 0; lhs_rows_idx < lhs_rows; ++lhs_rows_idx)
         {
             const q7_t *rhs_ptr = &rhs[0];
-            q31_t res00 = bias[rhs_rows - 1];
+            q31_t res00 = 0;
+            if (bias != NULL)
+            {
+                res00 = bias[rhs_rows - 1];
+            }
 
             for (int32_t rhs_cols_idx = 0; rhs_cols_idx < rhs_cols; ++rhs_cols_idx)
             {
@@ -178,6 +187,9 @@ int32_t riscv_nn_mat_mult_nt_t_s8(const q7_t *lhs,
                 ++rhs_ptr;
                 ++lhs_ptr;
             }
+
+            lhs_ptr -= rhs_cols;
+            lhs_ptr += lhs_cols_offset;
 
             // Quantize down
             res00 = riscv_nn_requantize(res00, dst_multipliers[rhs_rows - 1], dst_shifts[rhs_rows - 1]);

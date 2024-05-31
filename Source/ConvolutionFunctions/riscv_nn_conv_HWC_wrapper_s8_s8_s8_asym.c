@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -51,7 +51,6 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
 {
     if ((pad_x == 0)
         && (pad_y == 0)
-        && ((in_tensor_ch & 3) == 0)
         && (stride_x == 1)
         && (stride_y == 1)
         && (ker_dim_x ==1)
@@ -82,9 +81,7 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
     }
     else if ((out_tensor_dim_y == 1)
         && (in_tensor_dim_y == 1)
-        && (ker_dim_y == 1)
-        && ((out_tensor_dim_x & 3) == 0)
-        && (in_tensor_batch == 1))
+        && (ker_dim_y == 1))
     {
         return riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any(in_tensor,
             in_tensor_dim_x,
@@ -149,7 +146,6 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_t i
 {
     if ((pad_x == 0)
         && (pad_y == 0)
-        && ((in_tensor_ch & 3) == 0)
         && (stride_x == 1)
         && (stride_y == 1)
         && (ker_dim_x ==1)
@@ -159,9 +155,7 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_t i
     }
     else if ((out_tensor_dim_y == 1)
         && (in_tensor_dim_y == 1)
-        && (ker_dim_y == 1)
-        && ((out_tensor_dim_x & 3) == 0)
-        && (in_tensor_batch == 1))
+        && (ker_dim_y == 1))
     {
         return riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(in_tensor_ch,
             ker_dim_x,

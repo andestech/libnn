@@ -3,7 +3,7 @@
 /***************************************************************************
  * internal_math_types.h                                                   *
  *                                                                         *
- * Copyright (C) 2012-2023 Andes Technology Corporation                    *
+ * Copyright (C) 2012-2024 Andes Technology Corporation                    *
  * All rights reserved.                                                    *
  ***************************************************************************/
 

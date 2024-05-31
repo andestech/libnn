@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -53,7 +53,6 @@ int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
         return -1;
     }
 
-
     (void)dilation_x;
     (void)dilation_y;
     (void)tmp_buf;
@@ -68,10 +67,17 @@ int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
 
             for(; cur_ch <= (in_tensor_ch - 4); cur_ch += 4)
             {
-                int32_t out_buff0 = bias[cur_ch + 0];
-                int32_t out_buff1 = bias[cur_ch + 1];
-                int32_t out_buff2 = bias[cur_ch + 2];
-                int32_t out_buff3 = bias[cur_ch + 3];
+                int32_t out_buff0 = 0;
+                int32_t out_buff1 = 0;
+                int32_t out_buff2 = 0;
+                int32_t out_buff3 = 0;
+                if (bias != NULL)
+                {
+                    out_buff0 = bias[cur_ch + 0];
+                    out_buff1 = bias[cur_ch + 1];
+                    out_buff2 = bias[cur_ch + 2];
+                    out_buff3 = bias[cur_ch + 3];
+                }
 
                 const int8_t *input_ptr  = in_tensor + (in_y + ker_y_start) * (in_tensor_ch * in_tensor_dim_x) + in_x * in_tensor_ch + cur_ch;
                 const int8_t *kernel_ptr = ker_weight + ker_y_start * (in_tensor_ch * 3) + cur_ch;
@@ -132,7 +138,11 @@ int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
             // Leftover
             for(; cur_ch < in_tensor_ch; ++cur_ch)
             {
-                int32_t out_buff = bias[cur_ch];
+                int32_t out_buff = 0;
+                if (bias != NULL)
+                {
+                    out_buff = bias[cur_ch];
+                }
 
                 const int8_t *input_ptr  = in_tensor + (in_y + ker_y_start) * (in_tensor_ch * in_tensor_dim_x) + in_x * in_tensor_ch + cur_ch;
                 const int8_t *kernel_ptr = ker_weight + ker_y_start * (in_tensor_ch * 3) + cur_ch;

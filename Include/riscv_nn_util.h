@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -26,9 +26,11 @@ extern    "C"
 #endif
 
 #include "riscv_math_types.h"
+#include "riscv_nn_types.h"
+#include "riscv_nn_activation.h"
 
 /**
- * @defgroup Utils Utils Functions
+ * @defgroup Util Util Functions
  * @brief Utils functions are miscellaneous auxiliary tools.
  *
  * @{
@@ -45,11 +47,11 @@ typedef enum
 
 #ifdef __riscv_zfh
 /**
- * @brief           This function calculates the base-e exponential values of
+ * @brief           This function calculates the base-e exponential values for
  *                  half-precision floating-point inputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       size            number of elements in the input vector
- * @param[out]      out_vec         pointer of the output vector
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       size            Number of elements in the input vector
+ * @param[out]      out_vec         Pointer to the output vector
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_exp_f16(const float16_t * in_vec,
@@ -58,11 +60,11 @@ int32_t riscv_nn_exp_f16(const float16_t * in_vec,
 #endif
 
 /**
- * @brief           This function calculates the base-e exponential values of
+ * @brief           This function calculates the base-e exponential values for
  *                  floating-point inputs.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       size            number of elements in the input vector
- * @param[out]      out_vec         pointer of the output vector
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       size            Number of elements in the input vector
+ * @param[out]      out_vec         Pointer to the output vector
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_exp_f32(const float32_t * in_vec,
@@ -71,17 +73,17 @@ int32_t riscv_nn_exp_f32(const float32_t * in_vec,
 
 #ifdef __riscv_zfh
 /**
- * @brief           This function performs layer normalization for
+ * @brief           This function performs layer normalization on
  *                  half-precision floating-point inputs.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[in]       epsilon         constant to be added to mini-batch variances
- * @param[in]       beta            pointer of the offset vector for each
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       epsilon         Constant to be added to mini-batch variances
+ * @param[in]       beta            Pointer to the offset vector for each
  *                                  feature
- * @param[in]       gamma           pointer of the scaling vector for each
+ * @param[in]       gamma           Pointer to the scaling vector for each
  *                                  feature
- * @param[in]       sentence_len    length of input sentences
- * @param[in]       feature_len     length of features
- * @param[out]      out_tensor      pointer of the output tensor
+ * @param[in]       sentence_len    Length of input sentences
+ * @param[in]       feature_len     Length of features
+ * @param[out]      out_tensor      Pointer to the output tensor
  * @return          This function only returns 0.
  *
  * @note            The batch size is assumed to be 1.
@@ -96,11 +98,60 @@ int32_t riscv_nn_layer_norm_f16(const float16_t *in_tensor,
 #endif
 
 /**
- * @brief           This function turns the 8-bit input tensor into another
+ * @brief           This function performs a unidirectional long short-term
+ *                  memory (LSTM) operation with signed 8-bit input and output,
+ *                  and a signed 16-bit gate output.
+ * @param[in]       scratch_buffers                 A structure containing the
+ *                                                  scratch buffers. Each
+ *                                                  scratch buffer is expected
+ *                                                  to have a size of "lstm_dims->num_batches
+ *                                                  * lstm_dims->num_outputs."
+ * @param[in]       input_data                      Pointer to the input data
+ * @param[in]       lstm_dims                       Dimension of the LSTM's inputs
+ * @param[in]       in_to_in_weights                The input weights
+ * @param[in]       in_to_forget_weights            The forget weights
+ * @param[in]       in_to_cell_weights              The cell weights
+ * @param[in]       in_to_out_weights               The output weights
+ * @param[in]       recurrent_to_in_weights         Recurrent of the input weights
+ * @param[in]       recurrent_to_forget_weights     Recurrent of the forget weights
+ * @param[in]       recurrent_to_cell_weights       Recurrent of the cell weights
+ * @param[in]       recurrent_to_out_weights        Recurrent of the output weights
+ * @param[in]       cell_to_in_weights              Dummy
+ * @param[in]       cell_to_forget_weights          Dummy
+ * @param[in]       cell_to_out_weights             Dummy
+ * @param[in]       projection_weights              Dummy
+ * @param[in]       lstm                            LSTM parameters
+ * @param[in]       output_state                    Pointer to the output state
+ * @param[in]       cell_state                      Pointer to the cell state
+ * @param[out]      output_data                     Pointer to the input data
+ * @return          This function only returns 0.
+ */
+int32_t riscv_nn_lstm_unidirectional_s16_s8(riscv_nn_lstm_context *scratch_buffers,
+                                        const int8_t *input_data,
+                                        const riscv_nn_lstm_dims *lstm_dims,
+                                        const int8_t *in_to_in_weights,
+                                        const int8_t *in_to_forget_weights,
+                                        const int8_t *in_to_cell_weights,
+                                        const int8_t *in_to_out_weights,
+                                        const int8_t *recurrent_to_in_weights,
+                                        const int8_t *recurrent_to_forget_weights,
+                                        const int8_t *recurrent_to_cell_weights,
+                                        const int8_t *recurrent_to_out_weights,
+                                        const int16_t *cell_to_in_weights,
+                                        const int16_t *cell_to_forget_weights,
+                                        const int16_t *cell_to_out_weights,
+                                        const int8_t *projection_weights,
+                                        const riscv_nn_lstm_params *lstm,
+                                        int8_t *output_state,
+                                        int16_t *cell_state,
+                                        int8_t *output_data);
+
+/**
+ * @brief           This function turns an 8-bit input tensor into another
  *                  tensor with the same data but in a different shape.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       size            size, in bytes, of total input tensors
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       size            Size, in bytes, of total input tensors
  * @return          None
  *
  * @b Example:
@@ -118,12 +169,12 @@ void riscv_nn_reshape_s8(const int8_t *in_tensor,
 
 #ifdef __riscv_zfh
 /**
- * @brief           This function turns the half-precision floating-point input
+ * @brief           This function turns a half-precision floating-point input
  *                  tensor into another tensor with the same data but in a
  *                  different shape.
- * @param[in]       in_tensor       pointer of the input tensor
- * @param[out]      out_tensor      pointer of the output tensor
- * @param[in]       size            size, in bytes, of total input tensors
+ * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       size            Size, in bytes, of total input tensors
  * @return          None
  */
 void riscv_nn_reshape_f16(const float16_t *in_tensor,
@@ -132,58 +183,58 @@ void riscv_nn_reshape_f16(const float16_t *in_tensor,
 #endif
 
 /**
- * @brief           This function performs single value decomposition filter for
- *                  signed 8-bit integer inputs and signed 16-bit integer state
- *                  tensor.
- * @param[in]       tmp_buf             temporary buffer for the input tensor
- * @param[in]       tmp_buf2            temporary buffer for the output tensor
- * @param[in]       rank                number of largest elements to be kept
- * @param[in]       in_offset           offset value for the input tensor It
+ * @brief           This function performs singular value decomposition (SVD)
+ *                  filtering for signed 8-bit integer inputs and a signed
+ *                  16-bit integer state tensor.
+ * @param[in]       tmp_buf             Temporary buffer for the input tensor
+ * @param[in]       tmp_buf2            Temporary buffer for the output tensor
+ * @param[in]       rank                Number of largest elements to be kept
+ * @param[in]       in_offset           Offset value for the input tensor. It
  *                                      should be in the range of -127 to 128.
- * @param[in]       out_offset          offset value for the output tensor. It
+ * @param[in]       out_offset          Offset value for the output tensor. It
  *                                      should be in the range of -128 to 127.
- * @param[in]       in_act_min          minimum value that the intput tensor is
+ * @param[in]       in_act_min          Minimum value that the intput tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       in_act_max          maximum value that the intput tensor is
+ * @param[in]       in_act_max          Maximum value that the intput tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       out_act_min         minimum value that the output tensor is
+ * @param[in]       out_act_min         Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       out_act_max         maximum value that the output tensor is
+ * @param[in]       out_act_max         Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       in_scale            scaling value for the quantization on
+ * @param[in]       in_scale            Scaling value for the quantization on
  *                                      the inputs
- * @param[in]       in_shift            shift amount for the quantization on
+ * @param[in]       in_shift            Shift amount for the quantization on
  *                                      the inputs
- * @param[in]       out_scale           scaling value for the quantization on
+ * @param[in]       out_scale           Scaling value for the quantization on
  *                                      the outputs
- * @param[in]       out_shift           shift amount for the quantization on
+ * @param[in]       out_shift           Shift amount for the quantization on
  *                                      the outputs
- * @param[in]       in_batch            size of input tensor batches
- * @param[in]       in_height           height of the input tensor
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       state_tensor        pointer of the state tensor
- * @param[in]       wt_feature_batch    size of the feature weight tensor
+ * @param[in]       in_batch            Size of input tensor batches
+ * @param[in]       in_height           Height of the input tensor
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       state_tensor        Pointer to the state tensor
+ * @param[in]       wt_feature_batch    Size of the feature weight tensor
  *                                      batches
- * @param[in]       wt_feature_tensor   pointer of the feature weight tensor
- * @param[in]       wt_time_height      height of the time weight tensor
- * @param[in]       wt_time_tensor      pointer of the time weight tensor
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_height is
- *                  nonnegative and less than 0x7FFFFFF0 and wt_time_height is
+ * @param[in]       wt_feature_tensor   Pointer to the feature weight tensor
+ * @param[in]       wt_time_height      Height of the time weight tensor
+ * @param[in]       wt_time_tensor      Pointer to the time weight tensor
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_height is
+ *                  nonnegative and less than 0x7FFFFFF0, and wt_time_height is
  *                  also nonnegative.
  *
  * @note
  *  - bias could be a null pointer as the bias vector is optional for this
  *    function.
- *  - During the quantization process, a positive out_shift value is used to
- *    left shift calculation results whereas a negative one is used to right
- *    shift.
+ *  - During the quantization process, positive in_shift and out_shift values
+ *    are used to left shift calculation results whereas a negative ones are
+ *    used to right shift.
  */
 int32_t riscv_nn_svdf_s8(q31_t *tmp_buf,
                     q31_t *tmp_buf2,
@@ -210,58 +261,58 @@ int32_t riscv_nn_svdf_s8(q31_t *tmp_buf,
                     q7_t *out_tensor);
 
 /**
- * @brief           This function performs single value decomposition filter for
- *                  signed 8-bit integer inputs and signed 8-bit integer state
- *                  tensor.
- * @param[in]       tmp_buf             temporary buffer for the input tensor
- * @param[in]       tmp_buf2            temporary buffer for the output tensor
- * @param[in]       rank                number of largest elements to be kept
- * @param[in]       in_offset           offset value for the input tensor It
+ * @brief           This function performs singular value decomposition (SVD)
+ *                  filtering for signed 8-bit integer inputs and a signed 8-bit
+ *                  integer state tensor.
+ * @param[in]       tmp_buf             Temporary buffer for the input tensor
+ * @param[in]       tmp_buf2            Temporary buffer for the output tensor
+ * @param[in]       rank                Number of largest elements to be kept
+ * @param[in]       in_offset           Offset value for the input tensor It
  *                                      should be in the range of -127 to 128.
- * @param[in]       out_offset          offset value for the output tensor. It
+ * @param[in]       out_offset          Offset value for the output tensor. It
  *                                      should be in the range of -128 to 127.
- * @param[in]       in_act_min          minimum value that the intput tensor is
+ * @param[in]       in_act_min          Minimum value that the intput tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       in_act_max          maximum value that the intput tensor is
+ * @param[in]       in_act_max          Maximum value that the intput tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       out_act_min         minimum value that the output tensor is
+ * @param[in]       out_act_min         Minimum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       out_act_max         maximum value that the output tensor is
+ * @param[in]       out_act_max         Maximum value that the output tensor is
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
- * @param[in]       in_scale            scaling value for the quantization on
+ * @param[in]       in_scale            Scaling value for the quantization on
  *                                      the inputs
- * @param[in]       in_shift            shift amount for the quantization on
+ * @param[in]       in_shift            Shift amount for the quantization on
  *                                      the inputs
- * @param[in]       out_scale           scaling value for the quantization on
+ * @param[in]       out_scale           Scaling value for the quantization on
  *                                      the outputs
- * @param[in]       out_shift           shift amount for the quantization on
+ * @param[in]       out_shift           Shift amount for the quantization on
  *                                      the outputs
- * @param[in]       in_batch            size of input tensor batches
- * @param[in]       in_height           height of the input tensor
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       state_tensor        pointer of the state tensor
- * @param[in]       wt_feature_batch    size of the feature weight tensor
+ * @param[in]       in_batch            Size of input tensor batches
+ * @param[in]       in_height           Height of the input tensor
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       state_tensor        Pointer to the state tensor
+ * @param[in]       wt_feature_batch    Size of the feature weight tensor
  *                                      batches
- * @param[in]       wt_feature_tensor   pointer of the feature weight tensor
- * @param[in]       wt_time_height      height of the time weight tensor
- * @param[in]       wt_time_tensor      pointer of the time weight tensor
- * @param[in]       bias                pointer of the bias vector
- * @param[out]      out_tensor          pointer of the output tensor
- * @return          This function returns 0 on success; otherwise, it returns -1
- *                  if its inputs do not meet the constraints that in_height is
- *                  nonnegative and less than 0x7FFFFFF0 and wt_time_height is
+ * @param[in]       wt_feature_tensor   Pointer to the feature weight tensor
+ * @param[in]       wt_time_height      Height of the time weight tensor
+ * @param[in]       wt_time_tensor      Pointer to the time weight tensor
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_height is
+ *                  nonnegative and less than 0x7FFFFFF0, and wt_time_height is
  *                  also nonnegative.
  *
  * @note
  *  - bias could be a null pointer as the bias vector is optional for this
  *    function.
- *  - During the quantization process, a positive out_shift value is used to
- *    left shift calculation results whereas a negative one is used to right
- *    shift.
+ *  - During the quantization process, positive in_shift and out_shift values
+ *    are used to left shift calculation results whereas a negative ones are
+ *    used to right shift.
  */
 int riscv_nn_svdf_s8_state_s8(q31_t *tmp_buf,
                               q31_t *tmp_buf2,
@@ -287,21 +338,21 @@ int riscv_nn_svdf_s8_state_s8(q31_t *tmp_buf,
                               const q31_t *bias,
                               q7_t *out_tensor);
 /**
- * @brief           This function finds the k largest values and their indices
- *                  from the signed 8-bit integer input vector.
- * @param[in]       in_vec          pointer of the input vector
- * @param[in]       size            number of elements in the input vector
- * @param[in]       k               number of the largest values to be
+ * @brief           This function identifies the k largest values and their
+ *                  indices in a signed 8-bit integer input vector.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       k               Number of the largest values to be
  *                                  searched
- * @param[out]      val             the k largest values in the input vector
- * @param[out]      idx             indices of the k largest values in the
+ * @param[out]      val             The k largest values in the input vector
+ * @param[out]      idx             Indices of the k largest values in the
  *                                  input vector
  * @return          This function only returns 0.
  *
  * @note
- * The k largest values will be sorted from the largest to the smallest and
- * stored in the "val" output vector. If multiple elements share the same value,
- * those with smaller indices will have higher priority for the selection.
+ * The k largest values are sorted from largest to smallest and stored in the
+ * val output vector. If multiple elements share the same value, those with
+ * smaller indices are given higher priority in the selection.
  */
 int32_t riscv_nn_top_k_s8(q7_t *in_vec,
                         uint32_t size,
@@ -311,21 +362,21 @@ int32_t riscv_nn_top_k_s8(q7_t *in_vec,
 
 #ifdef __riscv_zfh
 /**
- * @brief           This function finds the k largest values and their indices
- *                  from the half-precision floating point input vector.
- * @param[in]       in_vec          pointer of the input tensor
- * @param[in]       size            number of elements in the input vector
- * @param[in]       k               number of the largest values to be
+ * @brief           This function identiﬁes the k largest values and their
+ *                  indices in a half-precision floating-point input vector.
+ * @param[in]       in_vec          Pointer to the input tensor
+ * @param[in]       size            Number of elements in the input vector
+ * @param[in]       k               Number of the largest values to be
  *                                  searched
- * @param[out]      val             the k largest values in the input vector
- * @param[out]      idx             indices of the k largest values in the
+ * @param[out]      val             The k largest values in the input vector
+ * @param[out]      idx             Indices of the k largest values in the
  *                                  input vector
  * @return          This function only returns 0.
  *
  * @note
- * The k largest values will be sorted from the largest to the smallest and
- * stored in the "val" output vector. If multiple elements share the same value,
- * those with smaller indices will have higher priority for the selection.
+ * The k largest values are sorted from largest to smallest and stored in the
+ * val output vector. If multiple elements share the same value, those with
+ * smaller indices are given higher priority in the selection.
  */
 int32_t riscv_nn_top_k_f16(float16_t *in_vec,
                         uint32_t size,
@@ -335,17 +386,16 @@ int32_t riscv_nn_top_k_f16(float16_t *in_vec,
 #endif
 
 /**
- * @brief           This function performs upsampling for 2 dimension tensor
- *                  with signed 8-bit integer data.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       scale_factor_x      factor to be scaled up for x dimension
- * @param[in]       scale_factor_y      factor to be scaled up for y dimension
- * @param[in]       upsample_method     algorithm to be applied for the
- *                                      upsampling
- * @param[out]      out_tensor          pointer of the output tensor
+ * @brief           This function performs upsampling on two-dimensional tensors
+ *                  containing signed 8-bit integer data.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       scale_factor_x      Factor to be scaled up for X dimension
+ * @param[in]       scale_factor_y      Factor to be scaled up for Y dimension
+ * @param[in]       upsample_method     Algorithm used for upsampling
+ * @param[out]      out_tensor          Pointer to the output tensor
  * @return          This function only returns 0.
  *
  * @note
@@ -362,17 +412,16 @@ int32_t riscv_nn_upsampling2d_HWC_s8(const int8_t* in_tensor,
 
 #ifdef __riscv_zfh
 /**
- * @brief           This function performs upsampling for 2 dimension tensor
- *                  with half-precision floating-point data.
- * @param[in]       in_tensor           pointer of the input tensor
- * @param[in]       in_tensor_dim_x     x dimension of the input tensor
- * @param[in]       in_tensor_dim_y     y dimension of the input tensor
- * @param[in]       in_tensor_ch        number of input tensor channels
- * @param[in]       scale_factor_x      factor to be scaled up for x dimension
- * @param[in]       scale_factor_y      factor to be scaled up for y dimension
- * @param[in]       upsample_method     algorithm to be applied for the
- *                                      upsampling
- * @param[out]      out_tensor          pointer of the output tensor
+ * @brief           This function performs upsampling on two-dimensional tensors
+ *                  containing half-precision floating-point data.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       scale_factor_x      Factor to be scaled up for X dimension
+ * @param[in]       scale_factor_y      Factor to be scaled up for Y dimension
+ * @param[in]       upsample_method     Algorithm used for upsampling
+ * @param[out]      out_tensor          Pointer to the output tensor
  * @return          This function only returns 0.
  *
  * @note
@@ -386,6 +435,7 @@ int32_t riscv_nn_upsampling2d_HWC_f16(const float16_t* in_tensor,
                                 const uint32_t scale_factor_y,
                                 const riscv_nn_upsample_method upsample_method,
                                 float16_t* out_tensor);
+
 #endif
 
 /**

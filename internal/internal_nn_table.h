@@ -1,5 +1,5 @@
 /***************************************************************************
- *  Copyright (C) 2018 - 2023 Andes Technology Corporation                 *
+ *  Copyright (C) 2018 - 2024 Andes Technology Corporation                 *
  *  All rights reserved.                                                   *
  ***************************************************************************/
 
@@ -27,5 +27,7 @@ extern const q15_t sigmoidLTable_q15[128];
 
 extern const q15_t sigmoidLTable_q15[128];
 extern const q15_t sigmoidHTable_q15[192];
+
+extern const uint16_t sigmoid_table_uint16[256];
 
 #endif                          /*  ARM_NN_TABLES_H */

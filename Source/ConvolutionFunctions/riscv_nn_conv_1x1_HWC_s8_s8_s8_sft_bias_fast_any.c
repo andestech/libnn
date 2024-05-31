@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -53,7 +53,6 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sft_bias_fast_any(const q7_t * in_tensor,
     }
 
     //Note. the out_tensor dimension should be the same as in_tensor's.
-
     int       i, j, k, l, m, n;
     int       conv_out;
     int       in_row, in_col;

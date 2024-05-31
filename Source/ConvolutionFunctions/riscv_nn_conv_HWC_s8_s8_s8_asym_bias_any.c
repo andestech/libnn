@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -60,8 +60,6 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
     int i_batch;
     for (i_batch = 0; i_batch < in_tensor_batch; i_batch++)
     {
-        in_tensor += i_batch * (in_tensor_dim_x * in_tensor_dim_y * in_tensor_ch);
-        out_tensor += i_batch * (out_tensor_dim_x * out_tensor_dim_y * out_tensor_ch);
         (void)in_tmp_buf;
         int32_t i_out_ch, i_out_y, i_out_x, i_input_ch, i_ker_y, i_ker_x;
         int32_t conv_out;
@@ -110,6 +108,8 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                 }
             }
         }
+        in_tensor += (in_tensor_dim_x * in_tensor_dim_y * in_tensor_ch);
+        out_tensor += (out_tensor_dim_x * out_tensor_dim_y * out_tensor_ch);
     }
 
     /* Return to application */

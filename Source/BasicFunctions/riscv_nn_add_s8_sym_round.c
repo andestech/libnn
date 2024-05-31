@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -34,7 +34,6 @@ void riscv_nn_add_s8_sym_round(const q7_t * in_vec1,
                         q7_t * out_vec)
 {
     long loop_cnt = size;
-
     int in1, in2, sum;
     while(loop_cnt-- > 0u)
     {

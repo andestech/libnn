@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -47,9 +47,8 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
                                     const uint16_t out_tensor_dim_y,
                                     q15_t *tmp_buf)
 {
-    if (in_tensor_ch % 4 != 0 ||
-        pad_x != 0 || pad_y != 0 ||
-        stride_x != 1 || stride_y != 1)
+    if ((pad_x != 0) ||
+        (pad_y != 0))
     {
         return -1;
     }
@@ -60,24 +59,62 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
     (void)out_tensor_dim_y;
     (void)tmp_buf;
 
-    const int32_t lhs_rows = in_tensor_dim_x * in_tensor_dim_y * in_tensor_batch;
-    const int32_t rhs_rows = out_tensor_ch;
-    const int32_t rhs_cols = in_tensor_ch;
+    if ((stride_x == 1) && (stride_y == 1))
+    {
+        const int32_t lhs_rows = in_tensor_dim_x * in_tensor_dim_y * in_tensor_batch;
+        const int32_t rhs_rows = out_tensor_ch;
+        const int32_t rhs_cols = in_tensor_ch;
+        const int32_t lhs_cols_offset = rhs_cols;
 
-    riscv_nn_mat_mult_nt_t_s8(in_tensor,
-                            ker_weight,
-                            bias,
-                            out_tensor,
-                            out_scale,
-                            out_shift,
-                            lhs_rows,
-                            rhs_rows,
-                            rhs_cols,
-                            in_offset,
-                            out_offset,
-                            act_min,
-                            act_max);
+        riscv_nn_mat_mult_nt_t_s8(in_tensor,
+                                ker_weight,
+                                bias,
+                                out_tensor,
+                                out_scale,
+                                out_shift,
+                                lhs_rows,
+                                rhs_rows,
+                                rhs_cols,
+                                in_offset,
+                                out_offset,
+                                act_min,
+                                act_max,
+                                lhs_cols_offset);
+    }
+    else
+    {
+        const int32_t lhs_rows = out_tensor_dim_x;
+        const int32_t rhs_rows = out_tensor_ch;
+        const int32_t rhs_cols = in_tensor_ch;
+        const int32_t input_inc = in_tensor_dim_x * stride_y * rhs_cols;
+        const int32_t output_inc = out_tensor_dim_x * rhs_rows;
+        const int32_t lhs_cols_offset = rhs_cols * stride_x;
 
+        for (int i_batch = 0; i_batch < in_tensor_batch; i_batch++)
+        {
+            const int8_t *in_tensor2 = in_tensor + (i_batch * in_tensor_dim_y * in_tensor_dim_x * in_tensor_ch);
+            for (int i_output_y = 0; i_output_y < out_tensor_dim_y; i_output_y++)
+            {
+                // Process one input row
+                riscv_nn_mat_mult_nt_t_s8(in_tensor2,
+                                          ker_weight,
+                                          bias,
+                                          out_tensor,
+                                          out_scale,
+                                          out_shift,
+                                          lhs_rows,
+                                          rhs_rows,
+                                          rhs_cols,
+                                          in_offset,
+                                          out_offset,
+                                          act_min,
+                                          act_max,
+                                          lhs_cols_offset);
+                in_tensor2 += input_inc;
+                out_tensor += output_inc;
+            }
+        }
+    }
 
     /* Return to application */
     return 0;

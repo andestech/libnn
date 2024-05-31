@@ -1,7 +1,7 @@
 /***************************************************************************
  * internal_nds_types.h                                                   *
  *                                                                         *
- * Copyright (C) 2012-2016 Andes Technology Corporation                    *
+ * Copyright (C) 2012-2024 Andes Technology Corporation                    *
  * All rights reserved.                                                    *
  ***************************************************************************/
 

@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -35,11 +35,8 @@ int riscv_nn_ew_mul_s8_asym(const int8_t *in_vec1,
                     const int32_t act_max,
                     const uint32_t size)
 {
-    uint32_t loop;
+    long loop = size;
     int32_t in1, in2, output;
-
-    loop = size;
-
     while (loop > 0)
     {
         in1 = *in_vec1++ + in_offset1;

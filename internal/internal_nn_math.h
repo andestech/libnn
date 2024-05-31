@@ -1,5 +1,5 @@
 /***************************************************************************
- *  Copyright (C) 2018-2023 Andes Technology Corporation                   *
+ *  Copyright (C) 2018-2024 Andes Technology Corporation                   *
  *  All rights reserved.                                                   *
  ***************************************************************************/
 
@@ -43,6 +43,8 @@ extern "C"
 #define RIGHT_SHIFT(_shift) (_shift > 0 ? 0 : -_shift)
 #define MASK_IF_ZERO(x)     (x) == 0 ? ~0 : 0
 #define MASK_IF_NON_ZERO(x) (x) != 0 ? ~0 : 0
+#define MASK_IF_GREATER_THAN(a, b) (MASK_IF_NON_ZERO(a > b))
+#define MASK_IF_LESS_THAN(a, b) (a < b)? ~0 : 0
 #define SELECT_USING_MASK(mask, a, b) ((mask) & (a)) ^ (~(mask) & (b))
 
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
@@ -271,6 +273,16 @@ __STATIC_FORCEINLINE q31_t riscv_nn_requantize_s64(const q63_t val, const q31_t 
 #define EXP_ON_NEG(x)  riscv_nn_exp_on_negative_values((x))
 #define ONE_OVER1(x)   riscv_nn_one_over_one_plus_x_for_x_in_0_1((x))
 
+// this sub-function is used to make
+//  - the allocated buffer size be a multiple of "align_byte"
+//  - the pointers point to the address of aligned "align_byte"
+// note. remember to make "align_byte" be power of 2
+__STATIC_FORCEINLINE unsigned long nn_align(unsigned long src, unsigned long align_byte)
+{
+    // the src may be buffer size (in byte) or pointers
+    src = (src + (align_byte - 1)) & ~(align_byte - 1);
+    return src;
+}
 
 //----- sub-functions for softmax layer_begin -----
 // @note The following functions are used only for softmax layer, scaled bits = 5 assumed
@@ -333,6 +345,49 @@ __STATIC_FORCEINLINE int32_t riscv_nn_one_over_one_plus_x_for_x_in_0_1(int32_t v
 
 //----- sub-functions for softmax layer_end -----
 
+//----- sub-functions for integer tanh/sigmoid _begin-----
+
+//----- sub-functions for softmax tanh/sigmoid _end -----
+
+// Exponent polynomial coefficients
+#define EXP_COE0        (float32_t)1.f
+#define EXP_COE1        (float32_t)0.0416598916054f
+#define EXP_COE2        (float32_t)0.500000596046f
+#define EXP_COE3        (float32_t)0.0014122662833f
+#define EXP_COE4        (float32_t)1.00000011921f
+#define EXP_COE5        (float32_t)0.00833693705499f
+#define EXP_COE6        (float32_t)0.166665703058f
+#define EXP_COE7        (float32_t)0.000195780929062f
+
+//--- const values for exp ---
+#define LN2             (float32_t)0.6931471805f    /* ln(2) */
+#define INV_LN2         (float32_t)1.4426950408f    /* 1/ln(2) */
+#define EXP_F32_MAX     (float32_t)88.72200896539586f
+#define EXP_F32_MIN     (float32_t)-87.33271909529616f
+#define EXP_F16_MAX     (float16_t)11.0898f
+#define EXP_F16_MIN     (float16_t)-9.7046f
+
+//--- const values for gelu ---
+#ifndef M_SQRT1_2
+#define M_SQRT1_2       (float32_t)0.70710678118654752440   /* 1/sqrt(2) */
+#endif
+#define SQRT_2_D_PI     (M_2_SQRTPI * M_SQRT1_2)            /* sqrt( 2 / pi ) */
+#define GELU_COE0       (float32_t)0.5f
+#define GELU_COE1       (float32_t)0.044715f
+
+//--- const velues for tanh ---
+#define TANH_F32_MAX        (float32_t)10.f
+#define TANH_F32_MIN        (float32_t)-10.f
+#define TANH_F32_THR        (float32_t)5.e-3
+#define TANH_F32_THR        (float32_t)5.e-3
+#define CST_1               (float32_t)1.f
+#define CST_2               (float32_t)2.f
+#define CST_1_3             (float32_t)0.3333333f
+
+//--- const velues for sigmoid ---
+#define SIGMOID_MAX         (float32_t)10.f
+#define SIGMOID_MIN         (float32_t)-10.f
+
 // Exponent polynomial coefficients
 extern const float CONST_COE0;
 extern const float CONST_COE1;
@@ -351,8 +406,40 @@ extern const float CONST_MAX_INPUT;
 extern const float CONST_0;
 extern const int   CONST_NEGATIVE_126;
 
-//exponential functions
-extern float exp_f32(float x);
+//exponential related functions' prototype
+extern float32_t exp_f32(float32_t x);
+extern float32_t tanh_f32(float32_t x);
+#ifdef __riscv_zfh
+extern float16_t exp_f16(float16_t x);
+extern float16_t tanh_f16(float16_t x);
+#endif
+
+// ACE related macros
+#ifdef ENA_ACE_RVV
+#define ace_exp(_RESULT, _INPUT)                        \
+    __asm__ __volatile__("exp " _RESULT ", " _INPUT " \n");
+#endif
+
+//----- algorithn switches_begin -----
+/*******************************************************************************
+ * For some fp16 functions will be calculated with exp, we can enable this
+ * switch to make the kernel calculations computed in 32-bit. By default, this
+ * swtich is not enabled to get better performance.
+ ******************************************************************************/
+// #define ENA_KERNEL_FP32
+
+/*******************************************************************************
+ * For those functions using divisions, we could enable ENA_FAST_ALGO switch to
+ * replace divisions with multiplying the reciprocal to get better performance.
+ * Now ENA_FAST_ALGO switch will be enabled by default.
+ ******************************************************************************/
+#define ENA_FAST_ALGO
+
+/*******************************************************************************
+ * The algorithn controlling switches for the tiling algorithm.
+ ******************************************************************************/
+#define ENA_TILING
+//----- algorithn switches_end -----
 
 #ifdef  __cplusplus
 }

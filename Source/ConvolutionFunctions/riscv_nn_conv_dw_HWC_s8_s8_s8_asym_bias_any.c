@@ -1,6 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2023 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -188,10 +188,10 @@ static void conv_dw_HWC_s8_any_generic(const q7_t *in_tensor,
 
                     for (int i_ker_y = ker_y_start; i_ker_y < ker_y_end; i_ker_y++)
                     {
-                        const int32_t idx_y = base_idx_y + i_ker_y;
+                        const int32_t idx_y = base_idx_y + dilation_y * i_ker_y;
                         for (int i_ker_x = ker_x_start; i_ker_x < ker_x_end; i_ker_x++)
                         {
-                            const int32_t idx_x = base_idx_x + i_ker_x;
+                            const int32_t idx_x = base_idx_x + dilation_x * i_ker_x;
                             int32_t idx_0 = (idx_y * in_tensor_dim_x + idx_x) * in_tensor_ch + i_input_ch;
                             int32_t ker_idx_0 = (i_ker_y * ker_dim_x + i_ker_x) * (in_tensor_ch * ch_mult) + idx_out_ch;
 

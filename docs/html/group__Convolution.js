@@ -73,6 +73,8 @@ var group__Convolution =
     [ "riscv_nn_conv_dw_HWC_u8_s8_s8_sym_any", "group__Convolution.html#gad04e7f4d6ff4f633dc17c39cdaae13af", null ],
     [ "riscv_nn_conv_dw_HWC_u8_s16_s8_sym_any", "group__Convolution.html#ga5abc7465c684db4237884784221b3e3f", null ],
     [ "riscv_nn_conv_HWC_s8_s8_s8_sym_bias_any", "group__Convolution.html#ga21a900727b07cf4b5f64ef37cb3616b2", null ],
+    [ "riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any", "group__Convolution.html#ga186fa2ae441af98b2ebcacd722c47654", null ],
+    [ "riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any_get_buffer_size", "group__Convolution.html#ga10177497f8d4e7bb997a520541aba0ce", null ],
     [ "riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any", "group__Convolution.html#gaffe21e2c04c4b6206e7cb3a6b7454624", null ],
     [ "riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size", "group__Convolution.html#ga13a646cc7f2d1eff194ceb09219aaad6", null ],
     [ "riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any", "group__Convolution.html#ga4c3bf56f976e682acbe89995e0b86b2e", null ],
@@ -96,5 +98,7 @@ var group__Convolution =
     [ "riscv_nn_conv_dw_HWC_u8_u8_u8_asym_bias_any", "group__Convolution.html#ga70c6a08d04a5cdeffa121992f017a5c8", null ],
     [ "riscv_nn_conv_dw_HWC_s16_s16_s8_asym_bias_any", "group__Convolution.html#ga901b8737e18570edc8b862241d48fbb5", null ],
     [ "riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym", "group__Convolution.html#ga41775a9f700b666336a779f1469e264b", null ],
-    [ "riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym_get_buffer_size", "group__Convolution.html#gab354e5c6b7fd27de531a81c1f6cb67ae", null ]
+    [ "riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym_get_buffer_size", "group__Convolution.html#gab354e5c6b7fd27de531a81c1f6cb67ae", null ],
+    [ "riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any", "group__Convolution.html#ga1151767d2481ee023a96f11151e8594c", null ],
+    [ "riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any_get_buffer_size", "group__Convolution.html#gae77955b6d63b1be3a73f3d3576e4c524", null ]
 ];
