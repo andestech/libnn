@@ -11,7 +11,7 @@
 ###############################################################################
 
 # set the common compilation flags
-CFLAG="-Wall -Werror -O3 -ffunction-sections -fdata-sections -std=c99 -fno-strict-aliasing"
+CFLAG="-Wall -Werror -O3 -ffunction-sections -fdata-sections -fno-strict-aliasing"
 
 # set the compiler
 CC="${1}"
