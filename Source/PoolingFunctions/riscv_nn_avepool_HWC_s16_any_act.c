@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -20,58 +20,71 @@
 /** @file*/
 
 #include "internal_nn_math.h"
+#include "riscv_nn_support.h"
 
 //// Pooling Functions
 
-int32_t riscv_nn_avepool_HWC_s16_any_act(const int in_tensor_dim_y,
-    const int in_tensor_dim_x,
-    const int out_tensor_dim_y,
-    const int out_tensor_dim_x,
-    const int stride_y,
-    const int stride_x,
-    const int ker_dim_y,
-    const int ker_dim_x,
-    const int pad_y,
-    const int pad_x,
-    const int act_min,
-    const int act_max,
-    const int in_tensor_ch,
-    int16_t *in_tensor,
-    int16_t *in_tmp_buf,
-    int16_t *out_tensor)
+int32_t riscv_nn_avepool_HWC_s16_any_act(const int in_tensor_batch,
+                                         const int in_tensor_dim_y,
+                                         const int in_tensor_dim_x,
+                                         const int out_tensor_dim_y,
+                                         const int out_tensor_dim_x,
+                                         const int stride_y,
+                                         const int stride_x,
+                                         const int ker_dim_y,
+                                         const int ker_dim_x,
+                                         const int pad_y,
+                                         const int pad_x,
+                                         const int act_min,
+                                         const int act_max,
+                                         const int in_tensor_ch,
+                                         int16_t * in_tensor,
+                                         int16_t * in_tmp_buf,
+                                         int16_t * out_tensor)
 {
     (void)in_tmp_buf;
 
-    for (int i_y = 0, base_idx_y = -pad_y; i_y < out_tensor_dim_y; base_idx_y += stride_y, i_y++)
+    const int32_t input_len = in_tensor_dim_y * in_tensor_dim_x * in_tensor_ch;
+    const int32_t output_len = out_tensor_dim_y * out_tensor_dim_x * in_tensor_ch;
+
+    for (int i_batch = 0; i_batch < in_tensor_batch; i_batch++)
     {
-        for (int i_x = 0, base_idx_x = -pad_x; i_x < out_tensor_dim_x; base_idx_x += stride_x, i_x++)
+        for (int i_y = 0, base_idx_y = -pad_y; i_y < out_tensor_dim_y; base_idx_y += stride_y, i_y++)
         {
-            const int32_t ker_y_start = MAX(0, -base_idx_y);
-            const int32_t ker_x_start = MAX(0, -base_idx_x);
-
-            const int32_t ker_dim_y_end = MIN(ker_dim_y, in_tensor_dim_y - base_idx_y);
-            const int32_t ker_dim_x_end = MIN(ker_dim_x, in_tensor_dim_x - base_idx_x);
-
-            for (int i_ch_in = 0; i_ch_in < in_tensor_ch; i_ch_in++)
+            for (int i_x = 0, base_idx_x = -pad_x; i_x < out_tensor_dim_x; base_idx_x += stride_x, i_x++)
             {
-                int sum = 0;
-                int count = 0;
+                const int32_t ker_y_start = MAX(0, -base_idx_y);
+                const int32_t ker_x_start = MAX(0, -base_idx_x);
 
-                for (int k_y = ker_y_start; k_y < ker_dim_y_end; k_y++)
+                const int32_t ker_dim_y_end = MIN(ker_dim_y, in_tensor_dim_y - base_idx_y);
+                const int32_t ker_dim_x_end = MIN(ker_dim_x, in_tensor_dim_x - base_idx_x);
+
+                for (int i_ch_in = 0; i_ch_in < in_tensor_ch; i_ch_in++)
                 {
-                    for (int k_x = ker_x_start; k_x < ker_dim_x_end; k_x++)
-                    {
-                        sum += in_tensor[i_ch_in + in_tensor_ch * (k_x + base_idx_x + (k_y + base_idx_y) * in_tensor_dim_x)];
-                        count++;
-                    }
-                }
-                sum = sum > 0 ? (sum + count / 2) / count : (sum - count / 2) / count;
-                sum = MAX(sum, act_min);
-                sum = MIN(sum, act_max);
+                    int sum = 0;
+                    int count = 0;
 
-                out_tensor[i_ch_in + in_tensor_ch * (i_x + i_y * out_tensor_dim_x)] = sum;
+                    for (int k_y = ker_y_start; k_y < ker_dim_y_end; k_y++)
+                    {
+                        for (int k_x = ker_x_start; k_x < ker_dim_x_end; k_x++)
+                        {
+                            sum += in_tensor[i_ch_in + in_tensor_ch * (k_x + base_idx_x + (k_y + base_idx_y) * in_tensor_dim_x)];
+                            count++;
+                        }
+                    }
+
+                    if (count > 0)
+                    {
+                        sum = sum > 0 ? (sum + count / 2) / count : (sum - count / 2) / count;
+                    }
+                    sum = MAX(sum, act_min);
+                    sum = MIN(sum, act_max);
+                    out_tensor[i_ch_in + in_tensor_ch * (i_x + i_y * out_tensor_dim_x)] = sum;
+                }
             }
         }
+        in_tensor += input_len;
+        out_tensor += output_len;
     }
     return 0;
 }

@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -23,8 +23,6 @@
 #include "riscv_nn_activation.h"
 
 //// Relu Functions
-
-extern float32_t tanh_f32(float32_t x);
 
 void riscv_nn_gelu_f32(const float32_t * in_vec, uint32_t size, float32_t * out_vec)
 {

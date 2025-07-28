@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -22,9 +22,9 @@
 #include "internal_nn_math.h"
 
 //// Relu Functions
-void riscv_nn_prelu_s8_asym(q7_t * in_tensor,
-                          q7_t * out_tensor,
-                          const q7_t * alpha_data,
+void riscv_nn_prelu_s8_asym(int8_t * in_tensor,
+                          int8_t * out_tensor,
+                          const int8_t * alpha_data,
                           const uint16_t in_tensor_dim_x,
                           const uint16_t in_tensor_dim_y,
                           const uint16_t in_tensor_ch,
@@ -35,8 +35,8 @@ void riscv_nn_prelu_s8_asym(q7_t * in_tensor,
                           const int32_t in_offset,
                           const int32_t alpha_offset,
                           const int32_t out_offset,
-                          const q7_t act_min,
-                          const q7_t act_max)
+                          const int8_t act_min,
+                          const int8_t act_max)
 {
     for (int32_t i_out_y = 0; i_out_y < in_tensor_dim_y; ++i_out_y)
     {
@@ -68,7 +68,7 @@ void riscv_nn_prelu_s8_asym(q7_t * in_tensor,
                 }
 
                 const int32_t clamped_output = MIN(act_max, MAX(act_min, unclamped_output));
-                out_tensor[idx] = (q7_t)clamped_output;
+                out_tensor[idx] = (int8_t)clamped_output;
 
                 loop--;
                 i_out_ch++;

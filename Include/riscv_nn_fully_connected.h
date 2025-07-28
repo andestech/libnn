@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -43,6 +43,141 @@ extern    "C"
  */
 
 /**
+ * @brief           This function performs batch matrix multiplication with
+ *                  signed 8-bit integers for both inputs and outputs.
+ * @param[in]       in_lhs          Pointer to the left-hand side input tensor
+ * @param[in]       in_rhs          Pointer to the right-hand side input tensor
+ * @param[in]       lhs_offset      Offset value for the left-hand side inputs.
+ *                                  It should be in the range of -128 to 127.
+ * @param[in]       rhs_offset      Offset value for the right-hand side inputs.
+ *                                  It should be in the range of -128 to 127.
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       dst             Pointer to the output tensor
+ * @param[in]       out_offset      Offset value for the output tensor. It
+ *                                  should be in the range of -128 to 127.
+ * @param[in]       out_scale       Scaling value for the quantization on the
+ *                                  outputs
+ * @param[in]       out_shift       Shift amount for the quantization on the
+ *                                  outputs
+ * @param[in]       lhs_dim_n       N dimension of the left-hand side input
+ *                                  tensor
+ * @param[in]       lhs_dim_h       H dimension of the left-hand side input
+ *                                  tensor
+ * @param[in]       lhs_dim_w       W dimension of the left-hand side input
+ *                                  tensor
+ * @param[in]       rhs_dim_n       N dimension of the right-hand side input
+ *                                  tensor
+ * @param[in]       rhs_dim_h       H dimension of the right-hand side input
+ *                                  tensor
+ * @param[in]       rhs_dim_w       W dimension of the right-hand side input
+ *                                  tensor
+ * @param[in]       rhs_dim_c       C dimension of the right-hand side input
+ *                                  tensor
+ * @param[in]       out_dim_n       N dimension of the output tensor
+ * @param[in]       out_dim_h       H dimension of the output tensor
+ * @param[in]       act_min         Minimum value that the output tensor is
+ *                                  limited to. It should be in the range of
+ *                                  -128 to 127.
+ * @param[in]       act_max         Maximum value that the output tensor is
+ *                                  limited to. It should be in the range of
+ *                                  -128 to 127.
+ * @return          This function only returns 0.
+ *
+ * @note
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to
+ *    left shift calculation results whereas a negative one is used to right
+ *    shift.
+ */
+int32_t riscv_nn_batch_matmul_s8_s8_s8(const int8_t * in_lhs,
+                                       const int8_t * in_rhs,
+                                       const int16_t lhs_offset,
+                                       const int16_t rhs_offset,
+                                       const int32_t * bias,
+                                       int8_t * dst,
+                                       const int16_t out_offset,
+                                       const int32_t out_scale,
+                                       const int32_t out_shift,
+                                       const int32_t lhs_dim_n,
+                                       const int32_t lhs_dim_h,
+                                       const int32_t lhs_dim_w,
+                                       const int32_t rhs_dim_n,
+                                       const int32_t rhs_dim_h,
+                                       const int32_t rhs_dim_w,
+                                       const int32_t rhs_dim_c,
+                                       const int32_t out_dim_n,
+                                       const int32_t out_dim_h,
+                                       const int32_t act_min,
+                                       const int32_t act_max);
+
+/**
+ * @brief           This function performs batch matrix multiplication with
+ *                  signed 16-bit integers for both inputs and outputs.
+ * @param[in]       in_lhs          Pointer to the left-hand side input tensor
+ * @param[in]       in_rhs          Pointer to the right-hand side input tensor
+ * @param[in]       lhs_offset      Dummy
+ * @param[in]       rhs_offset      Dummy
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       dst             Pointer to the output tensor
+ * @param[in]       out_offset      Dummy
+ * @param[in]       out_scale       Scaling value for the quantization on the
+ *                                  outputs
+ * @param[in]       out_shift       Shift amount for the quantization on the
+ *                                  outputs
+ * @param[in]       lhs_dim_n       N dimension of the left-hand side input
+ *                                  tensor
+ * @param[in]       lhs_dim_h       H dimension of the left-hand side input
+ *                                  tensor
+ * @param[in]       lhs_dim_w       W dimension of the left-hand side input
+ *                                  tensor
+ * @param[in]       rhs_dim_n       N dimension of the right-hand side input
+ *                                  tensor
+ * @param[in]       rhs_dim_h       H dimension of the right-hand side input
+ *                                  tensor
+ * @param[in]       rhs_dim_w       W dimension of the right-hand side input
+ *                                  tensor
+ * @param[in]       rhs_dim_c       C dimension of the right-hand side input
+ *                                  tensor
+ * @param[in]       out_dim_n       N dimension of the output tensor
+ * @param[in]       out_dim_h       H dimension of the output tensor
+ * @param[in]       act_min         Minimum value that the output tensor is
+ *                                  limited to. It should be in the range of
+ *                                  -32768 to 32767..
+ * @param[in]       act_max         Maximum value that the output tensor is
+ *                                  limited to. It should be in the range of
+ *                                  -32768 to 32767..
+ * @return          This function only returns 0.
+ *
+ * @note
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to
+ *    left shift calculation results whereas a negative one is used to right
+ *    shift.
+ */
+int32_t riscv_nn_batch_matmul_s16_s16_s16(const int16_t * in_lhs,
+                                          const int16_t * in_rhs,
+                                          const int16_t lhs_offset,
+                                          const int16_t rhs_offset,
+                                          const int64_t * bias,
+                                          int16_t * dst,
+                                          const int16_t out_offset,
+                                          const int32_t out_scale,
+                                          const int32_t out_shift,
+                                          const int32_t lhs_dim_n,
+                                          const int32_t lhs_dim_h,
+                                          const int32_t lhs_dim_w,
+                                          const int32_t rhs_dim_n,
+                                          const int32_t rhs_dim_h,
+                                          const int32_t rhs_dim_w,
+                                          const int32_t rhs_dim_c,
+                                          const int32_t dst_dim_n,
+                                          const int32_t dst_dim_h,
+                                          const int32_t act_min,
+                                          const int32_t act_max);
+
+/**
  * @brief           This function performs calculation on signed 8-bit integers
  *                  for inputs, applying shift-based quantization to the outputs.
  * @param[in]       in_vec          Pointer to the input vector
@@ -73,14 +208,14 @@ extern    "C"
  * @endcode
  */
 int32_t riscv_nn_fc_s8_s8_s8_sft_bias(const q7_t * in_vec,
-                                    const q7_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const uint16_t bias_lshift,
-                                    const uint16_t out_rshift,
-                                    const q7_t * bias,
-                                    q7_t * out_vec,
-                                    q15_t * in_tmp_buf);
+                                      const q7_t * wt_mat,
+                                      const uint16_t size,
+                                      const uint16_t wt_row_num,
+                                      const uint16_t bias_lshift,
+                                      const uint16_t out_rshift,
+                                      const q7_t * bias,
+                                      q7_t * out_vec,
+                                      q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs interleaved multiplication on signed
@@ -104,14 +239,14 @@ int32_t riscv_nn_fc_s8_s8_s8_sft_bias(const q7_t * in_vec,
  * format and obtained from riscv_nn_fc_s8_wt_converter.
  */
 int32_t riscv_nn_fc_s8_s8_s8_sft_bias_fast(const q7_t * in_vec,
-                                        const q7_t * wt_mat,
-                                        const uint16_t size,
-                                        const uint16_t wt_row_num,
-                                        const uint16_t bias_lshift,
-                                        const uint16_t out_rshift,
-                                        const q7_t * bias,
-                                        q7_t * out_vec,
-                                        q15_t * in_tmp_buf);
+                                           const q7_t * wt_mat,
+                                           const uint16_t size,
+                                           const uint16_t wt_row_num,
+                                           const uint16_t bias_lshift,
+                                           const uint16_t out_rshift,
+                                           const q7_t * bias,
+                                           q7_t * out_vec,
+                                           q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs calculation on signed 16-bit integers
@@ -128,14 +263,14 @@ int32_t riscv_nn_fc_s8_s8_s8_sft_bias_fast(const q7_t * in_vec,
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_fc_s16_s16_s16_sft_bias(const q15_t * in_vec,
-                                        const q15_t * wt_mat,
-                                        const uint16_t size,
-                                        const uint16_t wt_row_num,
-                                        const uint16_t bias_lshift,
-                                        const uint16_t out_rshift,
-                                        const q15_t * bias,
-                                        q15_t * out_vec,
-                                        q15_t * tmp_buf);
+                                         const q15_t * wt_mat,
+                                         const uint16_t size,
+                                         const uint16_t wt_row_num,
+                                         const uint16_t bias_lshift,
+                                         const uint16_t out_rshift,
+                                         const q15_t * bias,
+                                         q15_t * out_vec,
+                                         q15_t * tmp_buf);
 
 /**
  * @brief           This function performs interleaved multiplication on signed
@@ -160,14 +295,14 @@ int32_t riscv_nn_fc_s16_s16_s16_sft_bias(const q15_t * in_vec,
  * format and obtained from riscv_nn_fc_s16_wt_converter.
  */
 int32_t riscv_nn_fc_s16_s16_s16_sft_bias_fast(const q15_t * in_vec,
-                                            const q15_t * wt_mat,
-                                            const uint16_t size,
-                                            const uint16_t wt_row_num,
-                                            const uint16_t bias_lshift,
-                                            const uint16_t out_rshift,
-                                            const q15_t * bias,
-                                            q15_t * out_vec,
-                                            q15_t * in_tmp_buf);
+                                              const q15_t * wt_mat,
+                                              const uint16_t size,
+                                              const uint16_t wt_row_num,
+                                              const uint16_t bias_lshift,
+                                              const uint16_t out_rshift,
+                                              const q15_t * bias,
+                                              q15_t * out_vec,
+                                              q15_t * in_tmp_buf);
 
 /**
  * @brief           This function multiplies a signed 16-bit integer input
@@ -215,14 +350,14 @@ int32_t riscv_nn_fc_mat_vec_s16_s16_s8_sft_bias(const q15_t * in_vec,
  * format and obtained from riscv_nn_fc_mat_vec_s8_wt_converter.
  */
 int32_t riscv_nn_fc_mat_vec_s16_s16_s8_sft_bias_fast(const q15_t * in_vec,
-                                                    const q7_t * wt_mat,
-                                                    const uint16_t size,
-                                                    const uint16_t wt_row_num,
-                                                    const uint16_t bias_lshift,
-                                                    const uint16_t out_rshift,
-                                                    const q7_t * bias,
-                                                    q15_t * out_vec,
-                                                    q15_t * tmp_buf);
+                                                     const q7_t * wt_mat,
+                                                     const uint16_t size,
+                                                     const uint16_t wt_row_num,
+                                                     const uint16_t bias_lshift,
+                                                     const uint16_t out_rshift,
+                                                     const q7_t * bias,
+                                                     q15_t * out_vec,
+                                                     q15_t * tmp_buf);
 
 /**
  * @brief           This function performs calculation on signed 8-bit integers
@@ -249,15 +384,15 @@ int32_t riscv_nn_fc_mat_vec_s16_s16_s8_sft_bias_fast(const q15_t * in_vec,
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s8_s8_sym_bias(const q7_t * in_vec,
-                                    const q7_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    const q31_t * bias,
-                                    q7_t * out_vec,
-                                    q15_t * in_tmp_buf);
+                                      const q7_t * wt_mat,
+                                      const uint16_t size,
+                                      const uint16_t wt_row_num,
+                                      const uint16_t pre_rshift,
+                                      const uint16_t out_scale,
+                                      const uint16_t post_rshift,
+                                      const q31_t * bias,
+                                      q7_t * out_vec,
+                                      q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs calculation on signed 8-bit integers
@@ -285,15 +420,15 @@ int32_t riscv_nn_fc_s8_s8_s8_sym_bias(const q7_t * in_vec,
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s16_s8_sym_bias(const q7_t * in_vec,
-                                    const q7_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    const q31_t * bias,
-                                    q15_t * out_vec,
-                                    q15_t * in_tmp_buf);
+                                       const q7_t * wt_mat,
+                                       const uint16_t size,
+                                       const uint16_t wt_row_num,
+                                       const uint16_t pre_rshift,
+                                       const uint16_t out_scale,
+                                       const uint16_t post_rshift,
+                                       const q31_t * bias,
+                                       q15_t * out_vec,
+                                       q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs calculation on unsigned 8-bit
@@ -320,15 +455,15 @@ int32_t riscv_nn_fc_s8_s16_s8_sym_bias(const q7_t * in_vec,
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_u8_s8_sym_bias(const u8_t * in_vec,
-                                    const q7_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    const q31_t * bias,
-                                    u8_t * out_vec,
-                                    q15_t * in_tmp_buf);
+                                      const q7_t * wt_mat,
+                                      const uint16_t size,
+                                      const uint16_t wt_row_num,
+                                      const uint16_t pre_rshift,
+                                      const uint16_t out_scale,
+                                      const uint16_t post_rshift,
+                                      const q31_t * bias,
+                                      u8_t * out_vec,
+                                      q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs calculation on unsigned 8-bit
@@ -356,15 +491,15 @@ int32_t riscv_nn_fc_u8_u8_s8_sym_bias(const u8_t * in_vec,
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s8_s8_sym_bias(const u8_t * in_vec,
-                                    const q7_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    const q31_t * bias,
-                                    q7_t * out_vec,
-                                    q15_t * in_tmp_buf);
+                                      const q7_t * wt_mat,
+                                      const uint16_t size,
+                                      const uint16_t wt_row_num,
+                                      const uint16_t pre_rshift,
+                                      const uint16_t out_scale,
+                                      const uint16_t post_rshift,
+                                      const q31_t * bias,
+                                      q7_t * out_vec,
+                                      q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs calculation on unsigned 8-bit
@@ -392,15 +527,15 @@ int32_t riscv_nn_fc_u8_s8_s8_sym_bias(const u8_t * in_vec,
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s16_s8_sym_bias(const u8_t * in_vec,
-                                    const q7_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    const q31_t * bias,
-                                    q15_t * out_vec,
-                                    q15_t * in_tmp_buf);
+                                       const q7_t * wt_mat,
+                                       const uint16_t size,
+                                       const uint16_t wt_row_num,
+                                       const uint16_t pre_rshift,
+                                       const uint16_t out_scale,
+                                       const uint16_t post_rshift,
+                                       const q31_t * bias,
+                                       q15_t * out_vec,
+                                       q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs calculation on signed 8-bit integers
@@ -426,14 +561,14 @@ int32_t riscv_nn_fc_u8_s16_s8_sym_bias(const u8_t * in_vec,
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s8_s8_sym(const q7_t * in_vec,
-                                const q7_t * wt_mat,
-                                const uint16_t size,
-                                const uint16_t wt_row_num,
-                                const uint16_t pre_rshift,
-                                const uint16_t out_scale,
-                                const uint16_t post_rshift,
-                                q7_t * out_vec,
-                                q15_t * in_tmp_buf);
+                                 const q7_t * wt_mat,
+                                 const uint16_t size,
+                                 const uint16_t wt_row_num,
+                                 const uint16_t pre_rshift,
+                                 const uint16_t out_scale,
+                                 const uint16_t post_rshift,
+                                 q7_t * out_vec,
+                                 q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs calculation on signed 8-bit integers
@@ -459,14 +594,14 @@ int32_t riscv_nn_fc_s8_s8_s8_sym(const q7_t * in_vec,
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s16_s8_sym(const q7_t * in_vec,
-                                const q7_t * wt_mat,
-                                const uint16_t size,
-                                const uint16_t wt_row_num,
-                                const uint16_t pre_rshift,
-                                const uint16_t out_scale,
-                                const uint16_t post_rshift,
-                                q15_t * out_vec,
-                                q15_t * in_tmp_buf);
+                                  const q7_t * wt_mat,
+                                  const uint16_t size,
+                                  const uint16_t wt_row_num,
+                                  const uint16_t pre_rshift,
+                                  const uint16_t out_scale,
+                                  const uint16_t post_rshift,
+                                  q15_t * out_vec,
+                                  q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs calculation on unsigned 8-bit
@@ -492,14 +627,14 @@ int32_t riscv_nn_fc_s8_s16_s8_sym(const q7_t * in_vec,
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_u8_s8_sym(const u8_t * in_vec,
-                                const q7_t * wt_mat,
-                                const uint16_t size,
-                                const uint16_t wt_row_num,
-                                const uint16_t pre_rshift,
-                                const uint16_t out_scale,
-                                const uint16_t post_rshift,
-                                u8_t * out_vec,
-                                q15_t * in_tmp_buf);
+                                 const q7_t * wt_mat,
+                                 const uint16_t size,
+                                 const uint16_t wt_row_num,
+                                 const uint16_t pre_rshift,
+                                 const uint16_t out_scale,
+                                 const uint16_t post_rshift,
+                                 u8_t * out_vec,
+                                 q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs calculation on unsigned 8-bit
@@ -525,14 +660,14 @@ int32_t riscv_nn_fc_u8_u8_s8_sym(const u8_t * in_vec,
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s8_s8_sym(const u8_t * in_vec,
-                                const q7_t * wt_mat,
-                                const uint16_t size,
-                                const uint16_t wt_row_num,
-                                const uint16_t pre_rshift,
-                                const uint16_t out_scale,
-                                const uint16_t post_rshift,
-                                q7_t * out_vec,
-                                q15_t * in_tmp_buf);
+                                 const q7_t * wt_mat,
+                                 const uint16_t size,
+                                 const uint16_t wt_row_num,
+                                 const uint16_t pre_rshift,
+                                 const uint16_t out_scale,
+                                 const uint16_t post_rshift,
+                                 q7_t * out_vec,
+                                 q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs calculation on unsigned 8-bit
@@ -558,14 +693,14 @@ int32_t riscv_nn_fc_u8_s8_s8_sym(const u8_t * in_vec,
  * out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s16_s8_sym(const u8_t * in_vec,
-                                const q7_t * wt_mat,
-                                const uint16_t size,
-                                const uint16_t wt_row_num,
-                                const uint16_t pre_rshift,
-                                const uint16_t out_scale,
-                                const uint16_t post_rshift,
-                                q15_t * out_vec,
-                                q15_t * in_tmp_buf);
+                                  const q7_t * wt_mat,
+                                  const uint16_t size,
+                                  const uint16_t wt_row_num,
+                                  const uint16_t pre_rshift,
+                                  const uint16_t out_scale,
+                                  const uint16_t post_rshift,
+                                  q15_t * out_vec,
+                                  q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs interleaved multiplication on signed
@@ -595,15 +730,15 @@ int32_t riscv_nn_fc_u8_s16_s8_sym(const u8_t * in_vec,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s8_s8_sym_bias_fast(const q7_t * in_vec,
-                                        const q7_t * wt_mat,
-                                        const uint16_t size,
-                                        const uint16_t wt_row_num,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        const q31_t * bias,
-                                        q7_t * out_vec,
-                                        q15_t * in_tmp_buf);
+                                           const q7_t * wt_mat,
+                                           const uint16_t size,
+                                           const uint16_t wt_row_num,
+                                           const uint16_t pre_rshift,
+                                           const uint16_t out_scale,
+                                           const uint16_t post_rshift,
+                                           const q31_t * bias,
+                                           q7_t * out_vec,
+                                           q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs interleaved multiplication on signed
@@ -671,15 +806,15 @@ int32_t riscv_nn_fc_s8_s16_s8_sym_bias_fast(const q7_t * in_vec,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_u8_s8_sym_bias_fast(const u8_t * in_vec,
-                                        const q7_t * wt_mat,
-                                        const uint16_t size,
-                                        const uint16_t wt_row_num,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        const q31_t * bias,
-                                        u8_t * out_vec,
-                                        q15_t * in_tmp_buf);
+                                           const q7_t * wt_mat,
+                                           const uint16_t size,
+                                           const uint16_t wt_row_num,
+                                           const uint16_t pre_rshift,
+                                           const uint16_t out_scale,
+                                           const uint16_t post_rshift,
+                                           const q31_t * bias,
+                                           u8_t * out_vec,
+                                           q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs interleaved multiplication on
@@ -709,15 +844,15 @@ int32_t riscv_nn_fc_u8_u8_s8_sym_bias_fast(const u8_t * in_vec,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s8_s8_sym_bias_fast(const u8_t * in_vec,
-                                        const q7_t * wt_mat,
-                                        const uint16_t size,
-                                        const uint16_t wt_row_num,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        const q31_t * bias,
-                                        q7_t * out_vec,
-                                        q15_t * in_tmp_buf);
+                                           const q7_t * wt_mat,
+                                           const uint16_t size,
+                                           const uint16_t wt_row_num,
+                                           const uint16_t pre_rshift,
+                                           const uint16_t out_scale,
+                                           const uint16_t post_rshift,
+                                           const q31_t * bias,
+                                           q7_t * out_vec,
+                                           q15_t * in_tmp_buf);
 
 /**
  * @brief           This performs interleaved multiplication on unsigned 8-bit
@@ -747,15 +882,15 @@ int32_t riscv_nn_fc_u8_s8_s8_sym_bias_fast(const u8_t * in_vec,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s16_s8_sym_bias_fast(const u8_t * in_vec,
-                                        const q7_t * wt_mat,
-                                        const uint16_t size,
-                                        const uint16_t wt_row_num,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        const q31_t * bias,
-                                        q15_t * out_vec,
-                                        q15_t * in_tmp_buf);
+                                            const q7_t * wt_mat,
+                                            const uint16_t size,
+                                            const uint16_t wt_row_num,
+                                            const uint16_t pre_rshift,
+                                            const uint16_t out_scale,
+                                            const uint16_t post_rshift,
+                                            const q31_t * bias,
+                                            q15_t * out_vec,
+                                            q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs interleaved multiplication on signed
@@ -783,14 +918,14 @@ int32_t riscv_nn_fc_u8_s16_s8_sym_bias_fast(const u8_t * in_vec,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s8_s8_sym_fast(const q7_t * in_vec,
-                                    const q7_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    q7_t * out_vec,
-                                    q15_t * in_tmp_buf);
+                                      const q7_t * wt_mat,
+                                      const uint16_t size,
+                                      const uint16_t wt_row_num,
+                                      const uint16_t pre_rshift,
+                                      const uint16_t out_scale,
+                                      const uint16_t post_rshift,
+                                      q7_t * out_vec,
+                                      q15_t * in_tmp_buf);
 
 /**
  * @brief           This is a fully connected layer function for signed 8-bit
@@ -819,14 +954,14 @@ int32_t riscv_nn_fc_s8_s8_s8_sym_fast(const q7_t * in_vec,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_s8_s16_s8_sym_fast(const q7_t * in_vec,
-                                    const q7_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    q15_t * out_vec,
-                                    q15_t * in_tmp_buf);
+                                       const q7_t * wt_mat,
+                                       const uint16_t size,
+                                       const uint16_t wt_row_num,
+                                       const uint16_t pre_rshift,
+                                       const uint16_t out_scale,
+                                       const uint16_t post_rshift,
+                                       q15_t * out_vec,
+                                       q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs interleaved multiplication on
@@ -854,14 +989,14 @@ int32_t riscv_nn_fc_s8_s16_s8_sym_fast(const q7_t * in_vec,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_u8_s8_sym_fast(const u8_t * in_vec,
-                                    const q7_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    u8_t * out_vec,
-                                    q15_t * in_tmp_buf);
+                                      const q7_t * wt_mat,
+                                      const uint16_t size,
+                                      const uint16_t wt_row_num,
+                                      const uint16_t pre_rshift,
+                                      const uint16_t out_scale,
+                                      const uint16_t post_rshift,
+                                      u8_t * out_vec,
+                                      q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs interleaved multiplication on
@@ -889,14 +1024,14 @@ int32_t riscv_nn_fc_u8_u8_s8_sym_fast(const u8_t * in_vec,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s8_s8_sym_fast(const u8_t * in_vec,
-                                    const q7_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    q7_t * out_vec,
-                                    q15_t * in_tmp_buf);
+                                      const q7_t * wt_mat,
+                                      const uint16_t size,
+                                      const uint16_t wt_row_num,
+                                      const uint16_t pre_rshift,
+                                      const uint16_t out_scale,
+                                      const uint16_t post_rshift,
+                                      q7_t * out_vec,
+                                      q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs interleaved multiplication on
@@ -925,14 +1060,14 @@ int32_t riscv_nn_fc_u8_s8_s8_sym_fast(const u8_t * in_vec,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_fc_u8_s16_s8_sym_fast(const u8_t * in_vec,
-                                    const q7_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    q15_t * out_vec,
-                                    q15_t * in_tmp_buf);
+                                       const q7_t * wt_mat,
+                                       const uint16_t size,
+                                       const uint16_t wt_row_num,
+                                       const uint16_t pre_rshift,
+                                       const uint16_t out_scale,
+                                       const uint16_t post_rshift,
+                                       q15_t * out_vec,
+                                       q15_t * in_tmp_buf);
 
 /**
  * @brief           This is a weight converter for fully-connected layer
@@ -945,10 +1080,10 @@ int32_t riscv_nn_fc_u8_s16_s8_sym_fast(const u8_t * in_vec,
  *                                  specific ordering
  * @return          None
  */
-void riscv_nn_fc_s8_wt_converter(const q7_t *wt_mat,
-                                const uint32_t size,
-                                const uint32_t wt_row_num,
-                                q7_t *wt_mat_out);
+void riscv_nn_fc_s8_wt_converter(const q7_t * wt_mat,
+                                 const uint32_t size,
+                                 const uint32_t wt_row_num,
+                                 q7_t * wt_mat_out);
 
 /**
  * @brief           This is a weight converter for fully-connected layer
@@ -961,10 +1096,10 @@ void riscv_nn_fc_s8_wt_converter(const q7_t *wt_mat,
  *                                  specific ordering
  * @return          None
  */
-void riscv_nn_fc_s16_wt_converter(const q15_t *wt_mat,
-                                const uint32_t size,
-                                const uint32_t wt_row_num,
-                                q15_t *wt_mat_out);
+void riscv_nn_fc_s16_wt_converter(const q15_t * wt_mat,
+                                  const uint32_t size,
+                                  const uint32_t wt_row_num,
+                                  q15_t * wt_mat_out);
 
 /**
  * @brief           This is a weight converter for
@@ -977,9 +1112,9 @@ void riscv_nn_fc_s16_wt_converter(const q15_t *wt_mat,
  * @return          None
  */
 void riscv_nn_fc_mat_vec_s8_wt_converter(const q7_t *wt_mat,
-                                        const uint32_t size,
-                                        const uint32_t wt_row_num,
-                                        q7_t *wt_mat_out);
+                                         const uint32_t size,
+                                         const uint32_t wt_row_num,
+                                         q7_t *wt_mat_out);
 
 /**
  * @brief           This function performs calculation on signed 8-bit integers
@@ -1021,21 +1156,21 @@ void riscv_nn_fc_mat_vec_s8_wt_converter(const q7_t *wt_mat,
  *    left shift calculation results whereas a negative one is used to right
  *    shift.
  */
-int32_t riscv_nn_fc_s8_s8_s8_asym_bias(const int8_t *in_vec,
-                                    const int8_t *wt_mat,
-                                    const uint16_t in_vec_col,
-                                    const uint16_t wt_mat_row,
-                                    const uint16_t in_vec_batch,
-                                    const int32_t in_offset,
-                                    const int32_t wt_offset,
-                                    const int32_t out_scale,
-                                    const int32_t out_shift,
-                                    const int32_t out_offset,
-                                    const int32_t *bias,
-                                    int8_t *out_vec,
-                                    const int32_t act_min,
-                                    const int32_t act_max,
-                                    q15_t *tmp_buf);
+int32_t riscv_nn_fc_s8_s8_s8_asym_bias(const int8_t * in_vec,
+                                       const int8_t * wt_mat,
+                                       const uint16_t in_vec_col,
+                                       const uint16_t wt_mat_row,
+                                       const uint16_t in_vec_batch,
+                                       const int32_t in_offset,
+                                       const int32_t wt_offset,
+                                       const int32_t out_scale,
+                                       const int32_t out_shift,
+                                       const int32_t out_offset,
+                                       const int32_t * bias,
+                                       int8_t * out_vec,
+                                       const int32_t act_min,
+                                       const int32_t act_max,
+                                       int16_t * tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
@@ -1083,21 +1218,21 @@ int32_t riscv_nn_fc_s8_s8_s8_asym_bias_get_buffer_size(const uint16_t in_vec_col
  *    left shift calculation results whereas a negative one is used to right
  *    shift.
  */
-int32_t riscv_nn_fc_s16_s16_s8_asym_bias(const int16_t *in_vec,
-    const int8_t *wt_mat,
-    const int32_t in_vec_col,
-    const int32_t wt_mat_row,
-    const int32_t in_vec_batch,
-    const int32_t in_offset,
-    const int32_t wt_offset,
-    const int32_t out_scale,
-    const int32_t out_shift,
-    const int32_t out_offset,
-    const int64_t *bias,
-    int16_t *out_vec,
-    const int32_t act_min,
-    const int32_t act_max,
-    int16_t *tmp_buf);
+int32_t riscv_nn_fc_s16_s16_s8_asym_bias(const int16_t * in_vec,
+                                         const int8_t * wt_mat,
+                                         const int32_t in_vec_col,
+                                         const int32_t wt_mat_row,
+                                         const int32_t in_vec_batch,
+                                         const int32_t in_offset,
+                                         const int32_t wt_offset,
+                                         const int32_t out_scale,
+                                         const int32_t out_shift,
+                                         const int32_t out_offset,
+                                         const int64_t * bias,
+                                         int16_t * out_vec,
+                                         const int32_t act_min,
+                                         const int32_t act_max,
+                                         int16_t * tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
@@ -1123,12 +1258,12 @@ int32_t riscv_nn_fc_s16_s16_s8_asym_bias_get_buffer_size(const uint16_t in_vec_c
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_fc_f16_f16_f16_bias(const float16_t * in_vec,
-                                    const float16_t * wt_mat,
-                                    const uint16_t size,
-                                    const uint16_t wt_row_num,
-                                    const float16_t * bias,
-                                    float16_t * out_vec,
-                                    float16_t * tmp_buf);
+                                     const float16_t * wt_mat,
+                                     const uint16_t size,
+                                     const uint16_t wt_row_num,
+                                     const float16_t * bias,
+                                     float16_t * out_vec,
+                                     float16_t * tmp_buf);
 #endif
 
 /**

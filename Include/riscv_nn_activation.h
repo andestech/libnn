@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -74,9 +74,9 @@ typedef enum
  * @endcode
  */
 void riscv_nn_activate_s8(q7_t * in_out,
-                        uint32_t size,
-                        uint16_t int_bits,
-                        riscv_nn_activation_fun act_fun);
+                          uint32_t size,
+                          uint16_t int_bits,
+                          riscv_nn_activation_fun act_fun);
 
 /**
  * @brief           This function performs activation on signed 8-bit integer
@@ -303,6 +303,49 @@ void riscv_nn_leaky_relu_s8_asym(int8_t * in_vec,
                                  const int8_t act_min,
                                  const int8_t act_max);
 
+/**
+ * @brief           This function performs activation on signed 16-bit integer
+ *                  input vectors using the Leaky ReLU function and applies
+ *                  asymmetric quantization to the outputs.
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @param[in]       size            Number of elements in the input/output
+ *                                  vector
+ * @param[in]       multi_identity  Scaling value for the quantization on the
+ *                                  nonnegative inputs
+ * @param[in]       shift_identity  Shift amount for the quantization on the
+ *                                  nonnegative inputs
+ * @param[in]       multi_alpha     Scaling value for the quantization on the
+ *                                  negative inputs
+ * @param[in]       shift_alpha     Shift amount for the quantization on the
+ *                                  negative inputs
+ * @param[in]       in_offset       Offset value for the input vector. It should
+ *                                  be in the range of -32768 to 32767.
+ * @param[in]       out_offset      Offset value for the outputs. It should be
+ *                                  in the range of -32768 to 32767.
+ * @param[in]       act_min         Minimum value that the outputs are limited
+ *                                  to. It should be in the range of -32768 to 32767.
+ * @param[in]       act_max         Maximum value that the outputs are limited
+ *                                  to. It should be in the range of -32768 to 32767.
+ * @return          None
+ *
+ * @note
+ *  During the quantization process, a positive shift_identity/shift_alpha value
+ *  is used to left shift calculation results whereas a negative one is used to
+ *  right shift.
+ */
+void riscv_nn_leaky_relu_s16_asym(int16_t * in_vec,
+                                  int16_t * out_vec,
+                                  const uint32_t size,
+                                  const int32_t multi_identity,
+                                  const int32_t shift_identity,
+                                  const int32_t multi_alpha,
+                                  const int32_t shift_alpha,
+                                  const int32_t in_offset,
+                                  const int32_t out_offset,
+                                  const int16_t act_min,
+                                  const int16_t act_max);
+
 #ifdef __riscv_zfh
 /**
  * @brief           This function performs activation on half-precision
@@ -314,10 +357,10 @@ void riscv_nn_leaky_relu_s8_asym(int8_t * in_vec,
  * @param[out]      out_vec     Pointer to the output vector
  * @return          None
  */
-void riscv_nn_leaky_relu_f16(const float16_t* in_vec,
-                        uint32_t size,
-                        float16_t slope,
-                        float16_t* out_vec);
+void riscv_nn_leaky_relu_f16(const float16_t * in_vec,
+                             uint32_t size,
+                             float16_t slope,
+                             float16_t * out_vec);
 #endif
 
 /**
@@ -358,21 +401,21 @@ void riscv_nn_leaky_relu_f16(const float16_t* in_vec,
  *  is used to left shift calculation results whereas a negative one is used to
  *  right shift.
  */
-void riscv_nn_prelu_s8_asym(q7_t * in_vec,
-                          q7_t * out_vec,
-                          const q7_t * alpha_data,
-                          const uint16_t in_tensor_dim_x,
-                          const uint16_t in_tensor_dim_y,
-                          const uint16_t in_tensor_ch,
-                          const int32_t multi_identity,
-                          const int32_t shift_identity,
-                          const int32_t multi_alpha,
-                          const int32_t shift_alpha,
-                          const int32_t in_offset,
-                          const int32_t alpha_offset,
-                          const int32_t out_offset,
-                          const q7_t act_min,
-                          const q7_t act_max);
+void riscv_nn_prelu_s8_asym(int8_t * in_vec,
+                            int8_t * out_vec,
+                            const int8_t * alpha_data,
+                            const uint16_t in_tensor_dim_x,
+                            const uint16_t in_tensor_dim_y,
+                            const uint16_t in_tensor_ch,
+                            const int32_t multi_identity,
+                            const int32_t shift_identity,
+                            const int32_t multi_alpha,
+                            const int32_t shift_alpha,
+                            const int32_t in_offset,
+                            const int32_t alpha_offset,
+                            const int32_t out_offset,
+                            const int8_t act_min,
+                            const int8_t act_max);
 
 /**
  * @brief           This function performs activation on signed 8-bit integer
@@ -405,6 +448,21 @@ void riscv_nn_relu_any_s8_2buf(q7_t * in_vec,
                                uint32_t size,
                                q7_t max_val,
                                q7_t * out_vec);
+
+/**
+ * @brief           This function performs activation on signed 16-bit integer
+ *                  input vectors using the ReLU function, along with an
+ *                  in-place algorithm. The maximum output from the ReLU
+ *                  function is user-specified, for example:
+ *                  f(x) = min(max(0,x),max_val)
+ * @param[in,out]   in_vec      Pointer to the input/output vector
+ * @param[in]       size        Number of elements in the input/output vector
+ * @param[in]       max_val     Maximum value to limit the output vector
+ * @return          None
+ */
+void riscv_nn_relu_any_s16(q15_t * in_vec,
+                           uint32_t size,
+                           q15_t max_val);
 
 #ifdef __riscv_zfh
 /**
@@ -520,20 +578,48 @@ void riscv_nn_relu_f16(const float16_t * in_vec,
  *                                  than in_range_radius, the output will be
  *                                  limited to 127.
  * @param[in]       in_mult         Scaling value for rescaling the inputs
- * @param[in]       in_lshift       Shift amount for resacling the inputs
+ * @param[in]       in_shift        Shift amount for resacling the inputs
  * @param[in]       size            Number of elements in the input/output
  *                                  vector
  * @param[in]       in_vec          Pointer to the input vector
  * @param[out]      out_vec         Pointer to the output vector
  * @return          None
+ *
+ * @note
+ *  During the quantization process, a positive in_shift value is used to left
+ *  shift calculation results whereas a negative one is used to right shift.
  */
 void riscv_nn_sigmoid_s8(const int32_t in_offset,
                          const int32_t in_range_radius,
                          const int16_t in_mult,
-                         const int16_t in_lshift,
+                         const int16_t in_shift,
                          const uint32_t size,
-                         const int8_t* in_vec,
-                         int8_t* out_vec);
+                         const int8_t * in_vec,
+                         int8_t * out_vec);
+/**
+ * @brief           This function performs activation on signed 16-bit integer
+ *                  input vectors using the Sigmoid function.
+ * @param[in]       in_offset       Dummy.
+ * @param[in]       in_range_radius The maximum or minimum value for the inputs.
+ *                                  If the input is less than or equal to
+ *                                  in_range_radius, the output will be limited
+ *                                  to -32768. Conversely, if the input is
+ *                                  greater than in_range_radius, the output
+ *                                  will be limited to 32767.
+ * @param[in]       in_mult         Scaling value for rescaling the inputs
+ * @param[in]       in_shift       Shift amount for resacling the inputs
+ * @param[in]       size            Number of elements in the input/output vector
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @return          None
+ */
+void riscv_nn_sigmoid_s16(const int32_t in_offset,
+                          const int16_t in_range_radius,
+                          const int16_t in_mult,
+                          const int16_t in_shift,
+                          const uint32_t size,
+                          const int16_t * in_vec,
+                          int16_t * out_vec);
 
 #ifdef __riscv_zfh
 /**
@@ -550,7 +636,31 @@ void riscv_nn_sigmoid_s8(const int32_t in_offset,
 int32_t riscv_nn_sigmoid_f16(const float16_t * in_vec,
                             uint32_t size,
                             float16_t * out_vec);
+
+/**
+ * @brief           This function performs activation on half-precision
+ *                  floating-point input vectors using the SiLU function.
+ * @param[in]       in_vec      Pointer to the input vector
+ * @param[in]       size        Number of elements in the input/output vector
+ * @param[out]      out_vec     Pointer to the output vector
+ * @return          This function returns 0.
+ */
+int32_t riscv_nn_silu_f16(const float16_t * in_vec,
+                          uint32_t size,
+                          float16_t * out_vec);
 #endif
+
+/**
+ * @brief           This function performs activation on single-precision
+ *                  floating-point input vectors using the SiLU function.
+ * @param[in]       in_vec      Pointer to the input vector
+ * @param[in]       size        Number of elements in the input/output vector
+ * @param[out]      out_vec     Pointer to the output vector
+ * @return          This function returns 0.
+ */
+int32_t riscv_nn_silu_f32(const float32_t * in_vec,
+                          uint32_t size,
+                          float32_t * out_vec);
 
 /**
  * @brief           This function performs activation on signed 8-bit integer
@@ -564,20 +674,53 @@ int32_t riscv_nn_sigmoid_f16(const float16_t * in_vec,
  *                                  than in_range_radius, the output will be
  *                                  limited to 127.
  * @param[in]       in_mult         Scaling value for rescaling the inputs
- * @param[in]       in_lshift       Shift amount for resacling the inputs
+ * @param[in]       in_shift        Shift amount for resacling the inputs
  * @param[in]       size            Number of elements in the input/output
  *                                  vector
  * @param[in]       in_vec          Pointer to the input vector
  * @param[out]      out_vec         Pointer to the output vector
  * @return          None
+ *
+ * @note
+ *  During the quantization process, a positive in_shift value is used to left
+ *  shift calculation results whereas a negative one is used to right shift.
  */
 void riscv_nn_tanh_s8(const int32_t in_offset,
                       const int32_t in_range_radius,
                       const int16_t in_mult,
-                      const int16_t in_lshift,
+                      const int16_t in_shift,
                       const uint32_t size,
-                      const int8_t* in_vec,
-                      int8_t* out_vec);
+                      const int8_t * in_vec,
+                      int8_t * out_vec);
+
+/**
+ * @brief           This function performs activation on signed 16-bit integer
+ *                  input vectors using the Tanh function.
+ * @param[in]       in_offset       Dummy.
+ * @param[in]       in_range_radius The maximum or minimum value for the inputs.
+ *                                  If the input is less than or equal to
+ *                                  in_range_radius, the output will be limited
+ *                                  to -32768. Conversely, if the input is greater
+ *                                  than in_range_radius, the output will be
+ *                                  limited to 32767.
+ * @param[in]       in_mult         Scaling value for rescaling the inputs
+ * @param[in]       in_shift        Shift amount for resacling the inputs
+ * @param[in]       size            Number of elements in the input/output vector
+ * @param[in]       in_vec          Pointer to the input vector
+ * @param[out]      out_vec         Pointer to the output vector
+ * @return          None
+ *
+ * @note
+ *  During the quantization process, a positive in_shift value is used to left
+ *  shift calculation results whereas a negative one is used to right shift.
+ */
+void riscv_nn_tanh_s16(const int32_t in_offset,
+                       const int16_t in_range_radius,
+                       const int16_t in_mult,
+                       const int16_t in_shift,
+                       const uint32_t size,
+                       const int16_t * in_vec,
+                       int16_t * out_vec);
 
 #ifdef __riscv_zfh
 /**
@@ -605,9 +748,8 @@ int32_t riscv_nn_tanh_f16(const float16_t * in_vec,
  * @return          This function returns 0.
  */
 int32_t riscv_nn_tanh_f32(const float32_t * in_vec,
-                        uint32_t size,
-                        float32_t * out_vec);
-
+                          uint32_t size,
+                          float32_t * out_vec);
 
 /**
  *   * @}

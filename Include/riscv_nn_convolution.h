@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -128,25 +128,25 @@ extern    "C"
  */
 
 int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sft_bias_fast_any(const q7_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const q7_t * bias,
-                                                const uint16_t bias_lshift,
-                                                const uint16_t out_rshift,
-                                                q7_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf,
-                                                q7_t * tmp_buf);
+                                                         const uint16_t in_tensor_dim_x,
+                                                         const uint16_t in_tensor_dim_y,
+                                                         const uint16_t in_tensor_ch,
+                                                         const q7_t * ker_weight,
+                                                         const uint16_t out_tensor_ch,
+                                                         const uint16_t ker_dim_x,
+                                                         const uint16_t ker_dim_y,
+                                                         const uint16_t pad_x,
+                                                         const uint16_t pad_y,
+                                                         const uint16_t stride_x,
+                                                         const uint16_t stride_y,
+                                                         const q7_t * bias,
+                                                         const uint16_t bias_lshift,
+                                                         const uint16_t out_rshift,
+                                                         q7_t * out_tensor,
+                                                         const uint16_t out_tensor_dim_x,
+                                                         const uint16_t out_tensor_dim_y,
+                                                         q15_t * in_tmp_buf,
+                                                         q7_t * tmp_buf);
 
 /**
  * @brief           This function performs convolution on RGB images with signed
@@ -268,19 +268,19 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sft_bias(const q7_t * in_tensor,
  * @endcode
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sft_bias_fast(const q7_t * in_tensor,
-                                                const uint16_t in_tensor_dim,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim,
-                                                const uint16_t pad,
-                                                const uint16_t stride,
-                                                const q7_t * bias,
-                                                const uint16_t bias_lshift,
-                                                const uint16_t out_rshift,
-                                                q7_t * out_tensor,
-                                                const uint16_t out_tensor_dim,
-                                                q15_t * in_tmp_buf,
-                                                q15_t * wt_tmp_buf);
+                                                     const uint16_t in_tensor_dim,
+                                                     const q7_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim,
+                                                     const uint16_t pad,
+                                                     const uint16_t stride,
+                                                     const q7_t * bias,
+                                                     const uint16_t bias_lshift,
+                                                     const uint16_t out_rshift,
+                                                     q7_t * out_tensor,
+                                                     const uint16_t out_tensor_dim,
+                                                     q15_t * in_tmp_buf,
+                                                     q15_t * wt_tmp_buf);
 
 
 /**
@@ -412,25 +412,25 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sft_bias(const q7_t * in_tensor,
  */
 
 int32_t riscv_nn_conv_HWC_s8_s8_s8_sft_bias_any(const q7_t * in_tensor,
-                                            const uint16_t in_tensor_dim_x,
-                                            const uint16_t in_tensor_dim_y,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim_x,
-                                            const uint16_t ker_dim_y,
-                                            const uint16_t pad_x,
-                                            const uint16_t pad_y,
-                                            const uint16_t stride_x,
-                                            const uint16_t stride_y,
-                                            const q7_t * bias,
-                                            const uint16_t bias_lshift,
-                                            const uint16_t out_rshift,
-                                            q7_t * out_tensor,
-                                            const uint16_t out_tensor_dim_x,
-                                            const uint16_t out_tensor_dim_y,
-                                            q15_t * in_tmp_buf,
-                                            q7_t * tmp_buf);
+                                                const uint16_t in_tensor_dim_x,
+                                                const uint16_t in_tensor_dim_y,
+                                                const uint16_t in_tensor_ch,
+                                                const q7_t * ker_weight,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t ker_dim_x,
+                                                const uint16_t ker_dim_y,
+                                                const uint16_t pad_x,
+                                                const uint16_t pad_y,
+                                                const uint16_t stride_x,
+                                                const uint16_t stride_y,
+                                                const q7_t * bias,
+                                                const uint16_t bias_lshift,
+                                                const uint16_t out_rshift,
+                                                q7_t * out_tensor,
+                                                const uint16_t out_tensor_dim_x,
+                                                const uint16_t out_tensor_dim_y,
+                                                q15_t * in_tmp_buf,
+                                                q7_t * tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with signed 8-bit
@@ -485,20 +485,20 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sft_bias_any(const q7_t * in_tensor,
  */
 
 int32_t riscv_nn_conv_HWC_s8_s8_s8_sft_bias_fast(const q7_t * in_tensor,
-                                const uint16_t in_tensor_dim,
-                                const uint16_t in_tensor_ch,
-                                const q7_t * ker_weight,
-                                const uint16_t out_tensor_ch,
-                                const uint16_t ker_dim,
-                                const uint16_t pad,
-                                const uint16_t stride,
-                                const q7_t * bias,
-                                const uint16_t bias_lshift,
-                                const uint16_t out_rshift,
-                                q7_t * out_tensor,
-                                const uint16_t out_tensor_dim,
-                                q15_t * in_tmp_buf,
-                                q7_t * tmp_buf);
+                                                 const uint16_t in_tensor_dim,
+                                                 const uint16_t in_tensor_ch,
+                                                 const q7_t * ker_weight,
+                                                 const uint16_t out_tensor_ch,
+                                                 const uint16_t ker_dim,
+                                                 const uint16_t pad,
+                                                 const uint16_t stride,
+                                                 const q7_t * bias,
+                                                 const uint16_t bias_lshift,
+                                                 const uint16_t out_rshift,
+                                                 q7_t * out_tensor,
+                                                 const uint16_t out_tensor_dim,
+                                                 q15_t * in_tmp_buf,
+                                                 q7_t * tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with signed 8-bit
@@ -567,25 +567,25 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sft_bias_fast(const q7_t * in_tensor,
  */
 
 int32_t riscv_nn_conv_HWC_s8_s8_s8_sft_bias_fast_any(const q7_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const q7_t * bias,
-                                                const uint16_t bias_lshift,
-                                                const uint16_t out_rshift,
-                                                q7_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf,
-                                                q7_t * tmp_buf);
+                                                     const uint16_t in_tensor_dim_x,
+                                                     const uint16_t in_tensor_dim_y,
+                                                     const uint16_t in_tensor_ch,
+                                                     const q7_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim_x,
+                                                     const uint16_t ker_dim_y,
+                                                     const uint16_t pad_x,
+                                                     const uint16_t pad_y,
+                                                     const uint16_t stride_x,
+                                                     const uint16_t stride_y,
+                                                     const q7_t * bias,
+                                                     const uint16_t bias_lshift,
+                                                     const uint16_t out_rshift,
+                                                     q7_t * out_tensor,
+                                                     const uint16_t out_tensor_dim_x,
+                                                     const uint16_t out_tensor_dim_y,
+                                                     q15_t * in_tmp_buf,
+                                                     q7_t * tmp_buf);
 
 
 /**
@@ -639,20 +639,20 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sft_bias_fast_any(const q7_t * in_tensor,
  */
 
 int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias(const q15_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const uint16_t in_tensor_ch,
-                                            const q15_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const q15_t * bias,
-                                            const uint16_t bias_lshift,
-                                            const uint16_t out_rshift,
-                                            q15_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            q15_t * in_tmp_buf,
-                                            q7_t * tmp_buf);
+                                               const uint16_t in_tensor_dim,
+                                               const uint16_t in_tensor_ch,
+                                               const q15_t * ker_weight,
+                                               const uint16_t out_tensor_ch,
+                                               const uint16_t ker_dim,
+                                               const uint16_t pad,
+                                               const uint16_t stride,
+                                               const q15_t * bias,
+                                               const uint16_t bias_lshift,
+                                               const uint16_t out_rshift,
+                                               q15_t * out_tensor,
+                                               const uint16_t out_tensor_dim,
+                                               q15_t * in_tmp_buf,
+                                               q7_t * tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with signed 16-bit
@@ -707,20 +707,20 @@ int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias(const q15_t * in_tensor,
  */
 
 int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias_fast(const q15_t * in_tensor,
-                                                const uint16_t in_tensor_dim,
-                                                const uint16_t in_tensor_ch,
-                                                const q15_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim,
-                                                const uint16_t pad,
-                                                const uint16_t stride,
-                                                const q15_t * bias,
-                                                const uint16_t bias_lshift,
-                                                const uint16_t out_rshift,
-                                                q15_t * out_tensor,
-                                                const uint16_t out_tensor_dim,
-                                                q15_t * in_tmp_buf,
-                                                q7_t * tmp_buf);
+                                                    const uint16_t in_tensor_dim,
+                                                    const uint16_t in_tensor_ch,
+                                                    const q15_t * ker_weight,
+                                                    const uint16_t out_tensor_ch,
+                                                    const uint16_t ker_dim,
+                                                    const uint16_t pad,
+                                                    const uint16_t stride,
+                                                    const q15_t * bias,
+                                                    const uint16_t bias_lshift,
+                                                    const uint16_t out_rshift,
+                                                    q15_t * out_tensor,
+                                                    const uint16_t out_tensor_dim,
+                                                    q15_t * in_tmp_buf,
+                                                    q7_t * tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with signed 16-bit
@@ -789,25 +789,25 @@ int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias_fast(const q15_t * in_tensor,
  */
 
 int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias_fast_any(const q15_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q15_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const q15_t * bias,
-                                                const uint16_t bias_lshift,
-                                                const uint16_t out_rshift,
-                                                q15_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf,
-                                                q7_t * tmp_buf);
+                                                        const uint16_t in_tensor_dim_x,
+                                                        const uint16_t in_tensor_dim_y,
+                                                        const uint16_t in_tensor_ch,
+                                                        const q15_t * ker_weight,
+                                                        const uint16_t out_tensor_ch,
+                                                        const uint16_t ker_dim_x,
+                                                        const uint16_t ker_dim_y,
+                                                        const uint16_t pad_x,
+                                                        const uint16_t pad_y,
+                                                        const uint16_t stride_x,
+                                                        const uint16_t stride_y,
+                                                        const q15_t * bias,
+                                                        const uint16_t bias_lshift,
+                                                        const uint16_t out_rshift,
+                                                        q15_t * out_tensor,
+                                                        const uint16_t out_tensor_dim_x,
+                                                        const uint16_t out_tensor_dim_y,
+                                                        q15_t * in_tmp_buf,
+                                                        q7_t * tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -862,20 +862,20 @@ int32_t riscv_nn_conv_HWC_s16_s16_s16_sft_bias_fast_any(const q15_t * in_tensor,
  */
 
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sft_bias(const q7_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const q7_t * bias,
-                                            const uint16_t bias_lshift,
-                                            const uint16_t out_rshift,
-                                            q7_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            q15_t * in_tmp_buf,
-                                            q7_t * tmp_buf);
+                                               const uint16_t in_tensor_dim,
+                                               const uint16_t in_tensor_ch,
+                                               const q7_t * ker_weight,
+                                               const uint16_t out_tensor_ch,
+                                               const uint16_t ker_dim,
+                                               const uint16_t pad,
+                                               const uint16_t stride,
+                                               const q7_t * bias,
+                                               const uint16_t bias_lshift,
+                                               const uint16_t out_rshift,
+                                               q7_t * out_tensor,
+                                               const uint16_t out_tensor_dim,
+                                               q15_t * in_tmp_buf,
+                                               q7_t * tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -940,25 +940,25 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sft_bias(const q7_t * in_tensor,
  *  @endcode
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sft_bias_any(const q7_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const q7_t * bias,
-                                                const uint16_t bias_lshift,
-                                                const uint16_t out_rshift,
-                                                q7_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf,
-                                                q7_t * tmp_buf);
+                                                   const uint16_t in_tensor_dim_x,
+                                                   const uint16_t in_tensor_dim_y,
+                                                   const uint16_t in_tensor_ch,
+                                                   const q7_t * ker_weight,
+                                                   const uint16_t out_tensor_ch,
+                                                   const uint16_t ker_dim_x,
+                                                   const uint16_t ker_dim_y,
+                                                   const uint16_t pad_x,
+                                                   const uint16_t pad_y,
+                                                   const uint16_t stride_x,
+                                                   const uint16_t stride_y,
+                                                   const q7_t * bias,
+                                                   const uint16_t bias_lshift,
+                                                   const uint16_t out_rshift,
+                                                   q7_t * out_tensor,
+                                                   const uint16_t out_tensor_dim_x,
+                                                   const uint16_t out_tensor_dim_y,
+                                                   q15_t * in_tmp_buf,
+                                                   q7_t * tmp_buf);
 
 /**
  * @brief           This function performs convolution using a 1x1 kernel on
@@ -988,9 +988,8 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sft_bias_any(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector is enabled and its size
- *                                      must be equal to "2 * in_tensor_ch *
- *                                      ker_dim_x * ker_dim_y".
+ *                                      -mext-vector is enabled and its needed
+ *                                      size could be obtained by calling riscv_nn_conv_1x1_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the constraints specified in Note below.
  *
@@ -1008,25 +1007,25 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sft_bias_any(const q7_t * in_tensor,
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_bias_fast_any(const q7_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const q31_t * bias,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q7_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf);
+                                                         const uint16_t in_tensor_dim_x,
+                                                         const uint16_t in_tensor_dim_y,
+                                                         const uint16_t in_tensor_ch,
+                                                         const q7_t * ker_weight,
+                                                         const uint16_t out_tensor_ch,
+                                                         const uint16_t ker_dim_x,
+                                                         const uint16_t ker_dim_y,
+                                                         const uint16_t pad_x,
+                                                         const uint16_t pad_y,
+                                                         const uint16_t stride_x,
+                                                         const uint16_t stride_y,
+                                                         const q31_t * bias,
+                                                         const uint16_t pre_rshift,
+                                                         const uint16_t out_scale,
+                                                         const uint16_t post_rshift,
+                                                         q7_t * out_tensor,
+                                                         const uint16_t out_tensor_dim_x,
+                                                         const uint16_t out_tensor_dim_y,
+                                                         q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs convolution using a 1x1 kernel on
@@ -1057,9 +1056,8 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_bias_fast_any(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector is enabled and its size
- *                                      must be equal to "2 * in_tensor_ch *
- *                                      ker_dim_x * ker_dim_y".
+ *                                      -mext-vector is enabled and its needed
+ *                                      size could be obtained by calling riscv_nn_conv_1x1_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the constraints specified in Note below.
  *
@@ -1077,25 +1075,25 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_bias_fast_any(const q7_t * in_tensor,
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_bias_fast_any(const q7_t * in_tensor,
-                                                    const uint16_t in_tensor_dim_x,
-                                                    const uint16_t in_tensor_dim_y,
-                                                    const uint16_t in_tensor_ch,
-                                                    const q7_t * ker_weight,
-                                                    const uint16_t out_tensor_ch,
-                                                    const uint16_t ker_dim_x,
-                                                    const uint16_t ker_dim_y,
-                                                    const uint16_t pad_x,
-                                                    const uint16_t pad_y,
-                                                    const uint16_t stride_x,
-                                                    const uint16_t stride_y,
-                                                    const q31_t * bias,
-                                                    const uint16_t pre_rshift,
-                                                    const uint16_t out_scale,
-                                                    const uint16_t post_rshift,
-                                                    q15_t * out_tensor,
-                                                    const uint16_t out_tensor_dim_x,
-                                                    const uint16_t out_tensor_dim_y,
-                                                    q15_t * in_tmp_buf);
+                                                          const uint16_t in_tensor_dim_x,
+                                                          const uint16_t in_tensor_dim_y,
+                                                          const uint16_t in_tensor_ch,
+                                                          const q7_t * ker_weight,
+                                                          const uint16_t out_tensor_ch,
+                                                          const uint16_t ker_dim_x,
+                                                          const uint16_t ker_dim_y,
+                                                          const uint16_t pad_x,
+                                                          const uint16_t pad_y,
+                                                          const uint16_t stride_x,
+                                                          const uint16_t stride_y,
+                                                          const q31_t * bias,
+                                                          const uint16_t pre_rshift,
+                                                          const uint16_t out_scale,
+                                                          const uint16_t post_rshift,
+                                                          q15_t * out_tensor,
+                                                          const uint16_t out_tensor_dim_x,
+                                                          const uint16_t out_tensor_dim_y,
+                                                          q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs convolution using a 1x1 kernel on
@@ -1125,9 +1123,8 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_bias_fast_any(const q7_t * in_tensor
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector is enabled and its size
- *                                      must be equal to "2 * in_tensor_ch *
- *                                      ker_dim_x * ker_dim_y".
+ *                                      -mext-vector is enabled and its needed
+ *                                      size could be obtained by calling riscv_nn_conv_1x1_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the constraints specified in Note below.
  *
@@ -1145,25 +1142,25 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_bias_fast_any(const q7_t * in_tensor
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_bias_fast_any(const u8_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const q31_t * bias,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                u8_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf);
+                                                         const uint16_t in_tensor_dim_x,
+                                                         const uint16_t in_tensor_dim_y,
+                                                         const uint16_t in_tensor_ch,
+                                                         const q7_t * ker_weight,
+                                                         const uint16_t out_tensor_ch,
+                                                         const uint16_t ker_dim_x,
+                                                         const uint16_t ker_dim_y,
+                                                         const uint16_t pad_x,
+                                                         const uint16_t pad_y,
+                                                         const uint16_t stride_x,
+                                                         const uint16_t stride_y,
+                                                         const q31_t * bias,
+                                                         const uint16_t pre_rshift,
+                                                         const uint16_t out_scale,
+                                                         const uint16_t post_rshift,
+                                                         u8_t * out_tensor,
+                                                         const uint16_t out_tensor_dim_x,
+                                                         const uint16_t out_tensor_dim_y,
+                                                         q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs convolution using a 1x1 kernel on
@@ -1194,9 +1191,8 @@ int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_bias_fast_any(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector is enabled and its size
- *                                      must be equal to "2 * in_tensor_ch *
- *                                      ker_dim_x * ker_dim_y".
+ *                                      -mext-vector is enabled and its needed
+ *                                      size could be obtained by calling riscv_nn_conv_1x1_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the constraints specified in Note below.
  *
@@ -1214,25 +1210,25 @@ int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_bias_fast_any(const u8_t * in_tensor,
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_bias_fast_any(const u8_t * in_tensor,
-                                                    const uint16_t in_tensor_dim_x,
-                                                    const uint16_t in_tensor_dim_y,
-                                                    const uint16_t in_tensor_ch,
-                                                    const q7_t * ker_weight,
-                                                    const uint16_t out_tensor_ch,
-                                                    const uint16_t ker_dim_x,
-                                                    const uint16_t ker_dim_y,
-                                                    const uint16_t pad_x,
-                                                    const uint16_t pad_y,
-                                                    const uint16_t stride_x,
-                                                    const uint16_t stride_y,
-                                                    const q31_t * bias,
-                                                    const uint16_t pre_rshift,
-                                                    const uint16_t out_scale,
-                                                    const uint16_t post_rshift,
-                                                    q7_t * out_tensor,
-                                                    const uint16_t out_tensor_dim_x,
-                                                    const uint16_t out_tensor_dim_y,
-                                                    q15_t * in_tmp_buf);
+                                                         const uint16_t in_tensor_dim_x,
+                                                         const uint16_t in_tensor_dim_y,
+                                                         const uint16_t in_tensor_ch,
+                                                         const q7_t * ker_weight,
+                                                         const uint16_t out_tensor_ch,
+                                                         const uint16_t ker_dim_x,
+                                                         const uint16_t ker_dim_y,
+                                                         const uint16_t pad_x,
+                                                         const uint16_t pad_y,
+                                                         const uint16_t stride_x,
+                                                         const uint16_t stride_y,
+                                                         const q31_t * bias,
+                                                         const uint16_t pre_rshift,
+                                                         const uint16_t out_scale,
+                                                         const uint16_t post_rshift,
+                                                         q7_t * out_tensor,
+                                                         const uint16_t out_tensor_dim_x,
+                                                         const uint16_t out_tensor_dim_y,
+                                                         q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs convolution using a 1x1 kernel on
@@ -1263,9 +1259,8 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_bias_fast_any(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector is enabled and its size
- *                                      must be equal to "2 * in_tensor_ch *
- *                                      ker_dim_x * ker_dim_y".
+ *                                      -mext-vector is enabled and its needed
+ *                                      size could be obtained by calling riscv_nn_conv_1x1_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the constraints specified in Note below.
  *
@@ -1283,25 +1278,25 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_bias_fast_any(const u8_t * in_tensor,
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor,
-                                                    const uint16_t in_tensor_dim_x,
-                                                    const uint16_t in_tensor_dim_y,
-                                                    const uint16_t in_tensor_ch,
-                                                    const q7_t * ker_weight,
-                                                    const uint16_t out_tensor_ch,
-                                                    const uint16_t ker_dim_x,
-                                                    const uint16_t ker_dim_y,
-                                                    const uint16_t pad_x,
-                                                    const uint16_t pad_y,
-                                                    const uint16_t stride_x,
-                                                    const uint16_t stride_y,
-                                                    const q31_t * bias,
-                                                    const uint16_t pre_rshift,
-                                                    const uint16_t out_scale,
-                                                    const uint16_t post_rshift,
-                                                    q15_t * out_tensor,
-                                                    const uint16_t out_tensor_dim_x,
-                                                    const uint16_t out_tensor_dim_y,
-                                                    q15_t * in_tmp_buf);
+                                                          const uint16_t in_tensor_dim_x,
+                                                          const uint16_t in_tensor_dim_y,
+                                                          const uint16_t in_tensor_ch,
+                                                          const q7_t * ker_weight,
+                                                          const uint16_t out_tensor_ch,
+                                                          const uint16_t ker_dim_x,
+                                                          const uint16_t ker_dim_y,
+                                                          const uint16_t pad_x,
+                                                          const uint16_t pad_y,
+                                                          const uint16_t stride_x,
+                                                          const uint16_t stride_y,
+                                                          const q31_t * bias,
+                                                          const uint16_t pre_rshift,
+                                                          const uint16_t out_scale,
+                                                          const uint16_t post_rshift,
+                                                          q15_t * out_tensor,
+                                                          const uint16_t out_tensor_dim_x,
+                                                          const uint16_t out_tensor_dim_y,
+                                                          q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs convolution using a 1x1 kernel on
@@ -1330,9 +1325,8 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector is enabled and its size
- *                                      must be equal to 2 * in_tensor_ch *
- *                                      ker_dim_x * ker_dim_y.
+ *                                      -mext-vector is enabled and its needed
+ *                                      size could be obtained by calling riscv_nn_conv_1x1_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the constraints specified in Note below.
  *
@@ -1350,24 +1344,24 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_fast_any(const q7_t * in_tensor,
-                                            const uint16_t in_tensor_dim_x,
-                                            const uint16_t in_tensor_dim_y,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim_x,
-                                            const uint16_t ker_dim_y,
-                                            const uint16_t pad_x,
-                                            const uint16_t pad_y,
-                                            const uint16_t stride_x,
-                                            const uint16_t stride_y,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q7_t * out_tensor,
-                                            const uint16_t out_tensor_dim_x,
-                                            const uint16_t out_tensor_dim_y,
-                                            q15_t * in_tmp_buf);
+                                                    const uint16_t in_tensor_dim_x,
+                                                    const uint16_t in_tensor_dim_y,
+                                                    const uint16_t in_tensor_ch,
+                                                    const q7_t * ker_weight,
+                                                    const uint16_t out_tensor_ch,
+                                                    const uint16_t ker_dim_x,
+                                                    const uint16_t ker_dim_y,
+                                                    const uint16_t pad_x,
+                                                    const uint16_t pad_y,
+                                                    const uint16_t stride_x,
+                                                    const uint16_t stride_y,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    q7_t * out_tensor,
+                                                    const uint16_t out_tensor_dim_x,
+                                                    const uint16_t out_tensor_dim_y,
+                                                    q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs convolution using a 1x1 kernel on
@@ -1396,9 +1390,8 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_fast_any(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector is enabled and its size
- *                                      must be equal to 2 * in_tensor_ch *
- *                                      ker_dim_x * ker_dim_y.
+ *                                      -mext-vector is enabled and its needed
+ *                                      size could be obtained by calling riscv_nn_conv_1x1_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the constraints specified in Note below.
  *
@@ -1416,24 +1409,24 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_sym_fast_any(const q7_t * in_tensor,
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_fast_any(const q7_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q15_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf);
+                                                     const uint16_t in_tensor_dim_x,
+                                                     const uint16_t in_tensor_dim_y,
+                                                     const uint16_t in_tensor_ch,
+                                                     const q7_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim_x,
+                                                     const uint16_t ker_dim_y,
+                                                     const uint16_t pad_x,
+                                                     const uint16_t pad_y,
+                                                     const uint16_t stride_x,
+                                                     const uint16_t stride_y,
+                                                     const uint16_t pre_rshift,
+                                                     const uint16_t out_scale,
+                                                     const uint16_t post_rshift,
+                                                     q15_t * out_tensor,
+                                                     const uint16_t out_tensor_dim_x,
+                                                     const uint16_t out_tensor_dim_y,
+                                                     q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs convolution using a 1x1 kernel on
@@ -1462,9 +1455,8 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_fast_any(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector is enabled and its size
- *                                      must be equal to "2 * in_tensor_ch *
- *                                      ker_dim_x * ker_dim_y".
+ *                                      -mext-vector is enabled and its needed
+ *                                      size could be obtained by calling riscv_nn_conv_1x1_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the constraints specified in Note below.
  *
@@ -1482,24 +1474,24 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s16_s8_sym_fast_any(const q7_t * in_tensor,
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_fast_any(const u8_t * in_tensor,
-                                            const uint16_t in_tensor_dim_x,
-                                            const uint16_t in_tensor_dim_y,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim_x,
-                                            const uint16_t ker_dim_y,
-                                            const uint16_t pad_x,
-                                            const uint16_t pad_y,
-                                            const uint16_t stride_x,
-                                            const uint16_t stride_y,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            u8_t * out_tensor,
-                                            const uint16_t out_tensor_dim_x,
-                                            const uint16_t out_tensor_dim_y,
-                                            q15_t * in_tmp_buf);
+                                                    const uint16_t in_tensor_dim_x,
+                                                    const uint16_t in_tensor_dim_y,
+                                                    const uint16_t in_tensor_ch,
+                                                    const q7_t * ker_weight,
+                                                    const uint16_t out_tensor_ch,
+                                                    const uint16_t ker_dim_x,
+                                                    const uint16_t ker_dim_y,
+                                                    const uint16_t pad_x,
+                                                    const uint16_t pad_y,
+                                                    const uint16_t stride_x,
+                                                    const uint16_t stride_y,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    u8_t * out_tensor,
+                                                    const uint16_t out_tensor_dim_x,
+                                                    const uint16_t out_tensor_dim_y,
+                                                    q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs convolution using a 1x1 kernel on
@@ -1528,9 +1520,8 @@ int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_fast_any(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector is enabled and its size
- *                                      must be equal to 2 * in_tensor_ch *
- *                                      ker_dim_x * ker_dim_y.
+ *                                      -mext-vector is enabled and its needed
+ *                                      size could be obtained by calling riscv_nn_conv_1x1_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the constraints specified in Note below.
  *
@@ -1548,24 +1539,24 @@ int32_t riscv_nn_conv_1x1_HWC_u8_u8_s8_sym_fast_any(const u8_t * in_tensor,
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_fast_any(const u8_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q7_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf);
+                                                    const uint16_t in_tensor_dim_x,
+                                                    const uint16_t in_tensor_dim_y,
+                                                    const uint16_t in_tensor_ch,
+                                                    const q7_t * ker_weight,
+                                                    const uint16_t out_tensor_ch,
+                                                    const uint16_t ker_dim_x,
+                                                    const uint16_t ker_dim_y,
+                                                    const uint16_t pad_x,
+                                                    const uint16_t pad_y,
+                                                    const uint16_t stride_x,
+                                                    const uint16_t stride_y,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    q7_t * out_tensor,
+                                                    const uint16_t out_tensor_dim_x,
+                                                    const uint16_t out_tensor_dim_y,
+                                                    q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs convolution using a 1x1 kernel on
@@ -1594,9 +1585,8 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_fast_any(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector is enabled and its size
- *                                      must be equal to "2 * in_tensor_ch *
- *                                      ker_dim_x * ker_dim_y".
+ *                                      -mext-vector is enabled and its needed
+ *                                      size could be obtained by calling riscv_nn_conv_1x1_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the constraints specified in Note below.
  *
@@ -1614,24 +1604,56 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s8_s8_sym_fast_any(const u8_t * in_tensor,
  *   out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_1x1_HWC_u8_s16_s8_sym_fast_any(const u8_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q15_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf);
+                                                     const uint16_t in_tensor_dim_x,
+                                                     const uint16_t in_tensor_dim_y,
+                                                     const uint16_t in_tensor_ch,
+                                                     const q7_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim_x,
+                                                     const uint16_t ker_dim_y,
+                                                     const uint16_t pad_x,
+                                                     const uint16_t pad_y,
+                                                     const uint16_t stride_x,
+                                                     const uint16_t stride_y,
+                                                     const uint16_t pre_rshift,
+                                                     const uint16_t out_scale,
+                                                     const uint16_t post_rshift,
+                                                     q15_t * out_tensor,
+                                                     const uint16_t out_tensor_dim_x,
+                                                     const uint16_t out_tensor_dim_y,
+                                                     q15_t * in_tmp_buf);
+
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for those convolution
+ *                  functions with symmetric quantization and kernel dimension
+ *                  is 1.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @return          Returns the required length of the temporary buffer.
+ */
+uint32_t riscv_nn_conv_1x1_sym_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                               const uint16_t in_tensor_dim_y,
+                                               const uint16_t in_tensor_ch,
+                                               const uint16_t out_tensor_ch,
+                                               const uint16_t ker_dim_x,
+                                               const uint16_t ker_dim_y,
+                                               const uint16_t pad_x,
+                                               const uint16_t pad_y,
+                                               const uint16_t stride_x,
+                                               const uint16_t stride_y,
+                                               const uint16_t out_tensor_dim_x,
+                                               const uint16_t out_tensor_dim_y);
 
 /**
  * @brief           This function performs fast convolution on RGB images with
@@ -1655,8 +1677,8 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s16_s8_sym_fast_any(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be "2 * (3 *
- *                                  ker_dim * ker_dim + 1)".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
@@ -1668,20 +1690,20 @@ int32_t riscv_nn_conv_1x1_HWC_u8_s16_s8_sym_fast_any(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sym_bias_fast(const q7_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const q31_t * bias,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q7_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            q15_t * in_tmp_buf,
-                                            q15_t * wt_tmp_buf);
+                                                     const uint16_t in_tensor_dim,
+                                                     const q7_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim,
+                                                     const uint16_t pad,
+                                                     const uint16_t stride,
+                                                     const q31_t * bias,
+                                                     const uint16_t pre_rshift,
+                                                     const uint16_t out_scale,
+                                                     const uint16_t post_rshift,
+                                                     q7_t * out_tensor,
+                                                     const uint16_t out_tensor_dim,
+                                                     q15_t * in_tmp_buf,
+                                                     q15_t * wt_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution on RGB images with
@@ -1705,8 +1727,8 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sym_bias_fast(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be "2 * (3 *
- *                                  ker_dim * ker_dim + 1)".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
@@ -1718,20 +1740,20 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sym_bias_fast(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s16_s8_RGB_sym_bias_fast(const q7_t * in_tensor,
-                                                const uint16_t in_tensor_dim,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim,
-                                                const uint16_t pad,
-                                                const uint16_t stride,
-                                                const q31_t * bias,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q15_t * out_tensor,
-                                                const uint16_t out_tensor_dim,
-                                                q15_t * in_tmp_buf,
-                                                q15_t * wt_tmp_buf);
+                                                      const uint16_t in_tensor_dim,
+                                                      const q7_t * ker_weight,
+                                                      const uint16_t out_tensor_ch,
+                                                      const uint16_t ker_dim,
+                                                      const uint16_t pad,
+                                                      const uint16_t stride,
+                                                      const q31_t * bias,
+                                                      const uint16_t pre_rshift,
+                                                      const uint16_t out_scale,
+                                                      const uint16_t post_rshift,
+                                                      q15_t * out_tensor,
+                                                      const uint16_t out_tensor_dim,
+                                                      q15_t * in_tmp_buf,
+                                                      q15_t * wt_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution on RGB images with
@@ -1754,8 +1776,8 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_RGB_sym_bias_fast(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be "2 * (3 *
- *                                  ker_dim * ker_dim + 1)".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
@@ -1767,20 +1789,20 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_RGB_sym_bias_fast(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_u8_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const q31_t * bias,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            u8_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            q15_t * in_tmp_buf,
-                                            q15_t * wt_tmp_buf);
+                                                     const uint16_t in_tensor_dim,
+                                                     const q7_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim,
+                                                     const uint16_t pad,
+                                                     const uint16_t stride,
+                                                     const q31_t * bias,
+                                                     const uint16_t pre_rshift,
+                                                     const uint16_t out_scale,
+                                                     const uint16_t post_rshift,
+                                                     u8_t * out_tensor,
+                                                     const uint16_t out_tensor_dim,
+                                                     q15_t * in_tmp_buf,
+                                                     q15_t * wt_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution on RGB images with
@@ -1804,8 +1826,8 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be "2 * (3 *
- *                                  ker_dim * ker_dim + 1)".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
@@ -1817,20 +1839,20 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s8_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
-                                                const uint16_t in_tensor_dim,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim,
-                                                const uint16_t pad,
-                                                const uint16_t stride,
-                                                const q31_t * bias,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q7_t * out_tensor,
-                                                const uint16_t out_tensor_dim,
-                                                q15_t * in_tmp_buf,
-                                                q15_t * wt_tmp_buf);
+                                                     const uint16_t in_tensor_dim,
+                                                     const q7_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim,
+                                                     const uint16_t pad,
+                                                     const uint16_t stride,
+                                                     const q31_t * bias,
+                                                     const uint16_t pre_rshift,
+                                                     const uint16_t out_scale,
+                                                     const uint16_t post_rshift,
+                                                     q7_t * out_tensor,
+                                                     const uint16_t out_tensor_dim,
+                                                     q15_t * in_tmp_buf,
+                                                     q15_t * wt_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution on RGB images with
@@ -1854,8 +1876,8 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be "2 * (3 *
- *                                  ker_dim * ker_dim + 1)".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
@@ -1867,20 +1889,20 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s16_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
-                                                const uint16_t in_tensor_dim,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim,
-                                                const uint16_t pad,
-                                                const uint16_t stride,
-                                                const q31_t * bias,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q15_t * out_tensor,
-                                                const uint16_t out_tensor_dim,
-                                                q15_t * in_tmp_buf,
-                                                q15_t * wt_tmp_buf);
+                                                      const uint16_t in_tensor_dim,
+                                                      const q7_t * ker_weight,
+                                                      const uint16_t out_tensor_ch,
+                                                      const uint16_t ker_dim,
+                                                      const uint16_t pad,
+                                                      const uint16_t stride,
+                                                      const q31_t * bias,
+                                                      const uint16_t pre_rshift,
+                                                      const uint16_t out_scale,
+                                                      const uint16_t post_rshift,
+                                                      q15_t * out_tensor,
+                                                      const uint16_t out_tensor_dim,
+                                                      q15_t * in_tmp_buf,
+                                                      q15_t * wt_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution on RGB images with
@@ -1902,8 +1924,8 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be "2 * (3 *
- *                                  ker_dim * ker_dim + 1)".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
@@ -1915,19 +1937,19 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_RGB_sym_bias_fast(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sym_fast(const q7_t * in_tensor,
-                                        const uint16_t in_tensor_dim,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim,
-                                        const uint16_t pad,
-                                        const uint16_t stride,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        q7_t * out_tensor,
-                                        const uint16_t out_tensor_dim,
-                                        q15_t * in_tmp_buf,
-                                        q15_t * wt_tmp_buf);
+                                                const uint16_t in_tensor_dim,
+                                                const q7_t * ker_weight,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t ker_dim,
+                                                const uint16_t pad,
+                                                const uint16_t stride,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                q7_t * out_tensor,
+                                                const uint16_t out_tensor_dim,
+                                                q15_t * in_tmp_buf,
+                                                q15_t * wt_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution on RGB images with
@@ -1949,8 +1971,8 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sym_fast(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be "2 * (3 *
- *                                  ker_dim * ker_dim + 1)".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
@@ -1962,19 +1984,19 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_RGB_sym_fast(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s16_s8_RGB_sym_fast(const q7_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q15_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            q15_t * in_tmp_buf,
-                                            q15_t * wt_tmp_buf);
+                                                 const uint16_t in_tensor_dim,
+                                                 const q7_t * ker_weight,
+                                                 const uint16_t out_tensor_ch,
+                                                 const uint16_t ker_dim,
+                                                 const uint16_t pad,
+                                                 const uint16_t stride,
+                                                 const uint16_t pre_rshift,
+                                                 const uint16_t out_scale,
+                                                 const uint16_t post_rshift,
+                                                 q15_t * out_tensor,
+                                                 const uint16_t out_tensor_dim,
+                                                 q15_t * in_tmp_buf,
+                                                 q15_t * wt_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution on RGB images with
@@ -1996,8 +2018,8 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_RGB_sym_fast(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be "2 * (3 *
- *                                  ker_dim * ker_dim + 1)".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
@@ -2009,19 +2031,19 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_RGB_sym_fast(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_u8_s8_RGB_sym_fast(const u8_t * in_tensor,
-                                        const uint16_t in_tensor_dim,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim,
-                                        const uint16_t pad,
-                                        const uint16_t stride,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        u8_t * out_tensor,
-                                        const uint16_t out_tensor_dim,
-                                        q15_t * in_tmp_buf,
-                                        q15_t * wt_tmp_buf);
+                                                const uint16_t in_tensor_dim,
+                                                const q7_t * ker_weight,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t ker_dim,
+                                                const uint16_t pad,
+                                                const uint16_t stride,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                u8_t * out_tensor,
+                                                const uint16_t out_tensor_dim,
+                                                q15_t * in_tmp_buf,
+                                                q15_t * wt_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution on RGB images with
@@ -2043,8 +2065,8 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_RGB_sym_fast(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be "2 * (3 *
- *                                  ker_dim * ker_dim + 1)".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
@@ -2056,19 +2078,19 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_RGB_sym_fast(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s8_s8_RGB_sym_fast(const u8_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q7_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            q15_t * in_tmp_buf,
-                                            q15_t * wt_tmp_buf);
+                                                const uint16_t in_tensor_dim,
+                                                const q7_t * ker_weight,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t ker_dim,
+                                                const uint16_t pad,
+                                                const uint16_t stride,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                q7_t * out_tensor,
+                                                const uint16_t out_tensor_dim,
+                                                q15_t * in_tmp_buf,
+                                                q15_t * wt_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution on RGB images with
@@ -2091,8 +2113,8 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_RGB_sym_fast(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be "2 * (3 *
- *                                  ker_dim * ker_dim + 1)".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @param[in]       wt_tmp_buf      Temporary buffer for kernel weights. It is
  *                                  required when -mext-dsp or -mext-vector
  *                                  enabled and its size must be "out_tensor_ch *
@@ -2104,19 +2126,19 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_RGB_sym_fast(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s16_s8_RGB_sym_fast(const u8_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q15_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            q15_t * in_tmp_buf,
-                                            q15_t * wt_tmp_buf);
+                                                 const uint16_t in_tensor_dim,
+                                                 const q7_t * ker_weight,
+                                                 const uint16_t out_tensor_ch,
+                                                 const uint16_t ker_dim,
+                                                 const uint16_t pad,
+                                                 const uint16_t stride,
+                                                 const uint16_t pre_rshift,
+                                                 const uint16_t out_scale,
+                                                 const uint16_t post_rshift,
+                                                 q15_t * out_tensor,
+                                                 const uint16_t out_tensor_dim,
+                                                 q15_t * in_tmp_buf,
+                                                 q15_t * wt_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with signed 8-bit
@@ -2140,8 +2162,8 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_RGB_sym_fast(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be equal to "2 *
- *                                  in_tensor_ch * ker_dim * ker_dim".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2151,20 +2173,20 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_RGB_sym_fast(const u8_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_bias_fast(const q7_t * in_tensor,
-                                        const uint16_t in_tensor_dim,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim,
-                                        const uint16_t pad,
-                                        const uint16_t stride,
-                                        const q31_t * bias,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        q7_t * out_tensor,
-                                        const uint16_t out_tensor_dim,
-                                        q15_t * in_tmp_buf);
+                                                 const uint16_t in_tensor_dim,
+                                                 const uint16_t in_tensor_ch,
+                                                 const q7_t * ker_weight,
+                                                 const uint16_t out_tensor_ch,
+                                                 const uint16_t ker_dim,
+                                                 const uint16_t pad,
+                                                 const uint16_t stride,
+                                                 const q31_t * bias,
+                                                 const uint16_t pre_rshift,
+                                                 const uint16_t out_scale,
+                                                 const uint16_t post_rshift,
+                                                 q7_t * out_tensor,
+                                                 const uint16_t out_tensor_dim,
+                                                 q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with signed 8-bit
@@ -2189,8 +2211,8 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_bias_fast(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be equal to "2 *
- *                                  in_tensor_ch * ker_dim * ker_dim".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2200,20 +2222,20 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_bias_fast(const q7_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_bias_fast(const q7_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const q31_t * bias,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q15_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            q15_t * in_tmp_buf);
+                                                  const uint16_t in_tensor_dim,
+                                                  const uint16_t in_tensor_ch,
+                                                  const q7_t * ker_weight,
+                                                  const uint16_t out_tensor_ch,
+                                                  const uint16_t ker_dim,
+                                                  const uint16_t pad,
+                                                  const uint16_t stride,
+                                                  const q31_t * bias,
+                                                  const uint16_t pre_rshift,
+                                                  const uint16_t out_scale,
+                                                  const uint16_t post_rshift,
+                                                  q15_t * out_tensor,
+                                                  const uint16_t out_tensor_dim,
+                                                  q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with unsigned 8-bit
@@ -2237,8 +2259,8 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_bias_fast(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be equal to "2 *
- *                                  in_tensor_ch * ker_dim * ker_dim".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2248,20 +2270,20 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_bias_fast(const q7_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_bias_fast(const u8_t * in_tensor,
-                                        const uint16_t in_tensor_dim,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim,
-                                        const uint16_t pad,
-                                        const uint16_t stride,
-                                        const q31_t * bias,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        u8_t * out_tensor,
-                                        const uint16_t out_tensor_dim,
-                                        q15_t * in_tmp_buf);
+                                                 const uint16_t in_tensor_dim,
+                                                 const uint16_t in_tensor_ch,
+                                                 const q7_t * ker_weight,
+                                                 const uint16_t out_tensor_ch,
+                                                 const uint16_t ker_dim,
+                                                 const uint16_t pad,
+                                                 const uint16_t stride,
+                                                 const q31_t * bias,
+                                                 const uint16_t pre_rshift,
+                                                 const uint16_t out_scale,
+                                                 const uint16_t post_rshift,
+                                                 u8_t * out_tensor,
+                                                 const uint16_t out_tensor_dim,
+                                                 q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with unsigned 8-bit
@@ -2286,8 +2308,8 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_bias_fast(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be equal to "2 *
- *                                  in_tensor_ch * ker_dim * ker_dim".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2297,6 +2319,102 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_bias_fast(const u8_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_bias_fast(const u8_t * in_tensor,
+                                                 const uint16_t in_tensor_dim,
+                                                 const uint16_t in_tensor_ch,
+                                                 const q7_t * ker_weight,
+                                                 const uint16_t out_tensor_ch,
+                                                 const uint16_t ker_dim,
+                                                 const uint16_t pad,
+                                                 const uint16_t stride,
+                                                 const q31_t * bias,
+                                                 const uint16_t pre_rshift,
+                                                 const uint16_t out_scale,
+                                                 const uint16_t post_rshift,
+                                                 q7_t * out_tensor,
+                                                 const uint16_t out_tensor_dim,
+                                                 q15_t * in_tmp_buf);
+
+/**
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs,
+ *                  incorporating bias inputs and applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       bias            Pointer to the bias vector
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
+ *                                  required when -mext-dsp or -mext-vector
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
+ *
+ * @note
+ *  The outputs will be two-stage shifted before being stored, for example:
+ *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
+ */
+int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_bias_fast(const u8_t * in_tensor,
+                                                  const uint16_t in_tensor_dim,
+                                                  const uint16_t in_tensor_ch,
+                                                  const q7_t * ker_weight,
+                                                  const uint16_t out_tensor_ch,
+                                                  const uint16_t ker_dim,
+                                                  const uint16_t pad,
+                                                  const uint16_t stride,
+                                                  const q31_t * bias,
+                                                  const uint16_t pre_rshift,
+                                                  const uint16_t out_scale,
+                                                  const uint16_t post_rshift,
+                                                  q15_t * out_tensor,
+                                                  const uint16_t out_tensor_dim,
+                                                  q15_t * in_tmp_buf);
+
+/**
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers for both inputs and outputs, applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
+ *                                  required when -mext-dsp or -mext-vector
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
+ *
+ * @note
+ *  The outputs will be two-stage shifted before being stored, for example:
+ *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
+ */
+int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_fast(const q7_t * in_tensor,
                                             const uint16_t in_tensor_dim,
                                             const uint16_t in_tensor_ch,
                                             const q7_t * ker_weight,
@@ -2304,7 +2422,144 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_bias_fast(const u8_t * in_tensor,
                                             const uint16_t ker_dim,
                                             const uint16_t pad,
                                             const uint16_t stride,
-                                            const q31_t * bias,
+                                            const uint16_t pre_rshift,
+                                            const uint16_t out_scale,
+                                            const uint16_t post_rshift,
+                                            q7_t * out_tensor,
+                                            const uint16_t out_tensor_dim,
+                                            q15_t * in_tmp_buf);
+
+/**
+ * @brief           This function performs fast convolution with signed 8-bit
+ *                  integers for inputs and signed 16-bit integers for outputs,
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
+ *                                  required when -mext-dsp or -mext-vector
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
+ *
+ * @note
+ *  The outputs will be two-stage shifted before being stored, for example:
+ *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
+ */
+int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_fast(const q7_t * in_tensor,
+                                             const uint16_t in_tensor_dim,
+                                             const uint16_t in_tensor_ch,
+                                             const q7_t * ker_weight,
+                                             const uint16_t out_tensor_ch,
+                                             const uint16_t ker_dim,
+                                             const uint16_t pad,
+                                             const uint16_t stride,
+                                             const uint16_t pre_rshift,
+                                             const uint16_t out_scale,
+                                             const uint16_t post_rshift,
+                                             q15_t * out_tensor,
+                                             const uint16_t out_tensor_dim,
+                                             q15_t * in_tmp_buf);
+
+/**
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for both inputs and outputs, applying symmetric
+ *                  quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
+ *                                  required when -mext-dsp or -mext-vector
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
+ *
+ * @note
+ *  The outputs will be two-stage shifted before being stored, for example:
+ *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
+ */
+int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_fast(const u8_t * in_tensor,
+                                            const uint16_t in_tensor_dim,
+                                            const uint16_t in_tensor_ch,
+                                            const q7_t * ker_weight,
+                                            const uint16_t out_tensor_ch,
+                                            const uint16_t ker_dim,
+                                            const uint16_t pad,
+                                            const uint16_t stride,
+                                            const uint16_t pre_rshift,
+                                            const uint16_t out_scale,
+                                            const uint16_t post_rshift,
+                                            u8_t * out_tensor,
+                                            const uint16_t out_tensor_dim,
+                                            q15_t * in_tmp_buf);
+
+/**
+ * @brief           This function performs fast convolution with unsigned 8-bit
+ *                  integers for inputs and signed 8-bit integers for outputs,
+ *                  applying symmetric quantization to the outputs.
+ * @param[in]       in_tensor       Pointer to the input vector
+ * @param[in]       in_tensor_dim   Dimension of the input tensor
+ * @param[in]       in_tensor_ch    Number of input tensor channels
+ * @param[in]       ker_weight      Pointer of kernel weights
+ * @param[in]       out_tensor_ch   Number of output tensor channels
+ * @param[in]       ker_dim         Dimension of the filter kernel
+ * @param[in]       pad             Padding size
+ * @param[in]       stride          Convolution stride
+ * @param[in]       pre_rshift      Right shift amount for the output before
+ *                                  scaling
+ * @param[in]       out_scale       Value of scaling for the output
+ * @param[in]       post_rshift     Right shift amount for the output after
+ *                                  scaling
+ * @param[out]      out_tensor      Pointer to the output tensor
+ * @param[in]       out_tensor_dim  Dimension of the output tensor
+ * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
+ *                                  required when -mext-dsp or -mext-vector
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the following constraints: in_tensor_ch is a
+ *                  multiple of 4, and out_tensor_ch is a multiple of 2.
+ *
+ * @note
+ *  The outputs will be two-stage shifted before being stored, for example:
+ *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
+ */
+int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_fast(const u8_t * in_tensor,
+                                            const uint16_t in_tensor_dim,
+                                            const uint16_t in_tensor_ch,
+                                            const q7_t * ker_weight,
+                                            const uint16_t out_tensor_ch,
+                                            const uint16_t ker_dim,
+                                            const uint16_t pad,
+                                            const uint16_t stride,
                                             const uint16_t pre_rshift,
                                             const uint16_t out_scale,
                                             const uint16_t post_rshift,
@@ -2315,101 +2570,6 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_bias_fast(const u8_t * in_tensor,
 /**
  * @brief           This function performs fast convolution with unsigned 8-bit
  *                  integers for inputs and signed 16-bit integers for outputs,
- *                  incorporating bias inputs and applying symmetric
- *                  quantization to the outputs.
- * @param[in]       in_tensor       Pointer to the input vector
- * @param[in]       in_tensor_dim   Dimension of the input tensor
- * @param[in]       in_tensor_ch    Number of input tensor channels
- * @param[in]       ker_weight      Pointer of kernel weights
- * @param[in]       out_tensor_ch   Number of output tensor channels
- * @param[in]       ker_dim         Dimension of the filter kernel
- * @param[in]       pad             Padding size
- * @param[in]       stride          Convolution stride
- * @param[in]       bias            Pointer to the bias vector
- * @param[in]       pre_rshift      Right shift amount for the output before
- *                                  scaling
- * @param[in]       out_scale       Value of scaling for the output
- * @param[in]       post_rshift     Right shift amount for the output after
- *                                  scaling
- * @param[out]      out_tensor      Pointer to the output tensor
- * @param[in]       out_tensor_dim  Dimension of the output tensor
- * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
- *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be equal to "2 *
- *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
- *                  fail to meet the following constraints: in_tensor_ch is a
- *                  multiple of 4, and out_tensor_ch is a multiple of 2.
- *
- * @note
- *  The outputs will be two-stage shifted before being stored, for example:
- *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
- */
-int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_bias_fast(const u8_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const q31_t * bias,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q15_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            q15_t * in_tmp_buf);
-
-/**
- * @brief           This function performs fast convolution with signed 8-bit
- *                  integers for both inputs and outputs, applying symmetric
- *                  quantization to the outputs.
- * @param[in]       in_tensor       Pointer to the input vector
- * @param[in]       in_tensor_dim   Dimension of the input tensor
- * @param[in]       in_tensor_ch    Number of input tensor channels
- * @param[in]       ker_weight      Pointer of kernel weights
- * @param[in]       out_tensor_ch   Number of output tensor channels
- * @param[in]       ker_dim         Dimension of the filter kernel
- * @param[in]       pad             Padding size
- * @param[in]       stride          Convolution stride
- * @param[in]       pre_rshift      Right shift amount for the output before
- *                                  scaling
- * @param[in]       out_scale       Value of scaling for the output
- * @param[in]       post_rshift     Right shift amount for the output after
- *                                  scaling
- * @param[out]      out_tensor      Pointer to the output tensor
- * @param[in]       out_tensor_dim  Dimension of the output tensor
- * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
- *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be equal to "2 *
- *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
- *                  fail to meet the following constraints: in_tensor_ch is a
- *                  multiple of 4, and out_tensor_ch is a multiple of 2.
- *
- * @note
- *  The outputs will be two-stage shifted before being stored, for example:
- *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
- */
-int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_fast(const q7_t * in_tensor,
-                                    const uint16_t in_tensor_dim,
-                                    const uint16_t in_tensor_ch,
-                                    const q7_t * ker_weight,
-                                    const uint16_t out_tensor_ch,
-                                    const uint16_t ker_dim,
-                                    const uint16_t pad,
-                                    const uint16_t stride,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    q7_t * out_tensor,
-                                    const uint16_t out_tensor_dim,
-                                    q15_t * in_tmp_buf);
-
-/**
- * @brief           This function performs fast convolution with signed 8-bit
- *                  integers for inputs and signed 16-bit integers for outputs,
  *                  applying symmetric quantization to the outputs.
  * @param[in]       in_tensor       Pointer to the input vector
  * @param[in]       in_tensor_dim   Dimension of the input tensor
@@ -2428,146 +2588,8 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_fast(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim  Dimension of the output tensor
  * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
  *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be equal to "2 *
- *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
- *                  fail to meet the following constraints: in_tensor_ch is a
- *                  multiple of 4, and out_tensor_ch is a multiple of 2.
- *
- * @note
- *  The outputs will be two-stage shifted before being stored, for example:
- *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
- */
-int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_fast(const q7_t * in_tensor,
-                                        const uint16_t in_tensor_dim,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim,
-                                        const uint16_t pad,
-                                        const uint16_t stride,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        q15_t * out_tensor,
-                                        const uint16_t out_tensor_dim,
-                                        q15_t * in_tmp_buf);
-
-/**
- * @brief           This function performs fast convolution with unsigned 8-bit
- *                  integers for both inputs and outputs, applying symmetric
- *                  quantization to the outputs.
- * @param[in]       in_tensor       Pointer to the input vector
- * @param[in]       in_tensor_dim   Dimension of the input tensor
- * @param[in]       in_tensor_ch    Number of input tensor channels
- * @param[in]       ker_weight      Pointer of kernel weights
- * @param[in]       out_tensor_ch   Number of output tensor channels
- * @param[in]       ker_dim         Dimension of the filter kernel
- * @param[in]       pad             Padding size
- * @param[in]       stride          Convolution stride
- * @param[in]       pre_rshift      Right shift amount for the output before
- *                                  scaling
- * @param[in]       out_scale       Value of scaling for the output
- * @param[in]       post_rshift     Right shift amount for the output after
- *                                  scaling
- * @param[out]      out_tensor      Pointer to the output tensor
- * @param[in]       out_tensor_dim  Dimension of the output tensor
- * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
- *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be equal to "2 *
- *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
- *                  fail to meet the following constraints: in_tensor_ch is a
- *                  multiple of 4, and out_tensor_ch is a multiple of 2.
- *
- * @note
- *  The outputs will be two-stage shifted before being stored, for example:
- *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
- */
-int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_fast(const u8_t * in_tensor,
-                                    const uint16_t in_tensor_dim,
-                                    const uint16_t in_tensor_ch,
-                                    const q7_t * ker_weight,
-                                    const uint16_t out_tensor_ch,
-                                    const uint16_t ker_dim,
-                                    const uint16_t pad,
-                                    const uint16_t stride,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    u8_t * out_tensor,
-                                    const uint16_t out_tensor_dim,
-                                    q15_t * in_tmp_buf);
-
-/**
- * @brief           This function performs fast convolution with unsigned 8-bit
- *                  integers for inputs and signed 8-bit integers for outputs,
- *                  applying symmetric quantization to the outputs.
- * @param[in]       in_tensor       Pointer to the input vector
- * @param[in]       in_tensor_dim   Dimension of the input tensor
- * @param[in]       in_tensor_ch    Number of input tensor channels
- * @param[in]       ker_weight      Pointer of kernel weights
- * @param[in]       out_tensor_ch   Number of output tensor channels
- * @param[in]       ker_dim         Dimension of the filter kernel
- * @param[in]       pad             Padding size
- * @param[in]       stride          Convolution stride
- * @param[in]       pre_rshift      Right shift amount for the output before
- *                                  scaling
- * @param[in]       out_scale       Value of scaling for the output
- * @param[in]       post_rshift     Right shift amount for the output after
- *                                  scaling
- * @param[out]      out_tensor      Pointer to the output tensor
- * @param[in]       out_tensor_dim  Dimension of the output tensor
- * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
- *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be equal to "2 *
- *                                  in_tensor_ch * ker_dim * ker_dim".
- * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
- *                  fail to meet the following constraints: in_tensor_ch is a
- *                  multiple of 4, and out_tensor_ch is a multiple of 2.
- *
- * @note
- *  The outputs will be two-stage shifted before being stored, for example:
- *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
- */
-int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_fast(const u8_t * in_tensor,
-                                        const uint16_t in_tensor_dim,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim,
-                                        const uint16_t pad,
-                                        const uint16_t stride,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        q7_t * out_tensor,
-                                        const uint16_t out_tensor_dim,
-                                        q15_t * in_tmp_buf);
-
-/**
- * @brief           This function performs fast convolution with unsigned 8-bit
- *                  integers for inputs and signed 16-bit integers for outputs,
- *                  applying symmetric quantization to the outputs.
- * @param[in]       in_tensor       Pointer to the input vector
- * @param[in]       in_tensor_dim   Dimension of the input tensor
- * @param[in]       in_tensor_ch    Number of input tensor channels
- * @param[in]       ker_weight      Pointer of kernel weights
- * @param[in]       out_tensor_ch   Number of output tensor channels
- * @param[in]       ker_dim         Dimension of the filter kernel
- * @param[in]       pad             Padding size
- * @param[in]       stride          Convolution stride
- * @param[in]       pre_rshift      Right shift amount for the output before
- *                                  scaling
- * @param[in]       out_scale       Value of scaling for the output
- * @param[in]       post_rshift     Right shift amount for the output after
- *                                  scaling
- * @param[out]      out_tensor      Pointer to the output tensor
- * @param[in]       out_tensor_dim  Dimension of the output tensor
- * @param[in]       in_tmp_buf      Temporary buffer for the input tensor. It is
- *                                  required when -mext-dsp or -mext-vector
- *                                  enabled and its size must be equal to "2 *
- *                                  in_tensor_ch * ker_dim * ker_dim".
+ *                                  enabled and its needed size could be
+ *                                  obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2577,19 +2599,19 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_fast(const u8_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_fast(const u8_t * in_tensor,
-                                        const uint16_t in_tensor_dim,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim,
-                                        const uint16_t pad,
-                                        const uint16_t stride,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        q15_t * out_tensor,
-                                        const uint16_t out_tensor_dim,
-                                        q15_t * in_tmp_buf);
+                                             const uint16_t in_tensor_dim,
+                                             const uint16_t in_tensor_ch,
+                                             const q7_t * ker_weight,
+                                             const uint16_t out_tensor_ch,
+                                             const uint16_t ker_dim,
+                                             const uint16_t pad,
+                                             const uint16_t stride,
+                                             const uint16_t pre_rshift,
+                                             const uint16_t out_scale,
+                                             const uint16_t post_rshift,
+                                             q15_t * out_tensor,
+                                             const uint16_t out_tensor_dim,
+                                             q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with signed 8-bit
@@ -2619,9 +2641,8 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_fast(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector enabled and its size must
- *                                      be equal to "2 * in_tensor_ch * ker_dim_x
- *                                      * ker_dim_y".
+ *                                      -mext-vector enabled and its needed size
+ *                                      could be obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2631,25 +2652,25 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_fast(const u8_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_bias_fast_any(const q7_t * in_tensor,
-                                            const uint16_t in_tensor_dim_x,
-                                            const uint16_t in_tensor_dim_y,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim_x,
-                                            const uint16_t ker_dim_y,
-                                            const uint16_t pad_x,
-                                            const uint16_t pad_y,
-                                            const uint16_t stride_x,
-                                            const uint16_t stride_y,
-                                            const q31_t * bias,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q7_t * out_tensor,
-                                            const uint16_t out_tensor_dim_x,
-                                            const uint16_t out_tensor_dim_y,
-                                            q15_t * in_tmp_buf);
+                                                     const uint16_t in_tensor_dim_x,
+                                                     const uint16_t in_tensor_dim_y,
+                                                     const uint16_t in_tensor_ch,
+                                                     const q7_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim_x,
+                                                     const uint16_t ker_dim_y,
+                                                     const uint16_t pad_x,
+                                                     const uint16_t pad_y,
+                                                     const uint16_t stride_x,
+                                                     const uint16_t stride_y,
+                                                     const q31_t * bias,
+                                                     const uint16_t pre_rshift,
+                                                     const uint16_t out_scale,
+                                                     const uint16_t post_rshift,
+                                                     q7_t * out_tensor,
+                                                     const uint16_t out_tensor_dim_x,
+                                                     const uint16_t out_tensor_dim_y,
+                                                     q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with signed 8-bit
@@ -2679,9 +2700,8 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_bias_fast_any(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector enabled and its size must
- *                                      be equal to "2 * in_tensor_ch * ker_dim_x
- *                                      * ker_dim_y".
+ *                                      -mext-vector enabled and its needed size
+ *                                      could be obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2691,25 +2711,25 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_bias_fast_any(const q7_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_bias_fast_any(const q7_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const q31_t * bias,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q15_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf);
+                                                      const uint16_t in_tensor_dim_x,
+                                                      const uint16_t in_tensor_dim_y,
+                                                      const uint16_t in_tensor_ch,
+                                                      const q7_t * ker_weight,
+                                                      const uint16_t out_tensor_ch,
+                                                      const uint16_t ker_dim_x,
+                                                      const uint16_t ker_dim_y,
+                                                      const uint16_t pad_x,
+                                                      const uint16_t pad_y,
+                                                      const uint16_t stride_x,
+                                                      const uint16_t stride_y,
+                                                      const q31_t * bias,
+                                                      const uint16_t pre_rshift,
+                                                      const uint16_t out_scale,
+                                                      const uint16_t post_rshift,
+                                                      q15_t * out_tensor,
+                                                      const uint16_t out_tensor_dim_x,
+                                                      const uint16_t out_tensor_dim_y,
+                                                      q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with unsigned 8-bit
@@ -2739,9 +2759,8 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_bias_fast_any(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector enabled and its size must
- *                                      be equal to "2 * in_tensor_ch * ker_dim_x
- *                                      * ker_dim_y".
+ *                                      -mext-vector enabled and its needed size
+ *                                      could be obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2751,25 +2770,25 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_bias_fast_any(const q7_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_bias_fast_any(const u8_t * in_tensor,
-                                            const uint16_t in_tensor_dim_x,
-                                            const uint16_t in_tensor_dim_y,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim_x,
-                                            const uint16_t ker_dim_y,
-                                            const uint16_t pad_x,
-                                            const uint16_t pad_y,
-                                            const uint16_t stride_x,
-                                            const uint16_t stride_y,
-                                            const q31_t * bias,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            u8_t * out_tensor,
-                                            const uint16_t out_tensor_dim_x,
-                                            const uint16_t out_tensor_dim_y,
-                                            q15_t * in_tmp_buf);
+                                                     const uint16_t in_tensor_dim_x,
+                                                     const uint16_t in_tensor_dim_y,
+                                                     const uint16_t in_tensor_ch,
+                                                     const q7_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim_x,
+                                                     const uint16_t ker_dim_y,
+                                                     const uint16_t pad_x,
+                                                     const uint16_t pad_y,
+                                                     const uint16_t stride_x,
+                                                     const uint16_t stride_y,
+                                                     const q31_t * bias,
+                                                     const uint16_t pre_rshift,
+                                                     const uint16_t out_scale,
+                                                     const uint16_t post_rshift,
+                                                     u8_t * out_tensor,
+                                                     const uint16_t out_tensor_dim_x,
+                                                     const uint16_t out_tensor_dim_y,
+                                                     q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with unsigned 8-bit
@@ -2799,9 +2818,8 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_bias_fast_any(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector enabled and its size must
- *                                      be equal to "2 * in_tensor_ch * ker_dim_x
- *                                      * ker_dim_y".
+ *                                      -mext-vector enabled and its needed size
+ *                                      could be obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2811,25 +2829,25 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_bias_fast_any(const u8_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_bias_fast_any(const u8_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const q31_t * bias,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q7_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf);
+                                                     const uint16_t in_tensor_dim_x,
+                                                     const uint16_t in_tensor_dim_y,
+                                                     const uint16_t in_tensor_ch,
+                                                     const q7_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim_x,
+                                                     const uint16_t ker_dim_y,
+                                                     const uint16_t pad_x,
+                                                     const uint16_t pad_y,
+                                                     const uint16_t stride_x,
+                                                     const uint16_t stride_y,
+                                                     const q31_t * bias,
+                                                     const uint16_t pre_rshift,
+                                                     const uint16_t out_scale,
+                                                     const uint16_t post_rshift,
+                                                     q7_t * out_tensor,
+                                                     const uint16_t out_tensor_dim_x,
+                                                     const uint16_t out_tensor_dim_y,
+                                                     q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with unsigned 8-bit
@@ -2859,9 +2877,8 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_bias_fast_any(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector enabled and its size must
- *                                      be equal to "2 * in_tensor_ch * ker_dim_x
- *                                      * ker_dim_y".
+ *                                      -mext-vector enabled and its needed size
+ *                                      could be obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2871,25 +2888,25 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_bias_fast_any(const u8_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const q31_t * bias,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q15_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf);
+                                                      const uint16_t in_tensor_dim_x,
+                                                      const uint16_t in_tensor_dim_y,
+                                                      const uint16_t in_tensor_ch,
+                                                      const q7_t * ker_weight,
+                                                      const uint16_t out_tensor_ch,
+                                                      const uint16_t ker_dim_x,
+                                                      const uint16_t ker_dim_y,
+                                                      const uint16_t pad_x,
+                                                      const uint16_t pad_y,
+                                                      const uint16_t stride_x,
+                                                      const uint16_t stride_y,
+                                                      const q31_t * bias,
+                                                      const uint16_t pre_rshift,
+                                                      const uint16_t out_scale,
+                                                      const uint16_t post_rshift,
+                                                      q15_t * out_tensor,
+                                                      const uint16_t out_tensor_dim_x,
+                                                      const uint16_t out_tensor_dim_y,
+                                                      q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with signed 8-bit
@@ -2917,9 +2934,8 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim_y    y dimension of the output tensor
  * @param[in]       in_tmp_buf          temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector enabled and its size must
- *                                      be equal to "2 * in_tensor_ch * ker_dim_x
- *                                      * ker_dim_y".
+ *                                      -mext-vector enabled and its needed size
+ *                                      could be obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2929,24 +2945,24 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_bias_fast_any(const u8_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_fast_any(const q7_t * in_tensor,
-                                        const uint16_t in_tensor_dim_x,
-                                        const uint16_t in_tensor_dim_y,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim_x,
-                                        const uint16_t ker_dim_y,
-                                        const uint16_t pad_x,
-                                        const uint16_t pad_y,
-                                        const uint16_t stride_x,
-                                        const uint16_t stride_y,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        q7_t * out_tensor,
-                                        const uint16_t out_tensor_dim_x,
-                                        const uint16_t out_tensor_dim_y,
-                                        q15_t * in_tmp_buf);
+                                                const uint16_t in_tensor_dim_x,
+                                                const uint16_t in_tensor_dim_y,
+                                                const uint16_t in_tensor_ch,
+                                                const q7_t * ker_weight,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t ker_dim_x,
+                                                const uint16_t ker_dim_y,
+                                                const uint16_t pad_x,
+                                                const uint16_t pad_y,
+                                                const uint16_t stride_x,
+                                                const uint16_t stride_y,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                q7_t * out_tensor,
+                                                const uint16_t out_tensor_dim_x,
+                                                const uint16_t out_tensor_dim_y,
+                                                q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with signed 8-bit
@@ -2975,9 +2991,8 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_fast_any(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector enabled and its size must
- *                                      be equal to "2 * in_tensor_ch * ker_dim_x
- *                                      * ker_dim_y".
+ *                                      -mext-vector enabled and its needed size
+ *                                      could be obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -2987,24 +3002,24 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_sym_fast_any(const q7_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_fast_any(const q7_t * in_tensor,
-                                            const uint16_t in_tensor_dim_x,
-                                            const uint16_t in_tensor_dim_y,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim_x,
-                                            const uint16_t ker_dim_y,
-                                            const uint16_t pad_x,
-                                            const uint16_t pad_y,
-                                            const uint16_t stride_x,
-                                            const uint16_t stride_y,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q15_t * out_tensor,
-                                            const uint16_t out_tensor_dim_x,
-                                            const uint16_t out_tensor_dim_y,
-                                            q15_t * in_tmp_buf);
+                                                 const uint16_t in_tensor_dim_x,
+                                                 const uint16_t in_tensor_dim_y,
+                                                 const uint16_t in_tensor_ch,
+                                                 const q7_t * ker_weight,
+                                                 const uint16_t out_tensor_ch,
+                                                 const uint16_t ker_dim_x,
+                                                 const uint16_t ker_dim_y,
+                                                 const uint16_t pad_x,
+                                                 const uint16_t pad_y,
+                                                 const uint16_t stride_x,
+                                                 const uint16_t stride_y,
+                                                 const uint16_t pre_rshift,
+                                                 const uint16_t out_scale,
+                                                 const uint16_t post_rshift,
+                                                 q15_t * out_tensor,
+                                                 const uint16_t out_tensor_dim_x,
+                                                 const uint16_t out_tensor_dim_y,
+                                                 q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with unsigned 8-bit
@@ -3032,9 +3047,8 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_fast_any(const q7_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector enabled and its size must
- *                                      be equal to "2 * in_tensor_ch * ker_dim_x
- *                                      * ker_dim_y".
+ *                                      -mext-vector enabled and its needed size
+ *                                      could be obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -3044,24 +3058,24 @@ int32_t riscv_nn_conv_HWC_s8_s16_s8_sym_fast_any(const q7_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_fast_any(const u8_t * in_tensor,
-                                        const uint16_t in_tensor_dim_x,
-                                        const uint16_t in_tensor_dim_y,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim_x,
-                                        const uint16_t ker_dim_y,
-                                        const uint16_t pad_x,
-                                        const uint16_t pad_y,
-                                        const uint16_t stride_x,
-                                        const uint16_t stride_y,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        u8_t * out_tensor,
-                                        const uint16_t out_tensor_dim_x,
-                                        const uint16_t out_tensor_dim_y,
-                                        q15_t * in_tmp_buf);
+                                                const uint16_t in_tensor_dim_x,
+                                                const uint16_t in_tensor_dim_y,
+                                                const uint16_t in_tensor_ch,
+                                                const q7_t * ker_weight,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t ker_dim_x,
+                                                const uint16_t ker_dim_y,
+                                                const uint16_t pad_x,
+                                                const uint16_t pad_y,
+                                                const uint16_t stride_x,
+                                                const uint16_t stride_y,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                u8_t * out_tensor,
+                                                const uint16_t out_tensor_dim_x,
+                                                const uint16_t out_tensor_dim_y,
+                                                q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with unsigned 8-bit
@@ -3090,9 +3104,8 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_fast_any(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector enabled and its size must
- *                                      be equal to "2 * in_tensor_ch * ker_dim_x
- *                                      * ker_dim_y".
+ *                                      -mext-vector enabled and its needed size
+ *                                      could be obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -3102,24 +3115,24 @@ int32_t riscv_nn_conv_HWC_u8_u8_s8_sym_fast_any(const u8_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_fast_any(const u8_t * in_tensor,
-                                            const uint16_t in_tensor_dim_x,
-                                            const uint16_t in_tensor_dim_y,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim_x,
-                                            const uint16_t ker_dim_y,
-                                            const uint16_t pad_x,
-                                            const uint16_t pad_y,
-                                            const uint16_t stride_x,
-                                            const uint16_t stride_y,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q7_t * out_tensor,
-                                            const uint16_t out_tensor_dim_x,
-                                            const uint16_t out_tensor_dim_y,
-                                            q15_t * in_tmp_buf);
+                                                const uint16_t in_tensor_dim_x,
+                                                const uint16_t in_tensor_dim_y,
+                                                const uint16_t in_tensor_ch,
+                                                const q7_t * ker_weight,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t ker_dim_x,
+                                                const uint16_t ker_dim_y,
+                                                const uint16_t pad_x,
+                                                const uint16_t pad_y,
+                                                const uint16_t stride_x,
+                                                const uint16_t stride_y,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                q7_t * out_tensor,
+                                                const uint16_t out_tensor_dim_x,
+                                                const uint16_t out_tensor_dim_y,
+                                                q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs fast convolution with unsigned 8-bit
@@ -3148,9 +3161,8 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_fast_any(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector enabled and its size must
- *                                      be equal to "2 * in_tensor_ch * ker_dim_x
- *                                      * ker_dim_y".
+ *                                      -mext-vector enabled and its needed size
+ *                                      could be obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the following constraints: in_tensor_ch is a
  *                  multiple of 4, and out_tensor_ch is a multiple of 2.
@@ -3160,25 +3172,24 @@ int32_t riscv_nn_conv_HWC_u8_s8_s8_sym_fast_any(const u8_t * in_tensor,
  *    out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_fast_any(const u8_t * in_tensor,
-                                            const uint16_t in_tensor_dim_x,
-                                            const uint16_t in_tensor_dim_y,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim_x,
-                                            const uint16_t ker_dim_y,
-                                            const uint16_t pad_x,
-                                            const uint16_t pad_y,
-                                            const uint16_t stride_x,
-                                            const uint16_t stride_y,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q15_t * out_tensor,
-                                            const uint16_t out_tensor_dim_x,
-                                            const uint16_t out_tensor_dim_y,
-                                            q15_t * in_tmp_buf);
-
+                                                 const uint16_t in_tensor_dim_x,
+                                                 const uint16_t in_tensor_dim_y,
+                                                 const uint16_t in_tensor_ch,
+                                                 const q7_t * ker_weight,
+                                                 const uint16_t out_tensor_ch,
+                                                 const uint16_t ker_dim_x,
+                                                 const uint16_t ker_dim_y,
+                                                 const uint16_t pad_x,
+                                                 const uint16_t pad_y,
+                                                 const uint16_t stride_x,
+                                                 const uint16_t stride_y,
+                                                 const uint16_t pre_rshift,
+                                                 const uint16_t out_scale,
+                                                 const uint16_t post_rshift,
+                                                 q15_t * out_tensor,
+                                                 const uint16_t out_tensor_dim_x,
+                                                 const uint16_t out_tensor_dim_y,
+                                                 q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -3212,20 +3223,20 @@ int32_t riscv_nn_conv_HWC_u8_s16_s8_sym_fast_any(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_bias(const q7_t * in_tensor,
-                                        const uint16_t in_tensor_dim,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim,
-                                        const uint16_t pad,
-                                        const uint16_t stride,
-                                        const q31_t * bias,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        q7_t * out_tensor,
-                                        const uint16_t out_tensor_dim,
-                                        q15_t * in_tmp_buf);
+                                               const uint16_t in_tensor_dim,
+                                               const uint16_t in_tensor_ch,
+                                               const q7_t * ker_weight,
+                                               const uint16_t out_tensor_ch,
+                                               const uint16_t ker_dim,
+                                               const uint16_t pad,
+                                               const uint16_t stride,
+                                               const q31_t * bias,
+                                               const uint16_t pre_rshift,
+                                               const uint16_t out_scale,
+                                               const uint16_t post_rshift,
+                                               q7_t * out_tensor,
+                                               const uint16_t out_tensor_dim,
+                                               q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -3261,20 +3272,20 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_bias(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_bias(const q7_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const q31_t * bias,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q15_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            q15_t * in_tmp_buf);
+                                                const uint16_t in_tensor_dim,
+                                                const uint16_t in_tensor_ch,
+                                                const q7_t * ker_weight,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t ker_dim,
+                                                const uint16_t pad,
+                                                const uint16_t stride,
+                                                const q31_t * bias,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                q15_t * out_tensor,
+                                                const uint16_t out_tensor_dim,
+                                                q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -3310,20 +3321,20 @@ int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_bias(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_bias(const u8_t * in_tensor,
-                                        const uint16_t in_tensor_dim,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim,
-                                        const uint16_t pad,
-                                        const uint16_t stride,
-                                        const q31_t * bias,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        u8_t * out_tensor,
-                                        const uint16_t out_tensor_dim,
-                                        q15_t * in_tmp_buf);
+                                               const uint16_t in_tensor_dim,
+                                               const uint16_t in_tensor_ch,
+                                               const q7_t * ker_weight,
+                                               const uint16_t out_tensor_ch,
+                                               const uint16_t ker_dim,
+                                               const uint16_t pad,
+                                               const uint16_t stride,
+                                               const q31_t * bias,
+                                               const uint16_t pre_rshift,
+                                               const uint16_t out_scale,
+                                               const uint16_t post_rshift,
+                                               u8_t * out_tensor,
+                                               const uint16_t out_tensor_dim,
+                                               q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -3359,20 +3370,20 @@ int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_bias(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_bias(const u8_t * in_tensor,
-                                        const uint16_t in_tensor_dim,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim,
-                                        const uint16_t pad,
-                                        const uint16_t stride,
-                                        const q31_t * bias,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        q7_t * out_tensor,
-                                        const uint16_t out_tensor_dim,
-                                        q15_t * in_tmp_buf);
+                                               const uint16_t in_tensor_dim,
+                                               const uint16_t in_tensor_ch,
+                                               const q7_t * ker_weight,
+                                               const uint16_t out_tensor_ch,
+                                               const uint16_t ker_dim,
+                                               const uint16_t pad,
+                                               const uint16_t stride,
+                                               const q31_t * bias,
+                                               const uint16_t pre_rshift,
+                                               const uint16_t out_scale,
+                                               const uint16_t post_rshift,
+                                               q7_t * out_tensor,
+                                               const uint16_t out_tensor_dim,
+                                               q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -3408,20 +3419,20 @@ int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_bias(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_bias(const u8_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const q31_t * bias,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q15_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            q15_t * in_tmp_buf);
+                                                const uint16_t in_tensor_dim,
+                                                const uint16_t in_tensor_ch,
+                                                const q7_t * ker_weight,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t ker_dim,
+                                                const uint16_t pad,
+                                                const uint16_t stride,
+                                                const q31_t * bias,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                q15_t * out_tensor,
+                                                const uint16_t out_tensor_dim,
+                                                q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -3453,19 +3464,19 @@ int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_bias(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym(const q7_t * in_tensor,
-                                const uint16_t in_tensor_dim,
-                                const uint16_t in_tensor_ch,
-                                const q7_t * ker_weight,
-                                const uint16_t out_tensor_ch,
-                                const uint16_t ker_dim,
-                                const uint16_t pad,
-                                const uint16_t stride,
-                                const uint16_t pre_rshift,
-                                const uint16_t out_scale,
-                                const uint16_t post_rshift,
-                                q7_t * out_tensor,
-                                const uint16_t out_tensor_dim,
-                                q15_t * in_tmp_buf);
+                                          const uint16_t in_tensor_dim,
+                                          const uint16_t in_tensor_ch,
+                                          const q7_t * ker_weight,
+                                          const uint16_t out_tensor_ch,
+                                          const uint16_t ker_dim,
+                                          const uint16_t pad,
+                                          const uint16_t stride,
+                                          const uint16_t pre_rshift,
+                                          const uint16_t out_scale,
+                                          const uint16_t post_rshift,
+                                          q7_t * out_tensor,
+                                          const uint16_t out_tensor_dim,
+                                          q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -3499,19 +3510,19 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym(const q7_t * in_tensor,
-                                    const uint16_t in_tensor_dim,
-                                    const uint16_t in_tensor_ch,
-                                    const q7_t * ker_weight,
-                                    const uint16_t out_tensor_ch,
-                                    const uint16_t ker_dim,
-                                    const uint16_t pad,
-                                    const uint16_t stride,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    q15_t * out_tensor,
-                                    const uint16_t out_tensor_dim,
-                                    q15_t * in_tmp_buf);
+                                           const uint16_t in_tensor_dim,
+                                           const uint16_t in_tensor_ch,
+                                           const q7_t * ker_weight,
+                                           const uint16_t out_tensor_ch,
+                                           const uint16_t ker_dim,
+                                           const uint16_t pad,
+                                           const uint16_t stride,
+                                           const uint16_t pre_rshift,
+                                           const uint16_t out_scale,
+                                           const uint16_t post_rshift,
+                                           q15_t * out_tensor,
+                                           const uint16_t out_tensor_dim,
+                                           q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -3545,19 +3556,19 @@ int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym(const u8_t * in_tensor,
-                                const uint16_t in_tensor_dim,
-                                const uint16_t in_tensor_ch,
-                                const q7_t * ker_weight,
-                                const uint16_t out_tensor_ch,
-                                const uint16_t ker_dim,
-                                const uint16_t pad,
-                                const uint16_t stride,
-                                const uint16_t pre_rshift,
-                                const uint16_t out_scale,
-                                const uint16_t post_rshift,
-                                u8_t * out_tensor,
-                                const uint16_t out_tensor_dim,
-                                q15_t * in_tmp_buf);
+                                          const uint16_t in_tensor_dim,
+                                          const uint16_t in_tensor_ch,
+                                          const q7_t * ker_weight,
+                                          const uint16_t out_tensor_ch,
+                                          const uint16_t ker_dim,
+                                          const uint16_t pad,
+                                          const uint16_t stride,
+                                          const uint16_t pre_rshift,
+                                          const uint16_t out_scale,
+                                          const uint16_t post_rshift,
+                                          u8_t * out_tensor,
+                                          const uint16_t out_tensor_dim,
+                                          q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -3591,19 +3602,19 @@ int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym(const u8_t * in_tensor,
-                                    const uint16_t in_tensor_dim,
-                                    const uint16_t in_tensor_ch,
-                                    const q7_t * ker_weight,
-                                    const uint16_t out_tensor_ch,
-                                    const uint16_t ker_dim,
-                                    const uint16_t pad,
-                                    const uint16_t stride,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    q7_t * out_tensor,
-                                    const uint16_t out_tensor_dim,
-                                    q15_t * in_tmp_buf);
+                                          const uint16_t in_tensor_dim,
+                                          const uint16_t in_tensor_ch,
+                                          const q7_t * ker_weight,
+                                          const uint16_t out_tensor_ch,
+                                          const uint16_t ker_dim,
+                                          const uint16_t pad,
+                                          const uint16_t stride,
+                                          const uint16_t pre_rshift,
+                                          const uint16_t out_scale,
+                                          const uint16_t post_rshift,
+                                          q7_t * out_tensor,
+                                          const uint16_t out_tensor_dim,
+                                          q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -3637,19 +3648,19 @@ int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym(const u8_t * in_tensor,
-                                    const uint16_t in_tensor_dim,
-                                    const uint16_t in_tensor_ch,
-                                    const q7_t * ker_weight,
-                                    const uint16_t out_tensor_ch,
-                                    const uint16_t ker_dim,
-                                    const uint16_t pad,
-                                    const uint16_t stride,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    q15_t * out_tensor,
-                                    const uint16_t out_tensor_dim,
-                                    q15_t * in_tmp_buf);
+                                           const uint16_t in_tensor_dim,
+                                           const uint16_t in_tensor_ch,
+                                           const q7_t * ker_weight,
+                                           const uint16_t out_tensor_ch,
+                                           const uint16_t ker_dim,
+                                           const uint16_t pad,
+                                           const uint16_t stride,
+                                           const uint16_t pre_rshift,
+                                           const uint16_t out_scale,
+                                           const uint16_t post_rshift,
+                                           q15_t * out_tensor,
+                                           const uint16_t out_tensor_dim,
+                                           q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -3688,25 +3699,25 @@ int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_bias_any(const q7_t * in_tensor,
-                                            const uint16_t in_tensor_dim_x,
-                                            const uint16_t in_tensor_dim_y,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim_x,
-                                            const uint16_t ker_dim_y,
-                                            const uint16_t pad_x,
-                                            const uint16_t pad_y,
-                                            const uint16_t stride_x,
-                                            const uint16_t stride_y,
-                                            const q31_t * bias,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q7_t * out_tensor,
-                                            const uint16_t out_tensor_dim_x,
-                                            const uint16_t out_tensor_dim_y,
-                                            q15_t * in_tmp_buf);
+                                                   const uint16_t in_tensor_dim_x,
+                                                   const uint16_t in_tensor_dim_y,
+                                                   const uint16_t in_tensor_ch,
+                                                   const q7_t * ker_weight,
+                                                   const uint16_t out_tensor_ch,
+                                                   const uint16_t ker_dim_x,
+                                                   const uint16_t ker_dim_y,
+                                                   const uint16_t pad_x,
+                                                   const uint16_t pad_y,
+                                                   const uint16_t stride_x,
+                                                   const uint16_t stride_y,
+                                                   const q31_t * bias,
+                                                   const uint16_t pre_rshift,
+                                                   const uint16_t out_scale,
+                                                   const uint16_t post_rshift,
+                                                   q7_t * out_tensor,
+                                                   const uint16_t out_tensor_dim_x,
+                                                   const uint16_t out_tensor_dim_y,
+                                                   q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -3747,25 +3758,25 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_bias_any(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_bias_any(const q7_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const q31_t * bias,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q15_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf);
+                                                    const uint16_t in_tensor_dim_x,
+                                                    const uint16_t in_tensor_dim_y,
+                                                    const uint16_t in_tensor_ch,
+                                                    const q7_t * ker_weight,
+                                                    const uint16_t out_tensor_ch,
+                                                    const uint16_t ker_dim_x,
+                                                    const uint16_t ker_dim_y,
+                                                    const uint16_t pad_x,
+                                                    const uint16_t pad_y,
+                                                    const uint16_t stride_x,
+                                                    const uint16_t stride_y,
+                                                    const q31_t * bias,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    q15_t * out_tensor,
+                                                    const uint16_t out_tensor_dim_x,
+                                                    const uint16_t out_tensor_dim_y,
+                                                    q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -3806,25 +3817,25 @@ int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_bias_any(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_bias_any(const u8_t * in_tensor,
-                                            const uint16_t in_tensor_dim_x,
-                                            const uint16_t in_tensor_dim_y,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim_x,
-                                            const uint16_t ker_dim_y,
-                                            const uint16_t pad_x,
-                                            const uint16_t pad_y,
-                                            const uint16_t stride_x,
-                                            const uint16_t stride_y,
-                                            const q31_t * bias,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            u8_t * out_tensor,
-                                            const uint16_t out_tensor_dim_x,
-                                            const uint16_t out_tensor_dim_y,
-                                            q15_t * in_tmp_buf);
+                                                   const uint16_t in_tensor_dim_x,
+                                                   const uint16_t in_tensor_dim_y,
+                                                   const uint16_t in_tensor_ch,
+                                                   const q7_t * ker_weight,
+                                                   const uint16_t out_tensor_ch,
+                                                   const uint16_t ker_dim_x,
+                                                   const uint16_t ker_dim_y,
+                                                   const uint16_t pad_x,
+                                                   const uint16_t pad_y,
+                                                   const uint16_t stride_x,
+                                                   const uint16_t stride_y,
+                                                   const q31_t * bias,
+                                                   const uint16_t pre_rshift,
+                                                   const uint16_t out_scale,
+                                                   const uint16_t post_rshift,
+                                                   u8_t * out_tensor,
+                                                   const uint16_t out_tensor_dim_x,
+                                                   const uint16_t out_tensor_dim_y,
+                                                   q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -3865,25 +3876,25 @@ int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_bias_any(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_bias_any(const u8_t * in_tensor,
-                                            const uint16_t in_tensor_dim_x,
-                                            const uint16_t in_tensor_dim_y,
-                                            const uint16_t in_tensor_ch,
-                                            const q7_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim_x,
-                                            const uint16_t ker_dim_y,
-                                            const uint16_t pad_x,
-                                            const uint16_t pad_y,
-                                            const uint16_t stride_x,
-                                            const uint16_t stride_y,
-                                            const q31_t * bias,
-                                            const uint16_t pre_rshift,
-                                            const uint16_t out_scale,
-                                            const uint16_t post_rshift,
-                                            q7_t * out_tensor,
-                                            const uint16_t out_tensor_dim_x,
-                                            const uint16_t out_tensor_dim_y,
-                                            q15_t * in_tmp_buf);
+                                                   const uint16_t in_tensor_dim_x,
+                                                   const uint16_t in_tensor_dim_y,
+                                                   const uint16_t in_tensor_ch,
+                                                   const q7_t * ker_weight,
+                                                   const uint16_t out_tensor_ch,
+                                                   const uint16_t ker_dim_x,
+                                                   const uint16_t ker_dim_y,
+                                                   const uint16_t pad_x,
+                                                   const uint16_t pad_y,
+                                                   const uint16_t stride_x,
+                                                   const uint16_t stride_y,
+                                                   const q31_t * bias,
+                                                   const uint16_t pre_rshift,
+                                                   const uint16_t out_scale,
+                                                   const uint16_t post_rshift,
+                                                   q7_t * out_tensor,
+                                                   const uint16_t out_tensor_dim_x,
+                                                   const uint16_t out_tensor_dim_y,
+                                                   q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -3924,25 +3935,25 @@ int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_bias_any(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_bias_any(const u8_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const q7_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const q31_t * bias,
-                                                const uint16_t pre_rshift,
-                                                const uint16_t out_scale,
-                                                const uint16_t post_rshift,
-                                                q15_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t * in_tmp_buf);
+                                                    const uint16_t in_tensor_dim_x,
+                                                    const uint16_t in_tensor_dim_y,
+                                                    const uint16_t in_tensor_ch,
+                                                    const q7_t * ker_weight,
+                                                    const uint16_t out_tensor_ch,
+                                                    const uint16_t ker_dim_x,
+                                                    const uint16_t ker_dim_y,
+                                                    const uint16_t pad_x,
+                                                    const uint16_t pad_y,
+                                                    const uint16_t stride_x,
+                                                    const uint16_t stride_y,
+                                                    const q31_t * bias,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    q15_t * out_tensor,
+                                                    const uint16_t out_tensor_dim_x,
+                                                    const uint16_t out_tensor_dim_y,
+                                                    q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -3980,24 +3991,24 @@ int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_bias_any(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_any(const q7_t * in_tensor,
-                                    const uint16_t in_tensor_dim_x,
-                                    const uint16_t in_tensor_dim_y,
-                                    const uint16_t in_tensor_ch,
-                                    const q7_t * ker_weight,
-                                    const uint16_t out_tensor_ch,
-                                    const uint16_t ker_dim_x,
-                                    const uint16_t ker_dim_y,
-                                    const uint16_t pad_x,
-                                    const uint16_t pad_y,
-                                    const uint16_t stride_x,
-                                    const uint16_t stride_y,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    q7_t * out_tensor,
-                                    const uint16_t out_tensor_dim_x,
-                                    const uint16_t out_tensor_dim_y,
-                                    q15_t * in_tmp_buf);
+                                              const uint16_t in_tensor_dim_x,
+                                              const uint16_t in_tensor_dim_y,
+                                              const uint16_t in_tensor_ch,
+                                              const q7_t * ker_weight,
+                                              const uint16_t out_tensor_ch,
+                                              const uint16_t ker_dim_x,
+                                              const uint16_t ker_dim_y,
+                                              const uint16_t pad_x,
+                                              const uint16_t pad_y,
+                                              const uint16_t stride_x,
+                                              const uint16_t stride_y,
+                                              const uint16_t pre_rshift,
+                                              const uint16_t out_scale,
+                                              const uint16_t post_rshift,
+                                              q7_t * out_tensor,
+                                              const uint16_t out_tensor_dim_x,
+                                              const uint16_t out_tensor_dim_y,
+                                              q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -4037,24 +4048,24 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_sym_any(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_any(const q7_t * in_tensor,
-                                        const uint16_t in_tensor_dim_x,
-                                        const uint16_t in_tensor_dim_y,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim_x,
-                                        const uint16_t ker_dim_y,
-                                        const uint16_t pad_x,
-                                        const uint16_t pad_y,
-                                        const uint16_t stride_x,
-                                        const uint16_t stride_y,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        q15_t * out_tensor,
-                                        const uint16_t out_tensor_dim_x,
-                                        const uint16_t out_tensor_dim_y,
-                                        q15_t * in_tmp_buf);
+                                               const uint16_t in_tensor_dim_x,
+                                               const uint16_t in_tensor_dim_y,
+                                               const uint16_t in_tensor_ch,
+                                               const q7_t * ker_weight,
+                                               const uint16_t out_tensor_ch,
+                                               const uint16_t ker_dim_x,
+                                               const uint16_t ker_dim_y,
+                                               const uint16_t pad_x,
+                                               const uint16_t pad_y,
+                                               const uint16_t stride_x,
+                                               const uint16_t stride_y,
+                                               const uint16_t pre_rshift,
+                                               const uint16_t out_scale,
+                                               const uint16_t post_rshift,
+                                               q15_t * out_tensor,
+                                               const uint16_t out_tensor_dim_x,
+                                               const uint16_t out_tensor_dim_y,
+                                               q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -4093,24 +4104,24 @@ int32_t riscv_nn_conv_dw_HWC_s8_s16_s8_sym_any(const q7_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_any(const u8_t * in_tensor,
-                                    const uint16_t in_tensor_dim_x,
-                                    const uint16_t in_tensor_dim_y,
-                                    const uint16_t in_tensor_ch,
-                                    const q7_t * ker_weight,
-                                    const uint16_t out_tensor_ch,
-                                    const uint16_t ker_dim_x,
-                                    const uint16_t ker_dim_y,
-                                    const uint16_t pad_x,
-                                    const uint16_t pad_y,
-                                    const uint16_t stride_x,
-                                    const uint16_t stride_y,
-                                    const uint16_t pre_rshift,
-                                    const uint16_t out_scale,
-                                    const uint16_t post_rshift,
-                                    u8_t * out_tensor,
-                                    const uint16_t out_tensor_dim_x,
-                                    const uint16_t out_tensor_dim_y,
-                                    q15_t * in_tmp_buf);
+                                              const uint16_t in_tensor_dim_x,
+                                              const uint16_t in_tensor_dim_y,
+                                              const uint16_t in_tensor_ch,
+                                              const q7_t * ker_weight,
+                                              const uint16_t out_tensor_ch,
+                                              const uint16_t ker_dim_x,
+                                              const uint16_t ker_dim_y,
+                                              const uint16_t pad_x,
+                                              const uint16_t pad_y,
+                                              const uint16_t stride_x,
+                                              const uint16_t stride_y,
+                                              const uint16_t pre_rshift,
+                                              const uint16_t out_scale,
+                                              const uint16_t post_rshift,
+                                              u8_t * out_tensor,
+                                              const uint16_t out_tensor_dim_x,
+                                              const uint16_t out_tensor_dim_y,
+                                              q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -4150,24 +4161,24 @@ int32_t riscv_nn_conv_dw_HWC_u8_u8_s8_sym_any(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_any(const u8_t * in_tensor,
-                                        const uint16_t in_tensor_dim_x,
-                                        const uint16_t in_tensor_dim_y,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim_x,
-                                        const uint16_t ker_dim_y,
-                                        const uint16_t pad_x,
-                                        const uint16_t pad_y,
-                                        const uint16_t stride_x,
-                                        const uint16_t stride_y,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        q7_t * out_tensor,
-                                        const uint16_t out_tensor_dim_x,
-                                        const uint16_t out_tensor_dim_y,
-                                        q15_t * in_tmp_buf);
+                                              const uint16_t in_tensor_dim_x,
+                                              const uint16_t in_tensor_dim_y,
+                                              const uint16_t in_tensor_ch,
+                                              const q7_t * ker_weight,
+                                              const uint16_t out_tensor_ch,
+                                              const uint16_t ker_dim_x,
+                                              const uint16_t ker_dim_y,
+                                              const uint16_t pad_x,
+                                              const uint16_t pad_y,
+                                              const uint16_t stride_x,
+                                              const uint16_t stride_y,
+                                              const uint16_t pre_rshift,
+                                              const uint16_t out_scale,
+                                              const uint16_t post_rshift,
+                                              q7_t * out_tensor,
+                                              const uint16_t out_tensor_dim_x,
+                                              const uint16_t out_tensor_dim_y,
+                                              q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -4207,24 +4218,24 @@ int32_t riscv_nn_conv_dw_HWC_u8_s8_s8_sym_any(const u8_t * in_tensor,
  *  out = ((out >> pre_rshift) * out_scale) >> post_rshift.
  */
 int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_any(const u8_t * in_tensor,
-                                        const uint16_t in_tensor_dim_x,
-                                        const uint16_t in_tensor_dim_y,
-                                        const uint16_t in_tensor_ch,
-                                        const q7_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim_x,
-                                        const uint16_t ker_dim_y,
-                                        const uint16_t pad_x,
-                                        const uint16_t pad_y,
-                                        const uint16_t stride_x,
-                                        const uint16_t stride_y,
-                                        const uint16_t pre_rshift,
-                                        const uint16_t out_scale,
-                                        const uint16_t post_rshift,
-                                        q15_t * out_tensor,
-                                        const uint16_t out_tensor_dim_x,
-                                        const uint16_t out_tensor_dim_y,
-                                        q15_t * in_tmp_buf);
+                                               const uint16_t in_tensor_dim_x,
+                                               const uint16_t in_tensor_dim_y,
+                                               const uint16_t in_tensor_ch,
+                                               const q7_t * ker_weight,
+                                               const uint16_t out_tensor_ch,
+                                               const uint16_t ker_dim_x,
+                                               const uint16_t ker_dim_y,
+                                               const uint16_t pad_x,
+                                               const uint16_t pad_y,
+                                               const uint16_t stride_x,
+                                               const uint16_t stride_y,
+                                               const uint16_t pre_rshift,
+                                               const uint16_t out_scale,
+                                               const uint16_t post_rshift,
+                                               q15_t * out_tensor,
+                                               const uint16_t out_tensor_dim_x,
+                                               const uint16_t out_tensor_dim_y,
+                                               q15_t * in_tmp_buf);
 
 /**
  * @brief           This function performs convolution with signed 8-bit
@@ -4254,40 +4265,70 @@ int32_t riscv_nn_conv_dw_HWC_u8_s16_s8_sym_any(const u8_t * in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
- *                                      -mext-vector enabled and its size must
- *                                      be equal to "2 * in_tensor_ch * ker_dim_x
- *                                      * ker_dim_y".
+ *                                      -mext-vector enabled and its needed size
+ *                                      could be obtained by calling riscv_nn_conv_sym_get_buffer_size.
  * @param[in]       tmp_buf             Dummy
  * @return          None
  */
 void riscv_nn_conv_HWC_s8_s8_s8_sym_bias_any(const q7_t * in_tensor,
-                            const uint16_t in_tensor_dim_x,
-                            const uint16_t in_tensor_dim_y,
-                            const uint16_t in_tensor_ch,
-                            const q7_t * ker_weight,
-                            const uint16_t out_tensor_ch,
-                            const uint16_t ker_dim_x,
-                            const uint16_t ker_dim_y,
-                            const uint16_t pad_x,
-                            const uint16_t pad_y,
-                            const uint16_t stride_x,
-                            const uint16_t stride_y,
-                            const q31_t * bias,
-                            const uint16_t pre_rshift,
-                            const uint16_t out_scale,
-                            const uint16_t post_rshift,
-                            q7_t * out_tensor,
-                            const uint16_t out_tensor_dim_x,
-                            const uint16_t out_tensor_dim_y,
-                            q15_t * in_tmp_buf,
-                            q7_t * tmp_buf);
+                                             const uint16_t in_tensor_dim_x,
+                                             const uint16_t in_tensor_dim_y,
+                                             const uint16_t in_tensor_ch,
+                                             const q7_t * ker_weight,
+                                             const uint16_t out_tensor_ch,
+                                             const uint16_t ker_dim_x,
+                                             const uint16_t ker_dim_y,
+                                             const uint16_t pad_x,
+                                             const uint16_t pad_y,
+                                             const uint16_t stride_x,
+                                             const uint16_t stride_y,
+                                             const q31_t * bias,
+                                             const uint16_t pre_rshift,
+                                             const uint16_t out_scale,
+                                             const uint16_t post_rshift,
+                                             q7_t * out_tensor,
+                                             const uint16_t out_tensor_dim_x,
+                                             const uint16_t out_tensor_dim_y,
+                                             q15_t * in_tmp_buf,
+                                             q7_t * tmp_buf);
+
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for those convolution
+ *                  functions with symmetric quantization.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @return          Returns the required length of the temporary buffer.
+ */
+uint32_t riscv_nn_conv_sym_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                           const uint16_t in_tensor_dim_y,
+                                           const uint16_t in_tensor_ch,
+                                           const uint16_t out_tensor_ch,
+                                           const uint16_t ker_dim_x,
+                                           const uint16_t ker_dim_y,
+                                           const uint16_t pad_x,
+                                           const uint16_t pad_y,
+                                           const uint16_t stride_x,
+                                           const uint16_t stride_y,
+                                           const uint16_t out_tensor_dim_x,
+                                           const uint16_t out_tensor_dim_y);
 
 /**
  * @brief           This function performs transposed convolution with signed
  *                  8-bit integers for both inputs and outputs across any x and
  *                  y dimensions, incorporating bias inputs and applying
  *                  symmetric quantization to the outputs.
- * @param[in]       in_tensor           Pointer to the input vector
+ * @param[in]       in_tensor           Pointer to the input tensor
  * @param[in]       in_tensor_dim_x     X dimension of the input tensor
  * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
  * @param[in]       in_tensor_ch        Number of input tensor channels
@@ -4320,29 +4361,29 @@ void riscv_nn_conv_HWC_s8_s8_s8_sym_bias_any(const q7_t * in_tensor,
  *  bias could be a null pointer as the bias vector is optional for this
  *  function.
  */
-int32_t riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any(const q7_t *in_tensor,
-    const uint16_t in_tensor_dim_x,
-    const uint16_t in_tensor_dim_y,
-    const uint16_t in_tensor_ch,
-    const uint16_t in_tensor_batch,
-    const q7_t *ker_weight,
-    const uint16_t out_tensor_ch,
-    const uint16_t ker_dim_x,
-    const uint16_t ker_dim_y,
-    const uint16_t pad_x,
-    const uint16_t pad_y,
-    const uint16_t pad_offset_x,
-    const uint16_t pad_offset_y,
-    const uint16_t stride_x,
-    const uint16_t stride_y,
-    const int32_t *bias,
-    const uint16_t pre_rshift,
-    const uint16_t out_scale,
-    const uint16_t post_rshift,
-    q7_t *out_tensor,
-    const uint16_t out_tensor_dim_x,
-    const uint16_t out_tensor_dim_y,
-    int8_t *tmp_buf);
+int32_t riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any(const q7_t * in_tensor,
+                                                      const uint16_t in_tensor_dim_x,
+                                                      const uint16_t in_tensor_dim_y,
+                                                      const uint16_t in_tensor_ch,
+                                                      const uint16_t in_tensor_batch,
+                                                      const q7_t * ker_weight,
+                                                      const uint16_t out_tensor_ch,
+                                                      const uint16_t ker_dim_x,
+                                                      const uint16_t ker_dim_y,
+                                                      const uint16_t pad_x,
+                                                      const uint16_t pad_y,
+                                                      const uint16_t pad_offset_x,
+                                                      const uint16_t pad_offset_y,
+                                                      const uint16_t stride_x,
+                                                      const uint16_t stride_y,
+                                                      const q31_t * bias,
+                                                      const uint16_t pre_rshift,
+                                                      const uint16_t out_scale,
+                                                      const uint16_t post_rshift,
+                                                      q7_t * out_tensor,
+                                                      const uint16_t out_tensor_dim_x,
+                                                      const uint16_t out_tensor_dim_y,
+                                                      q7_t * tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
@@ -4364,24 +4405,407 @@ int32_t riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any(const q7_t *in_tensor,
  * @return          Returns the size required by the temporary buffer.
  */
 uint32_t riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any_get_buffer_size(const uint16_t in_tensor_dim_x,
-                                                   const uint16_t in_tensor_dim_y,
-                                                   const uint16_t in_tensor_ch,
-                                                   const uint16_t in_tensor_batch,
-                                                   const uint16_t out_tensor_ch,
-                                                   const uint16_t ker_dim_x,
-                                                   const uint16_t ker_dim_y,
-                                                   const uint16_t pad_x,
-                                                   const uint16_t pad_y,
-                                                   const uint16_t stride_x,
-                                                   const uint16_t stride_y,
-                                                   const uint16_t out_tensor_dim_x,
-                                                   const uint16_t out_tensor_dim_y);
+                                                                       const uint16_t in_tensor_dim_y,
+                                                                       const uint16_t in_tensor_ch,
+                                                                       const uint16_t in_tensor_batch,
+                                                                       const uint16_t out_tensor_ch,
+                                                                       const uint16_t ker_dim_x,
+                                                                       const uint16_t ker_dim_y,
+                                                                       const uint16_t pad_x,
+                                                                       const uint16_t pad_y,
+                                                                       const uint16_t stride_x,
+                                                                       const uint16_t stride_y,
+                                                                       const uint16_t out_tensor_dim_x,
+                                                                       const uint16_t out_tensor_dim_y);
+
+/**
+ * @brief           This function performs transposed convolution with signed
+ *                  8-bit integers for both inputs and outputs across any x and
+ *                  y dimensions, applying asymmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       pad_offset_x        Dummy
+ * @param[in]       pad_offset_y        Dummy
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_scale           Pointer to the scaling vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_offset          Offset value for the output tensor. It
+ *                                      should be in the range of -128 to 127.
+ * @param[in]       in_offset           Offset value for the input tensor. It
+ *                                      should be in the range of -127 to 128.
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       act_max             Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       tmp_buf             Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any_get_buffer_size.
+ * @return          This function only returns 0.
+ *
+ * @note
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to
+ *    left shift calculation results whereas a negative one is used to right
+ *    shift.
+ */
+int32_t riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any(const int8_t * in_tensor,
+                                                       const uint16_t in_tensor_dim_x,
+                                                       const uint16_t in_tensor_dim_y,
+                                                       const uint16_t in_tensor_ch,
+                                                       const uint16_t in_tensor_batch,
+                                                       const int8_t * ker_weight,
+                                                       const uint16_t out_tensor_ch,
+                                                       const uint16_t ker_dim_x,
+                                                       const uint16_t ker_dim_y,
+                                                       const uint16_t pad_x,
+                                                       const uint16_t pad_y,
+                                                       const uint16_t pad_offset_x,
+                                                       const uint16_t pad_offset_y,
+                                                       const uint16_t stride_x,
+                                                       const uint16_t stride_y,
+                                                       const int32_t * bias,
+                                                       int8_t * out_tensor,
+                                                       const int32_t * out_shift,
+                                                       const int32_t * out_scale,
+                                                       const int32_t out_offset,
+                                                       const int32_t in_offset,
+                                                       const int32_t act_min,
+                                                       const int32_t act_max,
+                                                       const uint16_t out_tensor_dim_x,
+                                                       const uint16_t out_tensor_dim_y,
+                                                       int8_t * tmp_buf);
+
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @return          Returns the required size by the temporary buffer.
+ */
+uint32_t riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                                                        const uint16_t in_tensor_dim_y,
+                                                                        const uint16_t in_tensor_ch,
+                                                                        const uint16_t in_tensor_batch,
+                                                                        const uint16_t out_tensor_ch,
+                                                                        const uint16_t ker_dim_x,
+                                                                        const uint16_t ker_dim_y,
+                                                                        const uint16_t pad_x,
+                                                                        const uint16_t pad_y,
+                                                                        const uint16_t stride_x,
+                                                                        const uint16_t stride_y,
+                                                                        const uint16_t out_tensor_dim_x,
+                                                                        const uint16_t out_tensor_dim_y);
+
+/**
+ * @brief           This function performs transposed convolution with signed
+ *                  16-bit integers for both inputs and outputs across any x and
+ *                  y dimensions, applying asymmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       pad_offset_x        Dummy
+ * @param[in]       pad_offset_y        Dummy
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_scale           Pointer to the scaling vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_offset          Dummy
+ * @param[in]       in_offset           Dummy
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -32768 to 32767.
+ * @param[in]       act_max             Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -32768 to 32767.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_trans_HWC_s16_s16_s8_asym_bias_any_get_buffer_size.
+ * @return          Returns 0 if successful
+ *
+ * @note
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to
+ *    left shift calculation results whereas a negative one is used to right
+ *    shift.
+ */
+int32_t riscv_nn_conv_trans_HWC_s16_s16_s8_asym_bias_any(const int16_t * in_tensor,
+                                                         const int32_t in_tensor_dim_x,
+                                                         const int32_t in_tensor_dim_y,
+                                                         const int32_t in_tensor_ch,
+                                                         const int32_t in_tensor_batch,
+                                                         const int8_t * ker_weight,
+                                                         const int32_t out_tensor_ch,
+                                                         const int32_t ker_dim_x,
+                                                         const int32_t ker_dim_y,
+                                                         const int32_t pad_x,
+                                                         const int32_t pad_y,
+                                                         const int32_t pad_offset_x,
+                                                         const int32_t pad_offset_y,
+                                                         const int32_t stride_x,
+                                                         const int32_t stride_y,
+                                                         const int64_t * bias,
+                                                         int16_t * out_tensor,
+                                                         const int32_t * out_shift,
+                                                         const int32_t * out_scale,
+                                                         const int32_t out_offset,
+                                                         const int32_t in_offset,
+                                                         const int32_t act_min,
+                                                         const int32_t act_max,
+                                                         const int32_t out_tensor_dim_x,
+                                                         const int32_t out_tensor_dim_y,
+                                                         int8_t * in_tmp_buf);
+
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_trans_HWC_s16_s16_s8_asym_bias_any.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @return          Returns the required size by the temporary buffer.
+ */
+uint32_t riscv_nn_conv_trans_HWC_s16_s16_s8_asym_bias_any_get_buffer_size(const int32_t in_tensor_dim_x,
+                                                                          const int32_t in_tensor_dim_y,
+                                                                          const int32_t in_tensor_ch,
+                                                                          const int32_t in_tensor_batch,
+                                                                          const int32_t out_tensor_ch,
+                                                                          const int32_t ker_dim_x,
+                                                                          const int32_t ker_dim_y,
+                                                                          const int32_t pad_x,
+                                                                          const int32_t pad_y,
+                                                                          const int32_t stride_x,
+                                                                          const int32_t stride_y,
+                                                                          const int32_t out_tensor_dim_x,
+                                                                          const int32_t out_tensor_dim_y);
+/**
+ * @brief           This function performs transposed convolution with signed
+ *                  16-bit integers for both inputs and outputs across any x
+ *                  dimensions, applying asymmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_scale           Pointer to the scaling vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_offset          Dummy
+ * @param[in]       in_offset           Dummy
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -32768 to 32767.
+ * @param[in]       act_max             Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -32768 to 32767.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_trans_1xn_HWC_s16_s16_s8_asym_bias_any_get_buffer_size.
+ * @return          Returns 0 if successful
+ *
+ * @note
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to
+ *    left shift calculation results whereas a negative one is used to right
+ *    shift.
+ */
+int32_t riscv_nn_conv_trans_1xn_HWC_s16_s16_s8_asym_bias_any(const int16_t * in_tensor,
+                                                             const int32_t in_tensor_dim_x,
+                                                             const int32_t in_tensor_ch,
+                                                             const int32_t in_tensor_batch,
+                                                             const int8_t * ker_weight,
+                                                             const int32_t out_tensor_ch,
+                                                             const int32_t ker_dim_x,
+                                                             const int32_t pad_x,
+                                                             const int32_t stride_x,
+                                                             const int64_t * bias,
+                                                             int16_t * out_tensor,
+                                                             const int32_t * out_shift,
+                                                             const int32_t * out_scale,
+                                                             const int32_t out_offset,
+                                                             const int32_t in_offset,
+                                                             const int32_t act_min,
+                                                             const int32_t act_max,
+                                                             const int32_t out_tensor_dim_x,
+                                                             int8_t * in_tmp_buf);
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_trans_1xn_HWC_s16_s16_s8_asym_bias_any.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @return          Returns the required size by the temporary buffer.
+ */
+uint32_t riscv_nn_conv_trans_1xn_HWC_s16_s16_s8_asym_bias_any_get_buffer_size(const uint32_t in_tensor_dim_x,
+                                                                              const uint32_t in_tensor_ch,
+                                                                              const uint32_t in_tensor_batch,
+                                                                              const uint32_t out_tensor_ch,
+                                                                              const uint32_t ker_dim_x,
+                                                                              const uint32_t pad_x,
+                                                                              const uint32_t stride_x,
+                                                                              const uint32_t out_tensor_dim_x);
 
 /**
  * @brief           This function performs convolution using a 1x1 kernel on
- *                  signed 8-bit integers for both inputs and outputs across
- *                  any x and y dimensions, applying asymmetric quantization to
- *                  the outputs.
+ *                  signed 8-bit integers for both inputs and outputs and signed
+ *                  4-bit integers for the kernel weight across any x and y
+ *                  dimensions, applying asymmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_scale           Pointer to the scaling vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_offset          Offset value for the output tensor. It
+ *                                      should be in the range of -128 to 127.
+ * @param[in]       in_offset           Offset value for the input tensor. It
+ *                                      should be in the range of -127 to 128.
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       act_max              Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       tmp_buf             Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_1x1_HWC_s8_s8_s4_asym_bias_fast_any_get_buffer_size.
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraints specified in Note below.
+ *
+ * @note
+ *  - The input constraints of this function are:
+ *     - pad_x is 0
+ *     - pad_y is 0
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to
+ *    left shift calculation results whereas a negative one is used to right
+ *    shift.
+ */
+int32_t riscv_nn_conv_1x1_HWC_s8_s8_s4_asym_bias_any(const int8_t * in_tensor,
+                                                     const int32_t in_tensor_dim_x,
+                                                     const int32_t in_tensor_dim_y,
+                                                     const int32_t in_tensor_ch,
+                                                     const int32_t in_tensor_batch,
+                                                     const int8_t * ker_weight,
+                                                     const int32_t out_tensor_ch,
+                                                     const int32_t pad_x,
+                                                     const int32_t pad_y,
+                                                     const int32_t stride_x,
+                                                     const int32_t stride_y,
+                                                     const int32_t * bias,
+                                                     int8_t * out_tensor,
+                                                     const int32_t * out_shift,
+                                                     const int32_t * out_scale,
+                                                     const int32_t out_offset,
+                                                     const int32_t in_offset,
+                                                     const int32_t act_min,
+                                                     const int32_t act_max,
+                                                     const int32_t out_tensor_dim_x,
+                                                     const int32_t out_tensor_dim_y,
+                                                     int8_t * tmp_buf);
+
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_1x1_HWC_s8_s8_s4_asym_bias_fast_any.
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @return          Returns the required size by the temporary buffer.
+ */
+int32_t riscv_nn_conv_1x1_HWC_s8_s8_s4_asym_bias_any_get_buffer_size(const int32_t in_tensor_ch,
+                                                                     const int32_t out_tensor_ch);
+
+/**
+ * @brief           This function performs convolution using a 1x1 kernel on
+ *                  signed 8-bit integers for inputs, outputs and kernel weight
+ *                  across any x and y dimensions, applying asymmetric
+ *                  quantization to the outputs.
  * @param[in]       in_tensor           Pointer to the input tensor
  * @param[in]       in_tensor_dim_x     X dimension of the input tensor
  * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
@@ -4411,7 +4835,9 @@ uint32_t riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any_get_buffer_size(const uin
  *                                      -128 to 127.
  * @param[in]       out_tensor_dim_x    X dimension of the output tensor
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
- * @param[in]       tmp_buf             Dummy
+ * @param[in]       tmp_buf             Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size.
  * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
  *                  fail to meet the constraints specified in Note below.
  *
@@ -4424,47 +4850,64 @@ uint32_t riscv_nn_conv_trans_HWC_s8_s8_s8_sym_bias_any_get_buffer_size(const uin
  * - During the quantization process, a positive out_shift value is used to left
  *   shift calculation results whereas a negative one is used to right shift.
  */
-int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
-                                    const uint16_t in_tensor_dim_x,
-                                    const uint16_t in_tensor_dim_y,
-                                    const uint16_t in_tensor_ch,
-                                    const uint16_t in_tensor_batch,
-                                    const q7_t *ker_weight,
-                                    const uint16_t out_tensor_ch,
-                                    const uint16_t pad_x,
-                                    const uint16_t pad_y,
-                                    const uint16_t stride_x,
-                                    const uint16_t stride_y,
-                                    const int32_t *bias,
-                                    q7_t *out_tensor,
-                                    const int32_t *out_shift,
-                                    const int32_t *out_scale,
-                                    const int32_t out_offset,
-                                    const int32_t in_offset,
-                                    const int32_t act_min,
-                                    const int32_t act_max,
-                                    const uint16_t out_tensor_dim_x,
-                                    const uint16_t out_tensor_dim_y,
-                                    q15_t *tmp_buf);
+int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any(const int8_t * in_tensor,
+                                                          const uint16_t in_tensor_dim_x,
+                                                          const uint16_t in_tensor_dim_y,
+                                                          const uint16_t in_tensor_ch,
+                                                          const uint16_t in_tensor_batch,
+                                                          const int8_t * ker_weight,
+                                                          const uint16_t out_tensor_ch,
+                                                          const uint16_t pad_x,
+                                                          const uint16_t pad_y,
+                                                          const uint16_t stride_x,
+                                                          const uint16_t stride_y,
+                                                          const int32_t * bias,
+                                                          int8_t * out_tensor,
+                                                          const int32_t * out_shift,
+                                                          const int32_t * out_scale,
+                                                          const int32_t out_offset,
+                                                          const int32_t in_offset,
+                                                          const int32_t act_min,
+                                                          const int32_t act_max,
+                                                          const uint16_t out_tensor_dim_x,
+                                                          const uint16_t out_tensor_dim_y,
+                                                          int16_t * tmp_buf);
 
 /**
- * @brief           This function calculates the required size (in bytes) for
- *                  the input temporary buffer needed for
- *                  riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any
+ * @brief           This function calculates the required length for the input
+ *                  temporary buffer needed for
+ *                  riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
  * @param[in]       in_tensor_ch        Number of input tensor channels
- * @return          Returns the size required by the temporary buffer.
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @return          Returns the required length of the temporary buffer.
  */
-int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size(const uint16_t in_tensor_ch);
-
+int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                                                          const uint16_t in_tensor_dim_y,
+                                                                          const uint16_t in_tensor_ch,
+                                                                          const uint16_t out_tensor_ch,
+                                                                          const uint16_t pad_x,
+                                                                          const uint16_t pad_y,
+                                                                          const uint16_t stride_x,
+                                                                          const uint16_t stride_y,
+                                                                          const uint16_t out_tensor_dim_x,
+                                                                          const uint16_t out_tensor_dim_y);
 /**
  * @brief           This function performs convolution using a 1xn kernel on
- *                  signed 8-bit integers for both inputs and outputs across any
- *                  x and y dimensions, applying asymmetric quantization to the
- *                  outputs.
+ *                  signed 8-bit integers for both inputs and outputs and signed
+ *                  4-bit integers for the kernel weights across any x and y
+ *                  dimensions, applying asymmetric quantization to the outputs.
  * @param[in]       in_tensor           Pointer to the input tensor
  * @param[in]       in_tensor_dim_x     X dimension of the input tensor
  * @param[in]       in_tensor_ch        Number of input tensor channels
- * @param[in]       in_tensor_batch     Dummy
+ * @param[in]       in_tensor_batch     Size of input tensor batches
  * @param[in]       ker_weight          Pointer of kernel weights
  * @param[in]       out_tensor_ch       Number of output tensor channels
  * @param[in]       ker_dim_x           X dimension of the filter kernel
@@ -4487,11 +4930,101 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size(const 
  *                                      limited to. It should be in the range of
  *                                      -128 to 127.
  * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       dilation_x          Dilation factor for the x dimension
  * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
  *                                      It is required when -mext-dsp or
  *                                      -mext-vector is enabled and its needed
- *                                      size can be obtained by calling riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any_get_buffer_size.
- * @return          This function only returns 0.
+ *                                      size can be obtained by calling riscv_nn_conv_1xn_HWC_s8_s8_s4_asym_bias_any_get_buffer_size.
+ * @return          Returns 0 if successful
+ *
+ * @note
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to
+ *    left shift calculation results whereas a negative one is used to right
+ *    shift.
+ */
+int32_t riscv_nn_conv_1xn_HWC_s8_s8_s4_asym_bias_any(const int8_t * in_tensor,
+                                                     const int32_t in_tensor_dim_x,
+                                                     const int32_t in_tensor_ch,
+                                                     const int32_t in_tensor_batch,
+                                                     const int8_t * ker_weight,
+                                                     const int32_t out_tensor_ch,
+                                                     const int32_t ker_dim_x,
+                                                     const int32_t pad_x,
+                                                     const int32_t stride_x,
+                                                     const int32_t * bias,
+                                                     int8_t * out_tensor,
+                                                     const int32_t * out_shift,
+                                                     const int32_t * out_scale,
+                                                     const int32_t out_offset,
+                                                     const int32_t in_offset,
+                                                     const int32_t act_min,
+                                                     const int32_t act_max,
+                                                     const int32_t out_tensor_dim_x,
+                                                     const int32_t dilation_x,
+                                                     int8_t * in_tmp_buf);
+
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_1xn_HWC_s8_s8_s4_asym_bias_any.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       dilation_x          Dilation factor for the x dimension
+ * @return          Returns the size required by the temporary buffer.
+ */
+int32_t riscv_nn_conv_1xn_HWC_s8_s8_s4_asym_bias_any_get_buffer_size(const int32_t in_tensor_dim_x,
+                                                                     const int32_t in_tensor_ch,
+                                                                     const int32_t in_tensor_batch,
+                                                                     const int32_t out_tensor_ch,
+                                                                     const int32_t ker_dim_x,
+                                                                     const int32_t pad_x,
+                                                                     const int32_t stride_x,
+                                                                     const int32_t out_tensor_dim_x,
+                                                                     const int32_t dilation_x);
+
+/**
+ * @brief           This function performs convolution using a 1xn kernel on
+ *                  signed 8-bit integers for both inputs and outputs across any
+ *                  x dimensions, applying asymmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_scale           Pointer to the scaling vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_offset          Offset value for the output tensor. It
+ *                                      should be in the range of -128 to 127.
+ * @param[in]       in_offset           Offset value for the input tensor. It
+ *                                      should be in the range of -127 to 128.
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       act_max             Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       in_tmp_buf          Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any_get_buffer_size.
+ * @return          Returns 0 if successful
  *
  * @note
  * - bias could be a null pointer as the bias vector is optional for this
@@ -4499,39 +5032,201 @@ int32_t riscv_nn_conv_1x1_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size(const 
  * - During the quantization process, a positive out_shift value is used to left
  *   shift calculation results whereas a negative one is used to right shift.
  */
-int riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_ch,
-                                                const uint16_t in_tensor_batch,
-                                                const q7_t *ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t pad_x,
-                                                const uint16_t stride_x,
-                                                const int32_t *bias,
-                                                q7_t *out_tensor,
-                                                const int32_t *out_shift,
-                                                const int32_t *out_scale,
-                                                const int32_t out_offset,
-                                                const int32_t in_offset,
-                                                const int32_t act_min,
-                                                const int32_t act_max,
-                                                const uint16_t out_tensor_dim_x,
-                                                q15_t *in_tmp_buf);
+int32_t riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any(const int8_t * in_tensor,
+                                                     const uint16_t in_tensor_dim_x,
+                                                     const uint16_t in_tensor_ch,
+                                                     const uint16_t in_tensor_batch,
+                                                     const int8_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim_x,
+                                                     const uint16_t pad_x,
+                                                     const uint16_t stride_x,
+                                                     const int32_t * bias,
+                                                     int8_t * out_tensor,
+                                                     const int32_t * out_shift,
+                                                     const int32_t * out_scale,
+                                                     const int32_t out_offset,
+                                                     const int32_t in_offset,
+                                                     const int32_t act_min,
+                                                     const int32_t act_max,
+                                                     const uint16_t out_tensor_dim_x,
+                                                     int16_t * in_tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
  *                  the input temporary buffer needed for
  *                  riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
  * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       out_tensor_ch       Number of output tensor channels
  * @param[in]       ker_dim_x           X dimension of the filter kernel
- * @param[in]       ker_dim_y           Y dimension of the filter kernel. It is
- *                                      always 1.
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
  * @return          Returns the size required by the temporary buffer.
  */
-int32_t riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y);
+int32_t riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                                                     const uint16_t in_tensor_ch,
+                                                                     const uint16_t out_tensor_ch,
+                                                                     const uint16_t ker_dim_x,
+                                                                     const uint16_t pad_x,
+                                                                     const uint16_t stride_x,
+                                                                     const uint16_t out_tensor_dim_x);
+
+/**
+ * @brief           This function performs convolution using a 1xn kernel on
+ *                  signed 16-bit integers for both inputs and outputs and
+ *                  signed 8-bit integers for ther kernel weights across any
+ *                  x dimensions, applying asymmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_scale           Pointer to the scaling vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_offset          Dummy
+ * @param[in]       in_offset           Dummy.
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -32768 to 32767.
+ * @param[in]       act_max             Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -32768 to 32767.
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       dilation_x          Dilation factor for the x dimension
+ * @param[in]       in_tmp_buf          Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any_get_buffer_size.
+ * @return          Returns 0 if successful
+ *
+ * @note
+ * - bias could be a null pointer as the bias vector is optional for this
+ *   function.
+ * - During the quantization process, a positive out_shift value is used to left
+ *   shift calculation results whereas a negative one is used to right shift.
+ */
+int32_t riscv_nn_conv_1xn_HWC_s16_s16_s8_asym_bias_any(const int16_t * in_tensor,
+                                                       const int32_t in_tensor_dim_x,
+                                                       const int32_t in_tensor_ch,
+                                                       const int32_t in_tensor_batch,
+                                                       const int8_t * ker_weight,
+                                                       const int32_t ker_dim_x,
+                                                       const int32_t pad_x,
+                                                       const int32_t stride_x,
+                                                       const int64_t * bias,
+                                                       int16_t * out_tensor,
+                                                       const int32_t * out_shift,
+                                                       const int32_t * out_scale,
+                                                       const int32_t out_offset,
+                                                       const int32_t in_offset,
+                                                       const int32_t act_min,
+                                                       const int32_t act_max,
+                                                       const int32_t out_tensor_ch,
+                                                       const int32_t out_tensor_dim_x,
+                                                       const int32_t dilation_x,
+                                                       int16_t * in_tmp_buf);
+
+/**
+ * @brief           This function performs convolution with signed 8-bit
+ *                  integers for both inputs and outputs and signed 4-bit
+ *                  integers for the kernel weights across any x and y
+ *                  dimensions, applying asymmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_scale           Pointer to the scaling vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_offset          Offset value for the output tensor. It
+ *                                      should be in the range of -128 to 127.
+ * @param[in]       in_offset           Offset value for the input tensor. It
+ *                                      should be in the range of -127 to 128.
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       act_max             Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       dilation_x          Dilation factor for the x dimension
+ * @param[in]       dilation_y          Dilation factor for the y dimension
+ * @param[in]       in_tmp_buf          Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_HWC_s8_s8_s4_asym_bias_any_get_buffer_size.
+ * @return          This function only returns 0.
+ *
+ * @note
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to
+ *    left shift calculation results whereas a negative one is used to right
+ *    shift.
+ */
+int32_t riscv_nn_conv_HWC_s8_s8_s4_asym_bias_any(const int8_t * in_tensor,
+                                                 const int32_t in_tensor_dim_x,
+                                                 const int32_t in_tensor_dim_y,
+                                                 const int32_t in_tensor_ch,
+                                                 const int32_t in_tensor_batch,
+                                                 const int8_t * ker_weight,
+                                                 const int32_t out_tensor_ch,
+                                                 const int32_t ker_dim_x,
+                                                 const int32_t ker_dim_y,
+                                                 const int32_t pad_x,
+                                                 const int32_t pad_y,
+                                                 const int32_t stride_x,
+                                                 const int32_t stride_y,
+                                                 const int32_t * bias,
+                                                 int8_t * out_tensor,
+                                                 const int32_t * out_shift,
+                                                 const int32_t * out_scale,
+                                                 const int32_t out_offset,
+                                                 const int32_t in_offset,
+                                                 const int32_t act_min,
+                                                 const int32_t act_max,
+                                                 const int32_t out_tensor_dim_x,
+                                                 const int32_t out_tensor_dim_y,
+                                                 const int32_t dilation_x,
+                                                 const int32_t dilation_y,
+                                                 int8_t * in_tmp_buf);
+
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_HWC_s8_s8_s4_asym_bias_any.
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @return          Returns the required size of the temporary buffer.
+ */
+int32_t riscv_nn_conv_HWC_s8_s8_s4_asym_bias_any_get_buffer_size(const int32_t in_tensor_ch,
+                                                                 const int32_t ker_dim_x,
+                                                                 const int32_t ker_dim_y,
+                                                                 const int32_t out_tensor_ch);
 
 /**
  * @brief           This function performs convolution with signed 8-bit
@@ -4581,43 +5276,61 @@ int32_t riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint1
  *    left shift calculation results whereas a negative one is used to right
  *    shift.
  */
-int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const uint16_t in_tensor_batch,
-                                                const q7_t *ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const int32_t *bias,
-                                                q7_t *out_tensor,
-                                                const int32_t *out_shift,
-                                                const int32_t *out_scale,
-                                                const int32_t out_offset,
-                                                const int32_t in_offset,
-                                                const int32_t act_min,
-                                                const int32_t act_max,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                q15_t *in_tmp_buf);
+int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any(const int8_t * in_tensor,
+                                                 const uint16_t in_tensor_dim_x,
+                                                 const uint16_t in_tensor_dim_y,
+                                                 const uint16_t in_tensor_ch,
+                                                 const uint16_t in_tensor_batch,
+                                                 const int8_t * ker_weight,
+                                                 const uint16_t out_tensor_ch,
+                                                 const uint16_t ker_dim_x,
+                                                 const uint16_t ker_dim_y,
+                                                 const uint16_t pad_x,
+                                                 const uint16_t pad_y,
+                                                 const uint16_t stride_x,
+                                                 const uint16_t stride_y,
+                                                 const int32_t * bias,
+                                                 int8_t * out_tensor,
+                                                 const int32_t * out_shift,
+                                                 const int32_t * out_scale,
+                                                 const int32_t out_offset,
+                                                 const int32_t in_offset,
+                                                 const int32_t act_min,
+                                                 const int32_t act_max,
+                                                 const uint16_t out_tensor_dim_x,
+                                                 const uint16_t out_tensor_dim_y,
+                                                 int16_t * in_tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
  *                  the input temporary buffer needed for
  *                  riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any.
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
  * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       out_tensor_ch       Number of output tensor channels
  * @param[in]       ker_dim_x           X dimension of the filter kernel
  * @param[in]       ker_dim_y           Y dimension of the filter kernel
- * @return          Returns the required size of the temporary buffer.
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @return          Returns the required length of the temporary buffer.
  */
-int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_ch,
-                                        const uint16_t ker_dim_x,
-                                        const uint16_t ker_dim_y);
+int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                                                 const uint16_t in_tensor_dim_y,
+                                                                 const uint16_t in_tensor_ch,
+                                                                 const uint16_t out_tensor_ch,
+                                                                 const uint16_t ker_dim_x,
+                                                                 const uint16_t ker_dim_y,
+                                                                 const uint16_t pad_x,
+                                                                 const uint16_t pad_y,
+                                                                 const uint16_t stride_x,
+                                                                 const uint16_t stride_y,
+                                                                 const uint16_t out_tensor_dim_x,
+                                                                 const uint16_t out_tensor_dim_y);
 
 /**
  * @brief           This function performs dilated convolution with signed 8-bit
@@ -4669,32 +5382,33 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t 
  *    left shift calculation results whereas a negative one is used to right
  *    shift.
  */
-int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated(const q7_t *in_tensor,
-    const uint16_t in_tensor_dim_x,
-    const uint16_t in_tensor_dim_y,
-    const uint16_t in_tensor_ch,
-    const uint16_t in_tensor_batch,
-    const q7_t *ker_weight,
-    const uint16_t out_tensor_ch,
-    const uint16_t ker_dim_x,
-    const uint16_t ker_dim_y,
-    const uint16_t pad_x,
-    const uint16_t pad_y,
-    const uint16_t stride_x,
-    const uint16_t stride_y,
-    const int32_t *bias,
-    q7_t *out_tensor,
-    const int32_t *out_shift,
-    const int32_t *out_scale,
-    const int32_t out_offset,
-    const int32_t in_offset,
-    const int32_t act_min,
-    const int32_t act_max,
-    const uint16_t out_tensor_dim_x,
-    const uint16_t out_tensor_dim_y,
-    const int32_t dilation_x,
-    const int32_t dilation_y,
-    q15_t *in_tmp_buf);
+int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated(const int8_t * in_tensor,
+                                                         const uint16_t in_tensor_dim_x,
+                                                         const uint16_t in_tensor_dim_y,
+                                                         const uint16_t in_tensor_ch,
+                                                         const uint16_t in_tensor_batch,
+                                                         const int8_t * ker_weight,
+                                                         const uint16_t out_tensor_ch,
+                                                         const uint16_t ker_dim_x,
+                                                         const uint16_t ker_dim_y,
+                                                         const uint16_t ker_ch,
+                                                         const uint16_t pad_x,
+                                                         const uint16_t pad_y,
+                                                         const uint16_t stride_x,
+                                                         const uint16_t stride_y,
+                                                         const int32_t * bias,
+                                                         int8_t * out_tensor,
+                                                         const int32_t * out_shift,
+                                                         const int32_t * out_scale,
+                                                         const int32_t out_offset,
+                                                         const int32_t in_offset,
+                                                         const int32_t act_min,
+                                                         const int32_t act_max,
+                                                         const uint16_t out_tensor_dim_x,
+                                                         const uint16_t out_tensor_dim_y,
+                                                         const int32_t dilation_x,
+                                                         const int32_t dilation_y,
+                                                         int16_t * in_tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
@@ -4705,9 +5419,10 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated(const q7_t *in_tensor,
  * @param[in]       ker_dim_y           Y dimension of the filter kernel
  * @return          Returns the required size of the temporary buffer.
  */
-int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated_get_buffer_size(const uint16_t in_tensor_ch,
-    const uint16_t ker_dim_x,
-    const uint16_t ker_dim_y);
+int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated_get_buffer_size(const uint16_t ker_ch,
+                                                                         const uint16_t ker_dim_x,
+                                                                         const uint16_t ker_dim_y,
+                                                                         const uint16_t out_tensor_ch);
 
 /**
  * @brief           This function performs convolution with signed 16-bit
@@ -4726,6 +5441,8 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated_get_buffer_size(const u
  * @param[in]       stride_x            Convolution stride in the x dimension
  * @param[in]       stride_y            Convolution stride in the y dimension
  * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       is_32b_bias         Indicate whether the type of bias vector
+ *                                      is 32-bit.
  * @param[out]      out_tensor          Pointer to the output tensor
  * @param[in]       out_shift           Pointer to the shift vector for the
  *                                      quantization on the outputs
@@ -4756,32 +5473,33 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_dilated_get_buffer_size(const u
  *    left shift calculation results whereas a negative one is used to right
  *    shift.
  */
-int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any(const q15_t *in_tensor,
-    const int32_t in_tensor_dim_x,
-    const int32_t in_tensor_dim_y,
-    const int32_t in_tensor_ch,
-    const int32_t in_tensor_batch,
-    const q7_t *ker_weight,
-    const int32_t ker_dim_x,
-    const int32_t ker_dim_y,
-    const int32_t pad_x,
-    const int32_t pad_y,
-    const int32_t stride_x,
-    const int32_t stride_y,
-    const int64_t *bias,
-    q15_t *out_tensor,
-    const int32_t *out_shift,
-    const int32_t *out_scale,
-    const int32_t out_offset,
-    const int32_t in_offset,
-    const int32_t act_min,
-    const int32_t act_max,
-    const int32_t out_tensor_ch,
-    const int32_t out_tensor_dim_x,
-    const int32_t out_tensor_dim_y,
-    const int32_t dilation_x,
-    const int32_t dilation_y,
-    q15_t *in_tmp_buf);
+int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any(const int16_t * in_tensor,
+                                                   const int32_t in_tensor_dim_x,
+                                                   const int32_t in_tensor_dim_y,
+                                                   const int32_t in_tensor_ch,
+                                                   const int32_t in_tensor_batch,
+                                                   const int8_t * ker_weight,
+                                                   const int32_t ker_dim_x,
+                                                   const int32_t ker_dim_y,
+                                                   const int32_t pad_x,
+                                                   const int32_t pad_y,
+                                                   const int32_t stride_x,
+                                                   const int32_t stride_y,
+                                                   const void * bias,
+                                                   const bool is_32b_bias,
+                                                   int16_t * out_tensor,
+                                                   const int32_t * out_shift,
+                                                   const int32_t * out_scale,
+                                                   const int32_t out_offset,
+                                                   const int32_t in_offset,
+                                                   const int32_t act_min,
+                                                   const int32_t act_max,
+                                                   const int32_t out_tensor_ch,
+                                                   const int32_t out_tensor_dim_x,
+                                                   const int32_t out_tensor_dim_y,
+                                                   const int32_t dilation_x,
+                                                   const int32_t dilation_y,
+                                                   int16_t * in_tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
@@ -4793,8 +5511,8 @@ int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any(const q15_t *in_tensor,
  * @return          Returns the required size of the temporary buffer.
  */
 int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any_get_buffer_size(const int32_t in_tensor_ch,
-    const int32_t ker_dim_x,
-    const int32_t ker_dim_y);
+                                                                   const int32_t ker_dim_x,
+                                                                   const int32_t ker_dim_y);
 
 /**
  * @brief           This function performs convolution with signed 16-bit
@@ -4847,30 +5565,30 @@ int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_any_get_buffer_size(const int32_t
  *    left shift calculation results whereas a negative one is used to right
  *    shift.
  */
-int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any(const q15_t *in_tensor,
-    const int32_t in_tensor_dim_x,
-    const int32_t in_tensor_dim_y,
-    const int32_t in_tensor_ch,
-    const int32_t in_tensor_batch,
-    const q7_t *ker_weight,
-    const int32_t ker_dim_x,
-    const int32_t ker_dim_y,
-    const int32_t pad_x,
-    const int32_t pad_y,
-    const int32_t stride_x,
-    const int32_t stride_y,
-    const int64_t *bias,
-    q15_t *out_tensor,
-    const int32_t *out_shift,
-    const int32_t *out_scale,
-    const int32_t out_offset,
-    const int32_t in_offset,
-    const int32_t act_min,
-    const int32_t act_max,
-    const int32_t out_tensor_ch,
-    const int32_t out_tensor_dim_x,
-    const int32_t out_tensor_dim_y,
-    q15_t *in_tmp_buf);
+int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any(const int16_t * in_tensor,
+                                                        const int32_t in_tensor_dim_x,
+                                                        const int32_t in_tensor_dim_y,
+                                                        const int32_t in_tensor_ch,
+                                                        const int32_t in_tensor_batch,
+                                                        const int8_t * ker_weight,
+                                                        const int32_t ker_dim_x,
+                                                        const int32_t ker_dim_y,
+                                                        const int32_t pad_x,
+                                                        const int32_t pad_y,
+                                                        const int32_t stride_x,
+                                                        const int32_t stride_y,
+                                                        const int64_t * bias,
+                                                        int16_t * out_tensor,
+                                                        const int32_t * out_shift,
+                                                        const int32_t * out_scale,
+                                                        const int32_t out_offset,
+                                                        const int32_t in_offset,
+                                                        const int32_t act_min,
+                                                        const int32_t act_max,
+                                                        const int32_t out_tensor_ch,
+                                                        const int32_t out_tensor_dim_x,
+                                                        const int32_t out_tensor_dim_y,
+                                                        int16_t * in_tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
@@ -4882,8 +5600,124 @@ int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any(const q15_t *in_tensor,
  * @return          Returns the required size of the temporary buffer.
  */
 int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any_get_buffer_size(const int32_t in_tensor_ch,
-    const int32_t ker_dim_x,
-    const int32_t ker_dim_y);
+                                                                        const int32_t ker_dim_x,
+                                                                        const int32_t ker_dim_y);
+
+/**
+ * @brief           This is a wrapper function for
+ *                  riscv_nn_conv_1x1_HWC_s8_s8_s4_asym_bias_fast_any,
+ *                  riscv_nn_conv_1xn_HWC_s8_s8_s4_asym_bias_any and
+ *                  riscv_nn_conv_HWC_s8_s8_s4_asym_bias_any. This function
+ *                  calls one among the three convolution functions according
+ *                  to the provided parameters.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_scale           Pointer to the scaling vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_offset          Offset value for the output tensor. It
+ *                                      should be in the range of -128 to 127.
+ * @param[in]       in_offset           Offset value for the input tensor It
+ *                                      should be in the range of -127 to 128.
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       act_max             Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       dilation_x          Dilation factor for the x dimension
+ * @param[in]       dilation_y          Dilation factor for the y dimension
+ * @param[in]       in_tmp_buf          Temporary buffer for the input tensor.
+ *                                      It is required when -mext-dsp or
+ *                                      -mext-vector is enabled and its needed
+ *                                      size could be obtained by calling
+ *                                      riscv_nn_conv_HWC_wrapper_s8_s8_s4_asym_get_buffer_size.
+ * @return          This function only returns 0.
+ *
+ * @note
+ *  - bias could be a null pointer as the bias vector is optional for this
+ *    function.
+ *  - During the quantization process, a positive out_shift value is used to left
+ *    shift calculation results whereas a negative one is used to right shift.
+ */
+int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s4_asym(const int8_t * in_tensor,
+                                                const int32_t in_tensor_dim_x,
+                                                const int32_t in_tensor_dim_y,
+                                                const int32_t in_tensor_ch,
+                                                const int32_t in_tensor_batch,
+                                                const int8_t * ker_weight,
+                                                const int32_t out_tensor_ch,
+                                                const int32_t ker_dim_x,
+                                                const int32_t ker_dim_y,
+                                                const int32_t pad_x,
+                                                const int32_t pad_y,
+                                                const int32_t stride_x,
+                                                const int32_t stride_y,
+                                                const int32_t * bias,
+                                                int8_t * out_tensor,
+                                                const int32_t * out_shift,
+                                                const int32_t * out_scale,
+                                                const int32_t out_offset,    //value is in the range of [-128, 127]
+                                                const int32_t in_offset,     //value is in the range of [-127, 128]
+                                                const int32_t act_min,
+                                                const int32_t act_max,
+                                                const int32_t out_tensor_dim_x,
+                                                const int32_t out_tensor_dim_y,
+                                                const int32_t dilation_x,
+                                                const int32_t dilation_y,
+                                                int8_t * in_tmp_buf);
+
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_HWC_wrapper_s8_s8_s4_asym.
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_tensor_ch       Pointer to the output tensor
+ * @param[in]       dilation_x          Dilation factor for the x dimension
+ * @param[in]       dilation_y          Dilation factor for the y dimension
+ * @return          Returns the required size of the temporary buffer.
+ */
+int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s4_asym_get_buffer_size(const int32_t in_tensor_dim_x,
+                                                                const int32_t in_tensor_dim_y,
+                                                                const int32_t in_tensor_ch,
+                                                                const int32_t in_tensor_batch,
+                                                                const int32_t ker_dim_x,
+                                                                const int32_t ker_dim_y,
+                                                                const int32_t pad_x,
+                                                                const int32_t pad_y,
+                                                                const int32_t stride_x,
+                                                                const int32_t stride_y,
+                                                                const int32_t out_tensor_dim_x,
+                                                                const int32_t out_tensor_dim_y,
+                                                                const int32_t out_tensor_ch,
+                                                                const int32_t dilation_x,
+                                                                const int32_t dilation_y);
 
 /**
  * @brief           This is a wrapper function for
@@ -4936,35 +5770,39 @@ int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any_get_buffer_size(const in
  *  - During the quantization process, a positive out_shift value is used to left
  *    shift calculation results whereas a negative one is used to right shift.
  */
-int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
-                                        const uint16_t in_tensor_dim_x,
-                                        const uint16_t in_tensor_dim_y,
-                                        const uint16_t in_tensor_ch,
-                                        const uint16_t in_tensor_batch,
-                                        const q7_t *ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim_x,
-                                        const uint16_t ker_dim_y,
-                                        const uint16_t pad_x,
-                                        const uint16_t pad_y,
-                                        const uint16_t stride_x,
-                                        const uint16_t stride_y,
-                                        const int32_t *bias,
-                                        q7_t *out_tensor,
-                                        const int32_t *out_shift,
-                                        const int32_t *out_scale,
-                                        const int32_t out_offset,
-                                        const int32_t in_offset,
-                                        const int32_t act_min,
-                                        const int32_t act_max,
-                                        const uint16_t out_tensor_dim_x,
-                                        const uint16_t out_tensor_dim_y,
-                                        q15_t *in_tmp_buf);
+int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const int8_t * in_tensor,
+                                                const uint16_t in_tensor_dim_x,
+                                                const uint16_t in_tensor_dim_y,
+                                                const uint16_t in_tensor_ch,
+                                                const uint16_t in_tensor_batch,
+                                                const int8_t * ker_weight,
+                                                const uint16_t out_tensor_ch,
+                                                const uint16_t ker_dim_x,
+                                                const uint16_t ker_dim_y,
+                                                const uint16_t ker_ch,
+                                                const uint16_t pad_x,
+                                                const uint16_t pad_y,
+                                                const uint16_t stride_x,
+                                                const uint16_t stride_y,
+                                                const int32_t * bias,
+                                                int8_t * out_tensor,
+                                                const int32_t * out_shift,
+                                                const int32_t * out_scale,
+                                                const int32_t out_offset,
+                                                const int32_t in_offset,
+                                                const int32_t act_min,
+                                                const int32_t act_max,
+                                                const uint16_t out_tensor_dim_x,
+                                                const uint16_t out_tensor_dim_y,
+                                                const int32_t dilation_x,
+                                                const int32_t dilation_y,
+                                                int16_t * in_tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
  *                  the input temporary buffer needed for
  *                  riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym.
+ * @param[in]       in_tensor_dim_X     X dimension of the input tensor
  * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
  * @param[in]       in_tensor_ch        Number of input tensor channels
  * @param[in]       in_tensor_batch     Size of input tensor batches
@@ -4978,17 +5816,22 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
  * @return          Returns the required size of the temporary buffer.
  */
-int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_t in_tensor_dim_y,
-    const uint16_t in_tensor_ch,
-    const uint16_t in_tensor_batch,
-    const uint16_t ker_dim_x,
-    const uint16_t ker_dim_y,
-    const uint16_t pad_x,
-    const uint16_t pad_y,
-    const uint16_t stride_x,
-    const uint16_t stride_y,
-    const uint16_t out_tensor_dim_x,
-    const uint16_t out_tensor_dim_y);
+int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                                                const uint16_t in_tensor_dim_y,
+                                                                const uint16_t in_tensor_ch,
+                                                                const uint16_t in_tensor_batch,
+                                                                const uint16_t ker_dim_x,
+                                                                const uint16_t ker_dim_y,
+                                                                const uint16_t ker_ch,
+                                                                const uint16_t pad_x,
+                                                                const uint16_t pad_y,
+                                                                const uint16_t stride_x,
+                                                                const uint16_t stride_y,
+                                                                const uint16_t out_tensor_dim_x,
+                                                                const uint16_t out_tensor_dim_y,
+                                                                const uint16_t out_tensor_ch,
+                                                                const int32_t dilation_x,
+                                                                const int32_t dilation_y);
 
 /**
  * @brief           This is a wrapper function for
@@ -5037,32 +5880,33 @@ int32_t riscv_nn_conv_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_t i
  *    left shift calculation results whereas a negative one is used to right
  *    shift.
  */
-int32_t riscv_nn_conv_HWC_wrapper_s16_s16_s8_asym(const q15_t *in_tensor,
-    const int32_t in_tensor_dim_x,
-    const int32_t in_tensor_dim_y,
-    const int32_t in_tensor_ch,
-    const int32_t in_tensor_batch,
-    const q7_t *ker_weight,
-    const int32_t ker_dim_x,
-    const int32_t ker_dim_y,
-    const int32_t pad_x,
-    const int32_t pad_y,
-    const int32_t stride_x,
-    const int32_t stride_y,
-    const int64_t *bias,
-    q15_t *out_tensor,
-    const int32_t *out_shift,
-    const int32_t *out_scale,
-    const int32_t out_offset,
-    const int32_t in_offset,
-    const int32_t act_min,
-    const int32_t act_max,
-    const int32_t out_tensor_ch,
-    const int32_t out_tensor_dim_x,
-    const int32_t out_tensor_dim_y,
-    const int32_t dilation_x,
-    const int32_t dilation_y,
-    q15_t *in_tmp_buf);
+int32_t riscv_nn_conv_HWC_wrapper_s16_s16_s8_asym(const int16_t * in_tensor,
+                                                  const int32_t in_tensor_dim_x,
+                                                  const int32_t in_tensor_dim_y,
+                                                  const int32_t in_tensor_ch,
+                                                  const int32_t in_tensor_batch,
+                                                  const int8_t * ker_weight,
+                                                  const int32_t ker_dim_x,
+                                                  const int32_t ker_dim_y,
+                                                  const int32_t pad_x,
+                                                  const int32_t pad_y,
+                                                  const int32_t stride_x,
+                                                  const int32_t stride_y,
+                                                  const void * bias,
+                                                  const bool is_32b_bias,
+                                                  int16_t * out_tensor,
+                                                  const int32_t * out_shift,
+                                                  const int32_t * out_scale,
+                                                  const int32_t out_offset,
+                                                  const int32_t in_offset,
+                                                  const int32_t act_min,
+                                                  const int32_t act_max,
+                                                  const int32_t out_tensor_ch,
+                                                  const int32_t out_tensor_dim_x,
+                                                  const int32_t out_tensor_dim_y,
+                                                  const int32_t dilation_x,
+                                                  const int32_t dilation_y,
+                                                  int16_t * in_tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
@@ -5076,10 +5920,98 @@ int32_t riscv_nn_conv_HWC_wrapper_s16_s16_s8_asym(const q15_t *in_tensor,
  * @return          Returns the required size of the temporary buffer.
  */
 int32_t riscv_nn_conv_HWC_wrapper_s16_s16_s8_asym_get_buffer_size(const int32_t in_tensor_ch,
-    const int32_t ker_dim_x,
-    const int32_t ker_dim_y,
-    const int32_t dilation_x,
-    const int32_t dilation_y);
+                                                                  const int32_t ker_dim_x,
+                                                                  const int32_t ker_dim_y,
+                                                                  const int32_t dilation_x,
+                                                                  const int32_t dilation_y);
+
+/**
+ * @brief           This function performs depthwise convolution with signed
+ *                  8-bit integers for both inputs and outputs and signed
+ *                  4-bit integers for the kernel weights across any x and
+ *                  y dimensions, applying asymmetric quantization to the
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ch_mult             Multiplier of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Pointer to the shift vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_scale           Pointer to the scaling vector for the
+ *                                      quantization on outputs
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_offset          Offset value for the output tensor. It
+ *                                      should be in the range of -128 to 127.
+ * @param[in]       in_offset           Offset value for the input tensor. It
+ *                                      should be in the range of -127 to 128.
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       act_max             Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       dilation_x          Dilation factor for the x dimension
+ * @param[in]       dilation_y          Dilation factor for the y dimension
+ * @param[in]       tmp_buf             Temporary buffer for calculations. Its
+ *                                      needed size could be obtained by calling
+ *                                      riscv_nn_conv_dw_HWC_s8_s8_s4_asym_bias_any_get_buffer_size.
+ * @return          Returns 0 if successful
+ */
+int32_t riscv_nn_conv_dw_HWC_s8_s8_s4_asym_bias_any(const int8_t * in_tensor,
+                                                    const int32_t in_tensor_batch,
+                                                    const int32_t in_tensor_dim_x,
+                                                    const int32_t in_tensor_dim_y,
+                                                    const int32_t in_tensor_ch,
+                                                    const int8_t * ker_weight,
+                                                    const int32_t out_tensor_ch,
+                                                    const int32_t ch_mult,
+                                                    const int32_t ker_dim_x,
+                                                    const int32_t ker_dim_y,
+                                                    const int32_t pad_x,
+                                                    const int32_t pad_y,
+                                                    const int32_t stride_x,
+                                                    const int32_t stride_y,
+                                                    const int32_t * bias,
+                                                    int8_t * out_tensor,
+                                                    const int32_t * out_shift,
+                                                    const int32_t * out_scale,
+                                                    const int32_t out_tensor_dim_x,
+                                                    const int32_t out_tensor_dim_y,
+                                                    const int32_t out_offset,
+                                                    const int32_t in_offset,
+                                                    const int32_t act_min,
+                                                    const int32_t act_max,
+                                                    const int32_t dilation_x,
+                                                    const int32_t dilation_y,
+                                                    int8_t * tmp_buf);
+
+/**
+ * @brief           This function calculates the required size (in bytes) for
+ *                  the input temporary buffer needed for
+ *                  riscv_nn_conv_dw_HWC_s8_s8_s4_asym_bias_any
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       ch_mult             Multiplier of input tensor channels
+ * @return          Returns the required size by the temporary buffer.
+ */
+int32_t riscv_nn_conv_dw_HWC_s8_s8_s4_asym_bias_any_get_buffer_size(const int32_t in_tensor_ch,
+                                                                    const int32_t ker_dim_x,
+                                                                    const int32_t ker_dim_y,
+                                                                    const int32_t ch_mult);
 
 /**
  * @brief           This function performs depthwise convolution using a 3x3
@@ -5127,29 +6059,29 @@ int32_t riscv_nn_conv_HWC_wrapper_s16_s16_s8_asym_get_buffer_size(const int32_t 
  *  - During the quantization process, a positive out_shift value is used to left
  *    shift calculation results whereas a negative one is used to right shift.
  */
-int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
-                                                const int32_t in_tensor_dim_x,
-                                                const int32_t in_tensor_dim_y,
-                                                const int32_t in_tensor_ch,
-                                                const int8_t *ker_weight,
-                                                const int32_t out_tensor_ch,
-                                                const int32_t pad_x,
-                                                const int32_t pad_y,
-                                                const int32_t stride_x,
-                                                const int32_t stride_y,
-                                                const int32_t *bias,
-                                                int8_t *out_tensor,
-                                                const int32_t *out_shift,
-                                                const int32_t *out_scale,
-                                                const int32_t out_tensor_dim_x,
-                                                const int32_t out_tensor_dim_y,
-                                                const int32_t out_offset,
-                                                const int32_t in_offset,
-                                                const int32_t act_min,
-                                                const int32_t act_max,
-                                                const int32_t dilation_x,
-                                                const int32_t dilation_y,
-                                                int16_t *tmp_buf);
+int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t * in_tensor,
+                                                        const int32_t in_tensor_dim_x,
+                                                        const int32_t in_tensor_dim_y,
+                                                        const int32_t in_tensor_ch,
+                                                        const int8_t * ker_weight,
+                                                        const int32_t out_tensor_ch,
+                                                        const int32_t pad_x,
+                                                        const int32_t pad_y,
+                                                        const int32_t stride_x,
+                                                        const int32_t stride_y,
+                                                        const int32_t * bias,
+                                                        int8_t * out_tensor,
+                                                        const int32_t * out_shift,
+                                                        const int32_t * out_scale,
+                                                        const int32_t out_tensor_dim_x,
+                                                        const int32_t out_tensor_dim_y,
+                                                        const int32_t out_offset,
+                                                        const int32_t in_offset,
+                                                        const int32_t act_min,
+                                                        const int32_t act_max,
+                                                        const int32_t dilation_x,
+                                                        const int32_t dilation_y,
+                                                        int16_t * tmp_buf);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -5201,32 +6133,32 @@ int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
  *    left shift calculation results whereas a negative one is used to right
  *    shift.
  */
-int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
-                                const uint16_t in_tensor_dim_x,
-                                const uint16_t in_tensor_dim_y,
-                                const uint16_t in_tensor_ch,
-                                const q7_t *ker_weight,
-                                const uint16_t out_tensor_ch,
-                                const uint16_t ch_mult,
-                                const uint16_t ker_dim_x,
-                                const uint16_t ker_dim_y,
-                                const uint16_t pad_x,
-                                const uint16_t pad_y,
-                                const uint16_t stride_x,
-                                const uint16_t stride_y,
-                                const int32_t *bias,
-                                q7_t *out_tensor,
-                                const int32_t *out_shift,
-                                const int32_t *out_scale,
-                                const uint16_t out_tensor_dim_x,
-                                const uint16_t out_tensor_dim_y,
-                                const int32_t out_offset,
-                                const int32_t in_offset,
-                                const int32_t act_min,
-                                const int32_t act_max,
-                                const uint16_t dilation_x,
-                                const uint16_t dilation_y,
-                                q15_t *tmp_buf);
+int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_any(const int8_t * in_tensor,
+                                                    const uint16_t in_tensor_dim_x,
+                                                    const uint16_t in_tensor_dim_y,
+                                                    const uint16_t in_tensor_ch,
+                                                    const int8_t * ker_weight,
+                                                    const uint16_t out_tensor_ch,
+                                                    const uint16_t ch_mult,
+                                                    const uint16_t ker_dim_x,
+                                                    const uint16_t ker_dim_y,
+                                                    const uint16_t pad_x,
+                                                    const uint16_t pad_y,
+                                                    const uint16_t stride_x,
+                                                    const uint16_t stride_y,
+                                                    const int32_t * bias,
+                                                    int8_t * out_tensor,
+                                                    const int32_t * out_shift,
+                                                    const int32_t * out_scale,
+                                                    const uint16_t out_tensor_dim_x,
+                                                    const uint16_t out_tensor_dim_y,
+                                                    const int32_t out_offset,
+                                                    const int32_t in_offset,
+                                                    const int32_t act_min,
+                                                    const int32_t act_max,
+                                                    const uint16_t dilation_x,
+                                                    const uint16_t dilation_y,
+                                                    int16_t * tmp_buf);
 
 /**
  * @brief           This function performs fast depthwise convolution with
@@ -5279,31 +6211,31 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
  *  - During the quantization process, a positive out_shift value is used to left
  *    shift calculation results whereas a negative one is used to right shift.
  */
-int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
-                                     const uint16_t in_tensor_dim_x,
-                                     const uint16_t in_tensor_dim_y,
-                                     const uint16_t in_tensor_ch,
-                                     const q7_t *ker_weight,
-                                     const uint16_t out_tensor_ch,
-                                     const uint16_t ker_dim_x,
-                                     const uint16_t ker_dim_y,
-                                     const uint16_t pad_x,
-                                     const uint16_t pad_y,
-                                     const uint16_t stride_x,
-                                     const uint16_t stride_y,
-                                     const int32_t *bias,
-                                     q7_t *out_tensor,
-                                     const int32_t *out_shift,
-                                     const int32_t *out_scale,
-                                     const uint16_t out_tensor_dim_x,
-                                     const uint16_t out_tensor_dim_y,
-                                     const int32_t out_offset,
-                                     const int32_t in_offset,
-                                     const int32_t act_min,
-                                     const int32_t act_max,
-                                     const uint16_t dilation_x,
-                                     const uint16_t dilation_y,
-                                     q15_t *in_tmp_buf);
+int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any(const int8_t * in_tensor,
+                                                         const uint16_t in_tensor_dim_x,
+                                                         const uint16_t in_tensor_dim_y,
+                                                         const uint16_t in_tensor_ch,
+                                                         const int8_t * ker_weight,
+                                                         const uint16_t out_tensor_ch,
+                                                         const uint16_t ker_dim_x,
+                                                         const uint16_t ker_dim_y,
+                                                         const uint16_t pad_x,
+                                                         const uint16_t pad_y,
+                                                         const uint16_t stride_x,
+                                                         const uint16_t stride_y,
+                                                         const int32_t * bias,
+                                                         int8_t * out_tensor,
+                                                         const int32_t * out_shift,
+                                                         const int32_t * out_scale,
+                                                         const uint16_t out_tensor_dim_x,
+                                                         const uint16_t out_tensor_dim_y,
+                                                         const int32_t out_offset,
+                                                         const int32_t in_offset,
+                                                         const int32_t act_min,
+                                                         const int32_t act_max,
+                                                         const uint16_t dilation_x,
+                                                         const uint16_t dilation_y,
+                                                         int16_t * in_tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
@@ -5315,8 +6247,8 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any(const q7_t *in_tensor,
  * @return          Returns the size required by the temporary buffer.
  */
 int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size(const uint16_t in_tensor_ch,
-                                                  const uint16_t ker_dim_x,
-                                                  const uint16_t ker_dim_y);
+                                                                         const uint16_t ker_dim_x,
+                                                                         const uint16_t ker_dim_y);
 
 /**
  * @brief           This function performs depthwise convolution with unsigned
@@ -5365,31 +6297,31 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_fast_any_get_buffer_size(const u
  *  During the quantization process, a positive out_shift value is used to left
  *  shift calculation results whereas a negative one is used to right shift.
  */
-int32_t riscv_nn_conv_dw_HWC_u8_u8_u8_asym_bias_any(const uint8_t *in_tensor,
-                                    const uint16_t in_tensor_dim_x,
-                                    const uint16_t in_tensor_dim_y,
-                                    const uint16_t in_tensor_ch,
-                                    const uint8_t *ker_weight,
-                                    const uint16_t ker_dim_x,
-                                    const uint16_t ker_dim_y,
-                                    const int16_t ch_mult,
-                                    const int16_t pad_x,
-                                    const int16_t pad_y,
-                                    const int16_t stride_x,
-                                    const int16_t stride_y,
-                                    const int16_t dilation_x,
-                                    const int16_t dilation_y,
-                                    const int32_t *bias,
-                                    const int32_t in_offset,
-                                    const int32_t ker_offset,
-                                    const int32_t out_offset,
-                                    uint8_t *out_tensor,
-                                    const uint16_t out_tensor_dim_x,
-                                    const uint16_t out_tensor_dim_y,
-                                    const int32_t act_min,
-                                    const int32_t act_max,
-                                    const int32_t out_shift,
-                                    const int32_t out_scale);
+int32_t riscv_nn_conv_dw_HWC_u8_u8_u8_asym_bias_any(const uint8_t * in_tensor,
+                                                    const uint16_t in_tensor_dim_x,
+                                                    const uint16_t in_tensor_dim_y,
+                                                    const uint16_t in_tensor_ch,
+                                                    const uint8_t * ker_weight,
+                                                    const uint16_t ker_dim_x,
+                                                    const uint16_t ker_dim_y,
+                                                    const int16_t ch_mult,
+                                                    const int16_t pad_x,
+                                                    const int16_t pad_y,
+                                                    const int16_t stride_x,
+                                                    const int16_t stride_y,
+                                                    const int16_t dilation_x,
+                                                    const int16_t dilation_y,
+                                                    const int32_t * bias,
+                                                    const int32_t in_offset,
+                                                    const int32_t ker_offset,
+                                                    const int32_t out_offset,
+                                                    uint8_t * out_tensor,
+                                                    const uint16_t out_tensor_dim_x,
+                                                    const uint16_t out_tensor_dim_y,
+                                                    const int32_t act_min,
+                                                    const int32_t act_max,
+                                                    const int32_t out_shift,
+                                                    const int32_t out_scale);
 
 /**
  * @brief           This function performs depthwise convolution with signed
@@ -5437,32 +6369,32 @@ int32_t riscv_nn_conv_dw_HWC_u8_u8_u8_asym_bias_any(const uint8_t *in_tensor,
  *    left shift calculation results whereas a negative one is used to right
  *    shift.
  */
-int32_t riscv_nn_conv_dw_HWC_s16_s16_s8_asym_bias_any(const int16_t *in_tensor,
-    const uint16_t in_tensor_batch,
-    const uint16_t in_tensor_dim_x,
-    const uint16_t in_tensor_dim_y,
-    const uint16_t in_tensor_ch,
-    const int8_t *ker_weight,
-    const uint16_t ch_mult,
-    const uint16_t ker_dim_x,
-    const uint16_t ker_dim_y,
-    const uint16_t pad_x,
-    const uint16_t pad_y,
-    const uint16_t stride_x,
-    const uint16_t stride_y,
-    const int32_t *bias,
-    int16_t *out_tensor,
-    const int32_t *out_shift,
-    const int32_t *out_scale,
-    const uint16_t out_tensor_dim_x,
-    const uint16_t out_tensor_dim_y,
-    const int32_t out_offset,
-    const int32_t in_offset,
-    const int32_t act_min,
-    const int32_t act_max,
-    const uint16_t dilation_x,
-    const uint16_t dilation_y,
-    int16_t *tmp_buf);
+int32_t riscv_nn_conv_dw_HWC_s16_s16_s8_asym_bias_any(const int16_t * in_tensor,
+                                                      const uint16_t in_tensor_batch,
+                                                      const uint16_t in_tensor_dim_x,
+                                                      const uint16_t in_tensor_dim_y,
+                                                      const uint16_t in_tensor_ch,
+                                                      const int8_t * ker_weight,
+                                                      const uint16_t ch_mult,
+                                                      const uint16_t ker_dim_x,
+                                                      const uint16_t ker_dim_y,
+                                                      const uint16_t pad_x,
+                                                      const uint16_t pad_y,
+                                                      const uint16_t stride_x,
+                                                      const uint16_t stride_y,
+                                                      const int64_t * bias,
+                                                      int16_t * out_tensor,
+                                                      const int32_t * out_shift,
+                                                      const int32_t * out_scale,
+                                                      const uint16_t out_tensor_dim_x,
+                                                      const uint16_t out_tensor_dim_y,
+                                                      const int32_t out_offset,
+                                                      const int32_t in_offset,
+                                                      const int32_t act_min,
+                                                      const int32_t act_max,
+                                                      const uint16_t dilation_x,
+                                                      const uint16_t dilation_y,
+                                                      int16_t * tmp_buf);
 
 /**
  * @brief           This is a wrapper function for
@@ -5521,32 +6453,32 @@ int32_t riscv_nn_conv_dw_HWC_s16_s16_s8_asym_bias_any(const int16_t *in_tensor,
  *  - During the quantization process, a positive out_shift value is used to left
  *    shift calculation results whereas a negative one is used to right shift.
  */
-int32_t riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
-                                    const uint16_t in_tensor_dim_x,
-                                    const uint16_t in_tensor_dim_y,
-                                    const uint16_t in_tensor_ch,
-                                    const q7_t *ker_weight,
-                                    const uint16_t out_tensor_ch,
-                                    const uint16_t ch_mult,
-                                    const uint16_t ker_dim_x,
-                                    const uint16_t ker_dim_y,
-                                    const uint16_t pad_x,
-                                    const uint16_t pad_y,
-                                    const uint16_t stride_x,
-                                    const uint16_t stride_y,
-                                    const int32_t *bias,
-                                    q7_t *out_tensor,
-                                    const int32_t *out_shift,
-                                    const int32_t *out_scale,
-                                    const uint16_t out_tensor_dim_x,
-                                    const uint16_t out_tensor_dim_y,
-                                    const int32_t out_offset,
-                                    const int32_t in_offset,
-                                    const int32_t act_min,
-                                    const int32_t act_max,
-                                    const uint16_t dilation_x,
-                                    const uint16_t dilation_y,
-                                    q15_t *tmp_buf);
+int32_t riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym(const int8_t * in_tensor,
+                                                   const uint16_t in_tensor_dim_x,
+                                                   const uint16_t in_tensor_dim_y,
+                                                   const uint16_t in_tensor_ch,
+                                                   const int8_t * ker_weight,
+                                                   const uint16_t out_tensor_ch,
+                                                   const uint16_t ch_mult,
+                                                   const uint16_t ker_dim_x,
+                                                   const uint16_t ker_dim_y,
+                                                   const uint16_t pad_x,
+                                                   const uint16_t pad_y,
+                                                   const uint16_t stride_x,
+                                                   const uint16_t stride_y,
+                                                   const int32_t * bias,
+                                                   int8_t * out_tensor,
+                                                   const int32_t * out_shift,
+                                                   const int32_t * out_scale,
+                                                   const uint16_t out_tensor_dim_x,
+                                                   const uint16_t out_tensor_dim_y,
+                                                   const int32_t out_offset,
+                                                   const int32_t in_offset,
+                                                   const int32_t act_min,
+                                                   const int32_t act_max,
+                                                   const uint16_t dilation_x,
+                                                   const uint16_t dilation_y,
+                                                   int16_t * tmp_buf);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
@@ -5560,128 +6492,10 @@ int32_t riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym(const q7_t *in_tensor,
  * @return          Returns the size required by the temporary buffer.
  */
 int32_t riscv_nn_conv_dw_HWC_wrapper_s8_s8_s8_asym_get_buffer_size(const uint16_t in_tensor_ch,
-                                                            const uint16_t ch_mult,
-                                                            const uint16_t ker_dim_x,
-                                                            const uint16_t ker_dim_y,
-                                                            const uint16_t pad_x);
-
-/**
- * @brief           This function performs transposed convolution with signed
- *                  8-bit integers for both inputs and outputs across any x and
- *                  y dimensions, applying asymmetric quantization to the
- *                  outputs.
- * @param[in]       in_tensor           Pointer to the input vector
- * @param[in]       in_tensor_dim_x     X dimension of the input tensor
- * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
- * @param[in]       in_tensor_ch        Number of input tensor channels
- * @param[in]       in_tensor_batch     Size of input tensor batches
- * @param[in]       ker_weight          Pointer of kernel weights
- * @param[in]       out_tensor_ch       Number of output tensor channels
- * @param[in]       ker_dim_x           X dimension of the filter kernel
- * @param[in]       ker_dim_y           Y dimension of the filter kernel
- * @param[in]       pad_x               Padding size in the x dimension
- * @param[in]       pad_y               Padding size in the y dimension
- * @param[in]       pad_offset_x        Dummy
- * @param[in]       pad_offset_y        Dummy
- * @param[in]       stride_x            Convolution stride in the x dimension
- * @param[in]       stride_y            Convolution stride in the y dimension
- * @param[in]       bias                Pointer to the bias vector
- * @param[out]      out_tensor          Pointer to the output tensor
- * @param[in]       out_shift           Pointer to the shift vector for the
- *                                      quantization on outputs
- * @param[in]       out_scale           Pointer to the scaling vector for the
- *                                      quantization on outputs
- * @param[in]       out_offset          Offset value for the output tensor. It
- *                                      should be in the range of -128 to 127.
- * @param[in]       in_offset           Offset value for the input tensor. It
- *                                      should be in the range of -127 to 128.
- * @param[in]       act_min             Minimum value that the output tensor is
- *                                      limited to. It should be in the range of
- *                                      -128 to 127.
- * @param[in]       act_max             Maximum value that the output tensor is
- *                                      limited to. It should be in the range of
- *                                      -128 to 127.
- * @param[in]       out_tensor_dim_x    X dimension of the output tensor
- * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
- * @param[in]       tmp_buf             Temporary buffer for calculations. Its
- *                                      needed size could be obtained by calling
- *                                      riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any_get_buffer_size.
- * @return          This function only returns 0.
- *
- * @note
- *  - bias could be a null pointer as the bias vector is optional for this
- *    function.
- *  - During the quantization process, a positive out_shift value is used to
- *    left shift calculation results whereas a negative one is used to right
- *    shift.
- */
-int32_t riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
-    const uint16_t in_tensor_dim_x,
-    const uint16_t in_tensor_dim_y,
-    const uint16_t in_tensor_ch,
-    const uint16_t in_tensor_batch,
-    const q7_t *ker_weight,
-    const uint16_t out_tensor_ch,
-    const uint16_t ker_dim_x,
-    const uint16_t ker_dim_y,
-    const uint16_t pad_x,
-    const uint16_t pad_y,
-    const uint16_t pad_offset_x,
-    const uint16_t pad_offset_y,
-    const uint16_t stride_x,
-    const uint16_t stride_y,
-    const int32_t *bias,
-    q7_t *out_tensor,
-    const int32_t *out_shift,
-    const int32_t *out_scale,
-    const int32_t out_offset,
-    const int32_t in_offset,
-    const int32_t act_min,
-    const int32_t act_max,
-    const uint16_t out_tensor_dim_x,
-    const uint16_t out_tensor_dim_y,
-    int8_t *tmp_buf);
-
-/**
- * @brief           This function calculates the required size (in bytes) for
- *                  the input temporary buffer needed for
- *                  riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any.
- * @param[in]       in_tensor_dim_x     X dimension of the input tensor
- * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
- * @param[in]       in_tensor_ch        Number of input tensor channels
- * @param[in]       in_tensor_batch     Size of input tensor batches
- * @param[in]       out_tensor_ch       Number of output tensor channels
- * @param[in]       ker_dim_x           X dimension of the filter kernel
- * @param[in]       ker_dim_y           Y dimension of the filter kernel
- * @param[in]       pad_x               Padding size in the x dimension
- * @param[in]       pad_y               Padding size in the y dimension
- * @param[in]       stride_x            Convolution stride in the x dimension
- * @param[in]       stride_y            Convolution stride in the y dimension
- * @param[in]       out_tensor_dim_x    X dimension of the output tensor
- * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
- * @return          Returns the required size by the temporary buffer.
- */
-uint32_t riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_dim_x,
-                                                                        const uint16_t in_tensor_dim_y,
-                                                                        const uint16_t in_tensor_ch,
-                                                                        const uint16_t in_tensor_batch,
-                                                                        const uint16_t out_tensor_ch,
-                                                                        const uint16_t ker_dim_x,
-                                                                        const uint16_t ker_dim_y,
-                                                                        const uint16_t pad_x,
-                                                                        const uint16_t pad_y,
-                                                                        const uint16_t stride_x,
-                                                                        const uint16_t stride_y,
-                                                                        const uint16_t out_tensor_dim_x,
-                                                                        const uint16_t out_tensor_dim_y);
-
-
-uint32_t riscv_nn_conv_get_buf_size(const long in_tensor_ch,
-    const long ker_dim_x,
-    const long ker_dim_y,
-    const long out_tensor_ch,
-    const long in_sz,
-    const long wt_sz);
+                                                                   const uint16_t ch_mult,
+                                                                   const uint16_t ker_dim_x,
+                                                                   const uint16_t ker_dim_y,
+                                                                   const uint16_t pad_x);
 
 #ifdef __riscv_zfh
 /**
@@ -5723,23 +6537,23 @@ uint32_t riscv_nn_conv_get_buf_size(const long in_tensor_ch,
  *     - stride_y is 1
  */
 int32_t riscv_nn_conv_1x1_HWC_f16_f16_f16_bias_any(const float16_t * in_tensor,
-                                                const uint16_t in_tensor_dim_x,
-                                                const uint16_t in_tensor_dim_y,
-                                                const uint16_t in_tensor_ch,
-                                                const float16_t * ker_weight,
-                                                const uint16_t out_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y,
-                                                const uint16_t pad_x,
-                                                const uint16_t pad_y,
-                                                const uint16_t stride_x,
-                                                const uint16_t stride_y,
-                                                const float16_t * bias,
-                                                float16_t * out_tensor,
-                                                const uint16_t out_tensor_dim_x,
-                                                const uint16_t out_tensor_dim_y,
-                                                float16_t * in_tmp_buf,
-                                                float16_t * tmp_buf);
+                                                   const uint16_t in_tensor_dim_x,
+                                                   const uint16_t in_tensor_dim_y,
+                                                   const uint16_t in_tensor_ch,
+                                                   const float16_t * ker_weight,
+                                                   const uint16_t out_tensor_ch,
+                                                   const uint16_t ker_dim_x,
+                                                   const uint16_t ker_dim_y,
+                                                   const uint16_t pad_x,
+                                                   const uint16_t pad_y,
+                                                   const uint16_t stride_x,
+                                                   const uint16_t stride_y,
+                                                   const float16_t * bias,
+                                                   float16_t * out_tensor,
+                                                   const uint16_t out_tensor_dim_x,
+                                                   const uint16_t out_tensor_dim_y,
+                                                   float16_t * in_tmp_buf,
+                                                   float16_t * tmp_buf);
 
 /**
  * @brief           This function calculates the required length for the input
@@ -5760,17 +6574,17 @@ int32_t riscv_nn_conv_1x1_HWC_f16_f16_f16_bias_any(const float16_t * in_tensor,
  * @return          Returns the required length of the temporary buffer.
  */
 uint32_t riscv_nn_conv_1x1_HWC_f16_f16_f16_bias_any_get_buffer_size(const uint16_t in_tensor_dim_x,
-                                                                   const uint16_t in_tensor_dim_y,
-                                                                   const uint16_t in_tensor_ch,
-                                                                   const uint16_t out_tensor_ch,
-                                                                   const uint16_t ker_dim_x,
-                                                                   const uint16_t ker_dim_y,
-                                                                   const uint16_t pad_x,
-                                                                   const uint16_t pad_y,
-                                                                   const uint16_t stride_x,
-                                                                   const uint16_t stride_y,
-                                                                   const uint16_t out_tensor_dim_x,
-                                                                   const uint16_t out_tensor_dim_y);
+                                                                    const uint16_t in_tensor_dim_y,
+                                                                    const uint16_t in_tensor_ch,
+                                                                    const uint16_t out_tensor_ch,
+                                                                    const uint16_t ker_dim_x,
+                                                                    const uint16_t ker_dim_y,
+                                                                    const uint16_t pad_x,
+                                                                    const uint16_t pad_y,
+                                                                    const uint16_t stride_x,
+                                                                    const uint16_t stride_y,
+                                                                    const uint16_t out_tensor_dim_x,
+                                                                    const uint16_t out_tensor_dim_y);
 
 /**
  * @brief           This function performs convolution on half-precision
@@ -5794,18 +6608,18 @@ uint32_t riscv_nn_conv_1x1_HWC_f16_f16_f16_bias_any_get_buffer_size(const uint16
  * @return          This function returns 0.
  */
 int32_t riscv_nn_conv_HWC_f16_f16_f16_bias(const float16_t * in_tensor,
-                                        const uint16_t in_tensor_dim,
-                                        const uint16_t in_tensor_ch,
-                                        const float16_t * ker_weight,
-                                        const uint16_t out_tensor_ch,
-                                        const uint16_t ker_dim,
-                                        const uint16_t pad,
-                                        const uint16_t stride,
-                                        const float16_t * bias,
-                                        float16_t * out_tensor,
-                                        const uint16_t out_tensor_dim,
-                                        float16_t * in_tmp_buf,
-                                        float16_t * tmp_buf);
+                                           const uint16_t in_tensor_dim,
+                                           const uint16_t in_tensor_ch,
+                                           const float16_t * ker_weight,
+                                           const uint16_t out_tensor_ch,
+                                           const uint16_t ker_dim,
+                                           const uint16_t pad,
+                                           const uint16_t stride,
+                                           const float16_t * bias,
+                                           float16_t * out_tensor,
+                                           const uint16_t out_tensor_dim,
+                                           float16_t * in_tmp_buf,
+                                           float16_t * tmp_buf);
 /**
  * @brief           This function calculates the required length for the input
  *                  temporary buffer needed for
@@ -5820,12 +6634,12 @@ int32_t riscv_nn_conv_HWC_f16_f16_f16_bias(const float16_t * in_tensor,
  * @return          Returns the required length of the temporary buffer.
  */
 uint32_t riscv_nn_conv_HWC_f16_f16_f16_bias_get_buffer_size(const uint16_t in_tensor_dim,
-                                                           const uint16_t in_tensor_ch,
-                                                           const uint16_t out_tensor_ch,
-                                                           const uint16_t ker_dim,
-                                                           const uint16_t pad,
-                                                           const uint16_t stride,
-                                                           const uint16_t out_tensor_dim);
+                                                            const uint16_t in_tensor_ch,
+                                                            const uint16_t out_tensor_ch,
+                                                            const uint16_t ker_dim,
+                                                            const uint16_t pad,
+                                                            const uint16_t stride,
+                                                            const uint16_t out_tensor_dim);
 
 /**
  * @brief           This function performs depthwise convolution on
@@ -5852,19 +6666,64 @@ uint32_t riscv_nn_conv_HWC_f16_f16_f16_bias_get_buffer_size(const uint16_t in_te
  *                  to out_tensor_ch.
  */
 int32_t riscv_nn_conv_dw_HWC_f16_f16_f16_bias(const float16_t * in_tensor,
-                                            const uint16_t in_tensor_dim,
-                                            const uint16_t in_tensor_ch,
-                                            const float16_t * ker_weight,
-                                            const uint16_t out_tensor_ch,
-                                            const uint16_t ker_dim,
-                                            const uint16_t pad,
-                                            const uint16_t stride,
-                                            const float16_t * bias,
-                                            float16_t * out_tensor,
-                                            const uint16_t out_tensor_dim,
-                                            float16_t * in_tmp_buf,
-                                            float16_t * tmp_buf);
+                                              const uint16_t in_tensor_dim,
+                                              const uint16_t in_tensor_ch,
+                                              const float16_t * ker_weight,
+                                              const uint16_t out_tensor_ch,
+                                              const uint16_t ker_dim,
+                                              const uint16_t pad,
+                                              const uint16_t stride,
+                                              const float16_t * bias,
+                                              float16_t * out_tensor,
+                                              const uint16_t out_tensor_dim,
+                                              float16_t * in_tmp_buf,
+                                              float16_t * tmp_buf);
 #endif
+
+/**
+ * @brief           This function performs depthwise convolution on
+ *                  single-precision floating-point data for both inputs and
+ *                  outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_batch     Size of input tensor batches
+ * @param[in]       in_tensor_dim_x     X dimension of the filter kernel
+ * @param[in]       in_tensor_dim_y     Y dimension of the filter kernel
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_weight          Pointer of kernel weights
+ * @param[in]       out_tensor_ch       Number of output tensor channels
+ * @param[in]       ker_dim_x           X dimension of the filter kernel
+ * @param[in]       ker_dim_y           Y dimension of the filter kernel
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Convolution stride in the x dimension
+ * @param[in]       stride_y            Convolution stride in the y dimension
+ * @param[in]       bias                Pointer to the bias vector
+ * @param[in]       out_tensor          Pointer to the output tensor
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       tmp_buf             Dummy
+ * @return          Returns 0 if successful; otherwise, returns -1 if the inputs
+ *                  fail to meet the constraint that in_tensor_ch must be equal
+ *                  to out_tensor_ch.t32_t
+ */
+int32_t riscv_nn_conv_dw_HWC_f32_f32_f32_bias_any(float32_t * in_tensor,
+                                                  const uint16_t in_tensor_batch,
+                                                  const uint16_t in_tensor_dim_x,
+                                                  const uint16_t in_tensor_dim_y,
+                                                  const uint16_t in_tensor_ch,
+                                                  const float32_t * ker_weight,
+                                                  const uint16_t out_tensor_ch,
+                                                  const uint16_t ker_dim_x,
+                                                  const uint16_t ker_dim_y,
+                                                  const uint16_t pad_x,
+                                                  const uint16_t pad_y,
+                                                  const uint16_t stride_x,
+                                                  const uint16_t stride_y,
+                                                  const float32_t * bias,
+                                                  float32_t * out_tensor,
+                                                  const uint16_t out_tensor_dim_x,
+                                                  const uint16_t out_tensor_dim_y,
+                                                  float32_t * tmp_buf);
 
 /**
  *   * @}

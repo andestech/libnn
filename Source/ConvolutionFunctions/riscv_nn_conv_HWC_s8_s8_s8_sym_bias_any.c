@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -21,6 +21,7 @@
 
 #include "internal_nn_math.h"
 #include "riscv_nn_support.h"
+#include <stdio.h>
 
 void riscv_nn_conv_HWC_s8_s8_s8_sym_bias_any(const q7_t * in_tensor,
                             const uint16_t in_tensor_dim_x,

@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -205,5 +205,24 @@ int32_t riscv_nn_mat_mult_nt_t_s8(const q7_t *lhs,
             dst_ptr += rhs_rows;
         }
     }
+    return 0;
+}
+
+int32_t riscv_nn_mat_mult_nt_t_s8_v2(const int8_t *lhs,
+            const int8_t *rhs,
+            const int32_t *bias,
+            int8_t *dst,
+            const int32_t *dst_multipliers,
+            const int32_t *dst_shifts,
+            const int32_t lhs_rows,
+            const int32_t rhs_rows,
+            const int32_t rhs_cols,
+            const int32_t lhs_offset,    //value is in the range of [-127, 128]
+            const int32_t dst_offset,    //value is in the range of [-128, 127]
+            const int32_t activation_min,
+            const int32_t activation_max,
+            const int32_t lhs_cols_offset,
+            int32_t *contri_buf)
+{
     return 0;
 }

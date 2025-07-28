@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -41,6 +41,7 @@ extern    "C"
  * @brief           This is an average pooling function for signed 8-bit integer
  *                  inputs.
  * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_batch Size of input tensor batches
  * @param[in]       in_tensor_dim   Dimension of the input tensor
  * @param[in]       in_tensor_ch    Number of input tensor channels
  * @param[in]       ker_dim         Dimension of the pooling window
@@ -69,6 +70,7 @@ extern    "C"
  * @endcode
  */
 void riscv_nn_avepool_HWC_s8(q7_t * in_tensor,
+                           const uint16_t in_tensor_batch,
                            const uint16_t in_tensor_dim,
                            const uint16_t in_tensor_ch,
                            const uint16_t ker_dim,
@@ -82,6 +84,7 @@ void riscv_nn_avepool_HWC_s8(q7_t * in_tensor,
  * @brief           This average pooling function processes signed 8-bit integer
  *                  inputs across any x and y dimensions.
  * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_batch     Size of input tensor batches
  * @param[in]       in_tensor_dim_x     X dimension of the input tensor
  * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
  * @param[in]       in_tensor_ch        Number of input tensor channels
@@ -125,6 +128,7 @@ void riscv_nn_avepool_HWC_s8(q7_t * in_tensor,
  * @endcode
  */
 void riscv_nn_avepool_HWC_s8_any(q7_t * in_tensor,
+                               const uint16_t in_tensor_batch,
                                const uint16_t in_tensor_dim_x,
                                const uint16_t in_tensor_dim_y,
                                const uint16_t in_tensor_ch,
@@ -144,6 +148,7 @@ void riscv_nn_avepool_HWC_s8_any(q7_t * in_tensor,
  * @brief           This average pooling function processes signed 8-bit integer
  *                  inputs across any x and y dimensions and includes activation
  *                  parameters to limit the outputs.
+ * @param[in]       in_tensor_batch     Size of input tensor batches
  * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
  * @param[in]       in_tensor_dim_x     X dimension of the input tensor
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
@@ -170,22 +175,23 @@ void riscv_nn_avepool_HWC_s8_any(q7_t * in_tensor,
  * @param[out]      out_tensor          Pointer to the output tensor
  * @return          This function only returns 0.
  */
-int32_t riscv_nn_avepool_HWC_s8_any_act(const int in_tensor_dim_y,
-                                const int in_tensor_dim_x,
-                                const int out_tensor_dim_y,
-                                const int out_tensor_dim_x,
-                                const int stride_y,
-                                const int stride_x,
-                                const int ker_dim_y,
-                                const int ker_dim_x,
-                                const int pad_y,
-                                const int pad_x,
-                                const int act_min,
-                                const int act_max,
-                                const int in_tensor_ch,
-                                int8_t *in_tensor,
-                                int16_t *in_tmp_buf,
-                                int8_t *out_tensor);
+int32_t riscv_nn_avepool_HWC_s8_any_act(const int in_tensor_batch,
+                                        const int in_tensor_dim_y,
+                                        const int in_tensor_dim_x,
+                                        const int out_tensor_dim_y,
+                                        const int out_tensor_dim_x,
+                                        const int stride_y,
+                                        const int stride_x,
+                                        const int ker_dim_y,
+                                        const int ker_dim_x,
+                                        const int pad_y,
+                                        const int pad_x,
+                                        const int act_min,
+                                        const int act_max,
+                                        const int in_tensor_ch,
+                                        int8_t * in_tensor,
+                                        int16_t * in_tmp_buf,
+                                        int8_t * out_tensor);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
@@ -200,6 +206,7 @@ int32_t riscv_nn_avepool_HWC_s8_any_act_get_buffer_size(const int out_tensor_dim
  * @brief           This average pooling function processes signed 16-bit
  *                  integer inputs across any x and y dimensions and includes
  *                  activation parameters to limit the outputs.
+ * @param[in]       in_tensor_batch     Size of input tensor batches
  * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
  * @param[in]       in_tensor_dim_x     X dimension of the input tensor
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
@@ -226,22 +233,23 @@ int32_t riscv_nn_avepool_HWC_s8_any_act_get_buffer_size(const int out_tensor_dim
  * @param[out]      out_tensor          Pointer to the output tensor
  * @return          This function only returns 0.
  */
-int32_t riscv_nn_avepool_HWC_s16_any_act(const int in_tensor_dim_y,
-    const int in_tensor_dim_x,
-    const int out_tensor_dim_y,
-    const int out_tensor_dim_x,
-    const int stride_y,
-    const int stride_x,
-    const int ker_dim_y,
-    const int ker_dim_x,
-    const int pad_y,
-    const int pad_x,
-    const int act_min,
-    const int act_max,
-    const int in_tensor_ch,
-    int16_t *in_tensor,
-    int16_t *in_tmp_buf,
-    int16_t *out_tensor);
+int32_t riscv_nn_avepool_HWC_s16_any_act(const int in_tensor_batch,
+                                         const int in_tensor_dim_y,
+                                         const int in_tensor_dim_x,
+                                         const int out_tensor_dim_y,
+                                         const int out_tensor_dim_x,
+                                         const int stride_y,
+                                         const int stride_x,
+                                         const int ker_dim_y,
+                                         const int ker_dim_x,
+                                         const int pad_y,
+                                         const int pad_x,
+                                         const int act_min,
+                                         const int act_max,
+                                         const int in_tensor_ch,
+                                         int16_t * in_tensor,
+                                         int16_t * in_tmp_buf,
+                                         int16_t * out_tensor);
 
 /**
  * @brief           This function calculates the required size (in bytes) for
@@ -252,6 +260,125 @@ int32_t riscv_nn_avepool_HWC_s16_any_act(const int in_tensor_dim_y,
  */
 int32_t riscv_nn_avepool_HWC_s16_any_act_get_buffer_size(const int out_tensor_dim_x,
     const int in_tensor_ch);
+
+/**
+ * @brief           This average pooling function processes signed 8-bit
+ *                  integer inputs across any x and y dimensions and applying
+ *                  asymmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the pooling window
+ * @param[in]       ker_dim_y           Y dimension of the pooling window
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Stride of the pooling window in the x
+ *                                      dimension
+ * @param[in]       stride_y            Stride of the pooling window in the y
+ *                                      dimension
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Shift amount for the quantization on the
+ *                                      outputs
+ * @param[in]       out_scale           Scaling value for the quantization on
+ *                                      the outputs
+ * @param[in]       out_round_pos       Rounding value for positive outputs
+ * @param[in]       out_round_neg       Rounding value for negative outputs
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_offset          Offset value to be added to the outputs.
+ *                                      It should be in the range of -128 to
+ *                                      127.
+ * @param[in]       in_offset           Offset value to be added to the inputs.
+ *                                  .   It should be in the range of -127 to 128.
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @param[in]       act_max             Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -128 to 127.
+ * @return          This function only returns 0.
+ */
+int32_t riscv_nn_avepool_HWC_s8_asym(const int8_t * in_tensor,
+                                     const uint16_t in_tensor_dim_x,
+                                     const uint16_t in_tensor_dim_y,
+                                     const uint16_t in_tensor_ch,
+                                     const uint16_t ker_dim_x,
+                                     const uint16_t ker_dim_y,
+                                     const uint16_t pad_x,
+                                     const uint16_t pad_y,
+                                     const uint16_t stride_x,
+                                     const uint16_t stride_y,
+                                     int8_t * out_tensor,
+                                     const int32_t out_shift,
+                                     const int32_t out_scale,
+                                     const int32_t out_round_pos,
+                                     const int32_t out_round_neg,
+                                     const uint16_t out_tensor_dim_x,
+                                     const uint16_t out_tensor_dim_y,
+                                     const int32_t out_offset,
+                                     const int32_t in_offset,
+                                     const int32_t act_min,
+                                     const int32_t act_max);
+
+/**
+ * @brief           This average pooling function processes signed 16-bit
+ *                  integer inputs across any x and y dimensions and applying
+ *                  asymmetric quantization to the outputs.
+ * @param[in]       in_tensor           Pointer to the input tensor
+ * @param[in]       in_tensor_dim_x     X dimension of the input tensor
+ * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
+ * @param[in]       in_tensor_ch        Number of input tensor channels
+ * @param[in]       ker_dim_x           X dimension of the pooling window
+ * @param[in]       ker_dim_y           Y dimension of the pooling window
+ * @param[in]       pad_x               Padding size in the x dimension
+ * @param[in]       pad_y               Padding size in the y dimension
+ * @param[in]       stride_x            Stride of the pooling window in the x
+ *                                      dimension
+ * @param[in]       stride_y            Stride of the pooling window in the y
+ *                                      dimension
+ * @param[out]      out_tensor          Pointer to the output tensor
+ * @param[in]       out_shift           Shift amount for the quantization on the
+ *                                      outputs
+ * @param[in]       out_scale           Scaling value for the quantization on
+ *                                      the outputs
+ * @param[in]       out_round_pos       Rounding value for positive outputs
+ * @param[in]       out_round_neg       Rounding value for negative outputs
+ * @param[in]       out_tensor_dim_x    X dimension of the output tensor
+ * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
+ * @param[in]       out_offset          Offset value to be added to the output
+ *                                      tensor.
+ * @param[in]       in_offset           Offset value to be added to the input
+ *                                      tensor.
+ * @param[in]       act_min             Minimum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -32768 to 32767.
+ * @param[in]       act_max             Maximum value that the output tensor is
+ *                                      limited to. It should be in the range of
+ *                                      -32768 to 32767.
+ * @return          This function only returns 0.
+ */
+int32_t riscv_nn_avepool_HWC_s16_asym(const int16_t * in_tensor,
+                                      const uint16_t in_tensor_dim_x,
+                                      const uint16_t in_tensor_dim_y,
+                                      const uint16_t in_tensor_ch,
+                                      const uint16_t ker_dim_x,
+                                      const uint16_t ker_dim_y,
+                                      const uint16_t pad_x,
+                                      const uint16_t pad_y,
+                                      const uint16_t stride_x,
+                                      const uint16_t stride_y,
+                                      int16_t * out_tensor,
+                                      const int32_t out_shift,
+                                      const int32_t out_scale,
+                                      const int32_t out_round_pos,
+                                      const int32_t out_round_neg,
+                                      const uint16_t out_tensor_dim_x,
+                                      const uint16_t out_tensor_dim_y,
+                                      const int32_t out_offset,
+                                      const int32_t in_offset,
+                                      const int32_t act_min,
+                                      const int32_t act_max);
 
 #ifdef __riscv_zfh
 /**
@@ -276,24 +403,25 @@ int32_t riscv_nn_avepool_HWC_s16_any_act_get_buffer_size(const int out_tensor_di
  * @return          None
  */
 void riscv_nn_avepool_HWC_f16_any(float16_t * in_tensor,
-                                const uint16_t in_tensor_dim_x,
-                                const uint16_t in_tensor_dim_y,
-                                const uint16_t in_tensor_ch,
-                                const uint16_t ker_dim_x,
-                                const uint16_t ker_dim_y,
-                                const uint16_t pad_x,
-                                const uint16_t pad_y,
-                                const uint16_t stride_x,
-                                const uint16_t stride_y,
-                                const uint16_t out_tensor_dim_x,
-                                const uint16_t out_tensor_dim_y,
-                                float16_t * in_tmp_buf,
-                                float16_t * out_tensor);
+                                  const uint16_t in_tensor_dim_x,
+                                  const uint16_t in_tensor_dim_y,
+                                  const uint16_t in_tensor_ch,
+                                  const uint16_t ker_dim_x,
+                                  const uint16_t ker_dim_y,
+                                  const uint16_t pad_x,
+                                  const uint16_t pad_y,
+                                  const uint16_t stride_x,
+                                  const uint16_t stride_y,
+                                  const uint16_t out_tensor_dim_x,
+                                  const uint16_t out_tensor_dim_y,
+                                  float16_t * in_tmp_buf,
+                                  float16_t * out_tensor);
 #endif
 /**
  * @brief           This is a max pooling function for signed 8-bit integer
  *                  inputs.
  * @param[in]       in_tensor       Pointer to the input tensor
+ * @param[in]       in_tensor_batch Size of input tensor batches
  * @param[in]       in_tensor_dim   Dimension of the input tensor
  * @param[in]       in_tensor_ch    Number of input tensor channels
  * @param[in]       ker_dim         Dimension of the pooling window
@@ -320,20 +448,22 @@ void riscv_nn_avepool_HWC_f16_any(float16_t * in_tensor,
  *      OUT_DIM, NULL, out_data);
  * @endcode
  */
- void riscv_nn_maxpool_HWC_s8(q7_t * in_tensor,
-                            const uint16_t in_tensor_dim,
-                            const uint16_t in_tensor_ch,
-                            const uint16_t ker_dim,
-                            const uint16_t pad,
-                            const uint16_t stride,
-                            const uint16_t out_tensor_dim,
-                            q7_t * in_tmp_buf,
-                            q7_t * out_tensor);
+ void riscv_nn_maxpool_HWC_s8(const q7_t * in_tensor,
+                              const uint16_t in_tensor_batch,
+                              const uint16_t in_tensor_dim,
+                              const uint16_t in_tensor_ch,
+                              const uint16_t ker_dim,
+                              const uint16_t pad,
+                              const uint16_t stride,
+                              const uint16_t out_tensor_dim,
+                              q7_t * in_tmp_buf,
+                              q7_t * out_tensor);
 
 /**
  * @brief           This max pooling function processes signed 8-bit integer
  *                  inputs across any x and y dimensions and includes activation
  *                  parameters to limit the outputs.
+ * @param[in]       in_tensor_batch     Size of input tensor batches
  * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
  * @param[in]       in_tensor_dim_x     X dimension of the input tensor
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
@@ -358,7 +488,8 @@ void riscv_nn_avepool_HWC_f16_any(float16_t * in_tensor,
  * @param[out]      out_tensor          Pointer to the output tensor
  * @return          This function only returns 0.
  */
-int32_t riscv_nn_maxpool_HWC_s8_any_act(const uint16_t in_tensor_dim_y,
+int32_t riscv_nn_maxpool_HWC_s8_any_act(const uint16_t in_tensor_batch,
+                                        const uint16_t in_tensor_dim_y,
                                         const uint16_t in_tensor_dim_x,
                                         const uint16_t out_tensor_dim_y,
                                         const uint16_t out_tensor_dim_x,
@@ -371,14 +502,15 @@ int32_t riscv_nn_maxpool_HWC_s8_any_act(const uint16_t in_tensor_dim_y,
                                         const int8_t act_min,
                                         const int8_t act_max,
                                         const uint16_t in_tensor_ch,
-                                        int8_t *in_tensor,
-                                        int16_t *tmp_buffer,
-                                        int8_t *out_tensor);
+                                        int8_t * in_tensor,
+                                        int16_t * tmp_buffer,
+                                        int8_t * out_tensor);
 
 /**
  * @brief           This max pooling function processes signed 16-bit integer
  *                  inputs across any x and y dimensions and includes activation
  *                  parameters to limit the outputs.
+ * @param[in]       in_tensor_batch     Size of input tensor batches
  * @param[in]       in_tensor_dim_y     Y dimension of the input tensor
  * @param[in]       in_tensor_dim_x     X dimension of the input tensor
  * @param[in]       out_tensor_dim_y    Y dimension of the output tensor
@@ -403,22 +535,23 @@ int32_t riscv_nn_maxpool_HWC_s8_any_act(const uint16_t in_tensor_dim_y,
  * @param[out]      out_tensor          Pointer to the output tensor
  * @return          This function only returns 0.
  */
-int32_t riscv_nn_maxpool_HWC_s16_any_act(const int32_t in_tensor_dim_y,
-    const int32_t in_tensor_dim_x,
-    const int32_t out_tensor_dim_y,
-    const int32_t out_tensor_dim_x,
-    const int32_t stride_y,
-    const int32_t stride_x,
-    const int32_t ker_dim_y,
-    const int32_t ker_dim_x,
-    const int32_t pad_y,
-    const int32_t pad_x,
-    const int32_t act_min,
-    const int32_t act_max,
-    const int32_t in_tensor_ch,
-    int16_t *in_tensor,
-    int16_t *tmp_buffer,
-    int16_t *out_tensor);
+int32_t riscv_nn_maxpool_HWC_s16_any_act(const int32_t in_tensor_batch,
+                                         const int32_t in_tensor_dim_y,
+                                         const int32_t in_tensor_dim_x,
+                                         const int32_t out_tensor_dim_y,
+                                         const int32_t out_tensor_dim_x,
+                                         const int32_t stride_y,
+                                         const int32_t stride_x,
+                                         const int32_t ker_dim_y,
+                                         const int32_t ker_dim_x,
+                                         const int32_t pad_y,
+                                         const int32_t pad_x,
+                                         const int32_t act_min,
+                                         const int32_t act_max,
+                                         const int32_t in_tensor_ch,
+                                         int16_t * in_tensor,
+                                         int16_t * tmp_buffer,
+                                         int16_t * out_tensor);
 
 #ifdef __riscv_zfh
 /**
@@ -443,19 +576,19 @@ int32_t riscv_nn_maxpool_HWC_s16_any_act(const int32_t in_tensor_dim_y,
  * @return          This function only returns 0.
  */
 int32_t riscv_nn_maxpool_HWC_f16_any(const uint16_t in_tensor_dim_y,
-                                    const uint16_t in_tensor_dim_x,
-                                    const uint16_t out_tensor_dim_y,
-                                    const uint16_t out_tensor_dim_x,
-                                    const uint16_t stride_y,
-                                    const uint16_t stride_x,
-                                    const uint16_t ker_dim_y,
-                                    const uint16_t ker_dim_x,
-                                    const uint16_t pad_y,
-                                    const uint16_t pad_x,
-                                    const uint16_t in_tensor_ch,
-                                    float16_t *in_tensor,
-                                    float16_t *tmp_buffer,
-                                    float16_t *out_tensor);
+                                     const uint16_t in_tensor_dim_x,
+                                     const uint16_t out_tensor_dim_y,
+                                     const uint16_t out_tensor_dim_x,
+                                     const uint16_t stride_y,
+                                     const uint16_t stride_x,
+                                     const uint16_t ker_dim_y,
+                                     const uint16_t ker_dim_x,
+                                     const uint16_t pad_y,
+                                     const uint16_t pad_x,
+                                     const uint16_t in_tensor_ch,
+                                     float16_t * in_tensor,
+                                     float16_t * tmp_buffer,
+                                     float16_t * out_tensor);
 
 #endif  //__riscv_zfh
 

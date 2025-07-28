@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -23,19 +23,19 @@
 
 //// Basic Operation Functions
 
-int riscv_nn_ew_addc_s8_asym(const int8_t *in_vec,
-                    const int32_t in_const,
-                    const int32_t in_offset,//range:[-128, 127]
-                    const int32_t in_scale,
-                    const int32_t in_rshift,
-                    const int32_t lshift,//23
-                    int8_t *out_vec,
-                    const int32_t out_offset,//range:[-128, 127]
-                    const int32_t out_scale,
-                    const int32_t out_rshift,
-                    const int32_t act_min,
-                    const int32_t act_max,
-                    const uint32_t size)
+int32_t riscv_nn_ew_addc_s8_asym(const int8_t * in_vec,
+                                 const int32_t in_const,
+                                 const int32_t in_offset,//range:[-128, 127]
+                                 const int32_t in_scale,
+                                 const int32_t in_rshift,
+                                 const int32_t lshift,//23
+                                 int8_t * out_vec,
+                                 const int32_t out_offset,//range:[-128, 127]
+                                 const int32_t out_scale,
+                                 const int32_t out_rshift,
+                                 const int32_t act_min,
+                                 const int32_t act_max,
+                                 const uint32_t size)
 {
     uint32_t loop;
     int32_t in1, output;
@@ -53,6 +53,5 @@ int riscv_nn_ew_addc_s8_asym(const int8_t *in_vec,
         *out_vec++ = output;
         loop--;
     }
-
     return 0;
 }

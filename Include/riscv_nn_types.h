@@ -116,4 +116,16 @@ typedef struct
 
 } riscv_nn_lstm_params;
 
+typedef enum
+{
+    NN_WZYX_2_WZXY = 0,  // perm:[0,1,3,2]
+    NN_WZYX_2_WYZX = 1,  // perm:[0,2,1,3]
+    NN_WZYX_2_WYXZ = 2,  // perm:[0,2,3,1]
+    NN_WZYX_2_WXZY = 3,  // perm:[0,3,1,2]
+    NN_WZYX_2_WXYZ = 4,  // perm:[0,3,2,1]
+    NN_WZYX_2_ZWXY = 5,  // perm:[1,0,3,2]
+	NN_WZYX_2_ZWYX = 6,  // perm:[1,0,2,3]
+	NN_WZYX_2_YWZX = 7,  // perm:[2,0,1,3]
+} riscv_nn_transpose_format;
+
 #endif // RISCV_NN_TYPES_H

@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -24,38 +24,30 @@
 
 //// Convolution Functions
 
-/*
-   * Basic s8 convolution function.
-   *
-   * Refer header file for details. Optimal use case for the DSP/MVE implementation is when input and output channels
-   * are multiples of 4 or atleast greater than 4.
-   *
-   */
-
-int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
-                           const uint16_t in_tensor_dim_x,
-                           const uint16_t in_tensor_dim_y,
-                           const uint16_t in_tensor_ch,
-                           const uint16_t in_tensor_batch,
-                           const q7_t *ker_weight,
-                           const uint16_t out_tensor_ch,
-                           const uint16_t ker_dim_x,
-                           const uint16_t ker_dim_y,
-                           const uint16_t pad_x,
-                           const uint16_t pad_y,
-                           const uint16_t stride_x,
-                           const uint16_t stride_y,
-                           const int32_t *bias,
-                           q7_t *out_tensor,
-                           const int32_t *out_shift,
-                           const int32_t *out_scale,
-                           const int32_t out_offset,    //value is in the range of [-128, 127]
-                           const int32_t in_offset,     //value is in the range of [-127, 128]
-                           const int32_t act_min,
-                           const int32_t act_max,
-                           const uint16_t out_tensor_dim_x,
-                           const uint16_t out_tensor_dim_y,
-                           q15_t *in_tmp_buf)
+int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any(const int8_t * in_tensor,
+                                                 const uint16_t in_tensor_dim_x,
+                                                 const uint16_t in_tensor_dim_y,
+                                                 const uint16_t in_tensor_ch,
+                                                 const uint16_t in_tensor_batch,
+                                                 const int8_t * ker_weight,
+                                                 const uint16_t out_tensor_ch,
+                                                 const uint16_t ker_dim_x,
+                                                 const uint16_t ker_dim_y,
+                                                 const uint16_t pad_x,
+                                                 const uint16_t pad_y,
+                                                 const uint16_t stride_x,
+                                                 const uint16_t stride_y,
+                                                 const int32_t * bias,
+                                                 int8_t * out_tensor,
+                                                 const int32_t * out_shift,
+                                                 const int32_t * out_scale,
+                                                 const int32_t out_offset,    //value is in the range of [-128, 127]
+                                                 const int32_t in_offset,     //value is in the range of [-127, 128]
+                                                 const int32_t act_min,
+                                                 const int32_t act_max,
+                                                 const uint16_t out_tensor_dim_x,
+                                                 const uint16_t out_tensor_dim_y,
+                                                 int16_t * in_tmp_buf)
 {
     int i_batch;
     for (i_batch = 0; i_batch < in_tensor_batch; i_batch++)
@@ -116,12 +108,31 @@ int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
     return 0;
 }
 
-int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_ch,
-                                        const uint16_t ker_dim_x,
-                                        const uint16_t ker_dim_y)
+int32_t riscv_nn_conv_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                                                 const uint16_t in_tensor_dim_y,
+                                                                 const uint16_t in_tensor_ch,
+                                                                 const uint16_t out_tensor_ch,
+                                                                 const uint16_t ker_dim_x,
+                                                                 const uint16_t ker_dim_y,
+                                                                 const uint16_t pad_x,
+                                                                 const uint16_t pad_y,
+                                                                 const uint16_t stride_x,
+                                                                 const uint16_t stride_y,
+                                                                 const uint16_t out_tensor_dim_x,
+                                                                 const uint16_t out_tensor_dim_y)
 {
+    (void) in_tensor_dim_x;
+    (void) in_tensor_dim_y;
+    (void) pad_x;
+    (void) pad_y;
+    (void) stride_x;
+    (void) stride_y;
+    (void) out_tensor_dim_x;
+    (void) out_tensor_dim_y;
+    int32_t buf_size = 0;
     (void)in_tensor_ch;
+    (void)out_tensor_ch;
     (void)ker_dim_x;
     (void)ker_dim_y;
-    return 0;
+    return buf_size;
 }

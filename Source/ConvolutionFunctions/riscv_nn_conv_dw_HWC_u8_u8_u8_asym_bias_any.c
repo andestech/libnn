@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -24,31 +24,31 @@
 
 //// Convolution Functions
 
-int32_t riscv_nn_conv_dw_HWC_u8_u8_u8_asym_bias_any(const uint8_t *in_tensor,
-                                    const uint16_t in_tensor_dim_x,
-                                    const uint16_t in_tensor_dim_y,
-                                    const uint16_t in_tensor_ch,
-                                    const uint8_t *ker_weight,
-                                    const uint16_t ker_dim_x,
-                                    const uint16_t ker_dim_y,
-                                    const int16_t ch_mult,
-                                    const int16_t pad_x,
-                                    const int16_t pad_y,
-                                    const int16_t stride_x,
-                                    const int16_t stride_y,
-                                    const int16_t dilation_x,
-                                    const int16_t dilation_y,
-                                    const int32_t *bias,
-                                    const int32_t in_offset,    //assume (in + offset) is in the range of int16
-                                    const int32_t ker_offset,   //assume (kernel + offset) is in the range of int16
-                                    const int32_t out_offset,   //assume (output + offset) is in the range of int16
-                                    uint8_t *out_tensor,
-                                    const uint16_t out_tensor_dim_x,
-                                    const uint16_t out_tensor_dim_y,
-                                    const int32_t act_min,
-                                    const int32_t act_max,
-                                    const int32_t out_shift,
-                                    const int32_t out_scale)
+int32_t riscv_nn_conv_dw_HWC_u8_u8_u8_asym_bias_any(const uint8_t * in_tensor,
+                                                    const uint16_t in_tensor_dim_x,
+                                                    const uint16_t in_tensor_dim_y,
+                                                    const uint16_t in_tensor_ch,
+                                                    const uint8_t * ker_weight,
+                                                    const uint16_t ker_dim_x,
+                                                    const uint16_t ker_dim_y,
+                                                    const int16_t ch_mult,
+                                                    const int16_t pad_x,
+                                                    const int16_t pad_y,
+                                                    const int16_t stride_x,
+                                                    const int16_t stride_y,
+                                                    const int16_t dilation_x,
+                                                    const int16_t dilation_y,
+                                                    const int32_t * bias,
+                                                    const int32_t in_offset,    //assume (in + offset) is in the range of int16
+                                                    const int32_t ker_offset,   //assume (kernel + offset) is in the range of int16
+                                                    const int32_t out_offset,   //assume (output + offset) is in the range of int16
+                                                    uint8_t * out_tensor,
+                                                    const uint16_t out_tensor_dim_x,
+                                                    const uint16_t out_tensor_dim_y,
+                                                    const int32_t act_min,
+                                                    const int32_t act_max,
+                                                    const int32_t out_shift,
+                                                    const int32_t out_scale)
 {
     int32_t status = 0;
 

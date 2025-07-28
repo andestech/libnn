@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -20,10 +20,12 @@
 /** @file*/
 
 #include "internal_nn_math.h"
+#include "riscv_nn_support.h"
 
 //// Pooling Functions
 
-int32_t riscv_nn_avepool_HWC_s8_any_act(const int in_tensor_dim_y,
+int32_t riscv_nn_avepool_HWC_s8_any_act(const int in_tensor_batch,
+                                        const int in_tensor_dim_y,
                                         const int in_tensor_dim_x,
                                         const int out_tensor_dim_y,
                                         const int out_tensor_dim_x,
@@ -36,40 +38,50 @@ int32_t riscv_nn_avepool_HWC_s8_any_act(const int in_tensor_dim_y,
                                         const int act_min,
                                         const int act_max,
                                         const int in_tensor_ch,
-                                        int8_t *in_tensor,
-                                        int16_t *in_tmp_buf,
-                                        int8_t *out_tensor)
+                                        int8_t * in_tensor,
+                                        int16_t * in_tmp_buf,
+                                        int8_t * out_tensor)
 {
     (void)in_tmp_buf;
-    int16_t   i_ch_in, i_x, i_y;
+    int16_t   i_batch, i_ch_in, i_x, i_y;
     int16_t   k_x, k_y;
+    const int32_t input_len = in_tensor_dim_y * in_tensor_dim_x * in_tensor_ch;
+    const int32_t output_len = out_tensor_dim_y * out_tensor_dim_x * in_tensor_ch;
 
-    for (i_y = 0; i_y < out_tensor_dim_y; i_y++)
+    for (i_batch = 0; i_batch < in_tensor_batch; i_batch++)
     {
-        for (i_x = 0; i_x < out_tensor_dim_x; i_x++)
+        for (i_y = 0; i_y < out_tensor_dim_y; i_y++)
         {
-            for (i_ch_in = 0; i_ch_in < in_tensor_ch; i_ch_in++)
+            for (i_x = 0; i_x < out_tensor_dim_x; i_x++)
             {
-                int       sum = 0;
-                int       count = 0;
-                for (k_y = i_y * stride_y - pad_y; k_y < i_y * stride_y - pad_y + ker_dim_y; k_y++)
+                for (i_ch_in = 0; i_ch_in < in_tensor_ch; i_ch_in++)
                 {
-                    for (k_x = i_x * stride_x - pad_x; k_x < i_x * stride_x - pad_x + ker_dim_x; k_x++)
+                    int       sum = 0;
+                    int       count = 0;
+                    for (k_y = i_y * stride_y - pad_y; k_y < i_y * stride_y - pad_y + ker_dim_y; k_y++)
                     {
-                        if (k_y >= 0 && k_x >= 0 && k_y < in_tensor_dim_y && k_x < in_tensor_dim_x)
+                        for (k_x = i_x * stride_x - pad_x; k_x < i_x * stride_x - pad_x + ker_dim_x; k_x++)
                         {
-                            sum += in_tensor[i_ch_in + in_tensor_ch * (k_x + k_y * in_tensor_dim_x)];
-                            count++;
+                            if (k_y >= 0 && k_x >= 0 && k_y < in_tensor_dim_y && k_x < in_tensor_dim_x)
+                            {
+                                sum += in_tensor[i_ch_in + in_tensor_ch * (k_x + k_y * in_tensor_dim_x)];
+                                count++;
+                            }
                         }
                     }
-                }
-                sum = sum > 0 ? (sum + count / 2) / count : (sum - count / 2) / count;
-                sum = MAX(sum, act_min);
-                sum = MIN(sum, act_max);
 
-                out_tensor[i_ch_in + in_tensor_ch * (i_x + i_y * out_tensor_dim_x)] = sum;
+                    if (count > 0)
+                    {
+                        sum = sum > 0 ? (sum + count / 2) / count : (sum - count / 2) / count;
+                    }
+                    sum = MAX(sum, act_min);
+                    sum = MIN(sum, act_max);
+                    out_tensor[i_ch_in + in_tensor_ch * (i_x + i_y * out_tensor_dim_x)] = sum;
+                }
             }
         }
+        in_tensor += input_len;
+        out_tensor += output_len;
     }
 
     return 0;

@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -43,7 +43,7 @@ void riscv_nn_concate_s8_y(const int8_t *in_tensor,
     // Copy per tile
     for (i = 0; i < num_iterations; ++i)
     {
-        memcpy(out_tensor, in_tensor, input_copy_size);
+        memcpy(out_tensor, in_tensor, input_copy_size * sizeof(*in_tensor));
         in_tensor  += input_copy_size;
         out_tensor += output_stride;
     }

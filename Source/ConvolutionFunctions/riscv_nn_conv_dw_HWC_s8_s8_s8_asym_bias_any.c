@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -23,6 +23,10 @@
 
 //// Convolution Functions
 
+#if !(__clang__) && (__riscv_xlen == 32) && (__riscv_dsp)
+// customized optimization for 45-series
+__attribute__((optimize("-O2")))
+#endif
 static void conv_dw_HWC_s8_any_mult_4(const int8_t *in_tensor,
                                      const int32_t in_tensor_dim_x,
                                      const int32_t in_tensor_dim_y,
@@ -75,7 +79,6 @@ static void conv_dw_HWC_s8_any_mult_4(const int8_t *in_tensor,
                         for(int32_t ker_w = ker_w_start; ker_w < MIN(ker_dim_x, in_tensor_dim_x - in_w); ++ker_w, ker_idx += out_tensor_ch)
                         {
                             int32_t in_val = in_tensor[in_idx + ker_w * in_tensor_ch] + in_offset;
-
                             out_buff0 += in_val * ker_weight[ker_idx + 0 + mult_tile];
                             out_buff1 += in_val * ker_weight[ker_idx + 1 + mult_tile];
                             out_buff2 += in_val * ker_weight[ker_idx + 2 + mult_tile];
@@ -108,11 +111,11 @@ static void conv_dw_HWC_s8_any_mult_4(const int8_t *in_tensor,
     }
 }
 
-static void conv_dw_HWC_s8_any_generic(const q7_t *in_tensor,
+void conv_dw_HWC_s8_any_generic(const int8_t *in_tensor,
                                       const uint16_t in_tensor_dim_x,
                                       const uint16_t in_tensor_dim_y,
                                       const uint16_t in_tensor_ch,
-                                      const q7_t *ker_weight,
+                                      const int8_t *ker_weight,
                                       const uint16_t out_tensor_ch,
                                       const uint16_t ch_mult,
                                       const uint16_t ker_dim_x,
@@ -122,7 +125,7 @@ static void conv_dw_HWC_s8_any_generic(const q7_t *in_tensor,
                                       const uint16_t stride_x,
                                       const uint16_t stride_y,
                                       const int32_t *bias,
-                                      q7_t *out_tensor,
+                                      int8_t *out_tensor,
                                       const int32_t *out_shift,
                                       const int32_t *out_scale,
                                       const uint16_t out_tensor_dim_x,
@@ -212,39 +215,32 @@ static void conv_dw_HWC_s8_any_generic(const q7_t *in_tensor,
     }
 }
 
-  /*
-   *  Basic s8 depthwise convolution function.
-   *
-   *  Refer header file for details.
-   *  Optimization using DSP extension is not available for the generic case where channel multiplier is > 1.
-   *
-   */
-int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
-                                    const uint16_t in_tensor_dim_x,
-                                    const uint16_t in_tensor_dim_y,
-                                    const uint16_t in_tensor_ch,
-                                    const q7_t *ker_weight,
-                                    const uint16_t out_tensor_ch,
-                                    const uint16_t ch_mult,
-                                    const uint16_t ker_dim_x,
-                                    const uint16_t ker_dim_y,
-                                    const uint16_t pad_x,
-                                    const uint16_t pad_y,
-                                    const uint16_t stride_x,
-                                    const uint16_t stride_y,
-                                    const int32_t *bias,
-                                    q7_t *out_tensor,
-                                    const int32_t *out_shift,
-                                    const int32_t *out_scale,
-                                    const uint16_t out_tensor_dim_x,
-                                    const uint16_t out_tensor_dim_y,
-                                    const int32_t out_offset,
-                                    const int32_t in_offset,
-                                    const int32_t act_min,
-                                    const int32_t act_max,
-                                    const uint16_t dilation_x,
-                                    const uint16_t dilation_y,
-                                    q15_t *tmp_buf)
+int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_any(const int8_t * in_tensor,
+                                                    const uint16_t in_tensor_dim_x,
+                                                    const uint16_t in_tensor_dim_y,
+                                                    const uint16_t in_tensor_ch,
+                                                    const int8_t * ker_weight,
+                                                    const uint16_t out_tensor_ch,
+                                                    const uint16_t ch_mult,
+                                                    const uint16_t ker_dim_x,
+                                                    const uint16_t ker_dim_y,
+                                                    const uint16_t pad_x,
+                                                    const uint16_t pad_y,
+                                                    const uint16_t stride_x,
+                                                    const uint16_t stride_y,
+                                                    const int32_t * bias,
+                                                    int8_t * out_tensor,
+                                                    const int32_t * out_shift,
+                                                    const int32_t * out_scale,
+                                                    const uint16_t out_tensor_dim_x,
+                                                    const uint16_t out_tensor_dim_y,
+                                                    const int32_t out_offset,
+                                                    const int32_t in_offset,
+                                                    const int32_t act_min,
+                                                    const int32_t act_max,
+                                                    const uint16_t dilation_x,
+                                                    const uint16_t dilation_y,
+                                                    int16_t * tmp_buf)
 {
     (void)tmp_buf;
 
@@ -261,6 +257,5 @@ int32_t riscv_nn_conv_dw_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                                   out_tensor, out_shift, out_scale, out_tensor_dim_x, out_tensor_dim_y, out_offset, in_offset, act_min, act_max, dilation_x, dilation_y);
     }
 
-    /* Return to application */
     return 0;
 }

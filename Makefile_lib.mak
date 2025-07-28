@@ -33,10 +33,15 @@ SRC_DIR := $(addprefix $(SRC_ROOT)/, ActivationFunctions \
 									 SoftmaxFunctions \
 									 UtilFunctions)
 # for nds_version.c
-SRC_DIR += $(LIB_ROOT)
+SRC_DIR += $(SRC_ROOT)
+
+# set the specified building directory
+ifeq ($(BUILD_DIR),)
+    BUILD_DIR := $(LIB_ROOT)
+endif
 
 # the folder to keep output objects
-BUILD := ${LIB_ROOT}/lib_objs
+OBJ_DIR := $(BUILD_DIR)/lib_objs
 
 # source file searching paths
 VPATH := $(SRC_DIR)
@@ -51,25 +56,25 @@ ifeq (,$(findstring -mzfh,$(CFLAGS)))
 endif
 
 # object list
-OBJS := $(addprefix $(BUILD)/,$(SRCS:.c=.o))
+OBJS := $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 
 .PHONY: all clean
 
 all: $(OBJS)
 	@echo
 	@echo '*** Build Andes NN library ***'
-	$(AR) crD $(LIB_ROOT)/$(LIB_NAME).a $(OBJS)
-	$(RANLIB) -D $(LIB_ROOT)/$(LIB_NAME).a
+	$(AR) crD $(BUILD_DIR)/$(LIB_NAME).a $(OBJS)
+	$(RANLIB) -D $(BUILD_DIR)/$(LIB_NAME).a
 	@echo '*** Build Andes NN Library complete ^_^ ***'
-	${OBJDUMP} -S $(LIB_ROOT)/$(LIB_NAME).a > $(LIB_ROOT)/$(LIB_NAME).a.objdump
+	${OBJDUMP} -S $(BUILD_DIR)/$(LIB_NAME).a > $(BUILD_DIR)/$(LIB_NAME).objdump
 	@echo
 
-$(BUILD)/%.o : %.c | $(BUILD)
+$(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
-$(BUILD):
-	mkdir -p $(BUILD)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 clean:
-	rm -rf $(LIB_ROOT)/*.a $(LIB_ROOT)/*.objdump $(BUILD)/
+	rm -rf $(BUILD_DIR)/$(LIB_NAME).a $(BUILD_DIR)/$(LIB_NAME).objdump $(OBJ_DIR)
 	@echo 'clean done'

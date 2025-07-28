@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -35,5 +35,5 @@ void riscv_nn_split_s8_w(const int8_t *in_tensor,
 
     in_tensor += in_offset;
 
-    memcpy(out_tensor, in_tensor, split_size);
+    memcpy(out_tensor, in_tensor, split_size * sizeof(*in_tensor));
 }

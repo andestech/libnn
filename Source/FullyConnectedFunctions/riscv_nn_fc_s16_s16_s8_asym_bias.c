@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -22,21 +22,21 @@
 #include "internal_nn_math.h"
 #include "riscv_nn_support.h"
 
-int32_t riscv_nn_fc_s16_s16_s8_asym_bias(const int16_t *in_vec,
-    const int8_t *wt_mat,
-    const int32_t in_vec_col,
-    const int32_t wt_mat_row,
-    const int32_t in_vec_batch,
-    const int32_t in_offset,
-    const int32_t wt_offset,
-    const int32_t out_scale,
-    const int32_t out_shift,
-    const int32_t out_offset,
-    const int64_t *bias,
-    int16_t *out_vec,
-    const int32_t act_min,
-    const int32_t act_max,
-    int16_t *tmp_buf)
+int32_t riscv_nn_fc_s16_s16_s8_asym_bias(const int16_t * in_vec,
+                                         const int8_t * wt_mat,
+                                         const int32_t in_vec_col,
+                                         const int32_t wt_mat_row,
+                                         const int32_t in_vec_batch,
+                                         const int32_t in_offset,
+                                         const int32_t wt_offset,
+                                         const int32_t out_scale,
+                                         const int32_t out_shift,
+                                         const int32_t out_offset,
+                                         const int64_t * bias,
+                                         int16_t * out_vec,
+                                         const int32_t act_min,
+                                         const int32_t act_max,
+                                         int16_t * tmp_buf)
 {
     (void)in_offset;
     (void)wt_offset;
@@ -45,13 +45,15 @@ int32_t riscv_nn_fc_s16_s16_s8_asym_bias(const int16_t *in_vec,
 
     int32_t batch_cnt = in_vec_batch;
 
+    const int32_t reduced_out_scale = REDUCE_MULTIPLIER(out_scale);
+
     while (batch_cnt)
     {
         riscv_nn_vec_mat_mult_t_s16(in_vec,
                                     wt_mat,
                                     bias,
                                     out_vec,
-                                    out_scale,
+                                    reduced_out_scale,
                                     out_shift,
                                     in_vec_col,
                                     wt_mat_row,

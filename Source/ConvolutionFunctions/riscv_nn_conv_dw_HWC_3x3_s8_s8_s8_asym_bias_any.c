@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -23,29 +23,34 @@
 #include "riscv_nn_support.h"
 
 //// Convolution Functions
-int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t *in_tensor,
-                                     const int32_t in_tensor_dim_x,
-                                     const int32_t in_tensor_dim_y,
-                                     const int32_t in_tensor_ch,
-                                     const int8_t *ker_weight,
-                                     const int32_t out_tensor_ch,
-                                     const int32_t pad_x,
-                                     const int32_t pad_y,
-                                     const int32_t stride_x,
-                                     const int32_t stride_y,
-                                     const int32_t *bias,
-                                     int8_t *out_tensor,
-                                     const int32_t *out_shift,
-                                     const int32_t *out_scale,
-                                     const int32_t out_tensor_dim_x,
-                                     const int32_t out_tensor_dim_y,
-                                     const int32_t out_offset,  //value is in the range of [-127, 128]
-                                     const int32_t in_offset,   //value is in the range of [-128, 127]
-                                     const int32_t act_min,
-                                     const int32_t act_max,
-                                     const int32_t dilation_x,
-                                     const int32_t dilation_y,
-                                     int16_t *tmp_buf)
+
+#if !(__clang__) && (__riscv_xlen == 32) && (__riscv_dsp)
+// customized optimization for 45-series
+__attribute__((optimize("-O2")))
+#endif
+int32_t riscv_nn_conv_dw_HWC_3x3_s8_s8_s8_asym_bias_any(const int8_t * in_tensor,
+                                                        const int32_t in_tensor_dim_x,
+                                                        const int32_t in_tensor_dim_y,
+                                                        const int32_t in_tensor_ch,
+                                                        const int8_t * ker_weight,
+                                                        const int32_t out_tensor_ch,
+                                                        const int32_t pad_x,
+                                                        const int32_t pad_y,
+                                                        const int32_t stride_x,
+                                                        const int32_t stride_y,
+                                                        const int32_t * bias,
+                                                        int8_t * out_tensor,
+                                                        const int32_t * out_shift,
+                                                        const int32_t * out_scale,
+                                                        const int32_t out_tensor_dim_x,
+                                                        const int32_t out_tensor_dim_y,
+                                                        const int32_t out_offset,  //value is in the range of [-127, 128]
+                                                        const int32_t in_offset,   //value is in the range of [-128, 127]
+                                                        const int32_t act_min,
+                                                        const int32_t act_max,
+                                                        const int32_t dilation_x,
+                                                        const int32_t dilation_y,
+                                                        int16_t * tmp_buf)
 {
     // Check input constraints
     if((in_tensor_ch != out_tensor_ch) || (pad_x > 1))

@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -20,81 +20,69 @@
 /** @file*/
 
 #include "internal_nn_math.h"
+#include "riscv_nn_support.h"
 
-static void compare_and_replace_if_larger(int16_t *dst, const int16_t *src, int32_t length)
+int32_t riscv_nn_maxpool_HWC_s16_any_act(const int32_t in_tensor_batch,
+                                         const int32_t in_tensor_dim_y,
+                                         const int32_t in_tensor_dim_x,
+                                         const int32_t out_tensor_dim_y,
+                                         const int32_t out_tensor_dim_x,
+                                         const int32_t stride_y,
+                                         const int32_t stride_x,
+                                         const int32_t ker_dim_y,
+                                         const int32_t ker_dim_x,
+                                         const int32_t pad_y,
+                                         const int32_t pad_x,
+                                         const int32_t act_min,
+                                         const int32_t act_max,
+                                         const int32_t in_tensor_ch,
+                                         int16_t * in_tensor,
+                                         int16_t * tmp_buffer,
+                                         int16_t * out_tensor)
 {
-    while (length-- > 0)
+    int32_t i_batch, i_ch_in, i_out_x, i_out_y;
+    int32_t i_ker_x, i_ker_y;
+    (void)tmp_buffer;
+    const int32_t input_len = in_tensor_dim_y * in_tensor_dim_x * in_tensor_ch;
+    const int32_t output_len = out_tensor_dim_y * out_tensor_dim_x * in_tensor_ch;
+
+    for (i_batch = 0; i_batch < in_tensor_batch; i_batch++)
     {
-        if (*src > *dst)
+        for (i_out_y = 0; i_out_y < out_tensor_dim_y; i_out_y++)
         {
-            *dst = *src;
-        }
-        dst++;
-        src++;
-    }
-}
-
-static void clamp_output(int16_t *source, int32_t length, const int16_t act_min, const int16_t act_max)
-{
-    while (length-- > 0)
-    {
-        int16_t in_val = *source;
-        in_val = MAX(in_val, act_min);
-        in_val = MIN(in_val, act_max);
-        *source = in_val;
-    }
-}
-
-int32_t riscv_nn_maxpool_HWC_s16_any_act(const int32_t in_tensor_dim_y,
-    const int32_t in_tensor_dim_x,
-    const int32_t out_tensor_dim_y,
-    const int32_t out_tensor_dim_x,
-    const int32_t stride_y,
-    const int32_t stride_x,
-    const int32_t ker_dim_y,
-    const int32_t ker_dim_x,
-    const int32_t pad_y,
-    const int32_t pad_x,
-    const int32_t act_min,
-    const int32_t act_max,
-    const int32_t in_tensor_ch,
-    int16_t *in_tensor,
-    int16_t *tmp_buffer,
-    int16_t *out_tensor)
-{
-    for (int i_y = 0, base_idx_y = -pad_y; i_y < out_tensor_dim_y; base_idx_y += stride_y, i_y++)
-    {
-        for (int i_x = 0, base_idx_x = -pad_x; i_x < out_tensor_dim_x; base_idx_x += stride_x, i_x++)
-        {
-            const int32_t ker_y_start = MAX(0, -base_idx_y);
-            const int32_t ker_x_start = MAX(0, -base_idx_x);
-            const int32_t kernel_y_end = MIN(ker_dim_y, in_tensor_dim_y - base_idx_y);
-            const int32_t kernel_x_end = MIN(ker_dim_x, in_tensor_dim_x - base_idx_x);
-
-            int count = 0;
-            for (int k_y = ker_y_start; k_y < kernel_y_end; k_y++)
+            for (i_out_x = 0; i_out_x < out_tensor_dim_x; i_out_x++)
             {
-                for (int k_x = ker_x_start; k_x < kernel_x_end; k_x++)
+                for (i_ch_in = 0; i_ch_in < in_tensor_ch; i_ch_in++)
                 {
-                    const int16_t *start = in_tensor + in_tensor_ch * (k_x + base_idx_x + (k_y + base_idx_y) * in_tensor_dim_x);
+                    int32_t max_val = Q15_MIN;
+                    const int32_t base_idx_y = (i_out_y * stride_y) - pad_y;
+                    const int32_t base_idx_x = (i_out_x * stride_x) - pad_x;
+                    const int32_t ker_y_start = MAX(0, -base_idx_y);
+                    const int32_t ker_x_start = MAX(0, -base_idx_x);
+                    const int32_t ker_y_end = MIN(ker_dim_y, in_tensor_dim_y - base_idx_y);
+                    const int32_t ker_x_end = MIN(ker_dim_x, in_tensor_dim_x - base_idx_x);
 
-                    if (count == 0)
+                    for (i_ker_y = ker_y_start; i_ker_y < ker_y_end; i_ker_y++)
                     {
-                        memcpy(out_tensor, start, in_tensor_ch * sizeof(int16_t));
-                        count++;
+                        for (i_ker_x = ker_x_start; i_ker_x < ker_x_end; i_ker_x++)
+                        {
+                            const int32_t col_idx = base_idx_x + i_ker_x;
+                            const int32_t row_idx = base_idx_y + i_ker_y;
+
+                            max_val = MAX(in_tensor[(row_idx * in_tensor_dim_x + col_idx) * in_tensor_ch + i_ch_in], max_val);
+                        }
                     }
-                    else
-                    {
-                        compare_and_replace_if_larger(out_tensor, start, in_tensor_ch);
-                    }
+
+                    max_val = MAX(max_val, act_min);
+                    max_val = MIN(max_val, act_max);
+
+                    out_tensor[i_ch_in + in_tensor_ch * (i_out_x + i_out_y * out_tensor_dim_x)] = max_val;
                 }
             }
-
-            out_tensor += in_tensor_ch;
         }
+        in_tensor += input_len;
+        out_tensor += output_len;
     }
-
-    clamp_output(out_tensor, out_tensor_dim_x * out_tensor_dim_y * in_tensor_ch, act_min, act_max);
 
     return 0;
 }

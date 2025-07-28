@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -24,30 +24,30 @@
 
 //// Convolution Functions
 
-int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any(const q15_t *in_tensor,
-    const int32_t in_tensor_dim_x,
-    const int32_t in_tensor_dim_y,
-    const int32_t in_tensor_ch,
-    const int32_t in_tensor_batch,
-    const q7_t *ker_weight,
-    const int32_t ker_dim_x,
-    const int32_t ker_dim_y,
-    const int32_t pad_x,
-    const int32_t pad_y,
-    const int32_t stride_x,
-    const int32_t stride_y,
-    const int64_t *bias,
-    q15_t *out_tensor,
-    const int32_t *out_shift,
-    const int32_t *out_scale,
-    const int32_t out_offset,
-    const int32_t in_offset,
-    const int32_t act_min,
-    const int32_t act_max,
-    const int32_t out_tensor_ch,
-    const int32_t out_tensor_dim_x,
-    const int32_t out_tensor_dim_y,
-    q15_t *in_tmp_buf)
+int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any(const int16_t * in_tensor,
+                                                        const int32_t in_tensor_dim_x,
+                                                        const int32_t in_tensor_dim_y,
+                                                        const int32_t in_tensor_ch,
+                                                        const int32_t in_tensor_batch,
+                                                        const int8_t * ker_weight,
+                                                        const int32_t ker_dim_x,
+                                                        const int32_t ker_dim_y,
+                                                        const int32_t pad_x,
+                                                        const int32_t pad_y,
+                                                        const int32_t stride_x,
+                                                        const int32_t stride_y,
+                                                        const int64_t * bias,
+                                                        int16_t * out_tensor,
+                                                        const int32_t * out_shift,
+                                                        const int32_t * out_scale,
+                                                        const int32_t out_offset,
+                                                        const int32_t in_offset,
+                                                        const int32_t act_min,
+                                                        const int32_t act_max,
+                                                        const int32_t out_tensor_ch,
+                                                        const int32_t out_tensor_dim_x,
+                                                        const int32_t out_tensor_dim_y,
+                                                        int16_t * in_tmp_buf)
 {
     (void)in_offset;
     (void)out_offset;
@@ -119,8 +119,8 @@ int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any(const q15_t *in_tensor,
 }
 
 int32_t riscv_nn_conv_HWC_s16_s16_s8_asym_bias_fast_any_get_buffer_size(const int32_t in_tensor_ch,
-    const int32_t ker_dim_x,
-    const int32_t ker_dim_y)
+                                                                        const int32_t ker_dim_x,
+                                                                        const int32_t ker_dim_y)
 {
     (void)in_tensor_ch;
     (void)ker_dim_x;

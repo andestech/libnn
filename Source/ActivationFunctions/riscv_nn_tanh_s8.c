@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (i) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (i) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (i) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (i) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -25,44 +25,48 @@
 //// Activation Functions
 
 void riscv_nn_tanh_s8(const int32_t in_offset,
-                      const int32_t in_range_radius,
+                      const int16_t in_range_radius,
                       const int16_t in_mult,
-                      const int16_t in_lshift,
+                      const int16_t in_shift,
                       const uint32_t size,
                       const int8_t* in_vec,
                       int8_t* out_vec)
 {
-    const int16_t out_offset = 0;
+    const int16_t output_offset = 0;
 
-    for (long i = 0; i < size; ++i)
+    int32_t c = 0;
+    for (c = 0; c < size; ++c)
     {
-        const int8_t in_val_s8 = in_vec[i];
-        const int16_t in_val_centered = (int16_t)(in_val_s8) + in_offset;
+        const int8_t input_val_s8 = in_vec[c];
+        const int16_t input_val_centered = (int16_t)(input_val_s8) + in_offset; // -input_zero_point;
+
         int8_t output_val;
-        if (in_val_centered <= -in_range_radius)
+        if (input_val_centered < -in_range_radius)
         {
             output_val = -128;
         }
-        else if (in_val_centered >= in_range_radius)
+        else if (input_val_centered > in_range_radius)
         {
             output_val = 127;
         }
         else
         {
             //Rescale input (in_scale & fixedpointlization) to fixed point representation.
-            const int16_t in_val_rescaled = SaturatingRoundingDoublingHighMul(
-                    (int16_t)(in_val_centered * (1 << in_lshift)),
-                    (int16_t)(in_mult));
+            const int16_t input_val_rescaled = SaturatingRoundingDoublingHighMul_with_Lsh(
+                (int16_t)(input_val_centered),
+                (int16_t)(in_mult), in_shift);
 
-            const struct FixedPoint in_val_f4 = FromRaw(in_val_rescaled, 4);
+            //
+            const struct FixedPoint input_val_f4 = FromRaw(input_val_rescaled, 4);//F4
             struct FixedPoint output_val_f0 = FromRaw(0, 0);
 
-            tanh_s16(in_val_f4, &output_val_f0);
+            //kernel of tanh.
+            tanh_s16(input_val_f4, &output_val_f0);
 
             //Rescale (inverse fixedpointization & requanitzation) to q7_t representation.
             int16_t output_val_s16 = RoundingDivideByPOT16b(output_val_f0.i_, 8);
 
-            output_val_s16 += out_offset;
+            output_val_s16 += output_offset;
 
             if (output_val_s16 == 128)
             {
@@ -70,6 +74,6 @@ void riscv_nn_tanh_s8(const int32_t in_offset,
             }
             output_val = (int8_t)(output_val_s16);
         }
-        out_vec[i] = output_val;
+        out_vec[c] = output_val;
     }
 }

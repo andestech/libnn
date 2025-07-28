@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -22,14 +22,15 @@
 #include "internal_nn_math.h"
 #include "riscv_nn_support.h"
 
+
 //// Convolution Functions
 
-int32_t riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
+int32_t riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any(const int8_t * in_tensor,
                                                        const uint16_t in_tensor_dim_x,
                                                        const uint16_t in_tensor_dim_y,
                                                        const uint16_t in_tensor_ch,
                                                        const uint16_t in_tensor_batch,
-                                                       const q7_t *ker_weight,
+                                                       const int8_t * ker_weight,
                                                        const uint16_t out_tensor_ch,
                                                        const uint16_t ker_dim_x,
                                                        const uint16_t ker_dim_y,
@@ -39,17 +40,17 @@ int32_t riscv_nn_conv_trans_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
                                                        const uint16_t pad_offset_y,
                                                        const uint16_t stride_x,
                                                        const uint16_t stride_y,
-                                                       const int32_t *bias,
-                                                       q7_t *out_tensor,
-                                                       const int32_t *out_shift,
-                                                       const int32_t *out_scale,
+                                                       const int32_t * bias,
+                                                       int8_t * out_tensor,
+                                                       const int32_t * out_shift,
+                                                       const int32_t * out_scale,
                                                        const int32_t out_offset,
                                                        const int32_t in_offset,
                                                        const int32_t act_min,
                                                        const int32_t act_max,
                                                        const uint16_t out_tensor_dim_x,
                                                        const uint16_t out_tensor_dim_y,
-                                                       int8_t *tmp_buf)
+                                                       int8_t * tmp_buf)
 {
     (void)pad_offset_x;
     (void)pad_offset_y;

@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -29,7 +29,6 @@ typedef union
     int32_t   i32;
 } _union32_t;
 
-#ifndef ENA_ACE_RVV
 //--- const values for taylor_poly_f32 ---
 // Exponent polynomial coefficients
 static const float32_t exp_coe0 = EXP_COE0;
@@ -46,7 +45,6 @@ static const float32_t ln2      = LN2;          // ln(2)
 static const float32_t inv_ln2  = INV_LN2;      // 1/ln(2)
 static const float32_t exp_max  = EXP_F32_MAX;
 static const float32_t exp_min  = EXP_F32_MIN;
-#endif
 
 static inline float32_t taylor_poly_f32(float32_t x)
 {

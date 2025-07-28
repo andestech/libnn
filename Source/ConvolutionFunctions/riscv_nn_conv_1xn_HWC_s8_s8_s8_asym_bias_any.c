@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -32,25 +32,25 @@
    *
    */
 
-int riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
-                                                 const uint16_t in_tensor_dim_x,
-                                                 const uint16_t in_tensor_ch,
-                                                 const uint16_t in_tensor_batch,
-                                                 const q7_t *ker_weight,
-                                                 const uint16_t out_tensor_ch,
-                                                 const uint16_t ker_dim_x,
-                                                 const uint16_t pad_x,
-                                                 const uint16_t stride_x,
-                                                 const int32_t *bias,
-                                                 q7_t *out_tensor,
-                                                 const int32_t *out_shift,
-                                                 const int32_t *out_scale,
-                                                 const int32_t out_offset,   //value is in the range of [-127, 128]
-                                                 const int32_t in_offset,    //value is in the range of [-128, 127]
-                                                 const int32_t act_min,
-                                                 const int32_t act_max,
-                                                 const uint16_t out_tensor_dim_x,
-                                                 q15_t *in_tmp_buf)
+int32_t riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any(const int8_t * in_tensor,
+                                                     const uint16_t in_tensor_dim_x,
+                                                     const uint16_t in_tensor_ch,
+                                                     const uint16_t in_tensor_batch,
+                                                     const int8_t * ker_weight,
+                                                     const uint16_t out_tensor_ch,
+                                                     const uint16_t ker_dim_x,
+                                                     const uint16_t pad_x,
+                                                     const uint16_t stride_x,
+                                                     const int32_t * bias,
+                                                     int8_t * out_tensor,
+                                                     const int32_t * out_shift,
+                                                     const int32_t * out_scale,
+                                                     const int32_t out_offset,   //value is in the range of [-127, 128]
+                                                     const int32_t in_offset,    //value is in the range of [-128, 127]
+                                                     const int32_t act_min,
+                                                     const int32_t act_max,
+                                                     const uint16_t out_tensor_dim_x,
+                                                     int16_t * in_tmp_buf)
 {
     int status = 0;
     (void)in_tmp_buf;
@@ -102,13 +102,20 @@ int riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any(const q7_t *in_tensor,
     return status;
 }
 
-//Note. the ker_dim_y paramter here is redundant since it's always 1.
-int32_t riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_ch,
-                                                const uint16_t ker_dim_x,
-                                                const uint16_t ker_dim_y)
+int32_t riscv_nn_conv_1xn_HWC_s8_s8_s8_asym_bias_any_get_buffer_size(const uint16_t in_tensor_dim_x,
+                                                                     const uint16_t in_tensor_ch,
+                                                                     const uint16_t out_tensor_ch,
+                                                                     const uint16_t ker_dim_x,
+                                                                     const uint16_t pad_x,
+                                                                     const uint16_t stride_x,
+                                                                     const uint16_t out_tensor_dim_x)
 {
+    (void)in_tensor_dim_x;
     (void)in_tensor_ch;
+    (void)out_tensor_ch;
     (void)ker_dim_x;
-    (void)ker_dim_y;
+    (void)pad_x;
+    (void)stride_x;
+    (void)out_tensor_dim_x;
     return 0;
 }

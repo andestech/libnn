@@ -35,7 +35,7 @@ extern "C"
 {
 #endif
 
-#include "internal_nds_config.h"
+//#include "internal_nds_config.h"
 //#include "riscv_dsp_math_types.h"
 
 //For those algorithms which have worse performance when using stride load/store instructions.

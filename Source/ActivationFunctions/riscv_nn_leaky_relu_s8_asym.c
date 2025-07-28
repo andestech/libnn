@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -23,8 +23,8 @@
 
 //// Relu Functions
 
-void riscv_nn_leaky_relu_s8_asym(q7_t * in_vec,
-        q7_t * out_vec,
+void riscv_nn_leaky_relu_s8_asym(int8_t * in_vec,
+        int8_t * out_vec,
         const uint32_t size,
         const int32_t multi_identity,
         const int32_t shift_identity,
@@ -32,8 +32,8 @@ void riscv_nn_leaky_relu_s8_asym(q7_t * in_vec,
         const int32_t shift_alpha,
         const int32_t in_offset,
         const int32_t out_offset,
-        const q7_t act_min,
-        const q7_t act_max)
+        const int8_t act_min,
+        const int8_t act_max)
 {
     for (int i = 0; i < size; ++i)
     {
@@ -53,6 +53,6 @@ void riscv_nn_leaky_relu_s8_asym(q7_t * in_vec,
         }
 
         const int32_t clamped_output = MIN(act_max, MAX(act_min, unclamped_output));
-        out_vec[i] = (q7_t)clamped_output;
+        out_vec[i] = (int8_t)clamped_output;
     }
 }

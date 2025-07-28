@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -23,42 +23,50 @@
 
 //// Pooling Functions
 
-void riscv_nn_maxpool_HWC_s8(q7_t * in_tensor,
-                           const uint16_t in_tensor_dim,
-                           const uint16_t in_tensor_ch,
-                           const uint16_t ker_dim,
-                           const uint16_t pad,
-                           const uint16_t stride,
-                           const uint16_t out_tensor_dim,
-                           q7_t * in_tmp_buf,
-                           q7_t * out_tensor)
+void riscv_nn_maxpool_HWC_s8(const q7_t * in_tensor,
+                             const uint16_t in_tensor_batch,
+                             const uint16_t in_tensor_dim,
+                             const uint16_t in_tensor_ch,
+                             const uint16_t ker_dim,
+                             const uint16_t pad,
+                             const uint16_t stride,
+                             const uint16_t out_tensor_dim,
+                             q7_t * in_tmp_buf,
+                             q7_t * out_tensor)
 {
-    int16_t   i_ch_in, i_x, i_y;
-    int16_t   k_x, k_y;
+    int16_t i_batch, i_ch_in, i_x, i_y;
+    int16_t k_x, k_y;
+    const int32_t input_len = in_tensor_dim * in_tensor_dim * in_tensor_ch;
+    const int32_t output_len = out_tensor_dim * out_tensor_dim * in_tensor_ch;
 
-    for (i_ch_in = 0; i_ch_in < in_tensor_ch; i_ch_in++)
+    for (i_batch = 0; i_batch < in_tensor_batch; i_batch++)
     {
-        for (i_y = 0; i_y < out_tensor_dim; i_y++)
+        for (i_ch_in = 0; i_ch_in < in_tensor_ch; i_ch_in++)
         {
-            for (i_x = 0; i_x < out_tensor_dim; i_x++)
+            for (i_y = 0; i_y < out_tensor_dim; i_y++)
             {
-                int       max = -129;
-                for (k_y = i_y * stride - pad; k_y < i_y * stride - pad + ker_dim; k_y++)
+                for (i_x = 0; i_x < out_tensor_dim; i_x++)
                 {
-                    for (k_x = i_x * stride - pad; k_x < i_x * stride - pad + ker_dim; k_x++)
+                    int max = (int8_t)Q7_MIN;
+                    for (k_y = i_y * stride - pad; k_y < i_y * stride - pad + ker_dim; k_y++)
                     {
-                        if (k_y >= 0 && k_x >= 0 && k_y < in_tensor_dim && k_x < in_tensor_dim)
+                        for (k_x = i_x * stride - pad; k_x < i_x * stride - pad + ker_dim; k_x++)
                         {
-                            if (in_tensor[i_ch_in + in_tensor_ch * (k_x + k_y * in_tensor_dim)] > max)
+                            if (k_y >= 0 && k_x >= 0 && k_y < in_tensor_dim && k_x < in_tensor_dim)
                             {
-                                max = in_tensor[i_ch_in + in_tensor_ch * (k_x + k_y * in_tensor_dim)];
+                                if (in_tensor[i_ch_in + in_tensor_ch * (k_x + k_y * in_tensor_dim)] > max)
+                                {
+                                    max = in_tensor[i_ch_in + in_tensor_ch * (k_x + k_y * in_tensor_dim)];
+                                }
                             }
                         }
                     }
+                    out_tensor[i_ch_in + in_tensor_ch * (i_x + i_y * out_tensor_dim)] = max;
                 }
-                out_tensor[i_ch_in + in_tensor_ch * (i_x + i_y * out_tensor_dim)] = max;
             }
         }
+        in_tensor += input_len;
+        out_tensor += output_len;
     }
 
 }

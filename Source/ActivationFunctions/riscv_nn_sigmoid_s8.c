@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (i) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (i) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (i) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (i) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -25,50 +25,54 @@
 //// Activation Functions
 
 void riscv_nn_sigmoid_s8(const int32_t in_offset,
-                         const int32_t in_range_radius,
+                         const int16_t in_range_radius,
                          const int16_t in_mult,
-                         const int16_t in_lshift,
-                         const uint32_t size,
+                         const int16_t in_shift,
+                         const int32_t size,
                          const int8_t* in_vec,
                          int8_t* out_vec)
 {
+    int32_t c = 0;
     const int16_t output_offset = -128;
 
-    for (long i = 0; i < size; ++i)
+    for (c = 0; c < size; ++c)
     {
-        const int8_t in_val_s8 = in_vec[i];
-        const int16_t in_val_centered = (int16_t)(in_val_s8) + in_offset;
-        int8_t out_val;
-        if (in_val_centered < -in_range_radius)
+        const int8_t input_val_s8 = in_vec[c];
+        const int16_t input_val_centered = (int16_t)(input_val_s8) + in_offset;
+
+        int8_t output_val;
+        if (input_val_centered < -in_range_radius)
         {
-            out_val = -128;
+            output_val = -128;
         }
-        else if (in_val_centered > in_range_radius)
+        else if (input_val_centered > in_range_radius)
         {
-            out_val = 127;
+            output_val = 127;
         }
         else
         {
             //Rescale input (in_scale & fixedpointlization) to fixed point representation.
-            const int16_t in_val_rescaled = SaturatingRoundingDoublingHighMul(
-                    (int16_t)(in_val_centered * (1 << in_lshift)),
-                    (int16_t)(in_mult));
+            const int16_t input_val_rescaled = SaturatingRoundingDoublingHighMul_with_Lsh(
+                (int16_t)(input_val_centered),
+                (int16_t)(in_mult), in_shift);
 
-            const struct FixedPoint in_val_f4 = FromRaw(in_val_rescaled, 4);
-            struct FixedPoint out_val_f0 = FromRaw(0, 0);
+            const struct FixedPoint input_val_f4 = FromRaw(input_val_rescaled, 4);//F4
+            struct FixedPoint output_val_f0 = FromRaw(0, 0);
 
-            logistic(in_val_f4, &out_val_f0);
+            //kernel of sigmoid.
+            logistic(input_val_f4, &output_val_f0);
 
             //Rescale (inverse fixedpointization & requanitzation) to q7_t representation.
-            int16_t out_val_s16 = RoundingDivideByPOT16b(out_val_f0.i_, 7);
-            out_val_s16 += output_offset;
+            int16_t output_val_s16 = RoundingDivideByPOT16b(output_val_f0.i_, 7);
 
-            if (out_val_s16 == 128)
+            output_val_s16 += output_offset;
+
+            if (output_val_s16 == 128)
             {
-                out_val_s16 = 127;
+                output_val_s16 = 127;
             }
-            out_val = (int8_t)(out_val_s16);
+            output_val = (int8_t)(output_val_s16);
         }
-        out_vec[i] = out_val;
+        out_vec[c] = output_val;
     }
 }

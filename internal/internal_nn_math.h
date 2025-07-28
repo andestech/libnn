@@ -15,6 +15,7 @@ extern "C"
 #include "riscv_math_types.h"
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>     // for malloc/free
 
 #include "internal_isa.h"
 
@@ -231,6 +232,16 @@ __STATIC_FORCEINLINE q31_t riscv_nn_requantize(const q31_t val, const q31_t mult
     return result;
 }
 
+// force the function using plain C algorithm
+__STATIC_FORCEINLINE q31_t riscv_nn_requantize_c(const q31_t val, const q31_t multiplier, const q31_t shift)
+{
+    const long total_shift = 31 - shift;
+    int64_t new_val = val * (int64_t)multiplier;
+    int32_t result = new_val >> (total_shift - 1);
+    result = (result + 1) >> 1;
+    return result;
+}
+
 // variant of riscv_nn_requantize for the shift is always >= 0 (for fixing the coverage issue on RV32P algo)
 __STATIC_FORCEINLINE q31_t riscv_nn_requantize_ps(const q31_t val, const q31_t multiplier, const q31_t shift)
 {
@@ -282,6 +293,18 @@ __STATIC_FORCEINLINE unsigned long nn_align(unsigned long src, unsigned long ali
     // the src may be buffer size (in byte) or pointers
     src = (src + (align_byte - 1)) & ~(align_byte - 1);
     return src;
+}
+
+__STATIC_FORCEINLINE void* nn_malloc(size_t size)
+{
+    void *ret_ptr;
+    ret_ptr = (void*)malloc(size);
+    return ret_ptr;
+}
+
+__STATIC_FORCEINLINE void nn_free(void *ptr)
+{
+    free(ptr);
 }
 
 //----- sub-functions for softmax layer_begin -----
@@ -415,12 +438,8 @@ extern float16_t tanh_f16(float16_t x);
 #endif
 
 // ACE related macros
-#ifdef ENA_ACE_RVV
-#define ace_exp(_RESULT, _INPUT)                        \
-    __asm__ __volatile__("exp " _RESULT ", " _INPUT " \n");
-#endif
 
-//----- algorithn switches_begin -----
+//----- algorithm switches_begin -----
 /*******************************************************************************
  * For some fp16 functions will be calculated with exp, we can enable this
  * switch to make the kernel calculations computed in 32-bit. By default, this
@@ -436,10 +455,19 @@ extern float16_t tanh_f16(float16_t x);
 #define ENA_FAST_ALGO
 
 /*******************************************************************************
- * The algorithn controlling switches for the tiling algorithm.
+ * The algorithm controlling switches for the tiling algorithm.
  ******************************************************************************/
 #define ENA_TILING
-//----- algorithn switches_end -----
+
+/*******************************************************************************
+ * Below algorithm controlling switch is used for selecting the s4 convlotion
+ * algorithm. If below switch is defined, the 4-bit data will be unpacked into
+ * the temporary buffer first, and the unpacked data will be used by the
+ * algorithm to calculate later; otherwise, the 4-bit will be unpacked into the
+ * register through intructions on the fly.
+ ******************************************************************************/
+// #define ENA_UNPACK_S4_TO_TMP_BUF
+//----- algorithm switches_end -----
 
 #ifdef  __cplusplus
 }

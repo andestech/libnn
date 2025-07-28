@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.*
- * Copyright (C) 2018-2024 Andes Technology Corporation. All rights reserved. *
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
  *                                                                            *
  * SPDX-License-Identifier: Apache-2.0                                        *
  *                                                                            *
@@ -28,22 +28,22 @@
 * are expected to be >=0; however, CMSIS' are expected to be <=0.       *
 *************************************************************************/
 
-int riscv_nn_ew_add_s16_asym(const int16_t *in_vec1,
-                             const int16_t *in_vec2,
-                             const int32_t in_offset1,
-                             const int32_t in_scale1,
-                             const int32_t in_rshift1,
-                             const int32_t in_offset2,
-                             const int32_t in_scale2,
-                             const int32_t in_rshift2,
-                             const int32_t lshift,
-                             int16_t *out_vec,
-                             const int32_t out_offset,
-                             const int32_t out_scale,
-                             const int32_t out_rshift,
-                             const int32_t act_min,
-                             const int32_t act_max,
-                             const int32_t size)
+int32_t riscv_nn_ew_add_s16_asym(const int16_t * in_vec1,
+                                 const int16_t * in_vec2,
+                                 const int32_t in_offset1,
+                                 const int32_t in_scale1,
+                                 const int32_t in_rshift1,
+                                 const int32_t in_offset2,
+                                 const int32_t in_scale2,
+                                 const int32_t in_rshift2,
+                                 const int32_t lshift,
+                                 int16_t * out_vec,
+                                 const int32_t out_offset,
+                                 const int32_t out_scale,
+                                 const int32_t out_rshift,
+                                 const int32_t act_min,
+                                 const int32_t act_max,
+                                 const uint32_t size)
 {
     (void)in_offset1;
     (void)in_offset2;

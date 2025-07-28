@@ -84,28 +84,16 @@ void static inline riscv_nn_dup_s8(const q7_t * src, q7_t * dst, uint32_t size)
     memcpy(dst, src, size);
 }
 
-void static inline riscv_nn_dup_s8_v2(const q7_t * src, q7_t * dst, uint32_t size)
-{
-#ifdef ENA_VEC_INTRINSIC
-    long vl;
-    long size2 = size;
-    while(size2 > 0)
-    {
-        vl = __riscv_vsetvl_e8m4(size2);
-        vint8m4_t vSrc = __riscv_vle8_v_i8m4(src, vl);
-        __riscv_vse8(dst, vSrc, vl);
-        src += vl;
-        dst += vl;
-        size2 -= vl;
-    }
-#else
-    memcpy(dst, src, size);
-#endif
-}
+//customized function for the VPU with the configuration of SIMD=VLEN/2
 
 void static inline riscv_nn_dup_u8(const u8_t * src, u8_t * dst, uint32_t size)
 {
     memcpy(dst, src, size);
+}
+
+void static inline riscv_nn_set_zero_s64(q63_t *dst, uint32_t size)
+{
+    memset(dst, 0, sizeof(int64_t) * size);
 }
 
 void static inline riscv_nn_set_zero_s16(q15_t *dst, uint32_t size)
@@ -138,6 +126,14 @@ void static inline riscv_nn_set_val_s8(q7_t *dst, q7_t val, uint32_t size)
     //     *dst++ = 0;
     // }
     memset(dst, val, size);
+}
+
+void static inline nn_set_val_s16(int16_t *dst, int16_t val, uint32_t size)
+{
+    while(size-- > 0)
+    {
+        *dst++ = val;
+    }
 }
 
 // Following is a customized function for q7 fully-connected.
@@ -212,8 +208,39 @@ int32_t riscv_nn_mat_mult_nt_t_s8(const q7_t *lhs,
                                    const int32_t lhs_offset,
                                    const int32_t dst_offset,
                                    const int32_t activation_min,
-                                   const int32_t activation_max,
-                                   const int32_t lhs_cols_offset);
+                                   const int32_t lhs_cols_offset,
+                                   const int32_t activation_max);
+
+int32_t riscv_nn_mat_mult_nt_t_s8_v2(const int8_t *lhs,
+            const int8_t *rhs,
+            const int32_t *bias,
+            int8_t *dst,
+            const int32_t *dst_multipliers,
+            const int32_t *dst_shifts,
+            const int32_t lhs_rows,
+            const int32_t rhs_rows,
+            const int32_t rhs_cols,
+            const int32_t lhs_offset,    //value is in the range of [-127, 128]
+            const int32_t dst_offset,    //value is in the range of [-128, 127]
+            const int32_t activation_min,
+            const int32_t activation_max,
+            const int32_t lhs_cols_offset,
+            int32_t *contri_buf);
+
+int riscv_nn_mat_mult_nt_t_s4(const int8_t *lhs,
+                              const int8_t *packed_rhs,
+                              const int32_t *bias,
+                              int8_t *dst,
+                              const int32_t *dst_multipliers,
+                              const int32_t *dst_shifts,
+                              const int32_t lhs_rows,
+                              const int32_t rhs_rows,
+                              const int32_t rhs_cols,
+                              const int32_t lhs_offset,
+                              const int32_t dst_offset,
+                              const int32_t activation_min,
+                              const int32_t activation_max,
+                              const int32_t lhs_cols_offset);
 
 //========== sub-functions for convolution ==========
 // following are internal sub-functions called by NN convolution functions
@@ -725,6 +752,47 @@ q7_t *riscv_nn_mat_mult_kernel_s8_offset(const q7_t *input_a,
                                     const int32_t *const output_bias,
                                     q7_t *out_0);
 
+int8_t* riscv_nn_mat_mult_kernel_s8_offset_v2(const int8_t *input_a,
+            const int8_t *input_b,
+            const int32_t out_tensor_ch,
+            const int32_t *out_shift,
+            const int32_t *out_scale,
+            const int32_t in_offset,    //value is in the range of [-127, 128]
+            const int32_t out_offset,   //value is in the range of [-128, 127]
+            const int32_t act_min,
+            const int32_t act_max,
+            const int32_t num_col_a,
+            const int32_t *contri_buf,
+            int8_t *out);
+
+int8_t* riscv_nn_mat_mult_kernel_s8_offset_v3(const int8_t *input_a,
+            const int8_t *input_b,
+            const int32_t out_ch_per_group,
+            const int32_t out_tensor_ch,
+            const int32_t *out_shift,
+            const int32_t *out_scale,
+            const int32_t in_offset,    //value is in the range of [-127, 128]
+            const int32_t out_offset,   //value is in the range of [-128, 127]
+            const int32_t act_min,
+            const int32_t act_max,
+            const int32_t num_col_a,
+            const int32_t num_col_a_aligned,
+            const int32_t *contri_buf,
+            int8_t *out);
+
+int8_t* nn_mat_mult_kernel_s8_s8_s4_asym(const int8_t *input_a,     // packed 4-bit data
+            const int8_t *input_b,
+            const int32_t out_tensor_ch,
+            const int32_t *out_shift,
+            const int32_t *out_scale,
+            const int32_t in_offset,    //value is in the range of [-127, 128]
+            const int32_t out_offset,   //value is in the range of [-128, 127]
+            const int32_t act_min,
+            const int32_t act_max,
+            const int32_t num_col_a,
+            const int32_t *contri_buf,
+            int8_t *out);
+
 int32_t riscv_nn_vec_mat_mult_t_s8(const q7_t *lhs,
                                     const q7_t *rhs,
                                     const q31_t *bias,
@@ -738,6 +806,20 @@ int32_t riscv_nn_vec_mat_mult_t_s8(const q7_t *lhs,
                                     const int32_t rhs_rows,
                                     const int32_t activation_min,
                                     const int32_t activation_max);
+
+int32_t nn_vec_mat_mult_t_s16_s16_s16(const int16_t *lhs,
+                                      const int16_t *rhs,
+                                      const int16_t lhs_offset,
+                                      const int16_t rhs_offset,
+                                      const int64_t *bias,
+                                      int16_t *dst,
+                                      const int16_t dst_offset,
+                                      const int32_t dst_multiplier,
+                                      const int32_t dst_shift,
+                                      const int32_t rhs_cols,
+                                      const int32_t rhs_rows,
+                                      const int32_t activation_min,
+                                      const int32_t activation_max);
 
 int32_t riscv_nn_vec_mat_mult_t_s8_v2(const q7_t *lhs,
                                     const q7_t *rhs,
@@ -793,6 +875,18 @@ q15_t *riscv_nn_mat_mult_kernel_s16(const q7_t *ker_wt,
                                     const int32_t col_count,
                                     const int64_t *const out_bias,
                                     q15_t *out_tensor);
+
+int16_t *nn_mat_mult_kernel_s16_v2(const int8_t *ker_wt,
+                                   const int16_t *in_tensor,
+                                   const int32_t output_ch,
+                                   const int32_t *out_shift,
+                                   const int32_t *out_mult,
+                                   const int32_t act_min,
+                                   const int32_t act_max,
+                                   const int32_t col_count,
+                                   const void *const bias,
+                                   const bool is_32b_bias,
+                                   int16_t *out_tensor);
 
 q15_t *riscv_nn_mat_mult_kernel_s16_acc_s64(const q7_t *ker_wt,
                                             const q15_t *in_tensor,
@@ -896,6 +990,207 @@ int lstm_step_s8(const int8_t *input,
                  riscv_nn_lstm_context *scratch_buffers);
 //----- sub-functions for lstm_end -----
 
+q7_t *riscv_nn_mat_mul_kernel_tiling_q7(const q7_t * src1,
+                                        const q7_t * src2,
+                                        q31_t * tmp_out,
+                                        q7_t * out,
+                                        const int32_t row,
+                                        const int32_t col,
+                                        const int32_t col2,
+                                        const uint16_t pre_rshift,
+                                        const uint16_t out_scale,
+                                        const uint16_t post_rshift,
+                                        const q31_t * bias,
+                                        const uint16_t tiling_size);
+
+void riscv_nn_mat_mul_kernel_tiling_transpose_q7(const q7_t * src,
+                                                 q7_t * dst,
+                                                 const long row,
+                                                 const long col);
+
+q7_t * riscv_nn_mat_mul_kernel_tiling_s8_s8_s8(const q7_t * src1,
+                                                const q7_t * src2,
+                                                q31_t * tmp_out,
+                                                q7_t * out,
+                                                const int32_t row,
+                                                const int32_t col,
+                                                const int32_t col2,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                const uint16_t tiling_size);
+
+q7_t * riscv_nn_mat_mul_kernel_tiling_bias_u8_s8_s8(const u8_t * src1,
+                                                    const q7_t * src2,
+                                                    q31_t * tmp_out,
+                                                    q7_t * out,
+                                                    const int32_t row,
+                                                    const int32_t col,
+                                                    const int32_t col2,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    const q31_t * bias,
+                                                    const uint16_t tiling_size);
+
+q7_t * riscv_nn_mat_mul_kernel_tiling_u8_s8_s8(const u8_t * src1,
+                                                const q7_t * src2,
+                                                q31_t * tmp_out,
+                                                q7_t * out,
+                                                const int32_t row,
+                                                const int32_t col,
+                                                const int32_t col2,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                const uint16_t tiling_size);
+
+u8_t * riscv_nn_mat_mul_kernel_tiling_bias_u8_u8_s8(const u8_t * src1,
+                                                    const q7_t * src2,
+                                                    q31_t * tmp_out,
+                                                    u8_t * out,
+                                                    const int32_t row,
+                                                    const int32_t col,
+                                                    const int32_t col2,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    const q31_t * bias,
+                                                    const uint16_t tiling_size);
+
+u8_t * riscv_nn_mat_mul_kernel_tiling_u8_u8_s8(const u8_t * src1,
+                                                const q7_t * src2,
+                                                q31_t * tmp_out,
+                                                u8_t * out,
+                                                const int32_t row,
+                                                const int32_t col,
+                                                const int32_t col2,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                const uint16_t tiling_size);
+
+void conv_dw_HWC_s8_any_generic(const int8_t *in_tensor,
+                                      const uint16_t in_tensor_dim_x,
+                                      const uint16_t in_tensor_dim_y,
+                                      const uint16_t in_tensor_ch,
+                                      const int8_t *ker_weight,
+                                      const uint16_t out_tensor_ch,
+                                      const uint16_t ch_mult,
+                                      const uint16_t ker_dim_x,
+                                      const uint16_t ker_dim_y,
+                                      const uint16_t pad_x,
+                                      const uint16_t pad_y,
+                                      const uint16_t stride_x,
+                                      const uint16_t stride_y,
+                                      const int32_t *bias,
+                                      int8_t *out_tensor,
+                                      const int32_t *out_shift,
+                                      const int32_t *out_scale,
+                                      const uint16_t out_tensor_dim_x,
+                                      const uint16_t out_tensor_dim_y,
+                                      const int32_t out_offset,
+                                      const int32_t in_offset,
+                                      const int32_t act_min,
+                                      const int32_t act_max,
+                                      const uint16_t dilation_x,
+                                      const uint16_t dilation_y);
+
+q15_t * riscv_nn_mat_mul_kernel_tiling_bias_s8_s16_s8(const q7_t * src1,
+                                                    const q7_t * src2,
+                                                    q31_t * tmp_out,
+                                                    q15_t * out,
+                                                    const int32_t row,
+                                                    const int32_t col,
+                                                    const int32_t col2,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    const q31_t * bias,
+                                                    const uint16_t tiling_size);
+
+q15_t * riscv_nn_mat_mul_kernel_tiling_s8_s16_s8(const q7_t * src1,
+                                                const q7_t * src2,
+                                                q31_t * tmp_out,
+                                                q15_t * out,
+                                                const int32_t row,
+                                                const int32_t col,
+                                                const int32_t col2,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                const uint16_t tiling_size);
+
+q15_t * riscv_nn_mat_mul_kernel_tiling_bias_u8_s16_s8(const u8_t * src1,
+                                                    const q7_t * src2,
+                                                    q31_t * tmp_out,
+                                                    q15_t * out,
+                                                    const int32_t row,
+                                                    const int32_t col,
+                                                    const int32_t col2,
+                                                    const uint16_t pre_rshift,
+                                                    const uint16_t out_scale,
+                                                    const uint16_t post_rshift,
+                                                    const q31_t * bias,
+                                                    const uint16_t tiling_size);
+
+q15_t * riscv_nn_mat_mul_kernel_tiling_u8_s16_s8(const u8_t * src1,
+                                                const q7_t * src2,
+                                                q31_t * tmp_out,
+                                                q15_t * out,
+                                                const int32_t row,
+                                                const int32_t col,
+                                                const int32_t col2,
+                                                const uint16_t pre_rshift,
+                                                const uint16_t out_scale,
+                                                const uint16_t post_rshift,
+                                                const uint16_t tiling_size);
+
+int32_t nn_mat_mat_mult_t_s8_s8_s8(const int8_t *lhs,
+                                   const int8_t *rhs,
+                                   const int32_t lhs_offset,
+                                   const int32_t rhs_offset,
+                                   const int32_t *bias,
+                                   int8_t *dst,
+                                   const int32_t out_offset,
+                                   const int32_t out_scale,
+                                   const int32_t out_shift,
+                                   const int32_t lhs_rows,
+                                   const int32_t rhs_cols,
+                                   const int32_t rhs_rows,
+                                   const int32_t act_min,
+                                   const int32_t act_max);
+
+int32_t nn_mat_mat_mult_t_s16_s16_s16(const int16_t *lhs,
+                                      const int16_t *rhs,
+                                      const int32_t lhs_offset,
+                                      const int32_t rhs_offset,
+                                      const int64_t *bias,
+                                      int16_t *dst,
+                                      const int32_t out_offset,
+                                      const int32_t out_scale,
+                                      const int32_t out_shift,
+                                      const int32_t lhs_rows,
+                                      const int32_t rhs_cols,
+                                      const int32_t rhs_rows,
+                                      const int32_t act_min,
+                                      const int32_t act_max);
+
+int8_t * riscv_nn_mat_mul_kernel_tiling_asym_s8_s8_s8(const int8_t * src1,
+                                                    const int8_t * src2,
+                                                    int32_t * tmp_out,
+                                                    int8_t * out,
+                                                    const int32_t * out_scale,
+                                                    const int32_t * out_shift,
+                                                    const int32_t row,
+                                                    const int32_t col,
+                                                    const int32_t col2,
+                                                    const int32_t out_offset,
+                                                    const int32_t act_min,
+                                                    const int32_t act_max,
+                                                    int32_t * contri_buf,
+                                                    const uint16_t tiling_size);
+
 #ifdef __riscv_zfh
 float16_t *riscv_nn_mat_mul_kernel_fp16_unroll4(const float16_t * src1,
                                             const float16_t * src2,
@@ -914,9 +1209,9 @@ float16_t *riscv_nn_mat_mul_kernel_f16(const float16_t * src1,
 float16_t *riscv_nn_mat_mul_kernel_tiling_f16(const float16_t * src1,
                                           const float16_t * src2,
                                           float16_t * out,
-                                          const uint16_t row,
-                                          const uint16_t col,
-                                          const uint16_t col2,
+                                          const int32_t row,
+                                          const int32_t col,
+                                          const int32_t col2,
                                           const float16_t * bias,
                                           const uint16_t tiling_size);
 
@@ -925,6 +1220,178 @@ void riscv_nn_mat_mul_kernel_tiling_transpose_f16(const float16_t * src,
                                                   const long row,
                                                   const long col);
 #endif
+
+// nn_transpose_s8
+void nn_transpose_nhwc_to_nhcw_s8(int8_t *in_tensor,
+                                  const uint32_t in_tensor_dim_x,
+                                  const uint32_t in_tensor_dim_y,
+                                  const uint32_t in_tensor_ch,
+                                  const uint32_t in_tensor_batch,
+                                  int8_t *out_tensor);
+
+void nn_transpose_nhwc_to_nwhc_s8(int8_t *in_tensor,
+								  const uint32_t in_tensor_dim_x,
+								  const uint32_t in_tensor_dim_y,
+								  const uint32_t in_tensor_ch,
+								  const uint32_t in_tensor_batch,
+								  int8_t *out_tensor);
+
+void nn_transpose_nhwc_to_nchw_s8(int8_t *in_tensor,
+								  const uint32_t in_tensor_dim_x,
+								  const uint32_t in_tensor_dim_y,
+								  const uint32_t in_tensor_ch,
+							      const uint32_t in_tensor_batch,
+								  int8_t *out_tensor);
+
+void nn_transpose_nhwc_to_ncwh_s8(int8_t * in_tensor,
+                                  const uint32_t in_tensor_dim_x,
+                                  const uint32_t in_tensor_dim_y,
+                                  const uint32_t in_tensor_ch,
+                                  const uint32_t in_tensor_batch,
+                                  int8_t *out_tensor);
+
+void nn_transpose_nhwc_to_nwch_s8(int8_t *in_tensor,
+								  const uint32_t in_tensor_dim_x,
+								  const uint32_t in_tensor_dim_y,
+								  const uint32_t in_tensor_ch,
+								  const uint32_t in_tensor_batch,
+								  int8_t *out_tensor);
+
+void nn_transpose_nhwc_to_hncw_s8(int8_t *in_tensor,
+							 	  const uint32_t in_tensor_dim_x,
+								  const uint32_t in_tensor_dim_y,
+								  const uint32_t in_tensor_ch,
+								  const uint32_t in_tensor_batch,
+								  int8_t *out_tensor);
+
+void nn_transpose_nhwc_to_hnwc_s8(int8_t *in_tensor,
+							 	  const uint32_t in_tensor_dim_x,
+								  const uint32_t in_tensor_dim_y,
+								  const uint32_t in_tensor_ch,
+								  const uint32_t in_tensor_batch,
+								  int8_t *out_tensor);
+
+void nn_transpose_nhwc_to_wnhc_s8(int8_t *in_tensor,
+                                  const uint32_t in_tensor_dim_x,
+                                  const uint32_t in_tensor_dim_y,
+                                  const uint32_t in_tensor_ch,
+                                  const uint32_t in_tensor_batch,
+                                  int8_t *out_tensor);
+
+// nn_transpose_s16
+void nn_transpose_nhwc_to_nhcw_s16(int16_t *in_tensor,
+                                   const uint32_t in_tensor_dim_x,
+                                   const uint32_t in_tensor_dim_y,
+                                   const uint32_t in_tensor_ch,
+                                   const uint32_t in_tensor_batch,
+                                   int16_t *out_tensor);
+
+void nn_transpose_nhwc_to_nwhc_s16(int16_t *in_tensor,
+								   const uint32_t in_tensor_dim_x,
+								   const uint32_t in_tensor_dim_y,
+								   const uint32_t in_tensor_ch,
+								   const uint32_t in_tensor_batch,
+								   int16_t *out_tensor);
+
+void nn_transpose_nhwc_to_nwch_s16(int16_t *in_tensor,
+								   const uint32_t in_tensor_dim_x,
+								   const uint32_t in_tensor_dim_y,
+								   const uint32_t in_tensor_ch,
+								   const uint32_t in_tensor_batch,
+								   int16_t *out_tensor);
+
+void nn_transpose_nhwc_to_nchw_s16(int16_t *in_tensor,
+								   const uint32_t in_tensor_dim_x,
+								   const uint32_t in_tensor_dim_y,
+								   const uint32_t in_tensor_ch,
+							       const uint32_t in_tensor_batch,
+								   int16_t *out_tensor);
+
+void nn_transpose_nhwc_to_ncwh_s16(int16_t * in_tensor,
+                                   const uint32_t in_tensor_dim_x,
+                                   const uint32_t in_tensor_dim_y,
+                                   const uint32_t in_tensor_ch,
+                                   const uint32_t in_tensor_batch,
+                                   int16_t *out_tensor);
+
+void nn_transpose_nhwc_to_hncw_s16(int16_t *in_tensor,
+							 	   const uint32_t in_tensor_dim_x,
+								   const uint32_t in_tensor_dim_y,
+								   const uint32_t in_tensor_ch,
+								   const uint32_t in_tensor_batch,
+								   int16_t *out_tensor);
+
+void nn_transpose_nhwc_to_hnwc_s16(int16_t *in_tensor,
+							 	   const uint32_t in_tensor_dim_x,
+								   const uint32_t in_tensor_dim_y,
+								   const uint32_t in_tensor_ch,
+								   const uint32_t in_tensor_batch,
+								   int16_t *out_tensor);
+
+void nn_transpose_nhwc_to_wnhc_s16(int16_t *in_tensor,
+                                   const uint32_t in_tensor_dim_x,
+                                   const uint32_t in_tensor_dim_y,
+                                   const uint32_t in_tensor_ch,
+                                   const uint32_t in_tensor_batch,
+                                   int16_t *out_tensor);
+
+// nn_transpose_s32
+void nn_transpose_nhwc_to_nhcw_s32(int32_t *in_tensor,
+                                   const uint32_t in_tensor_dim_x,
+                                   const uint32_t in_tensor_dim_y,
+                                   const uint32_t in_tensor_ch,
+                                   const uint32_t in_tensor_batch,
+                                   int32_t *out_tensor);
+
+void nn_transpose_nhwc_to_nwhc_s32(int32_t *in_tensor,
+								   const uint32_t in_tensor_dim_x,
+								   const uint32_t in_tensor_dim_y,
+								   const uint32_t in_tensor_ch,
+								   const uint32_t in_tensor_batch,
+								   int32_t *out_tensor);
+
+void nn_transpose_nhwc_to_nwch_s32(int32_t *in_tensor,
+								   const uint32_t in_tensor_dim_x,
+								   const uint32_t in_tensor_dim_y,
+								   const uint32_t in_tensor_ch,
+								   const uint32_t in_tensor_batch,
+								   int32_t *out_tensor);
+
+void nn_transpose_nhwc_to_nchw_s32(int32_t *in_tensor,
+								   const uint32_t in_tensor_dim_x,
+								   const uint32_t in_tensor_dim_y,
+								   const uint32_t in_tensor_ch,
+							       const uint32_t in_tensor_batch,
+								   int32_t *out_tensor);
+
+void nn_transpose_nhwc_to_ncwh_s32(int32_t * in_tensor,
+                                   const uint32_t in_tensor_dim_x,
+                                   const uint32_t in_tensor_dim_y,
+                                   const uint32_t in_tensor_ch,
+                                   const uint32_t in_tensor_batch,
+                                   int32_t *out_tensor);
+
+void nn_transpose_nhwc_to_hncw_s32(int32_t *in_tensor,
+							 	   const uint32_t in_tensor_dim_x,
+								   const uint32_t in_tensor_dim_y,
+								   const uint32_t in_tensor_ch,
+								   const uint32_t in_tensor_batch,
+								   int32_t *out_tensor);
+
+void nn_transpose_nhwc_to_hnwc_s32(int32_t *in_tensor,
+							 	   const uint32_t in_tensor_dim_x,
+								   const uint32_t in_tensor_dim_y,
+								   const uint32_t in_tensor_ch,
+								   const uint32_t in_tensor_batch,
+								   int32_t *out_tensor);
+
+void nn_transpose_nhwc_to_wnhc_s32(int32_t *in_tensor,
+                                    const uint32_t in_tensor_dim_x,
+                                    const uint32_t in_tensor_dim_y,
+                                    const uint32_t in_tensor_ch,
+                                    const uint32_t in_tensor_batch,
+                                    int32_t *out_tensor);
+
 /**
  *   * @}
  */

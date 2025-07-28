@@ -239,6 +239,22 @@ static inline int16_t AddSaturatingIf16Bit(int16_t a, int16_t b) {
 // [End of the explanation specializing to int32.]
 //
 // This is equivalent to the VQRDMULH instruction in ARM NEON.
+static inline int16_t SaturatingRoundingDoublingHighMul_with_Lsh(int16_t a, int16_t b, int16_t left_shift) {
+  //To compute a * b * 2^(left_shift) more precisely while a>>(-left_shift) = 0.
+
+  int16_t overflow = 0;
+  overflow = a == b && a == INT16_MIN;
+  int32_t a_32 = (int32_t)a;
+  int32_t b_32 = (int32_t)b;
+  int32_t ab_32 = a_32 * b_32;
+  //a*b*(power of two)
+  int32_t abpot_32 = (left_shift > 0) ? (ab_32*(1L << left_shift) ) : ( ab_32 >> (-left_shift));
+  int16_t nudge = ab_32 >= 0 ? (1 << 14) : (1 - (1 << 14));
+  int16_t ab_x2_high16 =
+      (int16_t)((abpot_32 + nudge) / (1 << 15));//use abpot_32, instead of ab_32
+  return overflow ? INT16_MAX : ab_x2_high16;
+}
+
 static inline int16_t SaturatingRoundingDoublingHighMul(int16_t a, int16_t b) {
     int16_t overflow = 0;
     overflow = a == b && a == INT16_MIN;
